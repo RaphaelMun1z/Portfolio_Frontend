@@ -1,21 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// Components
+import LandingSection from './components/LandingSection'
+
+// Styles
 import './App.css'
+import styles from './Home.module.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <header>
         <nav>
-          <p>Navbar</p>
+          <div className={styles.logoContainer}>
+            <p>Portfólio</p>
+          </div>
+          <div className={styles.linksContainer}>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='/'>Sobre</a></li>
+              <li><a href='/'>Habilidades</a></li>
+              <li><a href='/'>Projetos</a></li>
+            </ul>
+          </div>
         </nav>
       </header>
-      <main>
-        <p>Main</p>
-      </main>
+      <LandingSection />
       <footer>
         <p>Footer</p>
       </footer>

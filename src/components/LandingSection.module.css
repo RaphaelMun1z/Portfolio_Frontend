@@ -1,0 +1,91 @@
+main {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 85vh;
+    background-color: #dfdfd6;
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+main .imageContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+    flex: 0 1 50%;
+    border: 0px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+main .imageContainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    transform: rotateY(180deg);
+    filter: drop-shadow(5px 50px 200px #222);
+}
+
+main .landingContentContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+    flex: 0 1 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+main .landingContentContainer .insideLandingContent {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    gap: 10px;
+}
+
+.insideLandingContent h2 {
+    font-size: 45pt;
+    width: fit-content;
+    height: fit-content;
+    color: #474a51;
+    font-weight: 500;
+}
+
+.insideLandingContent h6 {
+    font-size: 13pt;
+    width: fit-content;
+    height: fit-content;
+    color: #474a51;
+    font-weight: 300;
+}
+
+.insideLandingContent p {
+    font-size: 25pt;
+    width: fit-content;
+    height: fit-content;
+    color: #474a51;
+    font-weight: 300;
+}
+
+.insideLandingContent a {
+    font-size: 13pt;
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 50px;
+    color: #fff;
+    background-color: blue;
+    padding: .5em 2em;
+    margin-top: 10px;
+}
