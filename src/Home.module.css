@@ -5,12 +5,41 @@ header {
     width: 100%;
     height: fit-content;
     min-height: 15vh;
-    background-color: #dfdfd6;
-    padding: 0 10em;
+    background-color: transparent;
+    padding: 0 8em;
     justify-content: center;
     align-items: center;
     font-size: 14pt;
     font-weight: bold;
+    top: 0;
+    left: 0;
+    transition: all .1s ease-in-out;
+}
+
+header.active {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    min-height: fit-content;
+    background-color: #fff;
+    padding: 1em 5em;
+    justify-content: center;
+    align-items: center;
+    font-size: 14pt;
+    font-weight: bold;
+    top: 10px;
+    left: 50%;
+    border-radius: 20px;
+    width: calc(100vw - 13em);
+    z-index: 999;
+    transform: translateX(-50%);
+    box-shadow: rgb(38, 57, 77) 0px 20px 20px -20px;
+    transition: all .1s ease-in-out;
+}
+
+header.active nav .linksContainer ul li{
+    color: rgba(254,135,0,255);
 }
 
 header nav {
@@ -31,7 +60,7 @@ nav .logoContainer {
 }
 
 nav .logoContainer p {
-    color: #474a51;
+    color: rgba(254,135,0,255);
     font-size: 25pt;
 }
 
@@ -57,7 +86,7 @@ nav .linksContainer ul li {
     flex-wrap: wrap;
     width: fit-content;
     height: fit-content;
-    color: #474a51;
+    color: #fff;
     font-weight: 500;
 }
 
@@ -76,11 +105,13 @@ footer {
     flex-wrap: wrap;
     width: 100%;
     height: 250px;
-    background-color: #dfdfd6;
+    background-color: #fff;
     padding: 2em;
     justify-content: center;
     align-items: center;
     font-size: 14pt;
     font-weight: bold;
     margin-top: 20em;
+    border-radius: 50px 50px 0 0;
+    color: rgba(254,135,0,255);
 }

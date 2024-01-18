@@ -4,8 +4,8 @@ main {
     flex-wrap: wrap;
     width: 100%;
     height: 85vh;
-    background-color: #dfdfd6;
-    padding: 2em;
+    background-color: transparent;
+    padding: 2em 8em;
     justify-content: center;
     align-items: center;
     font-size: 14pt;
@@ -19,16 +19,14 @@ main .imageContainer {
     width: 50%;
     height: 100%;
     flex: 0 1 50%;
-    border: 0px solid black;
     justify-content: center;
     align-items: center;
 }
 
-main .imageContainer img{
+main .imageContainer img {
     height: 100%;
     width: 100%;
     object-fit: contain;
-    transform: rotateY(180deg);
     filter: drop-shadow(5px 50px 200px #222);
 }
 
@@ -50,31 +48,44 @@ main .landingContentContainer .insideLandingContent {
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    gap: 10px;
 }
 
 .insideLandingContent h2 {
     font-size: 45pt;
     width: fit-content;
     height: fit-content;
-    color: #474a51;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 300;
+    line-height: 80px;
+    pointer-events: none;
+}
+
+.insideLandingContent h2 span {
+    font-size: 45pt;
+    width: fit-content;
+    height: fit-content;
+    color: rgba(254,135,0,255);
+    font-weight: 700;
 }
 
 .insideLandingContent h6 {
-    font-size: 13pt;
+    font-size: 15pt;
     width: fit-content;
     height: fit-content;
-    color: #474a51;
+    color: #fff;
     font-weight: 300;
+    margin-top: 5px;
+    pointer-events: none;
 }
 
 .insideLandingContent p {
     font-size: 25pt;
     width: fit-content;
     height: fit-content;
-    color: #474a51;
+    color: #fff;
     font-weight: 300;
+    margin-bottom: -10px;
+    pointer-events: none;
 }
 
 .insideLandingContent a {
@@ -85,7 +96,16 @@ main .landingContentContainer .insideLandingContent {
     color: inherit;
     border-radius: 50px;
     color: #fff;
-    background-color: blue;
-    padding: .5em 2em;
-    margin-top: 10px;
+    background-color: rgba(254,135,0,255);
+    padding: 1em 2em;
+    margin-top: 30px;
+    border: 2px solid #fff;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transition: all .1s ease-in-out;
+}
+
+.insideLandingContent a:hover{
+    transition: all .1s ease-in-out;
+    transform: scale(.9);
+    box-shadow: rgb(38, 57, 77) 0px 5px 30px -10px;
 }

@@ -1,14 +1,26 @@
+import { useState, useEffect } from 'react';
+
 // Components
 import LandingSection from './components/LandingSection'
+import AboutMe from './components/AboutMe'
+import Skills from './components/Skills';
 
 // Styles
 import './App.css'
 import styles from './Home.module.css'
 
 function App() {
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 0);
+    });
+  }, []);
+
   return (
     <>
-      <header>
+      <header className={scroll ? `${styles.active}` : ''}>
         <nav>
           <div className={styles.logoContainer}>
             <p>Portfólio</p>
@@ -24,8 +36,10 @@ function App() {
         </nav>
       </header>
       <LandingSection />
+      <AboutMe />
+      <Skills />
       <footer>
-        <p>Footer</p>
+        <p>Copyright &#169; 2024 Portfólio Raphael Muniz</p>
       </footer>
     </>
   )

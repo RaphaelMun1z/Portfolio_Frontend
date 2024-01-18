@@ -1,0 +1,155 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 8em;
+    gap: 3em 0;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    margin: 1em auto;
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 45pt;
+}
+
+.contentContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+}
+
+.contentContainer>div {
+    position: relative;
+    display: flex;
+    width: 50%;
+    height: 100%;
+    border: 0px solid black;
+    flex: 1 1 50%;
+}
+
+.contentContainer .cardContainer {
+    position: relative;
+    display: flex;
+    padding: 5em;
+}
+
+.cardContainer .insideCardContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    gap: 40px 5%;
+}
+
+.cardContainer .insideCardContainer .card {
+    position: relative;
+    display: flex;
+    width: 200px;
+    height: 20em;
+    border-radius: 20px;
+    flex: 1 1 45%;
+    background: rgb(224, 132, 26);
+    background: linear-gradient(180deg, rgb(210, 124, 24) 10%, rgb(238, 135, 14) 51%, rgb(255, 171, 76) 100%);
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transition: all .2s ease-in-out;
+    top: 0;
+}
+
+.card:hover {
+    transition: all .2s ease-in-out;
+    transform: rotate(4deg) scale(1.1);
+    box-shadow: rgb(38, 57, 77) 0px 20px 60px -10px !important;
+    z-index: 2;
+    top: -20px !important;
+}
+
+.card>.insideCard {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+}
+
+.card>.insideCard h3 {
+    font-size: 20pt;
+    color: #fff;
+}
+
+.card>.insideCard p {
+    font-size: 12pt;
+    color: #fff;
+    font-weight: 200;
+}
+
+.contentContainer .infoContainer {
+    position: relative;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+}
+
+.infoContainer .insideInfoContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    gap: 25px;
+}
+
+.infoContainer .insideInfoContainer h1 {
+    font-size: 45pt;
+    color: #fff;
+}
+
+.infoContainer .insideInfoContainer p {
+    color: #fff;
+    font-weight: 300;
+    font-size: 14pt;
+    font-style: italic;
+}
+
+.infoContainer .insideInfoContainer button {
+    font-size: 13pt;
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(254, 135, 0, 255);
+    padding: .5em 2em;
+    border: 2px solid #fff;
+    margin-top: 10px;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+
+.infoContainer .insideInfoContainer>button:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(.9);
+}
+
+.infoContainer .insideInfoContaine>button:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(.9);
+}

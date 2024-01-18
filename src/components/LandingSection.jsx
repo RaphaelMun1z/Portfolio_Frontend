@@ -5,14 +5,14 @@ const LandingSection = () => {
     return (
         <main>
             <div className={styles.imageContainer}>
-                <img src="https://static.vecteezy.com/system/resources/previews/011/153/370/original/3d-web-development-illustration-png.png" alt="Imagem" />
+                <img src="/rocket.png" alt="Foguete" />
             </div>
             <div className={styles.landingContentContainer}>
                 <div className={styles.insideLandingContent}>
-                    <p>Texto</p>
-                    <h2>Mais texto aqui</h2>
-                    <h6>Algum texto aqui</h6>
-                    <a href="/">Um link aqui</a>
+                    <p>Olá,</p>
+                    <h2>Me chamo <span>Raphael Muniz</span></h2>
+                    <h6>Sou Desenvolvedor Full Stack React.js + Node.js</h6>
+                    <a href="/">Conheça meu trabalho</a>
                 </div>
             </div>
         </main>
