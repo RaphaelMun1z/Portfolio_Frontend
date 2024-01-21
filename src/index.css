@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    scrollbar-color: rgba(254, 135, 0, 255) #03036C;
+    scrollbar-width: thin !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 15px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #03036C;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: rgba(254, 135, 0, 255);
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+    background-image: linear-gradient(to right, #0404B7, #03036C);
+}

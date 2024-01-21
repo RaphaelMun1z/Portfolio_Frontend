@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 
 // Components
+import Header from './components/Header';
 import LandingSection from './components/LandingSection'
 import AboutMe from './components/AboutMe'
 import Skills from './components/Skills';
+import Footer from './components/Footer';
+import ContactForm from './components/ContactForm';
 
 // Styles
-import './App.css'
-import styles from './Home.module.css'
+import styles from './App.module.css'
 
 function App() {
   const [scroll, setScroll] = useState(false);
@@ -20,27 +22,14 @@ function App() {
 
   return (
     <>
-      <header className={scroll ? `${styles.active}` : ''}>
-        <nav>
-          <div className={styles.logoContainer}>
-            <p>Portfólio</p>
-          </div>
-          <div className={styles.linksContainer}>
-            <ul>
-              <li><a href='/'>Home</a></li>
-              <li><a href='/'>Sobre</a></li>
-              <li><a href='/'>Habilidades</a></li>
-              <li><a href='/'>Projetos</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+      <Header scroll={scroll} />
+
       <LandingSection />
       <AboutMe />
       <Skills />
-      <footer>
-        <p>Copyright &#169; 2024 Portfólio Raphael Muniz</p>
-      </footer>
+      <ContactForm user={{ name: "João", email: "joao@hotmail.com" }} />
+
+      <Footer />
     </>
   )
 }

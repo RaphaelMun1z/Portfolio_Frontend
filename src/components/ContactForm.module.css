@@ -1,0 +1,123 @@
+section.formContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 8em;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.insideContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    flex: 1 1 50%;
+    min-height: 70vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.insideContainer:nth-child(1) {
+   padding: 5em;
+}
+
+.insideContainer:nth-child(1) img {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    object-fit: contain;
+    filter: drop-shadow(5px 50px 200px #222);
+}
+
+.mainDiv {
+    padding: 3em;
+    background: #fff !important;
+    border-radius: 20px;
+}
+
+form {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    gap: 30px;
+}
+
+form>h1 {
+    font-size: 45pt;
+    color: rgb(210, 124, 24);
+}
+
+form>input[type='submit'] {
+    font-size: 15pt;
+    width: 100%;
+    height: fit-content;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(254, 135, 0, 255);
+    padding: .5em 2em;
+    border: none;
+    margin-top: 10px;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+
+.inputGroup {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    gap: 5px;
+}
+
+.inputGroup label {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    font-size: 20pt;
+    font-weight: 600;
+    color: rgb(210, 124, 24);
+}
+
+.inputGroup label input,
+.inputGroup label textarea {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgb(210, 124, 24);
+    font-size: 15pt;
+    font-weight: 300;
+    padding: .2em .2em;
+}
+
+.inputGroup label textarea {
+    border: 2px solid rgb(210, 124, 24);
+    border-radius: 10px;
+    resize: vertical;
+    min-height: 150px;
+    height: 150px;
+    max-height: 200px;
+}
