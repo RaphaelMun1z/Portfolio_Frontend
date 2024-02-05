@@ -4,7 +4,7 @@ section {
     flex-wrap: wrap;
     width: 100%;
     height: fit-content;
-    padding: 2em 8em;
+    padding: 2em 0em;
     gap: 3em 0;
 }
 

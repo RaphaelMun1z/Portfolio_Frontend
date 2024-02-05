@@ -8,6 +8,16 @@
     scrollbar-width: thin !important;
 }
 
+#root{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-right: 8em;
+    padding-left: 8em;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 15px;

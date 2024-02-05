@@ -1,35 +1,30 @@
-import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // Components
 import Header from './components/Header';
-import LandingSection from './components/LandingSection'
-import AboutMe from './components/AboutMe'
-import Skills from './components/Skills';
 import Footer from './components/Footer';
-import ContactForm from './components/ContactForm';
 
-// Styles
-import styles from './App.module.css'
+// Pages
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import SkillsPage from './pages/SkillsPage';
+import ProjectsPage from './pages/ProjectsPage';
 
 function App() {
-  const [scroll, setScroll] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 0);
-    });
-  }, []);
-
   return (
     <>
-      <Header scroll={scroll} />
+      <BrowserRouter>
+        <Header />
 
-      <LandingSection />
-      <AboutMe />
-      <Skills />
-      <ContactForm user={{ name: "João", email: "joao@hotmail.com" }} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/sobre" element={<AboutPage />} />
+          <Route path="/habilidades" element={<SkillsPage />} />
+          <Route path="/projetos" element={<ProjectsPage />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
+      </BrowserRouter>
     </>
   )
 }

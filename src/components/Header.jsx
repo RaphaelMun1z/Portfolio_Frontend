@@ -1,7 +1,18 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 // Styles
 import styles from './Header.module.css'
 
-const Header = ({ scroll }) => {
+const Header = () => {
+    const [scroll, setScroll] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setScroll(window.scrollY > 0);
+        });
+    }, []);
+
     return (
         <header className={scroll ? `${styles.active}` : ''}>
             <nav>
@@ -10,10 +21,18 @@ const Header = ({ scroll }) => {
                 </div>
                 <div className={styles.linksContainer}>
                     <ul>
-                        <li><a href='/'>Home</a></li>
-                        <li><a href='/'>Sobre</a></li>
-                        <li><a href='/'>Habilidades</a></li>
-                        <li><a href='/'>Projetos</a></li>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/sobre">Sobre</Link>
+                        </li>
+                        <li>
+                            <Link to="/habilidades">Habilidades</Link>
+                        </li>
+                        <li>
+                            <Link to="/projetos">Projetos</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
