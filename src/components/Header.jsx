@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // Styles
 import styles from './Header.module.css'
@@ -22,16 +22,24 @@ const Header = () => {
                 <div className={styles.linksContainer}>
                     <ul>
                         <li>
-                            <Link to="/">Home</Link>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? `${styles.active}` : ''
+                            } to="/">Home</NavLink>
                         </li>
                         <li>
-                            <Link to="/sobre">Sobre</Link>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? `${styles.active}` : ''
+                            } to="/sobre">Sobre</NavLink>
                         </li>
                         <li>
-                            <Link to="/habilidades">Habilidades</Link>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? `${styles.active}` : ''
+                            } to="/habilidades">Habilidades</NavLink>
                         </li>
                         <li>
-                            <Link to="/projetos">Projetos</Link>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? `${styles.active}` : ''
+                            } to="/projetos">Projetos</NavLink>
                         </li>
                     </ul>
                 </div>

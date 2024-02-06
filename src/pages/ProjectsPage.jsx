@@ -1,6 +1,12 @@
+import ProjectsTypeMenu from "../components/ProjectsTypeMenu"
+import ProjectsSection from "../components/ProjectsSection"
+
 const ProjectsPage = () => {
   return (
-    <div>Projects</div>
+    <>
+      <ProjectsTypeMenu />
+      <ProjectsSection />
+    </>
   )
 }
 

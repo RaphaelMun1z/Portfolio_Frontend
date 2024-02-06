@@ -27,7 +27,7 @@ section.formContainer {
 }
 
 .insideContainer:nth-child(1) {
-   padding: 5em;
+    padding: 5em;
 }
 
 .insideContainer:nth-child(1) img {
@@ -60,7 +60,8 @@ form>h1 {
     color: rgb(210, 124, 24);
 }
 
-form>input[type='submit'] {
+form>button {
+    display: flex;
     font-size: 15pt;
     width: 100%;
     height: fit-content;
@@ -75,6 +76,15 @@ form>input[type='submit'] {
     margin-top: 10px;
     transition: all .1s ease-in-out;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    transition: all .1s ease-in-out;
+}
+
+form>button:hover {
+    opacity: .5;
+    transition: all .1s ease-in-out;
 }
 
 .inputGroup {

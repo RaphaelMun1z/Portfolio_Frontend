@@ -25,6 +25,7 @@ section {
 .contentContainer {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: fit-content;
 }
@@ -121,6 +122,14 @@ section:hover .contentContainer .imageContainer img{
     margin-top: 10px;
     transition: all .1s ease-in-out;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.contentContainer .infoContainer .insideInfoContainer>button>svg{
+    font-size: 17pt;
 }
 
 .contentContainer .infoContainer .insideInfoContainer>button:hover {

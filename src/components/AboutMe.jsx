@@ -1,6 +1,9 @@
 // Styles
 import styles from './AboutMe.module.css'
 
+// Icons
+import { IoMdDownload } from "react-icons/io";
+
 const AboutMe = () => {
     return (
         <section>
@@ -32,7 +35,7 @@ const AboutMe = () => {
                                 <p className={styles.title}>Projetos desenvolvidos</p>
                             </div>
                         </div>
-                        <button>Baixar CV</button>
+                        <button>Baixar CV<IoMdDownload /></button>
                     </div>
                 </div>
             </div>

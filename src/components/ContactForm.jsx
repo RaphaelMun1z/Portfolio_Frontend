@@ -3,6 +3,9 @@ import { useState } from 'react'
 // Styles
 import styles from './ContactForm.module.css'
 
+// Icons
+import { MdSend } from "react-icons/md";
+
 const ContactForm = ({ user }) => {
     const [name, setName] = useState(user ? user.name : '')
     const [email, setEmail] = useState(user ? user.email : '')
@@ -37,25 +40,27 @@ const ContactForm = ({ user }) => {
                     <form onSubmit={handleSubmit}>
                         <h1>Entre em contato</h1>
                         <div className={styles.inputGroup}>
-                            <label>
+                            <label htmlFor="name">
                                 <span>Nome:</span>
-                                <input type="text" name='name' placeholder='Digite seu nome' onChange={handleName} value={name}/>
+                                <input type="text" id='name' name='name' placeholder='Digite seu nome' onChange={handleName} value={name} />
                             </label>
 
                         </div>
                         <div className={styles.inputGroup}>
                             <label htmlFor="email">
                                 <span>E-mail:</span>
-                                <input type="text" name='email' placeholder='Digite seu e-mail' onChange={handleEmail} value={email}/>
+                                <input type="text" id='email' name='email' placeholder='Digite seu e-mail' onChange={handleEmail} value={email} />
                             </label>
                         </div>
                         <div className={styles.inputGroup}>
                             <label htmlFor="message">
                                 <span>Mensagem:</span>
-                                <textarea name="message" onChange={handleMessage} value={message}></textarea>
+                                <textarea id='message' name="message" onChange={handleMessage} value={message}></textarea>
                             </label>
                         </div>
-                        <input type="submit" value="Enviar" />
+                        <button type='submit'>
+                            Enviar<MdSend />
+                        </button>
                     </form>
                 </div>
             </div>

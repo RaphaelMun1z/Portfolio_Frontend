@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectPage from './pages/ProjectPage';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/sobre" element={<AboutPage />} />
           <Route path="/habilidades" element={<SkillsPage />} />
           <Route path="/projetos" element={<ProjectsPage />} />
+          <Route path="/projeto/:id" element={<ProjectPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
