@@ -1,0 +1,41 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 3em 0;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    margin: 1em auto;
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 45pt;
+}
+
+.contentContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    gap: 30px 1.5%;
+}
+
+.subTitle {
+    position: relative;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    font-size: 30pt !important;
+    font-weight: 700;
+}

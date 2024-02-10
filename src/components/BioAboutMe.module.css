@@ -1,0 +1,206 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 3em 0;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+    margin: 1em auto;
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 45pt;
+}
+
+.contentContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+}
+
+.contentContainer>div {
+    position: relative;
+    display: flex;
+    width: 50%;
+    height: 100%;
+    border: 0px solid black;
+    flex: 1 1 50%;
+}
+
+.contentContainer .imageContainer {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentContainer .imageContainer:hover div::after {
+    transform: scale(1.1);
+    border-width: 15px;
+    transition: all .1s ease-in-out;
+}
+
+.contentContainer .imageContainer:hover div::before {
+    transform: scale(1.1);
+    border-width: 15px;
+    transition: all .1s ease-in-out;
+}
+
+.contentContainer .imageContainer div {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+}
+
+.contentContainer .imageContainer div::after {
+    content: '';
+    position: absolute;
+    display: flex;
+    width: 50%;
+    height: 50%;
+    border: 10px solid orange;
+    border-bottom: none;
+    border-left: none;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    border-radius: 10px;
+    transition: all .1s ease-in-out;
+}
+
+.contentContainer .imageContainer div::before {
+    content: '';
+    position: absolute;
+    display: flex;
+    width: 50%;
+    height: 50%;
+    border: 10px solid orange;
+    border-top: none;
+    border-right: none;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    transition: all .1s ease-in-out;
+}
+
+.contentContainer .imageContainer div img {
+    position: relative;
+    display: flex;
+    height: 400px;
+    margin: 3em;
+    transition: all .1s ease-in-out;
+}
+
+.contentContainer .infoContainer {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: auto;
+    align-items: center;
+    padding: 3em 8em;
+}
+
+.contentContainer .infoContainer .insideInfoContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    gap: 25px;
+}
+
+.contentContainer .infoContainer .insideInfoContainer .aboutText {
+    color: #fff;
+    font-weight: 300;
+    font-size: 14pt;
+}
+
+.contentContainer .infoContainer .insideInfoContainer>button {
+    font-size: 13pt;
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(254, 135, 0, 255);
+    padding: .5em 2em;
+    border: 2px solid #fff;
+    margin-top: 10px;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.contentContainer .infoContainer .insideInfoContainer>button>svg {
+    font-size: 17pt;
+}
+
+.contentContainer .infoContainer .insideInfoContainer>button:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(.9);
+}
+
+.contentContainer .infoContainer .insideInfoContainer .experience {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    gap: 30px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 1em 2em;
+}
+
+.contentContainer .infoContainer .insideInfoContainer .experience .topic {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.topic:nth-child(2) {
+    border-right: 2px solid rgba(254, 135, 0, 255);
+    border-left: 2px solid rgba(254, 135, 0, 255);
+    padding: 0 1em;
+}
+
+.experience .topic .value {
+    font-size: 25pt;
+    font-weight: 600;
+    color: rgba(254, 135, 0, 255);
+}
+
+.experience .topic .title {
+    font-size: 10pt;
+    font-weight: 600;
+    width: fit-content;
+    height: fit-content;
+    color: rgba(254, 135, 0, 255);
+}
