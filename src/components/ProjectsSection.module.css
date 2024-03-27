@@ -22,6 +22,107 @@
     font-size: 45pt;
 }
 
+.searchForProjectContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    .searchBar {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+
+        input {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+            height: 50px;
+            font-size: 14pt;
+            border: 1px solid #fff;
+            background-color: #fff;
+            border-radius: 5px 0 0 5px;
+            padding: .5em;
+
+            &::placeholder {
+                color: #999;
+            }
+        }
+
+        button {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 50px;
+            height: 50px;
+            font-size: 14pt;
+            border: 1px solid #fff;
+            background-color: #fff;
+            border-radius: 0 5px 5px 0;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                position: relative;
+                display: flex;
+                font-size: 18pt;
+                fill: #aaa;
+            }
+        }
+    }
+
+    .messages {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+
+        .message {
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            width: 400px;
+            height: fit-content;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 1em;
+            gap: 1em;
+            justify-content: center;
+            align-items: center;
+
+            .icon {
+                position: relative;
+                display: flex;
+                width: 10%;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                font-size: 18pt;
+            }
+
+            .text {
+                position: relative;
+                display: flex;
+                width: 90%;
+                height: 100%;
+                font-size: 14pt;
+                justify-content: center;
+                align-items: center;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
 .contentContainer {
     position: relative;
     display: flex;

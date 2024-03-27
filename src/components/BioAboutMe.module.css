@@ -130,6 +130,10 @@ section {
     color: #fff;
     font-weight: 300;
     font-size: 14pt;
+
+    b {
+        font-weight: 600;
+    }
 }
 
 .contentContainer .infoContainer .insideInfoContainer>button {

@@ -26,6 +26,7 @@ section {
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
     height: fit-content;
 }
@@ -48,12 +49,12 @@ section {
     align-items: center;
 }
 
-.contentContainer .imageContainer div img{
+.contentContainer .imageContainer div img {
     transition: all 1s ease-in-out;
     transform: scale(.9);
 }
 
-.contentContainer .imageContainer::before{
+.contentContainer .imageContainer::before {
     content: '';
     position: absolute;
     display: flex;
@@ -69,7 +70,7 @@ section {
     filter: blur(10px);
 }
 
-section:hover .contentContainer .imageContainer::before{
+section:hover .contentContainer .imageContainer::before {
     transition: all 2s ease-in-out;
     width: 600px;
     height: 600px;
@@ -77,7 +78,7 @@ section:hover .contentContainer .imageContainer::before{
     transform: rotate(15deg);
 }
 
-section:hover .contentContainer .imageContainer img{
+section:hover .contentContainer .imageContainer img {
     transform: scale(.6) rotate(6deg);
     transition: all 1s ease-in-out;
     filter: blur(1px);
@@ -102,9 +103,32 @@ section:hover .contentContainer .imageContainer img{
 }
 
 .contentContainer .infoContainer .insideInfoContainer .aboutText {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
     color: #fff;
-    font-weight: 300;
-    font-size: 14pt;
+    gap: 1em;
+
+    .experienceContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: fit-content;
+        gap: .2em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid #fff;
+
+        h1 {
+            font-size: 16pt;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 12pt;
+            font-weight: 300;
+        }
+    }
 }
 
 .contentContainer .infoContainer .insideInfoContainer>button {
@@ -128,7 +152,7 @@ section:hover .contentContainer .imageContainer img{
     gap: 7px;
 }
 
-.contentContainer .infoContainer .insideInfoContainer>button>svg{
+.contentContainer .infoContainer .insideInfoContainer>button>svg {
     font-size: 17pt;
 }
 

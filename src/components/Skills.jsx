@@ -15,26 +15,26 @@ const Skills = () => {
                     <div className={styles.insideCardContainer}>
                         <div className={styles.card}>
                             <div className={styles.insideCard}>
-                                <h3>Titulo</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <h3>Frontend</h3>
+                                <p>Experiência avançada em HTML5, CSS3 (incluindo Sass/SCSS) e JavaScript para desenvolver interfaces responsivas, altamente organizadas e visualmente atraentes.</p>
                             </div>
                         </div>
                         <div className={styles.card}>
                             <div className={styles.insideCard}>
-                                <h3>Titulo</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <h3>Backend</h3>
+                                <p>Experiência em desenvolvimento de APIs RESTful e manipulação eficiente de dados com Node.js e Express.</p>
                             </div>
                         </div>
                         <div className={styles.card}>
                             <div className={styles.insideCard}>
-                                <h3>Titulo</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <h3>Frameworks</h3>
+                                <p>Expertise em frameworks como React.js e Laravel para agilizar o desenvolvimento e garantir a manutenibilidade do código.</p>
                             </div>
                         </div>
                         <div className={styles.card}>
                             <div className={styles.insideCard}>
-                                <h3>Titulo</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                <h3>Bancos de Dados</h3>
+                                <p>Proficiência em SQL e modelagem de bancos de dados relacionais, bem como experiência com bancos de dados NoSQL como MongoDB.</p>
                             </div>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ const BioAboutMe = () => {
                 <div className={styles.infoContainer}>
                     <div className={styles.insideInfoContainer}>
                         <p className={styles.aboutText}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                            Me chamo <b>Raphael Muniz</b> e atualmente curso o primeiro semestre de <b>Sistemas de Informação na Universidade Federal de Uberlândia (UFU)</b>. Sou apaixonado por desenvolvimento web e atuo como <b>full stack</b>. Minhas principais linguagens de programação são <b>JavaScript, PHP e C#</b>, e utilizo o ambiente de execução <b>Node.js</b>, além de frameworks como <b>ReactJs e Laravel</b>. Valorizo o <b>comprometimento</b>, sempre buscando a <b>excelência</b>, e prezo pelo <b>respeito</b> e <b>ética</b> em tudo o que faço.
                         </p>
                         <button>CV Simplificado<IoIosArrowForward /></button>
                     </div>
