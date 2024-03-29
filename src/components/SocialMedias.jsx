@@ -9,7 +9,10 @@ const SocialMedias = () => {
                 <h1>Redes Sociais</h1>
             </div>
             <div className={styles.contentContainer}>
-                <div className={`${styles.socialMediaCard} ${styles.linkedin}`}>
+                <div className='skeleton' style={{ width: '30%', height: '200px' }}></div>
+                <div className='skeleton' style={{ width: '30%', height: '200px' }}></div>
+                <div className='skeleton' style={{ width: '30%', height: '200px' }}></div>
+                {/* <div className={`${styles.socialMediaCard} ${styles.linkedin}`}>
                     <div className={styles.logo}>
                         <FaLinkedin />
                     </div>
@@ -32,7 +35,7 @@ const SocialMedias = () => {
                     <div className={styles.text}>
                         <h1>Instagram</h1>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
     )

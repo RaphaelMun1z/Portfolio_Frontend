@@ -28,7 +28,7 @@ const AboutMe = () => {
                                 <p className={styles.title}>Anos de experiência</p>
                             </div>
                             <div className={styles.topic}>
-                                <p className={styles.value}>30+</p>
+                                <p className={styles.value}><div className='skeleton' style={{ width: '100px', height: '50px' }}></div></p>
                                 <p className={styles.title}>Projetos desenvolvidos</p>
                             </div>
                         </div>

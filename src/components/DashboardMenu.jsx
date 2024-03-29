@@ -13,6 +13,14 @@ import { useState } from 'react';
 
 // Components
 import DashboardGeneral from './Dashboard/DashboardGeneral';
+import ProjectsManager from './Dashboard/ProjectsManager';
+import LanguagesManager from './Dashboard/LanguagesManager';
+import FrameworksManager from './Dashboard/FrameworksManager';
+import BddManager from './Dashboard/BddManager';
+import ToolsManager from './Dashboard/ToolsManager';
+import InterpersonalSkillsManager from './Dashboard/InterpersonalSkillsManager';
+import ContactFormsManager from './Dashboard/contactFormsManager';
+import FaqManager from './Dashboard/FaqManager';
 
 const DashboardMenu = () => {
     const [currentPage, setCurrentPage] = useState('general');
@@ -29,39 +37,39 @@ const DashboardMenu = () => {
             <div className={styles.contentContainer}>
                 <aside>
                     <div className={styles.actionsContainer}>
-                        <div className={`${styles.link} ${styles.activePage}`} onClick={() => handlePageChange('general')}>
+                        <div className={currentPage === 'general' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('general')}>
                             <TbHomeCog />
                             <p>Painel geral</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'projects' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('projects')}>
                             <AiOutlineFundProjectionScreen />
                             <p>Projetos</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'languages' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('languages')}>
                             <FaCode />
                             <p>Linguagens</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'frameworks' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('frameworks')}>
                             <GiGears />
                             <p>Frameworks</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'bdd' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('bdd')}>
                             <BsDatabase />
                             <p>Bancos de dados</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'tools' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('tools')}>
                             <FiTool />
                             <p>Ferramentas</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'InterpersonalSkills' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('InterpersonalSkills')}>
                             <BsPersonWorkspace />
                             <p>Habilidades interpessoais</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'contactForms' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('contactForms')}>
                             <MdOutlineQuestionAnswer />
                             <p>Formulários de contato</p>
                         </div>
-                        <div className={styles.link} onClick={() => handlePageChange('')}>
+                        <div className={currentPage === 'faq' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('faq')}>
                             <MdOutlineContactSupport />
                             <p>Perguntas e respostas</p>
                         </div>
@@ -69,6 +77,14 @@ const DashboardMenu = () => {
                 </aside>
                 <div className={styles.mainContainer}>
                     {currentPage === 'general' && <DashboardGeneral />}
+                    {currentPage === 'projects' && <ProjectsManager />}
+                    {currentPage === 'languages' && <LanguagesManager />}
+                    {currentPage === 'frameworks' && <FrameworksManager />}
+                    {currentPage === 'bdd' && <BddManager />}
+                    {currentPage === 'tools' && <ToolsManager />}
+                    {currentPage === 'InterpersonalSkills' && <InterpersonalSkillsManager />}
+                    {currentPage === 'contactForms' && <ContactFormsManager />}
+                    {currentPage === 'faq' && <FaqManager />}
                     {currentPage === '' && (
                         <div className={styles.error}>
                             <img src="/404.png" alt="Ocorreu um erro!" />

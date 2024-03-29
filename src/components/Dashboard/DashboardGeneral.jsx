@@ -1,5 +1,7 @@
 import styles from './DashboardGeneral.module.scss'
 
+import DashboardGraphic from '../DashboardGraphic';
+
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { FaCode } from "react-icons/fa";
 import { GiGears } from "react-icons/gi";
@@ -16,7 +18,8 @@ const DashboardGeneral = () => {
                             <AiOutlineFundProjectionScreen />
                         </div>
                     </div>
-                    <div className={styles.data}>35</div>
+                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    {/* <div className={styles.data}>35</div> */}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>
@@ -25,7 +28,8 @@ const DashboardGeneral = () => {
                             <FaCode />
                         </div>
                     </div>
-                    <div className={styles.data}>15</div>
+                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    {/* <div className={styles.data}>15</div> */}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>
@@ -34,7 +38,8 @@ const DashboardGeneral = () => {
                             <GiGears />
                         </div>
                     </div>
-                    <div className={styles.data}>5</div>
+                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    {/* <div className={styles.data}>5</div> */}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>
@@ -43,13 +48,20 @@ const DashboardGeneral = () => {
                             <RiSearchEyeLine />
                         </div>
                     </div>
-                    <div className={styles.data}>5</div>
+                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    {/* <div className={styles.data}>5</div> */}
                 </div>
             </div>
             <div className={styles.graphicsContainer}>
                 <div className={styles.mainGraphicsDivision}>
-                    <div className={styles.graphic}></div>
-                    <div className={styles.graphic}></div>
+                    <div className={styles.graphic}>
+                        <div className='skeleton' style={{ margin: '1em 2em', minHeight: '400px' }}></div>
+                        {/* <DashboardGraphic graphicType="bar" /> */}
+                    </div>
+                    <div className={styles.graphic}>
+                        <div className='skeleton' style={{ margin: '1em 2em', minHeight: '400px' }}></div>
+                        {/* < DashboardGraphic graphicType="line" /> */}
+                    </div>
                 </div>
                 <div className={styles.secondGraphicsDivision}></div>
             </div>

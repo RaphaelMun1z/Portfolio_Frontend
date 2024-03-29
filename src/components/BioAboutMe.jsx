@@ -1,8 +1,12 @@
 // Styles
 import styles from './BioAboutMe.module.css'
 
+import Image from './Image';
+
 // Icons
 import { IoIosArrowForward } from "react-icons/io";
+
+const photoImage = "/minha_foto_2.png"
 
 const BioAboutMe = () => {
     return (
@@ -13,7 +17,7 @@ const BioAboutMe = () => {
             <div className={styles.contentContainer}>
                 <div className={styles.imageContainer}>
                     <div>
-                        <img src="/minha_foto_2.png" alt="Foto" />
+                        <Image imagePath={photoImage} />
                     </div>
                 </div>
                 <div className={styles.infoContainer}>

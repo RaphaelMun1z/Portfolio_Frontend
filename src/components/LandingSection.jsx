@@ -1,14 +1,18 @@
 // Styles
 import styles from './LandingSection.module.css'
 
+import Image from './Image';
+
 // Icons
-import { LuRocket } from "react-icons/lu";
+import { LuRocket } from "react-icons/lu"
+
+const landingImage = "/rocket.png"
 
 const LandingSection = () => {
     return (
         <main>
             <div className={styles.imageContainer}>
-                <img src="/rocket.png" alt="Foguete" />
+                <Image imagePath={landingImage} />
             </div>
             <div className={styles.landingContentContainer}>
                 <div className={styles.insideLandingContent}>

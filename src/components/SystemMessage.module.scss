@@ -1,0 +1,109 @@
+.container {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+
+    .insideContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 500px;
+        height: fit-content;
+        border-radius: 20px;
+        background-color: #fff;
+        border: 1px solid #999;
+        padding: 2em;
+        gap: 1em;
+
+        .actions {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: fit-content;
+            justify-content: flex-end;
+            align-items: center;
+
+            button {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                height: fit-content;
+                border: 1px solid rgba(254, 135, 0, 255);
+                padding: .5em;
+                border-radius: 5px;
+                background-color: transparent;
+                justify-content: center;
+                align-items: center;
+                color: rgba(254, 135, 0, 255);
+                font-size: 14pt;
+                font-weight: 500;
+                gap: .2em;
+                cursor: pointer;
+                transition: all .1s ease-in-out;
+
+                &:hover{
+                    opacity: .5;
+                    transition: all .1s ease-in-out;
+                }
+
+                svg {
+                    font-size: 20pt;
+                    color: rgba(254, 135, 0, 255);
+                }
+            }
+
+        }
+
+        .header {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: fit-content;
+            border-bottom: 1px solid rgba(254, 135, 0, 255);
+            padding-bottom: .5em;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+                position: relative;
+                display: flex;
+                align-items: center;
+                font-size: 15pt;
+                color: rgba(254, 135, 0, 255);
+                font-weight: 500;
+                gap: 5px;
+            }
+        }
+
+        h1 {
+            font-size: 20pt;
+            color: rgba(254, 135, 0, 255);
+            font-weight: 700;
+            border-bottom: 1px solid rgba(254, 135, 0, 255);
+            padding-bottom: .5em;
+        }
+
+        p {
+            display: inline-flex;
+            gap: 5px;
+            font-size: 12pt;
+            color: rgba(254, 135, 0, 255);
+
+            span {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-weight: 700;
+            }
+        }
+    }
+}

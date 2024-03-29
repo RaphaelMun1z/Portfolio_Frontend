@@ -26,10 +26,12 @@ const ProjectsSection = () => {
                 </div>
             </div>
             <div className={styles.contentContainer}>
+                <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
+                <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
+                {/* <ProjectCard />
                 <ProjectCard />
                 <ProjectCard />
-                <ProjectCard />
-                <ProjectCard />
+                <ProjectCard /> */}
             </div>
         </div>
     )

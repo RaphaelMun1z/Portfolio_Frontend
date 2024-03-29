@@ -8,7 +8,7 @@
     scrollbar-width: thin !important;
 }
 
-#root{
+#root {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -37,4 +37,23 @@ body {
     min-height: 100vh;
     background: #fff;
     background-image: linear-gradient(to right, #0404B7, #03036C);
+}
+
+.skeleton {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: calc(100% - 70px);
+    border-radius: 20px;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 80%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
 }

@@ -2,16 +2,82 @@ footer {
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
-    height: 250px;
+    height: fit-content;
     background-color: #fff;
     padding: 2em;
     justify-content: center;
     align-items: center;
-    font-size: 14pt;
-    font-weight: bold;
     margin-top: 20em;
     border-radius: 50px 50px 0 0;
-    color: rgba(254, 135, 0, 255);
     margin-top: auto;
+    justify-content: space-between;
+    gap: 2em;
+    padding-bottom: 1em;
+
+    p {
+        color: rgba(254, 135, 0, 255);
+        font-size: 14pt;
+        font-weight: 500;
+    }
+
+    .insideFooter {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 4em;
+
+        .listsContainer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: fit-content;
+            min-width: 300px;
+            height: 100%;
+
+            h1 {
+                font-size: 20pt;
+                font-weight: 700;
+                color: rgba(254, 135, 0, 255);
+            }
+
+            ul {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                width: fit-content;
+                height: fit-content;
+                list-style: none;
+
+                li {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                    font-size: 12pt;
+                    color: rgba(254, 135, 0, 255);
+                    font-weight: 400;
+                    transition: all .1s ease-in-out;
+                    cursor: pointer;
+
+                    a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
+
+                    &:hover {
+                        border-left: 3px solid rgba(254, 135, 0, 255);
+                        padding-left: .2em;
+                        opacity: .6;
+                        transition: all .1s ease-in-out;
+                    }
+                }
+            }
+        }
+    }
 }

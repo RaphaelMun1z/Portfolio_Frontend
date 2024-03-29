@@ -90,6 +90,14 @@ nav .linksContainer ul li {
     font-weight: 500;
 }
 
+nav .linksContainer ul li p {
+    border: 2px solid red;
+    color: red;
+    padding: .3em 1.5em;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
 nav .linksContainer ul li a {
     color: inherit;
     text-decoration: none;
@@ -102,11 +110,11 @@ nav .linksContainer ul li a.active {
     font-weight: 600;
 }
 
-header.active nav .linksContainer ul li a.active{
+header.active nav .linksContainer ul li a.active {
     color: #fff;
 }
 
-nav .linksContainer ul li a.active:hover{
+nav .linksContainer ul li a.active:hover {
     opacity: 1;
 }
 

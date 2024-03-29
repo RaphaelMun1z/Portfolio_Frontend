@@ -13,12 +13,14 @@ import ProjectPage from './pages/ProjectPage';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 
+import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <SystemMessage msg="Olá, seja bem vindo(a) ao meu portfólio!" />
         <Header />
 
         <Routes>

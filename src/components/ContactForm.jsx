@@ -5,6 +5,9 @@ import styles from './ContactForm.module.css'
 
 // Icons
 import { MdSend } from "react-icons/md";
+import Image from './Image';
+
+const contactImage = "/satelite.png"
 
 const ContactForm = ({ user }) => {
     const [name, setName] = useState(user ? user.name : '')
@@ -34,7 +37,7 @@ const ContactForm = ({ user }) => {
         <section className={styles.formContainer}>
             <div className={styles.container}>
                 <div className={styles.insideContainer}>
-                    <img src="satelite.png" />
+                    <Image imagePath={contactImage} />
                 </div>
                 <div className={`${styles.insideContainer} ${styles.mainDiv}`}>
                     <form onSubmit={handleSubmit}>
