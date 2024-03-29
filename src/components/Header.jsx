@@ -46,6 +46,11 @@ const Header = () => {
                                 isActive ? `${styles.active}` : ''
                             } to="/contato">Contato</NavLink>
                         </li>
+                        <li>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? `${styles.active}` : ''
+                            } to="/painel">Painel</NavLink>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -1,0 +1,370 @@
+.projectDetailsContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 10px 0;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-size: 45pt;
+    }
+
+    .actions {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+        margin: 1em 0;
+        gap: 1em;
+
+        button {
+            position: relative;
+            display: flex;
+            width: fit-content;
+            height: fit-content;
+            border: 1px solid #999;
+            background-color: #d3d3d3;
+            color: #fff;
+            font-weight: 600;
+            font-size: 10pt;
+            border-radius: 10px;
+            padding: 1em 2em;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all .1s ease-in-out;
+
+            &.github {
+                background: rgb(36, 41, 46);
+                background: radial-gradient(circle, rgba(36, 41, 46, 1) 9%, rgba(43, 49, 55, 1) 92%);
+            }
+
+            &.bug {
+                background: rgb(231, 20, 20);
+                background: radial-gradient(circle, rgba(231, 20, 20, 1) 9%, rgba(204, 17, 17, 1) 92%);
+            }
+
+            &.save {
+                background: #999;
+            }
+
+            &.saved {
+                background: rgb(73, 236, 73);
+                background: radial-gradient(circle, rgba(73, 236, 73, 1) 9%, rgba(60, 217, 60, 1) 92%);
+            }
+
+            svg {
+                font-size: 12pt;
+            }
+        }
+    }
+}
+
+.contentContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    gap: 25px;
+
+    .headerContent {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .description {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: fit-content;
+            height: fit-content;
+            color: #fff;
+            max-width: 50%;
+            gap: 1em;
+
+            button {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                height: fit-content;
+                border: 1px solid #999;
+                background-color: #0094f6;
+                color: #fff;
+                font-weight: 600;
+                font-size: 12pt;
+                border-radius: 10px;
+                padding: 1em 4em;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+                transition: all 0.1s ease-in-out;
+
+                &:hover {
+                    transform: scale(.9);
+                    transition: all .1s ease-in-out;
+                }
+            }
+        }
+
+        .technologies {
+            position: relative;
+            display: flex;
+            max-width: 30%;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: fit-content;
+            height: fit-content;
+
+            h3 {
+                width: fit-content;
+                color: #fff;
+                gap: 5px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                margin-bottom: .5em;
+            }
+
+            .technologyCardContainer {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                width: fit-content;
+                height: fit-content;
+                gap: 1% 1%;
+
+                .technologyCard {
+                    position: relative;
+                    display: flex;
+                    flex-wrap: wrap;
+                    width: fit-content;
+                    flex: 1 1 49%;
+                    height: fit-content;
+                    background-color: transparent;
+                    border-radius: 5px;
+                    border: 1px solid #fff;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: .5em 1em;
+                    opacity: .7;
+                    transition: all .1s ease-in-out;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 1;
+                        transition: all .1s ease-in-out;
+                    }
+
+                    &.expand {
+                        opacity: 1;
+                        flex-direction: row-reverse;
+                        cursor: pointer;
+                        border-color: rgba(254, 135, 0, 255);
+
+                        .name {
+                            color: rgba(254, 135, 0, 255);
+                        }
+
+                        .icon {
+                            svg {
+                                fill: rgba(254, 135, 0, 255);
+                            }
+                        }
+                    }
+
+                    .icon {
+                        position: relative;
+                        display: flex;
+                        width: fit-content;
+                        height: 100%;
+                        padding: .5em;
+                        justify-content: center;
+                        align-items: center;
+
+                        svg {
+                            fill: #fff;
+                            font-size: 20pt;
+                        }
+                    }
+
+                    .name {
+                        position: relative;
+                        display: flex;
+                        width: fit-content;
+                        height: 100%;
+                        padding: .5em;
+                        font-size: 15pt;
+                        margin: auto;
+                        font-weight: 400;
+                        color: #fff;
+                    }
+
+                    .language {
+                        position: relative;
+                        display: flex;
+                        width: 50px;
+                        height: 50px;
+                        border-left: 2px solid #fff;
+                        margin-left: .5em;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0 0 0 .5em;
+
+                        svg {
+                            font-size: 20pt;
+                            fill: #fff;
+
+                            &.js {
+                                fill: #F0DB4F;
+                            }
+
+                            &.ts {
+                                fill: #007acc;
+                            }
+
+                            &.php {
+                                fill: #8993be;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .repositories {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        height: fit-content;
+        gap: .5em;
+
+        .header {
+            position: relative;
+            display: flex;
+            color: #fff;
+            align-items: center;
+            gap: 1em;
+
+            h1 {
+                font-size: 25pt;
+            }
+        }
+
+        .repositoriesSection {
+            position: relative;
+            display: flex;
+            width: fit-content;
+            height: fit-content;
+            cursor: pointer;
+
+            h1 {
+                font-size: 15pt;
+                color: #0094f6;
+            }
+
+            button {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                height: fit-content;
+                border: 1px solid #999;
+                background-color: #d3d3d3;
+                color: #fff;
+                font-weight: 600;
+                font-size: 12pt;
+                border-radius: 10px;
+                padding: 1em 2em;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+                transition: all .1s ease-in-out;
+
+                &:hover {
+                    transform: scale(.9);
+                    transition: all .1s ease-in-out;
+                }
+
+                &.github {
+                    background: rgb(36, 41, 46);
+                    background: radial-gradient(circle, rgba(36, 41, 46, 1) 9%, rgba(43, 49, 55, 1) 92%);
+                }
+
+                svg {
+                    margin-right: 7px;
+                    font-size: 20pt;
+
+                    &.link {
+                        font-size: 12pt;
+                        margin-left: .1em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.actions button:hover {
+    transform: scale(.9);
+    transition: all .1s ease-in-out;
+}
+
+.actions button svg {
+    margin-right: 7px;
+    font-size: 20pt;
+}
+
+.images {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    gap: 10px 1%;
+    margin: 1em 0;
+}
+
+.images h3 {
+    width: 100%;
+    color: #fff;
+    gap: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.images>.image {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 49%;
+    flex: 1 1 49%;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    margin-bottom: 10px;
+}

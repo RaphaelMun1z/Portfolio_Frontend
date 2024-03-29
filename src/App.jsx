@@ -11,6 +11,7 @@ import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import Contact from './pages/Contact';
+import Dashboard from './pages/Dashboard';
 
 import NotFound from './pages/NotFound';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/projetos" element={<ProjectsPage />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/projeto/:id" element={<ProjectPage />} />
+          <Route path="/painel" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
