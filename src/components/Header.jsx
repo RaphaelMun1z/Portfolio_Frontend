@@ -50,7 +50,7 @@ const Header = () => {
                         <li>
                             <NavLink className={({ isActive }) =>
                                 isActive ? `${styles.active}` : ''
-                            } to="/painel">Painel</NavLink>
+                            } to="/adm/painel">Painel</NavLink>
                         </li>
                         <li>
                             <p>Sair</p>

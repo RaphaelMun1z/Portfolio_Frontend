@@ -11,7 +11,7 @@ const HomePage = () => {
             <BioAboutMe />
             <Skills />
             <ProjectsTypeMenu />
-            <ContactForm user={{ name: "João", email: "joao@hotmail.com" }} />
+            <ContactForm />
         </>
     )
 }

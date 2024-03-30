@@ -1,17 +1,212 @@
 .container {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    padding: 1em;
+    max-height: 85vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 2em 3em;
     background-color: #fff;
     border-radius: 20px;
-    justify-content: center;
-    align-items: center;
+    gap: .5em;
+    align-content: flex-start;
 
-    p {
-        color: rgba(254, 135, 0, 255);
-        font-size: 25pt;
-        font-weight: 700;
+    .header {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            color: rgba(254, 135, 0, 255);
+            font-size: 30pt;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .newFramework {
+            position: relative;
+            display: flex;
+            width: fit-content;
+            height: fit-content;
+            border: 2px solid limegreen;
+            color: limegreen;
+            padding: .5em 1.5em;
+            border-radius: 20px;
+            font-size: 14pt;
+            align-items: center;
+            gap: .5em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .1s ease-in-out;
+
+            &:hover {
+                background-color: limegreen;
+                color: #fff;
+                transition: all .1s ease-in-out;
+            }
+
+            svg {
+                font-size: 20pt;
+            }
+        }
+    }
+
+    .searchContainer {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        margin: 1em 0 .1em 0;
+
+        input {
+            position: relative;
+            display: flex;
+            font-size: 14pt;
+            width: 50%;
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #999;
+            padding: .5em;
+            background-color: #f2f2f2;
+            border-right: none;
+
+            &::placeholder {
+                color: #999;
+            }
+        }
+
+        button {
+            position: relative;
+            display: flex;
+            font-size: 14pt;
+            width: 60px;
+            border-radius: 0 5px 5px 0;
+            background-color: transparent;
+            border: 1px solid #999;
+            padding: .5em;
+            background-color: #f2f2f2;
+            border-left: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+                font-size: 20pt;
+                color: rgba(254, 135, 0, 255);
+            }
+        }
+
+        label {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: fit-content;
+            height: fit-content;
+            align-items: center;
+            margin-left: auto;
+            gap: .5em;
+            color: rgb(254, 135, 0);
+            font-weight: 500;
+            font-size: 14pt;
+
+            select {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                height: auto;
+                padding: 1em;
+
+                option {
+                    font-size: 12pt;
+                }
+            }
+        }
+    }
+
+    .list {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        gap: 1em;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
+
+            thead {
+                background-color: rgb(254, 135, 0);
+
+                tr {
+
+                    th {
+                        font-weight: 600;
+                        color: #fff;
+                        align-items: center;
+                    }
+
+                    .headActionTh {
+                        text-align: center;
+                    }
+                }
+            }
+
+            tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .actionTh {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                    cursor: pointer;
+                    transition: all .1s ease-in-out;
+
+                    &:hover {
+                        transition: all .1s ease-in-out;
+                        opacity: .5;
+                    }
+                }
+            }
+
+            .view {
+                svg {
+                    color: #0094f6;
+                }
+            }
+
+            .edit {
+                svg {
+                    color: orange;
+                }
+            }
+
+            .delete {
+                svg {
+                    color: red;
+                }
+            }
+
+            th,
+            td {
+                padding: 8px;
+                text-align: left;
+
+                svg {
+                    font-size: 20pt;
+                }
+            }
+        }
     }
 }

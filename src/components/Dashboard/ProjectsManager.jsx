@@ -11,9 +11,9 @@ const ProjectsManager = () => {
       <td>Exemplo {index + 1}</td>
       <td>Exemplo</td>
       <td>Exemplo</td>
-      <td><th><FaRegEye /></th></td>
-      <td><th><FaRegEdit /></th></td>
-      <td><th><MdDeleteOutline /></th></td>
+      <td><th className={`${styles.actionTh} ${styles.view}`}><FaRegEye /></th></td>
+      <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
+      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
     </tr>
   ));
 
@@ -31,8 +31,8 @@ const ProjectsManager = () => {
         <label>
           <p>Filtrar por: </p>
           <select name="searchBy">
-            <option value="name">Nome do projeto</option>
-            <option value="id">Id do projeto</option>
+            <option value="name">Nome</option>
+            <option value="id">Id</option>
             <option value="createdat">Data de criação</option>
           </select>
         </label>
@@ -45,9 +45,9 @@ const ProjectsManager = () => {
               <th>Nome</th>
               <th>Criado em</th>
               <th>Atualizado em</th>
-              <th>Visualizar</th>
-              <th>Editar</th>
-              <th>Deletar</th>
+              <th className={styles.headActionTh}>Visualizar</th>
+              <th className={styles.headActionTh}>Editar</th>
+              <th className={styles.headActionTh}>Deletar</th>
             </tr>
           </thead>
           <tbody>

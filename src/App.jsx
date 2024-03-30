@@ -30,7 +30,7 @@ function App() {
           <Route path="/projetos" element={<ProjectsPage />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/projeto/:id" element={<ProjectPage />} />
-          <Route path="/painel" element={<Dashboard />} />
+          <Route path="/adm/painel" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

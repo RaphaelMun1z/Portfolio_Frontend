@@ -150,11 +150,52 @@
                         color: #fff;
                         align-items: center;
                     }
+
+                    .headActionTh {
+                        text-align: center;
+                    }
                 }
             }
 
             tbody tr:nth-child(even) {
                 background-color: #f2f2f2;
+            }
+
+            .actionTh {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                svg{
+                    cursor: pointer;
+                    transition: all .1s ease-in-out;
+
+                    &:hover{
+                        transition: all .1s ease-in-out;
+                        opacity: .5;
+                    }
+                }
+            }
+
+            .view {
+                svg {
+                    color: #0094f6;
+                }
+            }
+
+            .edit {
+                svg {
+                    color: orange;
+                }
+            }
+
+            .delete {
+                svg {
+                    color: red;
+                }
             }
 
             th,

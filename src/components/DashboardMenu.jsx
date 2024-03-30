@@ -71,7 +71,7 @@ const DashboardMenu = () => {
                         </div>
                         <div className={currentPage === 'faq' ? `${styles.link} ${styles.activePage}` : `${styles.link}`} onClick={() => handlePageChange('faq')}>
                             <MdOutlineContactSupport />
-                            <p>Perguntas e respostas</p>
+                            <p>FAQ</p>
                         </div>
                     </div>
                 </aside>
