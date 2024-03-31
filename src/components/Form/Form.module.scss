@@ -1,0 +1,218 @@
+.mainContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 5em 0;
+
+    .formStep {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        background-color: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 2em 3em;
+        gap: 1.5em;
+
+        .title {
+            h1 {
+                font-size: 25pt;
+                color: rgba(254, 135, 0, 255);
+            }
+        }
+
+        label,
+        .dataInputContainer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            gap: .2em;
+
+            p {
+                font-size: 15pt;
+                color: rgba(254, 135, 0, 255);
+            }
+
+            input {
+                position: relative;
+                display: flex;
+                font-size: 14pt;
+                width: 100%;
+                height: fit-content;
+                border-radius: 10px;
+                border: 1px solid #999;
+                padding: 0.5em;
+                background-color: #f2f2f2;
+                color: #222;
+            }
+
+            select {
+                position: relative;
+                display: flex;
+                font-size: 14pt;
+                width: 100%;
+                height: fit-content;
+                border-radius: 10px;
+                border: 1px solid #999;
+                padding: 0.5em;
+                background-color: #f2f2f2;
+                color: #222;
+            }
+
+            textarea {
+                position: relative;
+                display: flex;
+                font-size: 12pt;
+                width: 100%;
+                min-height: 100px;
+                height: 150px;
+                border-radius: 10px;
+                border: 1px solid #999;
+                padding: 0.5em;
+                background-color: #f2f2f2;
+                color: #222;
+                resize: vertical;
+                max-height: 250px;
+            }
+        }
+
+        .dataInputContainer {
+            label {
+                position: relative;
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1em;
+
+                p {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                    color: #626262;
+                }
+
+                input {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                }
+            }
+        }
+
+        .footer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            gap: .5em;
+
+            button,
+            .cancel {
+                display: flex;
+                font-size: 15pt;
+                width: 100%;
+                height: fit-content;
+                text-decoration: none;
+                color: inherit;
+                border-radius: 10px;
+                color: #fff;
+                font-weight: 600;
+                padding: .5em 2em;
+                border: none;
+                transition: all .1s ease-in-out;
+                cursor: pointer;
+                justify-content: center;
+                align-items: center;
+                gap: 7px;
+                transition: all .1s ease-in-out;
+
+                &:hover {
+                    opacity: .5;
+                    transition: all .1s ease-in-out;
+                }
+
+                &.submit {
+                    background-color: rgba(254, 135, 0, 255);
+                }
+
+                &.cancel {
+                    background-color: red;
+                }
+
+                &.nextStep {
+                    background-color: limegreen;
+
+                    svg {
+                        font-size: 25pt;
+                    }
+                }
+            }
+
+            .messages {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                gap: .5em;
+                margin-top: .5em;
+            }
+        }
+    }
+}
+
+.formSections {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    flex-wrap: wrap;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .formStep {
+        min-width: 35vw;
+    }
+
+    .stepsContainer {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        justify-content: center;
+        align-items: center;
+        gap: .5em;
+        padding: 1em;
+
+        .point {
+            position: relative;
+            display: flex;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 3px solid #fff;
+            cursor: pointer;
+
+            &.correctlyFilled {
+                background-color: #fff;
+            }
+
+            &.error {
+                border-color: red;
+            }
+
+            &.current {
+                transform: scale(1.2);
+                border-color: #fff;
+            }
+        }
+    }
+}

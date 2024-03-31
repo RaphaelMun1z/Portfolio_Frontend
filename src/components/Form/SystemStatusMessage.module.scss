@@ -1,0 +1,28 @@
+.systemMessage {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 1em;
+    justify-content: space-between;
+
+    p {
+        font-size: 12pt;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    svg {
+        font-size: 20pt;
+        color: #fff;
+    }
+
+    &.error {
+        background-color: red;
+    }
+
+    &.success {
+        background-color: limegreen;
+    }
+}

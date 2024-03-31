@@ -4,6 +4,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
 
+import { Link } from 'react-router-dom';
+
 const FrameworksManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
     <tr key={index}>
@@ -22,7 +24,7 @@ const FrameworksManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Frameworks</h1>
-        <div className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/framework" className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pelo framework...' />

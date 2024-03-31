@@ -4,6 +4,8 @@ import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
 
+import { Link } from 'react-router-dom';
+
 const ProjectsManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
     <tr key={index}>
@@ -21,7 +23,7 @@ const ProjectsManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Projetos</h1>
-        <div className={styles.newProject}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/projeto" className={styles.newProject}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pelo projeto...' />

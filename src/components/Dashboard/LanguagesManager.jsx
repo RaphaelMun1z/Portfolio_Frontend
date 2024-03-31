@@ -4,6 +4,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
 
+import { Link } from "react-router-dom"
+
 const LanguagesManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
     <tr key={index}>
@@ -21,7 +23,7 @@ const LanguagesManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Linguagens</h1>
-        <div className={styles.newLanguage}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/linguagem" className={styles.newLanguage}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pela linguagem...' />
