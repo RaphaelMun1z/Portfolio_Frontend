@@ -8,16 +8,30 @@ import SystemStatusMessage from './SystemStatusMessage'
 import { useEffect, useState } from 'react'
 
 const NewProject = () => {
+    // Step 0
+    const [projectName, setProjectName] = useState("")
+    const [projectDescription, setProjectDescription] = useState("")
+
+    // Step 1
     const [projectStack, setProjectStack] = useState("")
+    const [projectFrontendLanguage, setProjectFrontendLanguage] = useState("")
+    const [projectBackendLanguage, setProjectBackendLanguage] = useState("")
+    const [projectFrontendRepository, setProjectFrontendRepository] = useState("")
+    const [projectBackendRepository, setProjectBackendRepository] = useState("")
+
+    // Step 2
+    // Step 3
+    // Step 4
+
     const [projectIsHosted, setProjectIsHosted] = useState("")
     const [projectUsedTools, setProjectUsedTools] = useState(false)
 
     const [formSteps, setFormSteps] = useState([
-        { current: true, correctlyFilled: false, viewed: true },
-        { current: false, correctlyFilled: false, viewed: false },
-        { current: false, correctlyFilled: false, viewed: false },
-        { current: false, correctlyFilled: false, viewed: false },
-        { current: false, correctlyFilled: false, viewed: false }
+        { current: true, correctlyFilled: false, viewed: true, errors: [] },
+        { current: false, correctlyFilled: false, viewed: false, errors: [] },
+        { current: false, correctlyFilled: false, viewed: false, errors: [] },
+        { current: false, correctlyFilled: false, viewed: false, errors: [] },
+        { current: false, correctlyFilled: false, viewed: false, errors: [] }
     ])
 
     const [stepNumber, setStepNumber] = useState(0)
@@ -30,9 +44,105 @@ const NewProject = () => {
                 return { ...formStep, current: false };
             }
         });
-        
+
         setFormSteps(updatedFormSteps);
     }, [stepNumber])
+
+    const handleChangeFormInput = (step) => {
+        // Step 0
+        if (step === 0) {
+            formSteps[step].errors = []
+            let errors = 0
+
+            // Name & Description
+            if (projectName.trim() !== "") {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O nome é obrigatório!");
+            } else if (projectName.trim() === "") {
+                formSteps[step].errors.push("O nome é obrigatório!");
+                errors += 1
+            }
+
+            if (projectDescription.trim() !== "") {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A descrição é obrigatória!");
+            } else if (projectDescription.trim() === "") {
+                formSteps[step].errors.push("A descrição é obrigatória!");
+                errors += 1
+            }
+
+            if (errors > 0) {
+                formSteps[step].correctlyFilled = false
+            } else {
+                formSteps[step].correctlyFilled = true
+            }
+        }
+
+        // Step 1
+        if (step === 1) {
+            formSteps[step].errors = []
+            let errors = 0
+
+            // Stack && Languages && Repository
+            if (projectStack.trim() !== "") {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A stack é obrigatória!");
+            } else if (projectStack.trim() === "") {
+                formSteps[step].errors.push("A stack é obrigatória!");
+                errors += 1
+            }
+
+            if (projectStack.trim() === "Frontend" || projectStack.trim() === "Fullstack") {
+                if (projectFrontendLanguage.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A linguagem do frontend é obrigatória!");
+                } else if (projectFrontendLanguage.trim() === "") {
+                    formSteps[step].errors.push("A linguagem do frontend é obrigatória!");
+                    errors += 1
+                }
+
+                if (projectFrontendRepository.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O repositório do frontend é obrigatório!");
+                } else if (projectFrontendRepository.trim() === "") {
+                    formSteps[step].errors.push("O repositório do frontend é obrigatório!");
+                    errors += 1
+                }
+            }
+
+            if (projectStack.trim() === "Backend" || projectStack.trim() === "Fullstack") {
+                if (projectBackendLanguage.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A linguagem do backend é obrigatória!");
+                } else if (projectBackendLanguage.trim() === "") {
+                    formSteps[step].errors.push("A linguagem do backend é obrigatória!");
+                    errors += 1
+                }
+
+                if (projectBackendRepository.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O repositório do backend é obrigatório!");
+                } else if (projectBackendRepository.trim() === "") {
+                    formSteps[step].errors.push("O repositório do backend é obrigatório!");
+                    errors += 1
+                }
+            }
+
+            if (errors > 0) {
+                formSteps[step].correctlyFilled = false
+            } else {
+                formSteps[step].correctlyFilled = true
+            }
+        }
+    }
+
+    const verifyAllFormsInput = () => {
+        handleChangeFormInput(0)
+        handleChangeFormInput(1)
+    }
+
+    verifyAllFormsInput()
+
+    useEffect(() => {
+        handleChangeFormInput(0)
+    }, [projectName, projectDescription])
+
+    useEffect(() => {
+        handleChangeFormInput(1)
+    }, [projectStack, projectFrontendLanguage, projectFrontendRepository, projectBackendLanguage, projectBackendRepository])
 
     const changeFormStep = (step) => {
         setStepNumber(step)
@@ -76,24 +186,32 @@ const NewProject = () => {
 
                         <label>
                             <p>Qual o nome do projeto?</p>
-                            <input type="text" placeholder='Nome do projeto...' />
+                            <input type="text" placeholder='Nome do projeto...' onChange={(e) => setProjectName(e.target.value)} value={projectName} />
                         </label>
 
                         <label>
                             <p>Qual a descrição do projeto?</p>
-                            <textarea name="projectDescription"></textarea>
+                            <textarea name="projectDescription" onChange={(e) => setProjectDescription(e.target.value)}>{projectDescription}</textarea>
                         </label>
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
                             <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
-                            <div className={styles.messages}>
-                                <SystemStatusMessage type="error" msg="O nome da linguagem é obrigatório!" />
-                                <SystemStatusMessage type="success" msg="Linguagem cadastrada com sucesso!" />
-                            </div>
+                            {formSteps[0].errors.length > 0 && (
+                                <div className={styles.messages}>
+                                    {formSteps[0].errors.map((error, index) => (
+                                        <SystemStatusMessage type="error" msg={error} key={index} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
+
+                {/* <div className={styles.messages}>
+                                <SystemStatusMessage type="error" msg="O nome da linguagem é obrigatório!" />
+                                <SystemStatusMessage type="success" msg="Linguagem cadastrada com sucesso!" />
+                            </div> */}
 
                 {stepNumber === 1 && (
                     <div className={styles.formStep}>
@@ -101,15 +219,15 @@ const NewProject = () => {
                             <p>Esse projeto é:</p>
                             <label htmlFor="Frontend">
                                 <p>Frontend</p>
-                                <input type="radio" name="projectStack" id="Frontend" value="Frontend" onChange={(e) => handleSetProjecStack(e.target.value)} />
+                                <input type="radio" name="projectStack" id="Frontend" value="Frontend" onChange={(e) => handleSetProjecStack(e.target.value)} checked={projectStack === "Frontend"} />
                             </label>
                             <label htmlFor="Backend">
                                 <p>Backend</p>
-                                <input type="radio" name="projectStack" id="Backend" value="Backend" onChange={(e) => handleSetProjecStack(e.target.value)} />
+                                <input type="radio" name="projectStack" id="Backend" value="Backend" onChange={(e) => handleSetProjecStack(e.target.value)} checked={projectStack === "Backend"} />
                             </label>
                             <label htmlFor="FullStack">
                                 <p>Full Stack</p>
-                                <input type="radio" name="projectStack" id="FullStack" value="Fullstack" onChange={(e) => handleSetProjecStack(e.target.value)} />
+                                <input type="radio" name="projectStack" id="FullStack" value="Fullstack" onChange={(e) => handleSetProjecStack(e.target.value)} checked={projectStack === "Fullstack"} />
                             </label>
                         </div>
 
@@ -117,11 +235,11 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' />
+                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' onChange={(e) => setProjectFrontendLanguage(e.target.value)} value={projectFrontendLanguage} />
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Repositório frontend...' />
+                                    <input type="text" placeholder='Repositório frontend...' onChange={(e) => setProjectFrontendRepository(e.target.value)} value={projectFrontendRepository} />
                                 </label>
                             </>
                         )}
@@ -130,11 +248,11 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' />
+                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage} />
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Repositório backend...' />
+                                    <input type="text" placeholder='Repositório backend...' onChange={(e) => setProjectBackendRepository(e.target.value)} value={projectBackendRepository} />
                                 </label>
                             </>
                         )}
@@ -143,19 +261,19 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' />
+                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' onChange={(e) => setProjectFrontendLanguage(e.target.value)} value={projectFrontendLanguage} />
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Repositório frontend...' />
+                                    <input type="text" placeholder='Repositório frontend...' onChange={(e) => setProjectFrontendRepository(e.target.value)} value={projectFrontendRepository} />
                                 </label>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' />
+                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage} />
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Repositório backend...' />
+                                    <input type="text" placeholder='Repositório backend...' onChange={(e) => setProjectBackendRepository(e.target.value)} value={projectBackendRepository} />
                                 </label>
                             </>
                         )}
@@ -163,6 +281,13 @@ const NewProject = () => {
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
                             <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            {formSteps[1].errors.length > 0 && (
+                                <div className={styles.messages}>
+                                    {formSteps[1].errors.map((error, index) => (
+                                        <SystemStatusMessage type="error" msg={error} key={index} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
@@ -260,7 +385,7 @@ const NewProject = () => {
                     })}
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
