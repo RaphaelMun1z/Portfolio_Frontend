@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <SystemMessage msg="Olá, seja bem vindo(a) ao meu portfólio!" />
+        {/* <SystemMessage msg="Olá, seja bem vindo(a) ao meu portfólio!" /> */}
         <Header />
 
         <Routes>

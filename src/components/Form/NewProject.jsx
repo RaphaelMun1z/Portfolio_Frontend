@@ -1,6 +1,7 @@
 import styles from './Form.module.scss'
 
 import { MdOutlineNavigateNext } from "react-icons/md";
+import { FiAlertTriangle } from "react-icons/fi";
 
 import { Link } from 'react-router-dom'
 import SystemStatusMessage from './SystemStatusMessage'
@@ -8,24 +9,29 @@ import SystemStatusMessage from './SystemStatusMessage'
 import { useEffect, useState } from 'react'
 
 const NewProject = () => {
-    // Step 0
+    // Step 0 - States
     const [projectName, setProjectName] = useState("")
     const [projectDescription, setProjectDescription] = useState("")
 
-    // Step 1
+    // Step 1 - States
     const [projectStack, setProjectStack] = useState("")
     const [projectFrontendLanguage, setProjectFrontendLanguage] = useState("")
     const [projectBackendLanguage, setProjectBackendLanguage] = useState("")
     const [projectFrontendRepository, setProjectFrontendRepository] = useState("")
     const [projectBackendRepository, setProjectBackendRepository] = useState("")
 
-    // Step 2
-    // Step 3
-    // Step 4
-
+    // Step 2 - States
     const [projectIsHosted, setProjectIsHosted] = useState("")
-    const [projectUsedTools, setProjectUsedTools] = useState(false)
+    const [projectHostUrl, setProjectHostUrl] = useState("")
 
+    // Step 3 - States
+    const [projectUsedTools, setProjectUsedTools] = useState(null)
+    const [projectToolsArray, setProjectToolsArray] = useState([])
+
+    // Step 4 - States
+    const [formsErrors, setFormsErrors] = useState([])
+
+    // Forms States
     const [formSteps, setFormSteps] = useState([
         { current: true, correctlyFilled: false, viewed: true, errors: [] },
         { current: false, correctlyFilled: false, viewed: false, errors: [] },
@@ -36,18 +42,41 @@ const NewProject = () => {
 
     const [stepNumber, setStepNumber] = useState(0)
 
+    // On Change Step
     useEffect(() => {
-        const updatedFormSteps = formSteps.map((formStep, index) => {
-            if (index === stepNumber) {
-                return { ...formStep, current: true, viewed: true };
-            } else {
-                return { ...formStep, current: false };
-            }
-        });
+        const updateFormSteps = async () => {
+            const updatedFormSteps = formSteps.map((formStep, index) => {
+                if (index === stepNumber) {
+                    // The form turn viewed and current
+                    return { ...formStep, current: true, viewed: true };
+                } else {
+                    return { ...formStep, current: false };
+                }
+            });
+            setFormSteps(updatedFormSteps);
 
-        setFormSteps(updatedFormSteps);
+            await handleVerifyAllErrors()
+        };
+
+        updateFormSteps();
     }, [stepNumber])
 
+    const handleNextStep = () => {
+        if (stepNumber >= 0 && stepNumber < 4) {
+            setStepNumber(stepNumber + 1)
+        }
+    }
+
+    const handleSelectFormForPoint = async (step) => {
+        if (formsErrors.length === 0 && formSteps[0].viewed && formSteps[1].viewed && formSteps[2].viewed && formSteps[3].viewed) {
+            formSteps[4].correctlyFilled = true
+        } else {
+            formSteps[4].correctlyFilled = false
+        }
+        setStepNumber(step)
+    }
+
+    // Verify if there're values in the input's and validate them
     const handleChangeFormInput = (step) => {
         // Step 0
         if (step === 0) {
@@ -127,36 +156,111 @@ const NewProject = () => {
                 formSteps[step].correctlyFilled = true
             }
         }
+
+        // Step 2
+        if (step === 2) {
+            formSteps[step].errors = []
+            let errors = 0
+
+            // IsHosted && HostUrl
+            if (projectIsHosted.trim() !== "") {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "Responda: 'O projeto está hospedado?'");
+            } else if (projectIsHosted.trim() === "") {
+                formSteps[step].errors.push("Responda: 'O projeto está hospedado?'");
+                errors += 1
+            }
+
+            if (projectIsHosted.trim() === "yes") {
+                if (projectHostUrl.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O endereço de hospedagem é obrigatório!");
+                } else if (projectHostUrl.trim() === "") {
+                    formSteps[step].errors.push("O endereço de hospedagem é obrigatório!");
+                    errors += 1
+                }
+            }
+
+            if (errors > 0) {
+                formSteps[step].correctlyFilled = false
+            } else {
+                formSteps[step].correctlyFilled = true
+            }
+        }
+
+        // Step 3
+        if (step === 3) {
+            formSteps[step].errors = []
+            let errors = 0
+
+            // UsedTools && ToolsArray
+            if (projectUsedTools !== null) {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "Responda: 'Foi utilizada alguma ferramenta?'");
+            } else if (projectUsedTools === null) {
+                formSteps[step].errors.push("Responda: 'Foi utilizada alguma ferramenta?'");
+                errors += 1
+            }
+
+            if (projectUsedTools === "true") {
+                if (projectToolsArray.length > 0) {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "Quais ferramentas foram utilizadas?");
+                } else if (projectToolsArray.length === 0) {
+                    formSteps[step].errors.push("Quais ferramentas foram utilizadas?");
+                    errors += 1
+                }
+            }
+
+            if (errors > 0) {
+                formSteps[step].correctlyFilled = false
+            } else {
+                formSteps[step].correctlyFilled = true
+            }
+        }
     }
 
     const verifyAllFormsInput = () => {
         handleChangeFormInput(0)
         handleChangeFormInput(1)
+        handleChangeFormInput(2)
+        handleChangeFormInput(3)
     }
 
     verifyAllFormsInput()
 
+    // Step 0 - Verify Errors
     useEffect(() => {
         handleChangeFormInput(0)
     }, [projectName, projectDescription])
 
+    // Step 1 - Verify Errors
     useEffect(() => {
         handleChangeFormInput(1)
     }, [projectStack, projectFrontendLanguage, projectFrontendRepository, projectBackendLanguage, projectBackendRepository])
 
-    const changeFormStep = (step) => {
-        setStepNumber(step)
+    // Step 2 - Verify Errors
+    useEffect(() => {
+        handleChangeFormInput(2)
+    }, [projectIsHosted, projectHostUrl])
 
-        const updatedFormSteps = formSteps.map((formStep, index) => {
-            if (index === step) {
-                return { ...formStep, current: true };
-            } else {
-                return { ...formStep, current: false };
-            }
+    // Step 3 - Verify Errors
+    useEffect(() => {
+        handleChangeFormInput(3)
+    }, [projectUsedTools, projectToolsArray])
+
+    const handleVerifyAllErrors = () => {
+        return new Promise((resolve, reject) => {
+            let errorsNumber = 0
+            let errorsMessages = []
+
+            formSteps.map((step, index) => {
+                errorsMessages.push(...step.errors)
+                errorsNumber += step.errors.length
+            })
+            setFormsErrors(errorsMessages)
+
+            resolve();
         });
-        setFormSteps(updatedFormSteps);
-    };
+    }
 
+    // Set input values in their states
     const handleSetProjecStack = (stack) => {
         setProjectStack(stack)
     }
@@ -169,9 +273,10 @@ const NewProject = () => {
         setProjectUsedTools(res)
     }
 
-    const handleNextStep = () => {
-        if (stepNumber >= 0 && stepNumber < 4) {
-            changeFormStep(stepNumber + 1);
+    const handleSelectProjectTool = (opt) => {
+        if (projectToolsArray.includes(opt.target.value)) {
+        } else if (opt.target.value !== "invalid") {
+            projectToolsArray.push(opt.target.value)
         }
     }
 
@@ -191,7 +296,7 @@ const NewProject = () => {
 
                         <label>
                             <p>Qual a descrição do projeto?</p>
-                            <textarea name="projectDescription" onChange={(e) => setProjectDescription(e.target.value)}>{projectDescription}</textarea>
+                            <textarea name="projectDescription" onChange={(e) => setProjectDescription(e.target.value)} defaultValue={projectDescription}></textarea>
                         </label>
 
                         <div className={styles.footer}>
@@ -207,11 +312,6 @@ const NewProject = () => {
                         </div>
                     </div>
                 )}
-
-                {/* <div className={styles.messages}>
-                                <SystemStatusMessage type="error" msg="O nome da linguagem é obrigatório!" />
-                                <SystemStatusMessage type="success" msg="Linguagem cadastrada com sucesso!" />
-                            </div> */}
 
                 {stepNumber === 1 && (
                     <div className={styles.formStep}>
@@ -298,27 +398,30 @@ const NewProject = () => {
                             <p>Esse projeto está hospedado?</p>
                             <label htmlFor="YesHosted">
                                 <p>Sim</p>
-                                <input type="radio" name="projectIsHosted" id="YesHosted" value="yes" onChange={(e) => handleSetProjecIsHosted(e.target.value)} />
+                                <input type="radio" name="projectIsHosted" id="YesHosted" value="yes" onChange={(e) => handleSetProjecIsHosted(e.target.value)} checked={projectIsHosted === "yes"} />
                             </label>
                             <label htmlFor="NoHosted">
                                 <p>Não</p>
-                                <input type="radio" name="projectIsHosted" id="NoHosted" value="no" onChange={(e) => handleSetProjecIsHosted(e.target.value)} />
+                                <input type="radio" name="projectIsHosted" id="NoHosted" value="no" onChange={(e) => handleSetProjecIsHosted(e.target.value)} checked={projectIsHosted === "no"} />
                             </label>
                             <label htmlFor="SoonHosted">
                                 <p>Estará em breve</p>
-                                <input type="radio" name="projectIsHosted" id="SoonHosted" value="soon" onChange={(e) => handleSetProjecIsHosted(e.target.value)} />
+                                <input type="radio" name="projectIsHosted" id="SoonHosted" value="soon" onChange={(e) => handleSetProjecIsHosted(e.target.value)} checked={projectIsHosted === "soon"} />
                             </label>
                         </div>
                         {projectIsHosted && projectIsHosted === "yes" && (
                             <label>
                                 <p>Qual o endereço de hospedagem?</p>
-                                <input type="text" placeholder='Endereço hospedagem...' />
+                                <input type="text" placeholder='Endereço hospedagem...' onChange={(e) => setProjectHostUrl(e.target.value)} value={projectHostUrl} />
                             </label>
                         )}
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
                             <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            {formSteps[2].errors.map((error, index) => (
+                                <SystemStatusMessage type="error" msg={error} key={index} />
+                            ))}
                         </div>
                     </div>
                 )}
@@ -329,17 +432,18 @@ const NewProject = () => {
                             <p>Foram utilizadas ferramentas de desenvolvimento?</p>
                             <label htmlFor="YesTools">
                                 <p>Sim</p>
-                                <input type="radio" name="toolsWereUsed" id="YesTools" value={true} onChange={(e) => handleSetProjecUsedTools(e.target.value)} />
+                                <input type="radio" name="toolsWereUsed" id="YesTools" value={true} onChange={(e) => handleSetProjecUsedTools(e.target.value)} checked={projectUsedTools === "true"} />
                             </label>
                             <label htmlFor="NoTools">
                                 <p>Não</p>
-                                <input type="radio" name="toolsWereUsed" id="NoTools" value={false} onChange={(e) => handleSetProjecUsedTools(e.target.value)} />
+                                <input type="radio" name="toolsWereUsed" id="NoTools" value={false} onChange={(e) => handleSetProjecUsedTools(e.target.value)} checked={projectUsedTools === "false"} />
                             </label>
                         </div>
                         {projectUsedTools && projectUsedTools === "true" && (
                             <label>
                                 <p>Quais ferramentas foram utilizadas?</p>
-                                <select name="tools">
+                                <select name="tools" onChange={(e) => handleSelectProjectTool(e)}>
+                                    <option value="invalid">Selecione</option>
                                     <option value="docker">Docker</option>
                                     <option value="postman">Postman</option>
                                     <option value="other">Outras</option>
@@ -350,19 +454,125 @@ const NewProject = () => {
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
                             <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            {formSteps[3].errors.map((error, index) => (
+                                <SystemStatusMessage type="error" msg={error} key={index} />
+                            ))}
                         </div>
                     </div>
                 )}
 
                 {stepNumber === 4 && (
                     <div className={styles.formStep}>
-                        <p>Etapa de verificação</p>
-                        <button className={styles.submit}>Salvar</button>
+                        <div className={styles.dataContainer}>
+                            <h2>Nome do projeto:</h2>
+                            <p>{projectName.trim() !== "" ? projectName : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                        </div>
+                        <div className={styles.dataContainer}>
+                            <h2>Descrição do projeto:</h2>
+                            <p>{projectDescription.trim() !== "" ? projectDescription : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                        </div>
+                        <div className={styles.dataContainer}>
+                            <h2>Stack do projeto:</h2>
+                            <p>{projectStack.trim() !== "" ? projectStack : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                        </div>
+
+                        {projectStack === "Frontend" || projectStack == "Fullstack" ? (
+                            <>
+                                <div className={styles.dataContainer}>
+                                    <h2>Linguagem usada no frontend:</h2>
+                                    <p>{projectFrontendLanguage.trim() !== "" ? projectFrontendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                </div>
+                                <div className={styles.dataContainer}>
+                                    <h2>Repositório do frontend:</h2>
+                                    <p>{projectFrontendRepository.trim() !== "" ? projectFrontendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                </div>
+                            </>
+                        ) : ''}
+                        {projectStack === "Backend" || projectStack == "Fullstack" ? (
+                            <>
+                                <div className={styles.dataContainer}>
+                                    <h2>Linguagem usada no backend:</h2>
+                                    <p>{projectBackendLanguage.trim() !== "" ? projectBackendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                </div>
+                                <div className={styles.dataContainer}>
+                                    <h2>Repositório do backend:</h2>
+                                    <p>{projectBackendRepository.trim() !== "" ? projectBackendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                </div>
+                            </>
+                        ) : ''}
+
+                        <div className={styles.dataContainer}>
+                            <h2>O projeto está hospedado:</h2>
+                            {!projectIsHosted || projectIsHosted.trim() === "" ? (
+                                <p><span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span></p>
+                            ) : ''}
+                            {projectIsHosted && projectIsHosted.trim() === "yes" && (
+                                <p>Sim</p>
+                            )}
+                            {projectIsHosted && projectIsHosted.trim() === "no" && (
+                                <p>Não.</p>
+                            )}
+                            {projectIsHosted && projectIsHosted.trim() === "soon" && (
+                                <p>Em breve.</p>
+                            )}
+                        </div>
+
+                        {projectIsHosted && projectIsHosted.trim() === "yes" && (
+                            <div className={styles.dataContainer}>
+                                <h2>URL do projeto hospedado:</h2>
+                                <p>{projectHostUrl.trim() !== "" ? projectHostUrl : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                            </div>
+                        )}
+
+                        <div className={styles.dataContainer}>
+                            <h2>Usou ferramentas de desenvolvimento:</h2>
+                            {!projectUsedTools || projectUsedTools === null ? (
+                                <p><span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span></p>
+                            ) : ''}
+                            {projectUsedTools && projectUsedTools.trim() === "true" && (
+                                <p>Sim</p>
+                            )}
+                            {projectUsedTools && projectUsedTools.trim() === "false" && (
+                                <p>Não.</p>
+                            )}
+                        </div>
+
+                        {projectUsedTools && projectUsedTools === "true" ? (
+                            <div className={styles.dataContainer}>
+                                <h2>Ferramentas de desenvolvimento utilizadas:</h2>
+                                <ul>
+                                    <li>teste</li>
+                                    <li>teste</li>
+                                    <li>teste</li>
+                                </ul>
+                            </div>
+                        ) : ''}
+
+                        <div className={styles.footer}>
+                            {formsErrors && formsErrors.length === 0 ? (
+                                <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
+                            ) : (
+                                <button className={`${styles.nextStep} ${styles.disabled}`} disabled onClick={() => handleNextStep()}><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
+                            )}
+                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <div className={styles.messages}>
+                                {formsErrors && formsErrors.length > 0 && (
+                                    <>
+                                        <div className={styles.auxErrorMessage}>
+                                            <p className={styles.title}>Há campos a serem preenchidos:</p>
+                                            {formsErrors && formsErrors.map((error, index) => (
+                                                <SystemStatusMessage type="error" msg={error} key={index} />
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
 
                 <div className={styles.stepsContainer}>
-                    {formSteps.map((step, index) => {
+                    {formSteps && formSteps.map((step, index) => {
                         let pointClassName = ` ${styles.point} `;
 
                         if (step.current || step.correctlyFilled) {
@@ -379,7 +589,7 @@ const NewProject = () => {
 
                         return (
                             <p key={index}>
-                                <div className={pointClassName} onClick={() => changeFormStep(index)}></div>
+                                <div className={pointClassName} onClick={() => handleSelectFormForPoint(index)}></div>
                             </p>
                         );
                     })}

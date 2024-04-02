@@ -153,6 +153,11 @@
                     svg {
                         font-size: 25pt;
                     }
+
+                    &.disabled {
+                        opacity: .5;
+                        cursor: no-drop;
+                    }
                 }
             }
 
@@ -163,6 +168,69 @@
                 flex-direction: column;
                 gap: .5em;
                 margin-top: .5em;
+            }
+
+            .auxErrorMessage {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                width: 100%;
+                border: 3px solid rgba(254, 135, 0, 255);
+                border-radius: 10px;
+                padding: 1em;
+                gap: .3em;
+
+                .title {
+                    color: rgba(254, 135, 0, 255);
+                    font-weight: 600;
+                    margin-bottom: .5em;
+                    font-size: 14pt;
+                }
+            }
+        }
+
+        .dataContainer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+
+            h3 {
+                font-size: 14pt;
+            }
+
+            p {
+                position: relative;
+                display: flex;
+                gap: .3em;
+                font-size: 12pt;
+
+                .notDefinedYet{
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    background-color: rgba(254, 135, 0, 255);
+                    color: #fff;
+                    padding: .5em 1em;
+                    border-radius: 10px;
+                    gap: .5em;
+
+                    svg{
+                        font-size: 15pt;
+                    }
+                }
+            }
+
+            ul{
+                list-style: none;
+                width: fit-content;
+
+                li{
+                    font-size: 12pt;
+                }
             }
         }
     }
