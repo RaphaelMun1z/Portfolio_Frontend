@@ -17,6 +17,10 @@ import Dashboard from './pages/Dashboard';
 import NewLanguage from './components/Form/NewLanguage';
 import NewFramework from './components/Form/NewFramework';
 import NewProject from './components/Form/NewProject';
+import NewBdd from './components/Form/NewBdd';
+import NewTool from './components/Form/NewTool';
+import NewInterpersonalSkill from './components/Form/NewInterpersonalSkill';
+import NewFaq from './components/Form/NewFaq';
 
 import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
@@ -40,6 +44,10 @@ function App() {
           <Route path="/adm/cadastrar/linguagem" element={<NewLanguage />} />
           <Route path="/adm/cadastrar/framework" element={<NewFramework />} />
           <Route path="/adm/cadastrar/projeto" element={<NewProject />} />
+          <Route path="/adm/cadastrar/bdd" element={<NewBdd />} />
+          <Route path="/adm/cadastrar/ferramenta" element={<NewTool />} />
+          <Route path="/adm/cadastrar/habilidadeinterpessoal" element={<NewInterpersonalSkill />} />
+          <Route path="/adm/cadastrar/faq" element={<NewFaq />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

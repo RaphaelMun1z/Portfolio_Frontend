@@ -1,4 +1,4 @@
-import styles from './FrameworksManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -24,7 +24,7 @@ const FrameworksManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Frameworks</h1>
-        <Link to="/adm/cadastrar/framework" className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></Link>
+        <Link to="/adm/cadastrar/framework" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pelo framework...' />

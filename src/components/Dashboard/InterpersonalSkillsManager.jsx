@@ -1,7 +1,9 @@
-import styles from './InterpersonalSkillsManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
+
+import { Link } from 'react-router-dom';
 
 const InterpersonalSkillsManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
@@ -17,7 +19,7 @@ const InterpersonalSkillsManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Habilidades interpessoais</h1>
-        <div className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/habilidadeinterpessoal" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pela habilidade interpessoal...' />

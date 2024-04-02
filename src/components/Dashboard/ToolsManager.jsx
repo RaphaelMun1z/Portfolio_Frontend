@@ -1,8 +1,10 @@
-import styles from './ToolsManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
+
+import { Link } from 'react-router-dom';
 
 const ToolsManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
@@ -21,7 +23,7 @@ const ToolsManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Ferramentas</h1>
-        <div className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/ferramenta" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pela ferramenta...' />

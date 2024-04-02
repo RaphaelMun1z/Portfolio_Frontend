@@ -28,7 +28,7 @@
             text-transform: uppercase;
         }
 
-        .newFramework {
+        .newItem {
             position: relative;
             display: flex;
             width: fit-content;
@@ -43,6 +43,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all .1s ease-in-out;
+            text-decoration: none;
 
             &:hover {
                 background-color: limegreen;

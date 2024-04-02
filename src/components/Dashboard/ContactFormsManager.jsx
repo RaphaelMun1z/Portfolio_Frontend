@@ -1,4 +1,4 @@
-import styles from './ContactFormsManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line, RiSendPlaneLine  } from "react-icons/ri";
@@ -21,7 +21,6 @@ const ContactFormsManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Formulários de contato</h1>
-        <div className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></div>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pelo formulário de contato...' />

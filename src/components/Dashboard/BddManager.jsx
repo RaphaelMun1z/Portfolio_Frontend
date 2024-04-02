@@ -1,8 +1,10 @@
-import styles from './BddManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
+
+import { Link } from 'react-router-dom';
 
 const BddManager = () => {
   const linhas = Array.from({ length: 10 }, (_, index) => (
@@ -22,7 +24,7 @@ const BddManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Bancos de dados</h1>
-        <div className={styles.newFramework}>Cadastrar<MdAddCircleOutline /></div>
+        <Link to="/adm/cadastrar/bdd" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pelo banco de dados...' />

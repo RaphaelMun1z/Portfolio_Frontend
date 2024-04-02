@@ -1,4 +1,4 @@
-import styles from './LanguagesManager.module.scss'
+import styles from './DashboardItems.module.scss'
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -23,7 +23,7 @@ const LanguagesManager = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Linguagens</h1>
-        <Link to="/adm/cadastrar/linguagem" className={styles.newLanguage}>Cadastrar<MdAddCircleOutline /></Link>
+        <Link to="/adm/cadastrar/linguagem" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
       </div>
       <div className={styles.searchContainer}>
         <input type="text" placeholder='Busque pela linguagem...' />
