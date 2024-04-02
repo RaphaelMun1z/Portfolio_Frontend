@@ -44,7 +44,7 @@ const NewProject = () => {
 
     // On Change Step
     useEffect(() => {
-        const updateFormSteps = async () => {
+        const updateFormSteps = () => {
             const updatedFormSteps = formSteps.map((formStep, index) => {
                 if (index === stepNumber) {
                     // The form turn viewed and current
@@ -55,7 +55,7 @@ const NewProject = () => {
             });
             setFormSteps(updatedFormSteps);
 
-            await handleVerifyAllErrors()
+            handleVerifyAllErrors()
         };
 
         updateFormSteps();
@@ -67,7 +67,7 @@ const NewProject = () => {
         }
     }
 
-    const handleSelectFormForPoint = async (step) => {
+    const handleSelectFormForPoint = (step) => {
         if (formsErrors.length === 0 && formSteps[0].viewed && formSteps[1].viewed && formSteps[2].viewed && formSteps[3].viewed) {
             formSteps[4].correctlyFilled = true
         } else {
@@ -246,18 +246,15 @@ const NewProject = () => {
     }, [projectUsedTools, projectToolsArray])
 
     const handleVerifyAllErrors = () => {
-        return new Promise((resolve, reject) => {
-            let errorsNumber = 0
-            let errorsMessages = []
+        let errorsNumber = 0
+        let errorsMessages = []
 
-            formSteps.map((step, index) => {
-                errorsMessages.push(...step.errors)
-                errorsNumber += step.errors.length
-            })
-            setFormsErrors(errorsMessages)
+        formSteps.map((step, index) => {
+            errorsMessages.push(...step.errors)
+            errorsNumber += step.errors.length
+        })
 
-            resolve();
-        });
+        setFormsErrors(errorsMessages)
     }
 
     // Set input values in their states
