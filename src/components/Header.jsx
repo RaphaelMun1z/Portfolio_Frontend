@@ -9,7 +9,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > 1200);
+            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > 2000);
         });
     }, []);
 

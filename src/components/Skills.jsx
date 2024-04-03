@@ -8,7 +8,7 @@ const Skills = () => {
     return (
         <section>
             <div className={styles.header}>
-                <h1>Principais Habilidades</h1>
+                <h1>Habilidades</h1>
             </div>
             <div className={styles.contentContainer}>
                 <div className={styles.cardContainer}>

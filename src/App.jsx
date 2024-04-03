@@ -12,6 +12,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
+import Faq from './pages/Faq';
 
 // Adm
 /// Register Form
@@ -23,6 +24,7 @@ import NewBdd from './components/Form/NewBdd';
 import NewTool from './components/Form/NewTool';
 import NewInterpersonalSkill from './components/Form/NewInterpersonalSkill';
 import NewFaq from './components/Form/NewFaq';
+import Budget from './pages/Budget';
 /// Answer Form
 import AnswerContactForm from './components/Form/AnswerContactForm';
 
@@ -43,7 +45,9 @@ function App() {
           <Route path="/projetos" element={<ProjectsPage />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/projeto/:id" element={<ProjectPage />} />
-          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/depoimentos" element={<Testimonials />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/orcamento" element={<Budget />} />
 
           {/* ADM Routes */}
           <Route path="/adm/painel" element={<Dashboard />} />

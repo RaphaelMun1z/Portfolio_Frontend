@@ -11,9 +11,9 @@ const Footer = () => {
                     <h1>Serviços</h1>
                     <ul>
                         <li><Link to="/projetos">Projetos desenvolvidos</Link></li>
-                        <li><Link to="/testimonials">Depoimentos/Recomendações</Link></li>
-                        <li><Link to="/">Orçamento</Link></li>
-                        <li><Link to="/">FAQ (Perguntas Frequentes)</Link></li>
+                        <li><Link to="/depoimentos">Depoimentos/Recomendações</Link></li>
+                        <li><Link to="/orcamento">Orçamento</Link></li>
+                        <li><Link to="/faq">FAQ (Perguntas Frequentes)</Link></li>
                     </ul>
                 </div>
                 <div className={styles.listsContainer}>

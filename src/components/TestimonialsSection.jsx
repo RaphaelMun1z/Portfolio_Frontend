@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // Hooks
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 const TestimonialsSection = () => {
     const [testimonials, setTestimonials] = useState([

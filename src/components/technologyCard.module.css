@@ -1,9 +1,9 @@
 .techCard {
     position: relative;
     display: flex;
-    height: 300px;
+    height: fit-content;
+    width: fit-content;
     background-color: #fff;
-    width: calc(100%/3);
     flex: 0 1 calc((100%/3) - 1%);
     border-radius: 20px;
 }
@@ -11,6 +11,7 @@
 .techCard>div {
     flex: 1 1 50%;
     width: 50%;
+    height: auto;
 }
 
 .iconContainer {

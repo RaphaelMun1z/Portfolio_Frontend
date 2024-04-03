@@ -1,0 +1,91 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 3em 0;
+
+    .header {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+        margin: 1em auto;
+        color: #fff;
+
+        h1 {
+            font-size: 45pt;
+        }
+    }
+
+    .contentContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: fit-content;
+
+        .division {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 50%;
+            height: fit-content;
+            padding: 1em;
+            gap: .5em;
+
+            .item {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                min-height: 120px;
+                height: fit-content;
+                border-radius: 10px;
+                background-color: rgba(254, 135, 0, 255);
+                padding: 1em 2em 1em 1em;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                .question {
+                    position: relative;
+                    display: flex;
+                    width: 100%;
+                    min-height: calc(100px - 1em);
+                    height: fit-content;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: .3em 0;
+
+                    p {
+                        font-size: 20pt;
+                        font-weight: 600;
+                        color: #fff;
+                        max-width: 90%;
+                    }
+
+                    svg {
+                        color: #fff;
+                        font-size: 20pt;
+                    }
+                }
+
+                .answer {
+                    position: relative;
+                    display: flex;
+                    width: 100%;
+                    height: fit-content;
+                    align-items: center;
+                    font-size: 214t;
+                    font-weight: 300;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

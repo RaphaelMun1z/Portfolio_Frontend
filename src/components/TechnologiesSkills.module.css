@@ -39,3 +39,14 @@ section {
     font-size: 30pt !important;
     font-weight: 700;
 }
+
+.examples {
+    position: relative;
+    display: flex;
+    height: inherit;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 3em;
+    cursor: pointer;
+}

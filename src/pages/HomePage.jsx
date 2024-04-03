@@ -1,8 +1,10 @@
 import LandingSection from '../components/LandingSection'
 import BioAboutMe from '../components/BioAboutMe';
 import Skills from '../components/Skills';
-import ContactForm from '../components/ContactForm';
 import ProjectsTypeMenu from '../components/ProjectsTypeMenu';
+import Testimonials from './Testimonials';
+import Faq from './Faq';
+import ContactForm from '../components/ContactForm';
 
 const HomePage = () => {
     return (
@@ -11,6 +13,8 @@ const HomePage = () => {
             <BioAboutMe />
             <Skills />
             <ProjectsTypeMenu />
+            <Testimonials />
+            <Faq />
             <ContactForm />
         </>
     )
