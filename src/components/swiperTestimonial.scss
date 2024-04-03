@@ -1,0 +1,29 @@
+.mySwiper {
+    position: relative;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+    height: auto;
+    gap: 1em;
+
+    .swiper-wrapper {
+        height: auto !important;
+    }
+
+    .swiper-pagination {
+        position: relative;
+        display: flex;
+        height: fit-content !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #fff !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+    }
+}

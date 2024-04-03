@@ -17,7 +17,7 @@ const NewFaq = () => {
                     </label>
                     <label>
                         <p>Qual a resposta?</p>
-                        <input type="text" placeholder='Digite a resposta...' />
+                        <textarea name="answer" placeholder='Digite a resposta...'></textarea>
                     </label>
                     <div className={styles.footer}>
                         <button type="submit" className={styles.submit}>Salvar</button>

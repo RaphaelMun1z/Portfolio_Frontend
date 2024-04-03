@@ -9,7 +9,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.scrollY > 0);
+            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > 1200);
         });
     }, []);
 
@@ -46,7 +46,7 @@ const Header = () => {
                                 isActive ? `${styles.active}` : ''
                             } to="/contato">Contato</NavLink>
                         </li>
-                      
+
                         <li>
                             <NavLink className={({ isActive }) =>
                                 isActive ? `${styles.active}` : ''

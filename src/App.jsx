@@ -11,8 +11,10 @@ import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import Contact from './pages/Contact';
+import Testimonials from './pages/Testimonials';
 
 // Adm
+/// Register Form
 import Dashboard from './pages/Dashboard';
 import NewLanguage from './components/Form/NewLanguage';
 import NewFramework from './components/Form/NewFramework';
@@ -21,6 +23,8 @@ import NewBdd from './components/Form/NewBdd';
 import NewTool from './components/Form/NewTool';
 import NewInterpersonalSkill from './components/Form/NewInterpersonalSkill';
 import NewFaq from './components/Form/NewFaq';
+/// Answer Form
+import AnswerContactForm from './components/Form/AnswerContactForm';
 
 import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
@@ -39,6 +43,8 @@ function App() {
           <Route path="/projetos" element={<ProjectsPage />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/projeto/:id" element={<ProjectPage />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+
           {/* ADM Routes */}
           <Route path="/adm/painel" element={<Dashboard />} />
           <Route path="/adm/cadastrar/linguagem" element={<NewLanguage />} />
@@ -48,6 +54,7 @@ function App() {
           <Route path="/adm/cadastrar/ferramenta" element={<NewTool />} />
           <Route path="/adm/cadastrar/habilidadeinterpessoal" element={<NewInterpersonalSkill />} />
           <Route path="/adm/cadastrar/faq" element={<NewFaq />} />
+          <Route path="/adm/contactform" element={<AnswerContactForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

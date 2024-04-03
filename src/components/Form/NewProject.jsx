@@ -31,9 +31,14 @@ const NewProject = () => {
     // Step 4 - States
     const [formsErrors, setFormsErrors] = useState([])
 
+    // Step 5 - States
+    const [projectUsedBdd, setProjectUsedBdd] = useState(null)
+    const [projectBdd, setProjectBdd] = useState("")
+
     // Forms States
     const [formSteps, setFormSteps] = useState([
         { current: true, correctlyFilled: false, viewed: true, errors: [] },
+        { current: false, correctlyFilled: false, viewed: false, errors: [] },
         { current: false, correctlyFilled: false, viewed: false, errors: [] },
         { current: false, correctlyFilled: false, viewed: false, errors: [] },
         { current: false, correctlyFilled: false, viewed: false, errors: [] },
@@ -68,10 +73,10 @@ const NewProject = () => {
     }
 
     const handleSelectFormForPoint = (step) => {
-        if (formsErrors.length === 0 && formSteps[0].viewed && formSteps[1].viewed && formSteps[2].viewed && formSteps[3].viewed) {
-            formSteps[4].correctlyFilled = true
+        if (formsErrors.length === 0 && formSteps[0].viewed && formSteps[1].viewed && formSteps[2].viewed && formSteps[3].viewed && formSteps[4].viewed) {
+            formSteps[5].correctlyFilled = true
         } else {
-            formSteps[4].correctlyFilled = false
+            formSteps[5].correctlyFilled = false
         }
         setStepNumber(step)
     }
@@ -214,6 +219,35 @@ const NewProject = () => {
                 formSteps[step].correctlyFilled = true
             }
         }
+
+        // Step 4
+        if (step === 4) {
+            formSteps[step].errors = []
+            let errors = 0
+
+            // UsedTools && ToolsArray
+            if (projectUsedBdd !== null) {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "Responda: 'Foi utilizada algum banco de dados?'");
+            } else if (projectUsedBdd === null) {
+                formSteps[step].errors.push("Responda: 'Foi utilizada algum banco de dados?'");
+                errors += 1
+            }
+
+            if (projectUsedBdd === "true") {
+                if (projectBdd.trim() !== "") {
+                    formSteps[step].errors = formSteps[step].errors.filter(error => error !== "Qual banco de dados foi utilizado?");
+                } else if (projectBdd.trim() === "") {
+                    formSteps[step].errors.push("Qual banco de dados foi utilizado");
+                    errors += 1
+                }
+            }
+
+            if (errors > 0) {
+                formSteps[step].correctlyFilled = false
+            } else {
+                formSteps[step].correctlyFilled = true
+            }
+        }
     }
 
     const verifyAllFormsInput = () => {
@@ -221,6 +255,7 @@ const NewProject = () => {
         handleChangeFormInput(1)
         handleChangeFormInput(2)
         handleChangeFormInput(3)
+        handleChangeFormInput(4)
     }
 
     verifyAllFormsInput()
@@ -244,6 +279,11 @@ const NewProject = () => {
     useEffect(() => {
         handleChangeFormInput(3)
     }, [projectUsedTools, projectToolsArray])
+
+    // Step 4 - Verify Errors
+    useEffect(() => {
+        handleChangeFormInput(4)
+    }, [projectUsedBdd, projectBdd])
 
     const handleVerifyAllErrors = () => {
         let errorsNumber = 0
@@ -274,6 +314,12 @@ const NewProject = () => {
         if (projectToolsArray.includes(opt.target.value)) {
         } else if (opt.target.value !== "invalid") {
             projectToolsArray.push(opt.target.value)
+        }
+    }
+
+    const handleSelectProjectBdd = (opt) => {
+        if (opt.target.value !== "invalid") {
+            setProjectBdd(opt.target.value)
         }
     }
 
@@ -459,6 +505,41 @@ const NewProject = () => {
                 )}
 
                 {stepNumber === 4 && (
+                    <div className={styles.formStep}>
+                        <div className={styles.dataInputContainer}>
+                            <p>Foi utilizado algum banco de dados?</p>
+                            <label htmlFor="YesBdd">
+                                <p>Sim</p>
+                                <input type="radio" name="bddWasUsed" id="YesBdd" value={true} onChange={(e) => setProjectUsedBdd(e.target.value)} checked={projectUsedBdd === "true"} />
+                            </label>
+                            <label htmlFor="NoBdd">
+                                <p>Não</p>
+                                <input type="radio" name="bddWasUsed" id="NoBdd" value={false} onChange={(e) => setProjectUsedBdd(e.target.value)} checked={projectUsedBdd === "false"} />
+                            </label>
+                        </div>
+                        {projectUsedBdd && projectUsedBdd === "true" && (
+                            <label>
+                                <p>Qual banco foi usado?</p>
+                                <select name="tools" onChange={(e) => handleSelectProjectBdd(e)}>
+                                    <option value="invalid">Selecione</option>
+                                    <option value="MySQL" selected={projectBdd === "MySQL"}>MySQL</option>
+                                    <option value="MongoDB" selected={projectBdd === "MongoDB"}>MongoDB</option>
+                                    <option value="Firebase" selected={projectBdd === "Firebase"}>Firebase</option>
+                                </select>
+                            </label>
+                        )}
+
+                        <div className={styles.footer}>
+                            <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
+                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            {formSteps[4].errors.map((error, index) => (
+                                <SystemStatusMessage type="error" msg={error} key={index} />
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {stepNumber === 5 && (
                     <div className={styles.formStep}>
                         <div className={styles.dataContainer}>
                             <h2>Nome do projeto:</h2>

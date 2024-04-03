@@ -26,6 +26,14 @@
             }
         }
 
+        .answer {
+            h2 {
+                font-size: 12pt;
+                font-weight: 300;
+                max-width: 650px;
+            }
+        }
+
         label,
         .dataInputContainer {
             position: relative;
