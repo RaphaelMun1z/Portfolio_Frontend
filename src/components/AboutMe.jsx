@@ -2,7 +2,9 @@
 import styles from './AboutMe.module.css'
 
 // Icons
-import { IoMdDownload } from "react-icons/io";
+import { GrCertificate } from "react-icons/gr";
+
+import { Link } from 'react-router-dom';
 
 const AboutMe = () => {
     return (
@@ -42,7 +44,7 @@ const AboutMe = () => {
                                 <p>Na posição de técnico em informática na Prefeitura de Praia Grande/SP, desempenhei um papel crucial na gestão de dados e sistemas internos. Minhas responsabilidades incluíam inserção, verificação e atualização de dados no sistema interno da organização, garantindo a integridade e precisão das informações. Além disso, forneci suporte técnico para os funcionários municipais, solucionando problemas de hardware e software e garantindo a continuidade das operações do dia a dia.</p>
                             </div>
                         </div>
-                        <button>Baixar CV<IoMdDownload /></button>
+                        <Link to="/certificacoes">Certificações<GrCertificate /></Link>
                     </div>
                 </div>
             </div>

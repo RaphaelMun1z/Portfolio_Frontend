@@ -1,5 +1,5 @@
 import styles from './TestimonialsSection.module.scss'
-import './swiperTestimonial.scss'
+import './swiperConfig.scss'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';

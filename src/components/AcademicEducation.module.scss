@@ -1,0 +1,139 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 3em 0;
+
+
+    .header {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+        margin: 1em auto;
+        color: #fff;
+
+        h1 {
+            font-size: 45pt;
+        }
+    }
+
+    .contentContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        height: fit-content;
+        justify-content: center;
+
+        .academicEducationContainer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 70%;
+            height: fit-content;
+
+            .item {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: fit-content;
+
+                .image,
+                .textContainer {
+                    position: relative;
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .image {
+                    width: 30%;
+                    padding: 3em;
+
+                    .imageContainer {
+                        position: relative;
+                        display: flex;
+                        width: 228px;
+                        height: 228px;
+                        border: 3px solid rgba(254, 135, 0, 255);
+                        background-color: #fff;
+                        border-radius: 50%;
+                        padding: 3em;
+
+                        img {
+                            position: relative;
+                            display: flex;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                        }
+                    }
+                }
+
+                .textContainer {
+                    width: 70%;
+
+                    .text {
+                        position: relative;
+                        display: flex;
+                        height: fit-content;
+                        width: fit-content;
+                        min-height: 235px;
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                        justify-content: center;
+                        border: 3px solid rgba(254, 135, 0, 255);
+                        color: #fff;
+                        border-radius: 20px;
+                        padding: 1em 2.5em;
+
+                        h1 {
+                            width: fit-content;
+                            font-size: 30pt;
+                        }
+
+                        h2 {
+                            width: 600px;
+                            font-size: 15pt;
+                        }
+
+                        p {
+                            width: fit-content;
+                            font-size: 15pt;
+                            margin-top: .5em;
+                        }
+
+                        .date {
+                            margin-top: .2em;
+                            font-weight: 200;
+                        }
+                    }
+                }
+            }
+
+            .icon {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: fit-content;
+                justify-content: center;
+                align-items: center;
+                margin: 1em 0;
+
+                svg {
+                    font-size: 50pt;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

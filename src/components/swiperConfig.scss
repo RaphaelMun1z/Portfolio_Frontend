@@ -6,6 +6,10 @@
     height: auto;
     gap: 1em;
 
+    .swiper-slide {
+        min-width: 430px;
+    }
+
     .swiper-wrapper {
         height: auto !important;
     }

@@ -19,11 +19,11 @@ const Footer = () => {
                 <div className={styles.listsContainer}>
                     <h1>Qualificações</h1>
                     <ul>
-                        <li><Link to="/">Blog/Artigos</Link></li>
-                        <li><Link to="/">Certificações/Formação Acadêmica</Link></li>
+                        <li><Link to="/sobre">Formação Acadêmica</Link></li>
                         <li><Link to="/sobre">Experiência Profissional</Link></li>
                         <li><Link to="/habilidades">Habilidades</Link></li>
-                        <li><Link to="/">Prêmios/Reconhecimentos</Link></li>
+                        <li><Link to="/certificacoes">Certificações</Link></li>
+                        <li><Link to="/reconhecimentos">Prêmios/Reconhecimentos</Link></li>
                     </ul>
                 </div>
                 <div className={styles.listsContainer}>

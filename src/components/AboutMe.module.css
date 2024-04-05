@@ -131,7 +131,7 @@ section:hover .contentContainer .imageContainer img {
     }
 }
 
-.contentContainer .infoContainer .insideInfoContainer>button {
+.contentContainer .infoContainer .insideInfoContainer>a {
     font-size: 13pt;
     width: fit-content;
     height: fit-content;
@@ -152,11 +152,11 @@ section:hover .contentContainer .imageContainer img {
     gap: 7px;
 }
 
-.contentContainer .infoContainer .insideInfoContainer>button>svg {
+.contentContainer .infoContainer .insideInfoContainer>a>svg {
     font-size: 17pt;
 }
 
-.contentContainer .infoContainer .insideInfoContainer>button:hover {
+.contentContainer .infoContainer .insideInfoContainer>a:hover {
     transition: all .1s ease-in-out;
     transform: scale(.9);
 }
