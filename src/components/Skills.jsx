@@ -45,7 +45,6 @@ const Skills = () => {
                         <p>
                             "Explorador comprometido das intricadas linhas de código, busco harmonizar criatividade e eficiência para transformar desafios em experiências digitais notáveis. Com uma abordagem centrada no usuário, minha jornada envolve a constante busca por soluções inovadoras que transcendam as expectativas no universo digital."
                         </p>
-                        <button>Ver todas skills<IoIosArrowForward /></button>
                     </div>
                 </div>
             </div>

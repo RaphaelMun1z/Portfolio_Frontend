@@ -2,6 +2,7 @@ import LandingSection from '../components/LandingSection'
 import BioAboutMe from '../components/BioAboutMe';
 import Skills from '../components/Skills';
 import ProjectsTypeMenu from '../components/ProjectsTypeMenu';
+import Certifications from './Certifications';
 import Testimonials from './Testimonials';
 import Faq from './Faq';
 import ContactForm from '../components/ContactForm';
@@ -13,6 +14,7 @@ const HomePage = () => {
             <BioAboutMe />
             <Skills />
             <ProjectsTypeMenu />
+            <Certifications />
             <Testimonials />
             <Faq />
             <ContactForm />

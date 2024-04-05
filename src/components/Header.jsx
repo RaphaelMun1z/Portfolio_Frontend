@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 // Styles
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 
 const Header = () => {
     const [scroll, setScroll] = useState(false);

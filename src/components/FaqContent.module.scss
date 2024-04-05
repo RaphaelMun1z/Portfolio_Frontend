@@ -51,6 +51,12 @@ section {
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
+                transition: all .1s ease-in-out;
+
+                &:hover{
+                    opacity: .8;
+                    transition: all .1s ease-in-out;
+                }
 
                 .question {
                     position: relative;
