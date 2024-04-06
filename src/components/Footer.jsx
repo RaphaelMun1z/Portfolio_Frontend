@@ -23,7 +23,6 @@ const Footer = () => {
                         <li><Link to="/sobre">Experiência Profissional</Link></li>
                         <li><Link to="/habilidades">Habilidades</Link></li>
                         <li><Link to="/certificacoes">Certificações</Link></li>
-                        <li><Link to="/reconhecimentos">Prêmios/Reconhecimentos</Link></li>
                     </ul>
                 </div>
                 <div className={styles.listsContainer}>

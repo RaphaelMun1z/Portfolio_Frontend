@@ -14,7 +14,6 @@ import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
 import Faq from './pages/Faq';
 import Certifications from './pages/Certifications';
-import Recognitions from './pages/Recognitions';
 
 // Adm
 /// Register Form
@@ -51,7 +50,6 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/orcamento" element={<Budget />} />
           <Route path="/certificacoes" element={<Certifications />} />
-          <Route path="/reconhecimentos" element={<Recognitions />} />
 
           {/* ADM Routes */}
           <Route path="/adm/painel" element={<Dashboard />} />

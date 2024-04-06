@@ -1,18 +1,71 @@
 import styles from './ProjectsTypeMenu.module.css'
 
+import { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 // Icons
 import { TbWorldWww, TbCircuitCellPlus } from "react-icons/tb";
 import { IoIosDesktop, IoIosArrowForward } from "react-icons/io";
 import { CiMobile1 } from "react-icons/ci";
 
 const ProjectsTypeMenu = () => {
+    const el = useRef()
+    const tl = useRef()
+
+    useLayoutEffect(() => {
+        gsap.registerPlugin(ScrollTrigger)
+        const ctx = gsap.context(() => {
+            tl.current = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#item",
+                    scrub: true,
+                    start: "top 1000px",
+                    end: "bottom 1100px",
+                }
+            })
+                .fromTo("[class*='item1']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
+                .fromTo("[class*='item2']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
+                .fromTo("[class*='item3']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
+                .fromTo("[class*='item4']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
+        }, el)
+
+        return () => {
+            gsap.killTweensOf("#item")
+        }
+    }, [])
+
     return (
         <section className={styles.projectTypeContainer}>
             <div className={styles.header}>
                 <h1>Tipos de Projetos</h1>
             </div>
-            <div className={styles.contentContainer}>
-                <div className={styles.projectTypeCard}>
+            <div className={styles.contentContainer} ref={el}>
+                <div className={`${styles.projectTypeCard} item1`} id='item'>
                     <div className={styles.iconContainer}>
                         <TbWorldWww />
                     </div>
@@ -22,7 +75,7 @@ const ProjectsTypeMenu = () => {
                         <button>Ver Projetos<IoIosArrowForward /></button>
                     </div>
                 </div>
-                <div className={styles.projectTypeCard}>
+                <div className={`${styles.projectTypeCard} item2`} id='item'>
                     <div className={styles.iconContainer}>
                         <IoIosDesktop />
                     </div>
@@ -32,7 +85,7 @@ const ProjectsTypeMenu = () => {
                         <button>Ver Projetos<IoIosArrowForward /></button>
                     </div>
                 </div>
-                <div className={styles.projectTypeCard}>
+                <div className={`${styles.projectTypeCard} item3`} id='item'>
                     <div className={styles.iconContainer}>
                         <CiMobile1 />
                     </div>
@@ -42,7 +95,7 @@ const ProjectsTypeMenu = () => {
                         <button>Ver Projetos<IoIosArrowForward /></button>
                     </div>
                 </div>
-                <div className={styles.projectTypeCard}>
+                <div className={`${styles.projectTypeCard} item4`} id='item'>
                     <div className={styles.iconContainer}>
                         <TbCircuitCellPlus />
                     </div>
