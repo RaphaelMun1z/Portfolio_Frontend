@@ -24,6 +24,13 @@ const ProjectsTypeMenu = () => {
                     end: "bottom 1100px",
                 }
             })
+                .fromTo("[class*='item0']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
                 .fromTo("[class*='item1']", {
                     opacity: 0,
                     y: -150,
@@ -60,11 +67,11 @@ const ProjectsTypeMenu = () => {
     }, [])
 
     return (
-        <section className={styles.projectTypeContainer}>
-            <div className={styles.header}>
+        <section className={styles.projectTypeContainer} ref={el}>
+            <div className={`${styles.header} item0`}>
                 <h1>Tipos de Projetos</h1>
             </div>
-            <div className={styles.contentContainer} ref={el}>
+            <div className={styles.contentContainer} >
                 <div className={`${styles.projectTypeCard} item1`} id='item'>
                     <div className={styles.iconContainer}>
                         <TbWorldWww />

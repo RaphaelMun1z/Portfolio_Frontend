@@ -7,10 +7,40 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 // Hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TestimonialsSection = () => {
+    const el = useRef(null);
+    const tl = useRef(null);
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const testimonialsElements = el.current.querySelectorAll('.item');
+
+        tl.current = gsap.timeline({
+            scrollTrigger: {
+                trigger: testimonialsElements,
+                scrub: true,
+                start: "top 700px",
+                end: "bottom 300px",
+            }
+        })
+            .fromTo(testimonialsElements,
+                { opacity: 0, y: -150 },
+                { opacity: 1, y: 0, stagger: 0.2 }
+            );
+
+        return () => {
+            tl.current.kill();
+        };
+    }, []);
+
     const [testimonials, setTestimonials] = useState([
         {
             name: "John Doe",
@@ -45,8 +75,8 @@ const TestimonialsSection = () => {
     ])
 
     return (
-        <section>
-            <div className={styles.header}>
+        <section ref={el}>
+            <div className={`${styles.header} item`}>
                 <h1>Depoimentos/Recomendações</h1>
             </div>
             <div className={styles.contentContainer}>
@@ -62,7 +92,7 @@ const TestimonialsSection = () => {
                             className="mySwiper"
                         >
                             {testimonials.map((testimonial, index) => (
-                                <SwiperSlide key={index}>
+                                <SwiperSlide className='item' key={index}>
                                     <div className={styles.testimonial} >
                                         <div className={styles.insideTestimonial}>
                                             <div className={styles.image}>

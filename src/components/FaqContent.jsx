@@ -4,7 +4,37 @@ import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 
 import { useState } from 'react';
 
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 const FaqContent = () => {
+    const el = useRef(null);
+    const tl = useRef(null);
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const testimonialsElements = el.current.querySelectorAll('.item');
+
+        tl.current = gsap.timeline({
+            scrollTrigger: {
+                trigger: testimonialsElements,
+                scrub: true,
+                start: "top 900px",
+                end: "bottom 600px",
+            }
+        })
+            .fromTo(testimonialsElements, // Selecione os elementos
+                { opacity: 0, y: -150 }, // De
+                { opacity: 1, y: 0, stagger: 0.2 } // Para
+            );
+
+        return () => {
+            tl.current.kill();
+        };
+    }, []);
+
     const [faq, setFaq] = useState([
         {
             "pergunta": "Em quanto tempo meu projeto ficaria pronto?",
@@ -57,14 +87,14 @@ const FaqContent = () => {
     };
 
     return (
-        <section>
-            <div className={styles.header}>
+        <section ref={el}>
+            <div className={`${styles.header} item`}>
                 <h1>FAQ</h1>
             </div>
-            <div className={styles.contentContainer}>
+            <div className={styles.contentContainer} >
                 <div className={styles.division}>
                     {faq.slice(0, 5).map((f, index) => (
-                        <div className={styles.item} key={index} onClick={() => handleFaq(index)}>
+                        <div className={`${styles.item} item`} key={index} onClick={() => handleFaq(index)}>
                             <div className={styles.question}>
                                 <p>{f.pergunta}</p>
                                 {expandedItems[index] ? (
@@ -81,7 +111,7 @@ const FaqContent = () => {
                 </div>
                 <div className={styles.division}>
                     {faq.slice(5, 10).map((f, index) => (
-                        <div className={styles.item} key={index} onClick={() => handleFaq(index + 5)}>
+                        <div className={`${styles.item} item`} key={index} onClick={() => handleFaq(index + 5)}>
                             <div className={styles.question}>
                                 <p>{f.pergunta}</p>
                                 {expandedItems[index + 5] ? (

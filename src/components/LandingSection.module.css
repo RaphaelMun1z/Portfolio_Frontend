@@ -12,6 +12,12 @@ main {
     font-weight: bold;
 }
 
+main > div {
+    opacity: 0;
+    transform: translateY(-150px);
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+}
+
 main .imageContainer {
     position: relative;
     display: flex;

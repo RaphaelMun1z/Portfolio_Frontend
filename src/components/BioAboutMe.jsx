@@ -29,6 +29,13 @@ const BioAboutMe = () => {
                     end: "bottom 920px",
                 }
             })
+                .fromTo("[class*='title']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
                 .fromTo("[class*='imageContainer']", {
                     opacity: 0,
                     y: -150,
@@ -51,11 +58,11 @@ const BioAboutMe = () => {
     }, [])
 
     return (
-        <section id='container'>
-            <div className={styles.header}>
+        <section id='container' ref={el}>
+            <div className={`${styles.header} title`} >
                 <h1>Quem Sou?</h1>
             </div>
-            <div className={styles.contentContainer} ref={el}>
+            <div className={styles.contentContainer}>
                 <div className={styles.imageContainer} id='item'>
                     <div>
                         <Image imagePath={photoImage} />
