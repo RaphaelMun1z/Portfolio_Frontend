@@ -26,13 +26,16 @@ const LandingSection = () => {
     const tl = useRef(null);
 
     useEffect(() => {
-        const testimonialsElements = el.current.children;
+        const testimonialsElements = document.querySelectorAll('.item');
 
         tl.current = gsap.timeline()
             .from(testimonialsElements, {
                 opacity: 1,
                 y: 0,
                 stagger: 0.2,
+                filter: 'blur(0)',
+                scale: 1,
+                duration: 1,
             });
 
         return () => {
@@ -82,9 +85,9 @@ const LandingSection = () => {
     }, [model]);
 
     return (
-        <main ref={el}>
-            <div className={`${styles.imageContainer} item`}>
-                <Canvas scene={scene}>
+        <main>
+            <div className={`${styles.imageContainer}`} ref={el}>
+                <Canvas scene={scene} className='item'>
                     <ambientLight intensity={0.5} color="white" />
                     <directionalLight intensity={0.8} color="white" position={[0, 5, 5]} />
                     <spotLight
@@ -104,8 +107,8 @@ const LandingSection = () => {
                     />
                 </Canvas>
             </div>
-            <div className={`${styles.landingContentContainer} item`}>
-                <div className={styles.insideLandingContent}>
+            <div className={`${styles.landingContentContainer}`} ref={el}>
+                <div className={`${styles.insideLandingContent} item`}>
                     <p>Olá,</p>
                     <h2>Me chamo <span>Raphael Muniz</span></h2>
                     <h6>Sou Desenvolvedor Full Stack React.js + Node.js</h6>
