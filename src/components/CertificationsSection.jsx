@@ -50,6 +50,13 @@ const CertificationsSection = () => {
                     opacity: 1,
                     y: 0,
                 })
+                .fromTo("[class*='item3']", {
+                    opacity: 0,
+                    y: -150,
+                }, {
+                    opacity: 1,
+                    y: 0,
+                })
         }, el)
 
         return () => {
@@ -79,7 +86,7 @@ const CertificationsSection = () => {
                             </div>
                             <div className={styles.textContainer}>
                                 <h1 className={styles.title}>Node.js do Zero a Maestria com diversos Projetos</h1>
-                                <p className={styles.description}><i>Crie aplicações completas com Node.js, Express, MongoDB, MySQL, React.js, arquitetura MVC e muito mais!</i></p>
+                                <p className={styles.description}><i>Aplicações completas com Node.js, Express, MongoDB, MySQL, React.js, arquitetura MVC e muito mais!</i></p>
                                 <div className={styles.teach}>
                                     <p className={styles.createdBy}><FaChalkboardTeacher />Matheus Battisti - Hora de Codar</p>
                                     <p className={styles.platform}><SiUdemy />Udemy</p>
@@ -88,6 +95,21 @@ const CertificationsSection = () => {
                         </div>
                     </SwiperSlide>
                     <SwiperSlide className='item2' id='item'>
+                        <div className={styles.card}>
+                            <div className={styles.imageContainer}>
+                                <img src="/Curso3.jpg" alt="Certificado" />
+                            </div>
+                            <div className={styles.textContainer}>
+                                <h1 className={styles.title}>React do Zero a Maestria (c/ hooks, router, API, Projetos)</h1>
+                                <p className={styles.description}><i>Projetos completos com React, utilizando tecnologias em alta no mercado como Firebase, Node.js, MongoDB e mais!</i></p>
+                                <div className={styles.teach}>
+                                    <p className={styles.createdBy}><FaChalkboardTeacher />Matheus Battisti - Hora de Codar</p>
+                                    <p className={styles.platform}><SiUdemy />Udemy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide className='item3' id='item'>
                         <div className={styles.card}>
                             <div className={styles.imageContainer}>
                                 <img src="/Curso2.png" alt="Certificado" />
