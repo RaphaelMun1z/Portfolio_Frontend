@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-import { UserComputerDataProvider } from './context/UserComputerDataContext'
+// Redux
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserComputerDataProvider>
+    <Provider store={store}>
       <App />
-    </UserComputerDataProvider>
+    </Provider>
   </React.StrictMode>
 )
