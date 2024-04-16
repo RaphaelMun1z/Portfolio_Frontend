@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 // Components
 import Header from './components/Header';
@@ -32,8 +32,34 @@ import AnswerContactForm from './components/Form/AnswerContactForm';
 
 import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
+import Loading from './components/Loading';
+
+// Hooks
+import { useAuth } from './hooks/useAuth';
 
 function App() {
+  const { auth, loading } = useAuth()
+
+  if (loading) {
+    return <Loading />
+  }
+
+  const PrivateRoute = ({ children }) => {
+    return auth ? (
+      children
+    ) : (
+      <Navigate to="/login" />
+    );
+  };
+
+  const wrapPrivateRoute = (element) => {
+    return (
+      <PrivateRoute>
+        {element}
+      </PrivateRoute>
+    );
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -51,18 +77,19 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/orcamento" element={<Budget />} />
           <Route path="/certificacoes" element={<Certifications />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={auth ? <Navigate to="/adm/painel" /> : <Login />} />
 
           {/* ADM Routes */}
-          <Route path="/adm/painel" element={<Dashboard />} />
-          <Route path="/adm/cadastrar/linguagem" element={<NewLanguage />} />
-          <Route path="/adm/cadastrar/framework" element={<NewFramework />} />
-          <Route path="/adm/cadastrar/projeto" element={<NewProject />} />
-          <Route path="/adm/cadastrar/bdd" element={<NewBdd />} />
-          <Route path="/adm/cadastrar/ferramenta" element={<NewTool />} />
-          <Route path="/adm/cadastrar/habilidadeinterpessoal" element={<NewInterpersonalSkill />} />
-          <Route path="/adm/cadastrar/faq" element={<NewFaq />} />
-          <Route path="/adm/contactform" element={<AnswerContactForm />} />
+          <Route path="/adm/painel" element={wrapPrivateRoute(<Dashboard />)} />
+          <Route path="/adm/cadastrar/linguagem" element={wrapPrivateRoute(<NewLanguage />)} />
+          <Route path="/adm/cadastrar/framework" element={wrapPrivateRoute(<NewFramework />)} />
+          <Route path="/adm/cadastrar/projeto" element={wrapPrivateRoute(<NewProject />)} />
+          <Route path="/adm/cadastrar/bdd" element={wrapPrivateRoute(<NewBdd />)} />
+          <Route path="/adm/cadastrar/ferramenta" element={wrapPrivateRoute(<NewTool />)} />
+          <Route path="/adm/cadastrar/habilidadeinterpessoal" element={wrapPrivateRoute(<NewInterpersonalSkill />)} />
+          <Route path="/adm/cadastrar/faq" element={wrapPrivateRoute(<NewFaq />)} />
+          <Route path="/adm/contactform" element={wrapPrivateRoute(<AnswerContactForm />)} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
 

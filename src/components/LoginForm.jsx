@@ -50,11 +50,14 @@ const LoginForm = () => {
                     <input type="password" placeholder='Digite a senha...' onChange={(e) => setPassword(e.target.value)} value={password} />
                 </label>
                 <div className={styles.footer}>
-                    <button type="submit" className={styles.submit}>Acessar</button>
+                    {!loading && <button type="submit" className={styles.submit}>Acessar</button>}
+                    {loading && <button type="button" className={styles.submit} disabled>Aguarde...</button>}
                     <Link to="/" className={styles.cancel}>Voltar</Link>
-                    <div className={styles.messages}>
-                        <SystemStatusMessage type="error" msg="Credenciais inválidas!" />
-                    </div>
+                    {error && (
+                        <div className={styles.messages}>
+                            <SystemStatusMessage type="error" msg={error} />
+                        </div>
+                    )}
                 </div>
             </form>
         </div>

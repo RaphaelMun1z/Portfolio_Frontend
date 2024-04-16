@@ -12,13 +12,19 @@ const login = async (data) => {
             localStorage.setItem('user', JSON.stringify(res));
         }
 
+        return res
     } catch (error) {
         console.log(error)
     }
 }
 
+const logout = () => {
+    localStorage.removeItem("user")
+}
+
 const authService = {
     login,
+    logout,
 }
 
 export default authService
