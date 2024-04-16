@@ -1,0 +1,53 @@
+.toolsContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    gap: .5em;
+
+    p {
+        font-size: 13pt;
+        font-weight: 200;
+    }
+
+    .toolInfoContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        p {
+            font-size: 12pt;
+            font-weight: 600 !important;
+            color: #999;
+        }
+
+        .tools {
+            position: relative;
+            display: flex;
+            width: fit-content;
+            height: fit-content;
+            gap: .5em;
+            padding: .2em 0;
+
+            .toolCard {
+                position: relative;
+                display: flex;
+                width: 60px;
+                height: 60px;
+                border-radius: 10px;
+                background-color: orange;
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                    color: #fff;
+                    font-size: 20pt;
+                }
+            }
+        }
+    }
+}

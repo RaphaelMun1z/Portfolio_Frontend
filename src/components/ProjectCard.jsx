@@ -1,13 +1,17 @@
-import styles from './ProjectCard.module.css'
-import { LuMonitorSmartphone } from "react-icons/lu";
+import styles from './ProjectCard.module.scss'
+
+import { Link } from 'react-router-dom'
+import TechnologiesProjectCard from './TechnologiesProjectCard'
+import ToolsProjectCard from './ToolsProjectCard';
 
 // Icons
-import { SiJavascript, SiHtml5, SiCss3, SiReact, SiLetsencrypt } from "react-icons/si";
-import { GoSearch } from "react-icons/go";
-import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
+import { GoStack, GoServer } from "react-icons/go";
+import { GrCircleInformation } from "react-icons/gr";
 import { IoIosArrowForward } from "react-icons/io";
+import { IoCloudOfflineOutline } from "react-icons/io5";
+import { MdDesignServices } from "react-icons/md";
 
-const ProjectCard = () => {
+const ProjectCard = ({ project }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageContainer}>
@@ -17,60 +21,47 @@ const ProjectCard = () => {
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.info}>
-          <h1>ConnectHub</h1>
-          <p>O ConnectHub nasceu da convicção de que o poder das conexões profissionais pode transformar carreiras e impulsionar o sucesso. Nossa missão é proporcionar um espaço digital inovador, onde profissionais de diversas áreas podem se conectar, compartilhar experiências e fortalecer suas redes profissionais.</p>
+          <h1>{project.name}</h1>
+          <p>{project.description}</p>
 
-          <div className={styles.technologiesContainer}>
-            <p>Tecnologias utilizadas:</p>
-            <div className={styles.technologies}>
-              <div className={styles.technologieCard}>
-                <SiHtml5 />
-              </div>
-              <div className={styles.technologieCard}>
-                <SiJavascript />
-              </div>
-              <div className={styles.technologieCard}>
-                <SiCss3 />
-              </div>
-              <div className={styles.technologieCard}>
-                <SiReact />
-              </div>
+          {project.stack && (
+            <div className={styles.stackContainer}>
+              {project.stack === "Fullstack" && (
+                <>
+                  <GoStack />
+                  <p>{project.stack}</p>
+                </>
+              )}
+              {project.stack === "Frontend" && (
+                <>
+                  <MdDesignServices />
+                  <p>{project.stack}</p>
+                </>
+              )}
+              {project.stack === "Backend" && (
+                <>
+                  <GoServer />
+                  <p>{project.stack}</p>
+                </>
+              )}
             </div>
-          </div>
-          <div className={styles.projectExtraDetails}>
-            <div className={styles.extraDetailsCard}>
-              <div className={styles.icon}>
-                <LuMonitorSmartphone />
-              </div>
-              <div className={styles.text}>
-                Responsivo
-              </div>
-            </div>
-            <div className={styles.extraDetailsCard}>
-              <div className={styles.icon}>
-                <SiLetsencrypt />
-              </div>
-              <div className={styles.text}>
-                Criptografia
-              </div>
-            </div>
-            <div className={styles.extraDetailsCard}>
-              <div className={styles.icon}>
-                <GoSearch />
-              </div>
-              <div className={styles.text}>
-                SEO
-              </div>
-            </div>
-          </div>
+          )}
+
+          <TechnologiesProjectCard frontend={project.ProjectFrontend} backend={project.ProjectBackend} />
+          <ToolsProjectCard projectTools={project.ProjectTools} />
+
           <div className={styles.actions}>
-            <button className={styles.btnMoreAbout}>Saber Mais<IoIosArrowForward /></button>
-            <button className={styles.btnSave}><BsBookmark />Salvar</button>
-            <button className={styles.btnSaved}><BsBookmarkCheckFill />Salvo!</button>
+            <Link to={`projeto/${project.id}`} className={styles.btnMoreAbout}>Saber Mais<GrCircleInformation /></Link>
+            {project.ProjectHost && (
+              <Link to={`${project.ProjectHost.URL}`} className={styles.btnVisitProject}>Visitar<IoIosArrowForward /></Link>
+            )}
+            {!project.ProjectHost && (
+              <Link className={styles.btnVisitProjectBlock}>Não hospedado<IoCloudOfflineOutline /></Link>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

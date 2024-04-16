@@ -1,9 +1,23 @@
 import ProjectCard from './ProjectCard'
 import styles from './ProjectsSection.module.css'
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { FaSearch, FaInfo } from "react-icons/fa";
 
+// Redux
+import { getProjects } from '../slices/projectSlice'
+
 const ProjectsSection = () => {
+    const dispatch = useDispatch()
+
+    const { projects, loading, error, message } = useSelector((state) => state.project)
+
+    useEffect(() => {
+        dispatch(getProjects())
+    }, [])
+
     return (
         <div className={styles.projectsContainer}>
             <div className={styles.header}>
@@ -26,12 +40,15 @@ const ProjectsSection = () => {
                 </div>
             </div>
             <div className={styles.contentContainer}>
-                <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
-                <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
-                {/* <ProjectCard />
-                <ProjectCard />
-                <ProjectCard />
-                <ProjectCard /> */}
+                {!loading && projects && projects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                ))}
+                {loading && (
+                    <>
+                        <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
+                        <div className='skeleton' style={{ width: '49%', height: '555px' }}></div>
+                    </>
+                )}
             </div>
         </div>
     )
