@@ -1,5 +1,11 @@
 import styles from './DashboardGeneral.module.scss'
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getProjects } from '../../slices/projectSlice'
+
 import DashboardGraphic from '../DashboardGraphic';
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
@@ -8,6 +14,14 @@ import { GiGears } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
 
 const DashboardGeneral = () => {
+    const dispatch = useDispatch()
+
+    const { projects, loading, error, message } = useSelector((state) => state.project)
+
+    useEffect(() => {
+        dispatch(getProjects())
+    }, [])
+
     return (
         <>
             <div className={styles.mainNumberContainer}>
@@ -18,8 +32,12 @@ const DashboardGeneral = () => {
                             <AiOutlineFundProjectionScreen />
                         </div>
                     </div>
-                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
-                    {/* <div className={styles.data}>35</div> */}
+                    {loading && (
+                        <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    )}
+                    {!loading && projects && (
+                        <div className={styles.data}>{projects.length}</div>
+                    )}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>

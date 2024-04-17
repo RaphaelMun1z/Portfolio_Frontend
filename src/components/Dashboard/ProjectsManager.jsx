@@ -1,5 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getProjects } from '../../slices/projectSlice'
+
 import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
@@ -7,17 +13,29 @@ import { RiSearch2Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 
 const ProjectsManager = () => {
-  const linhas = Array.from({ length: 10 }, (_, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>Exemplo {index + 1}</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td><th className={`${styles.actionTh} ${styles.view}`}><FaRegEye /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
-    </tr>
-  ));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  const dispatch = useDispatch()
+
+  const { projects, loading, error, message } = useSelector((state) => state.project)
+
+  useEffect(() => {
+    dispatch(getProjects())
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -53,7 +71,17 @@ const ProjectsManager = () => {
             </tr>
           </thead>
           <tbody>
-            {linhas}
+            {projects && projects.map((project) => (
+              <tr key={project.id}>
+                <td>{project.id}</td>
+                <td>{project.name}</td>
+                <td>{formatDate(project.createdAt)}<br />{formatTime(project.createdAt)}</td>
+                <td>{formatDate(project.updatedAt)}<br />{formatTime(project.updatedAt)}</td>
+                <td><th className={`${styles.actionTh} ${styles.view}`}><Link to={`/projeto/${project.id}`}><FaRegEye /></Link></th></td>
+                <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
