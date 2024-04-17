@@ -1,12 +1,43 @@
 import styles from './SingleProjectDetails.module.scss'
 
-import { FaCode, FaGithub, FaBug, FaReact, FaJs, FaLaravel, FaPhp, FaAngular, FaDocker, FaExternalLinkAlt } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
+// Icons
+import { GoStack, GoServer, GoTools } from "react-icons/go";
+import { GrMysql } from "react-icons/gr"
+import { MdDesignServices } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
-import { IoIosArrowDown } from "react-icons/io";
-import { SiTypescript } from "react-icons/si";
-import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
+import {
+    FaCode,
+    FaGithub,
+    FaBug,
+    FaReact,
+    FaJava,
+    FaJs,
+    FaAngular,
+    FaDocker,
+    FaExternalLinkAlt,
+    FaGitAlt,
+    FaSlack
+} from "react-icons/fa";
+import {
+    SiVisualstudiocode,
+    SiPostman,
+    SiJirasoftware,
+    SiPython,
+    SiPhp,
+    SiJavascript,
+    SiTypescript,
+    SiHtml5,
+    SiCss3,
+    SiReact,
+    SiDjango,
+    SiSpring,
+    SiExpress,
+    SiLaravel,
+    SiVuedotjs,
+    SiFlask
+} from "react-icons/si";
 
+// Hooks
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -24,6 +55,35 @@ const SingleProjectDetails = () => {
     useEffect(() => {
         dispatch(getProjectById(id))
     }, [dispatch, id])
+
+    const toolIcons = {
+        Github: <FaGithub />,
+        Docker: <FaDocker />,
+        Git: <FaGitAlt />,
+        Slack: <FaSlack />,
+        VScode: <SiVisualstudiocode />,
+        Postman: <SiPostman />,
+        Jira: <SiJirasoftware />,
+    };
+
+    const languageIcons = {
+        Python: <SiPython />,
+        PHP: <SiPhp />,
+        Javascript: <SiJavascript className={styles.js} />,
+        Typescript: <SiTypescript />,
+        SQL: <GrMysql />,
+        HTML: <SiHtml5 />,
+        CSS: <SiCss3 />,
+        Java: <FaJava />,
+        React: <SiReact />,
+        Angular: <FaAngular />,
+        Django: <SiDjango />,
+        SpringBoot: <SiSpring />,
+        Express: <SiExpress />,
+        Laravel: <SiLaravel />,
+        Vue: <SiVuedotjs />,
+        Flask: <SiFlask />,
+    };
 
     return (
         <section className={styles.projectDetailsContainer}>
@@ -61,54 +121,129 @@ const SingleProjectDetails = () => {
                         {!loading && project && (
                             <button className={styles.bug}>Visitar<FaExternalLinkAlt /></button>
                         )}
-                    </div>
-                    <div className={styles.technologies}>
-                        <h3><FaCode />Tecnologias utilizadas:</h3>
-                        <div className={styles.technologyCardContainer}>
-                            {loading && !project && (
-                                <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
-                            )}
-                            {!loading && project && (
-                                <>
-                                    {project.ProjectFrontend && (
-                                        <div className={styles.technologyCard}>
-                                            <div className={styles.icon}><FaReact /></div>
-                                            <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
-                                            <div className={styles.language}><FaJs className={styles.js} /></div>
-                                        </div>
+                        <div className={styles.repositories}>
+                            <div className={styles.header}>
+                                <h1>Repositórios do projeto</h1>
+                            </div>
+                            <div className={styles.repoContainer}>
+                                <div className={styles.repositoriesSection}>
+                                    {loading && !project && (
+                                        <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {project.ProjectBackend && (
-                                        <div className={styles.technologyCard}>
-                                            <div className={styles.icon}><FaReact /></div>
-                                            <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
-                                            <div className={styles.language}><FaJs className={styles.js} /></div>
-                                        </div>
+                                    {!loading && project && project.ProjectFrontend && (
+                                        <button className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></button>
                                     )}
-                                </>
-                            )}
+                                </div>
+                                <div className={styles.repositoriesSection}>
+                                    {loading && !project && (
+                                        <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
+                                    )}
+                                    {!loading && project && project.ProjectBackend && (
+                                        <button className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></button>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className={styles.repositories}>
-                    <div className={styles.header}>
-                        <h1>Repositórios do projeto</h1>
+                    <div className={styles.technologies}>
+                        <div className={styles.projectTechInfo}>
+                            <div className={styles.technologyCardContainer}>
+                                <div className={styles.technologyCard}>
+                                    <div className={styles.icon}>
+                                        {project && project.stack === "Fullstack" && (<GoStack />)}
+                                        {project && project.stack === "Frontend" && (<MdDesignServices />)}
+                                        {project && project.stack === "Backend" && (<GoServer />)}
+                                    </div>
+                                    <div className={styles.name}>{project && project.stack}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.projectTechInfo}>
+                            <h3><FaCode />Frameworks utilizados:</h3>
+                            <div className={styles.technologyCardContainer}>
+                                {loading && !project && (
+                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                )}
+                                {!loading && project && (
+                                    <>
+                                        {project.ProjectFrontend && (
+                                            <div className={styles.technologyCard}>
+                                                <div className={styles.icon}>{languageIcons[project.ProjectFrontend.Framework.name] || <FaCode />}</div>
+                                                <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
+                                                <div className={styles.language}>{languageIcons[project.ProjectFrontend.Framework.Language.name] || <FaCode />}</div>
+                                            </div>
+                                        )}
+                                        {project.ProjectBackend && (
+                                            <div className={styles.technologyCard}>
+                                                <div className={styles.icon}>{languageIcons[project.ProjectBackend.Framework.name] || <FaCode />}</div>
+                                                <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
+                                                <div className={styles.language}>{languageIcons[project.ProjectBackend.Framework.Language.name] || <FaCode />}</div>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className={styles.projectTechInfo}>
+                            <h3><FaCode />Linguages utilizadas:</h3>
+                            <div className={styles.technologyCardContainer}>
+                                {loading && !project && (
+                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                )}
+                                {!loading && project && (
+                                    <>
+                                        {project.ProjectFrontend && (
+                                            <div className={styles.technologyCard}>
+                                                <div className={styles.icon}><MdDesignServices /></div>
+                                                <div className={styles.name}><b>Frontend:</b><p>{project.ProjectFrontend.Language.name}</p></div>
+                                                <div className={styles.language}>{languageIcons[project.ProjectFrontend.Language.name] || <FaCode />}</div>
+                                            </div>
+                                        )}
+                                        {project.ProjectBackend && (
+                                            <div className={styles.technologyCard}>
+                                                <div className={styles.icon}><GoServer /></div>
+                                                <div className={styles.name}><b>Backend:</b><p>{project.ProjectBackend.Language.name}</p></div>
+                                                <div className={styles.language}>{languageIcons[project.ProjectBackend.Language.name] || <FaCode />}</div>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className={styles.projectTechInfo}>
+                            <h3><GoTools />Ferramentas utilizadas:</h3>
+                            <div className={styles.technologyCardContainer}>
+                                {loading && !project && (
+                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                )}
+                                {!loading && project && project.ProjectTools.length > 0 && (
+                                    <>
+                                        {project.ProjectTools.map((ProjectTool) => (
+                                            <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
+                                                <div className={styles.icon}>{toolIcons[ProjectTool.Tool.name] || <FaCode />}</div>
+                                                <div className={styles.name}><p>{ProjectTool.Tool.name}</p></div>
+                                            </div>
+                                        ))}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className={styles.projectTechInfo}>
+                            <h3><GoTools />Banco de dados utilizado:</h3>
+                            <div className={styles.technologyCardContainer}>
+                                {loading && !project && (
+                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                )}
+                                {!loading && project && project.usedDatabase && (
+                                    <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
+                                        <div className={styles.icon}>{toolIcons[ProjectTool.ProjectDatabase.name] || <FaCode />}</div>
+                                        <div className={styles.name}><p>{ProjectTool.ProjectDatabase.name}</p></div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
-                    <div className={styles.repositoriesSection}>
-                        {loading && !project && (
-                            <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
-                        )}
-                        {!loading && project && (
-                            <button className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></button>
-                        )}
-                    </div>
-                    <div className={styles.repositoriesSection}>
-                        {loading && !project && (
-                            <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
-                        )}
-                        {!loading && project && (
-                            <button className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></button>
-                        )}
-                    </div>
+
                 </div>
                 <div className={styles.images}>
                     <h3><AiFillPicture />Imagens do projeto:</h3>

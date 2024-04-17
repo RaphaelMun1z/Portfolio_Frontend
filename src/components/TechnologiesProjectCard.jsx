@@ -7,10 +7,6 @@ import { SiJavascript, SiHtml5, SiCss3, SiReact, SiPython, SiPhp, SiTypescript, 
 import { FaCode } from "react-icons/fa6";
 import { FaJava, FaAngular } from "react-icons/fa";
 import { GrMysql } from "react-icons/gr";
-import { GoSearch } from "react-icons/go";
-import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
-import { IoIosArrowForward } from "react-icons/io";
-import { LuMonitorSmartphone } from "react-icons/lu";
 
 const TechnologiesProjectCard = ({ frontend, backend }) => {
     const [languages, setLanguages] = useState([])
