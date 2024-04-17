@@ -51,7 +51,7 @@ const ProjectCard = ({ project }) => {
           <ToolsProjectCard projectTools={project.ProjectTools} />
 
           <div className={styles.actions}>
-            <Link to={`projeto/${project.id}`} className={styles.btnMoreAbout}>Saber Mais<GrCircleInformation /></Link>
+            <Link to={`/projeto/${project.id}`} className={styles.btnMoreAbout}>Saber Mais<GrCircleInformation /></Link>
             {project.ProjectHost && (
               <Link to={`${project.ProjectHost.URL}`} className={styles.btnVisitProject}>Visitar<IoIosArrowForward /></Link>
             )}
