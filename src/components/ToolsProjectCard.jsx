@@ -24,8 +24,8 @@ const ToolsProjectCard = ({ projectTools }) => {
                 <div className={styles.toolInfoContainer}>
                     <p>Ferramentas utilizadas:</p>
                     <div className={styles.tools}>
-                        {projectTools && projectTools.map((projectTool) => (
-                            <div className={styles.toolCard} key={projectTools.id}>
+                        {projectTools && projectTools.map((projectTool, index) => (
+                            <div className={styles.toolCard} key={index}>
                                 {toolIcons[projectTool.Tool.name] || <FaCode />}
                             </div>
                         ))}

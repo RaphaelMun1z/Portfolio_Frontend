@@ -1,7 +1,7 @@
 import styles from './SingleProjectDetails.module.scss'
 
 // Icons
-import { GoStack, GoServer, GoTools } from "react-icons/go";
+import { GoStack, GoServer, GoTools, GoDatabase } from "react-icons/go";
 import { GrMysql } from "react-icons/gr"
 import { MdDesignServices } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
@@ -34,7 +34,14 @@ import {
     SiExpress,
     SiLaravel,
     SiVuedotjs,
-    SiFlask
+    SiFlask,
+    SiMysql,
+    SiMicrosoftsqlserver,
+    SiPostgresql,
+    SiMongodb,
+    SiOracle,
+    SiSqlite,
+    SiRedis
 } from "react-icons/si";
 
 // Hooks
@@ -84,6 +91,16 @@ const SingleProjectDetails = () => {
         Vue: <SiVuedotjs />,
         Flask: <SiFlask />,
     };
+
+    const databaseIcons = {
+        MySQL: < SiMysql />,
+        SqlServer: <SiMicrosoftsqlserver />,
+        PostgreSQL: <SiPostgresql />,
+        MongoDB: <SiMongodb />,
+        OracleDatabase: <SiOracle />,
+        SQLite: <SiSqlite />,
+        Redis: <SiRedis />,
+    }
 
     return (
         <section className={styles.projectDetailsContainer}>
@@ -210,38 +227,42 @@ const SingleProjectDetails = () => {
                                 )}
                             </div>
                         </div>
-                        <div className={styles.projectTechInfo}>
-                            <h3><GoTools />Ferramentas utilizadas:</h3>
-                            <div className={styles.technologyCardContainer}>
-                                {loading && !project && (
-                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
-                                )}
-                                {!loading && project && project.ProjectTools.length > 0 && (
-                                    <>
-                                        {project.ProjectTools.map((ProjectTool) => (
-                                            <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
-                                                <div className={styles.icon}>{toolIcons[ProjectTool.Tool.name] || <FaCode />}</div>
-                                                <div className={styles.name}><p>{ProjectTool.Tool.name}</p></div>
-                                            </div>
-                                        ))}
-                                    </>
-                                )}
+                        {project && project.usedTools && (
+                            <div className={styles.projectTechInfo}>
+                                <h3><GoTools />Ferramentas utilizadas:</h3>
+                                <div className={styles.technologyCardContainer}>
+                                    {loading && !project && (
+                                        <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                    )}
+                                    {!loading && project && project.ProjectTools.length > 0 && (
+                                        <>
+                                            {project.ProjectTools.map((ProjectTool) => (
+                                                <div className={`${styles.technologyCard} ${styles.toolsContainer}`} key={ProjectTool.id}>
+                                                    <div className={styles.icon}>{toolIcons[ProjectTool.Tool.name] || <FaCode />}</div>
+                                                    <div className={styles.name}><p>{ProjectTool.Tool.name}</p></div>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles.projectTechInfo}>
-                            <h3><GoTools />Banco de dados utilizado:</h3>
-                            <div className={styles.technologyCardContainer}>
-                                {loading && !project && (
-                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
-                                )}
-                                {!loading && project && project.usedDatabase && (
-                                    <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
-                                        <div className={styles.icon}>{toolIcons[ProjectTool.ProjectDatabase.name] || <FaCode />}</div>
-                                        <div className={styles.name}><p>{ProjectTool.ProjectDatabase.name}</p></div>
-                                    </div>
-                                )}
+                        )}
+                        {project && project.usedDatabase && (
+                            <div className={styles.projectTechInfo}>
+                                <h3><GoDatabase />Banco de dados utilizado:</h3>
+                                <div className={styles.technologyCardContainer}>
+                                    {loading && !project && (
+                                        <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
+                                    )}
+                                    {!loading && project && project.usedDatabase && (
+                                        <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
+                                            <div className={styles.icon}>{databaseIcons[project.ProjectDatabase.Database.name] || <FaCode />}</div>
+                                            <div className={styles.name}><p>{project.ProjectDatabase.Database.name}</p></div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                 </div>

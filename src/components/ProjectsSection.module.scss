@@ -39,6 +39,8 @@
         flex-wrap: wrap;
         width: fit-content;
         height: fit-content;
+        flex-direction: row;
+        gap: 0;
 
         input {
             position: relative;
@@ -69,12 +71,103 @@
             border-radius: 0 5px 5px 0;
             justify-content: center;
             align-items: center;
+            margin: 0;
+            padding: 0;
+
+            &:hover{
+                background: #fff;
+                opacity: 1;
+            }
 
             svg {
                 position: relative;
                 display: flex;
                 font-size: 18pt;
-                fill: #aaa;
+                fill: #aaa !important;
+                color: #aaa !important;
+            }
+        }
+    }
+
+    .filterContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        gap: 1em;
+
+        .title {
+            font-size: 30pt;
+            color: rgb(254, 135, 0);
+        }
+
+        .topic {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: fit-content;
+            height: fit-content;
+
+            h4 {
+                color: #aaa;
+                font-weight: 400;
+                margin-bottom: .2em;
+            }
+
+            .itemsContainer {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                height: fit-content;
+                gap: .5em;
+
+                .item {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                    height: fit-content;
+                    border: 1px solid #fff;
+                    border-radius: 10px;
+                    padding: .5em 1em;
+                    align-items: center;
+                    gap: .5em;
+                    cursor: pointer;
+                    transition: all .1s ease-in-out;
+
+                    &:hover{
+                        opacity: .5;
+                        transition: all .1s ease-in-out;
+                    }
+
+                    &.active {
+                        border: 2px solid rgb(254, 135, 0);
+
+                        .icon {
+                            color: rgb(254, 135, 0);
+                        }
+
+                        p {
+                            color: rgb(254, 135, 0);
+                        }
+                    }
+
+                    .icon {
+                        position: relative;
+                        display: flex;
+                        width: fit-content;
+                        height: fit-content;
+                        color: #fff;
+                    }
+
+                    p {
+                        color: #fff;
+                        font-weight: 500;
+                    }
+                }
             }
         }
     }

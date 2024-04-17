@@ -55,8 +55,8 @@ const TechnologiesProjectCard = ({ frontend, backend }) => {
                 <div className={styles.techInfoContainer}>
                     <p>Linguages utilizadas:</p>
                     <div className={styles.technologies}>
-                        {languages && languages.map((language) => (
-                            <div className={styles.technologieCard} key={language}>
+                        {languages && languages.map((language, index) => (
+                            <div className={styles.technologieCard} key={index}>
                                 {languageIcons[language] || <FaCode />}
                             </div>
                         ))}
@@ -67,8 +67,8 @@ const TechnologiesProjectCard = ({ frontend, backend }) => {
                 <div className={styles.techInfoContainer}>
                     <p>Frameworks utilizados:</p>
                     <div className={styles.technologies}>
-                        {frameworks && frameworks.map((framework) => (
-                            <div className={styles.technologieCard}>
+                        {frameworks && frameworks.map((framework, index) => (
+                            <div className={styles.technologieCard} key={index}>
                                 {languageIcons[framework] || <FaCode />}
                             </div>
                         ))}
