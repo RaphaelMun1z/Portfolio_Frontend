@@ -30,7 +30,7 @@
     width: 100%;
     height: fit-content;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 1em;
 
     .searchBar {
@@ -74,7 +74,7 @@
             margin: 0;
             padding: 0;
 
-            &:hover{
+            &:hover {
                 background: #fff;
                 opacity: 1;
             }
@@ -97,6 +97,61 @@
         width: 100%;
         height: fit-content;
         gap: 1em;
+
+        .mainSearchInput {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            gap: 1em;
+
+            .fastSearchInput {
+                position: relative;
+                display: flex;
+                width: fit-content;
+                height: fit-content;
+                align-items: center;
+
+                input {
+                    display: none;
+                }
+
+                .flashSearch {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                    height: fit-content;
+                    padding: .5em 1em;
+                    border-radius: 5px;
+                    border: 2px solid red;
+                    align-items: center;
+                    gap: .5em;
+                    color: red;
+                    cursor: pointer;
+                    transition: all .1s ease-in-out;
+
+                    &:hover {
+                        opacity: .5;
+                        transition: all .1s ease-in-out;
+                    }
+
+                    &.activedFlash {
+                        color: yellow;
+                        border-color: yellow;
+
+                        svg {
+                            color: yellow;
+                        }
+                    }
+
+                    svg {
+                        font-size: 20pt;
+                        color: red;
+                    }
+                }
+            }
+        }
 
         .title {
             font-size: 30pt;
@@ -138,13 +193,15 @@
                     cursor: pointer;
                     transition: all .1s ease-in-out;
 
-                    &:hover{
+                    &:hover {
                         opacity: .5;
+                        transform: scale(.9);
                         transition: all .1s ease-in-out;
                     }
 
                     &.active {
                         border: 2px solid rgb(254, 135, 0);
+                        animation: moveUpDown .3s forwards;
 
                         .icon {
                             color: rgb(254, 135, 0);
@@ -152,6 +209,20 @@
 
                         p {
                             color: rgb(254, 135, 0);
+                        }
+                    }
+
+                    @keyframes moveUpDown {
+                        0% {
+                            transform: scale(1);
+                        }
+
+                        50% {
+                            transform: scale(1.1);
+                        }
+
+                        100% {
+                            transform: scale(1);
                         }
                     }
 
@@ -191,6 +262,8 @@
             gap: 1em;
             justify-content: center;
             align-items: center;
+            border-left: 7px solid rgb(254, 135, 0);
+            color: rgb(254, 135, 0);
 
             .icon {
                 position: relative;
@@ -210,7 +283,8 @@
                 font-size: 14pt;
                 justify-content: center;
                 align-items: center;
-                font-weight: 400;
+                font-weight: 500;
+                gap: .3em;
             }
         }
     }
