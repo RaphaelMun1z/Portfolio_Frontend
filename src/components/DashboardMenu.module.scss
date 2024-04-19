@@ -58,6 +58,7 @@ section {
                     gap: 1em;
                     cursor: pointer;
                     transition: all .1s ease-in-out;
+                    text-decoration: none;
 
                     &.activePage {
                         background-color: transparent;

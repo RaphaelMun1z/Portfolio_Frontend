@@ -1,24 +1,41 @@
 import styles from './DashboardItems.module.scss'
 
-import { FaRegEdit } from "react-icons/fa";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getFrameworks } from '../../slices/frameworkSlice';
+
+import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
 
 import { Link } from 'react-router-dom';
 
 const FrameworksManager = () => {
-  const linhas = Array.from({ length: 10 }, (_, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>Exemplo {index + 1}</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
-    </tr>
-  ));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  const dispatch = useDispatch()
+
+  const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+
+  useEffect(() => {
+    dispatch(getFrameworks())
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -56,7 +73,18 @@ const FrameworksManager = () => {
             </tr>
           </thead>
           <tbody>
-            {linhas}
+            {frameworks && frameworks.map((framework) => (
+              <tr key={framework.id}>
+                <td>{framework.id}</td>
+                <td>{framework.name}</td>
+                <td>{framework.Language.name}</td>
+                <td>{framework.proficiency}</td>
+                <td>{formatDate(framework.createdAt)}<br />{formatTime(framework.createdAt)}</td>
+                <td>{formatDate(framework.updatedAt)}<br />{formatTime(framework.updatedAt)}</td>
+                <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

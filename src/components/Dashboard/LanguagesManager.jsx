@@ -1,5 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getLanguages } from '../../slices/languageSlice';
+
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
@@ -7,17 +13,29 @@ import { RiSearch2Line } from "react-icons/ri";
 import { Link } from "react-router-dom"
 
 const LanguagesManager = () => {
-  const linhas = Array.from({ length: 10 }, (_, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>Exemplo {index + 1}</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
-    </tr>
-  ));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  const dispatch = useDispatch()
+
+  const { languages, loading: languageLoading } = useSelector((state) => state.language)
+
+  useEffect(() => {
+    dispatch(getLanguages())
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -53,7 +71,17 @@ const LanguagesManager = () => {
             </tr>
           </thead>
           <tbody>
-            {linhas}
+            {languages && languages.map((language) => (
+              <tr key={language.id}>
+                <td>{language.id}</td>
+                <td>{language.name}</td>
+                <td>{language.proficiency}</td>
+                <td>{formatDate(language.createdAt)}<br />{formatTime(language.createdAt)}</td>
+                <td>{formatDate(language.updatedAt)}<br />{formatTime(language.updatedAt)}</td>
+                <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

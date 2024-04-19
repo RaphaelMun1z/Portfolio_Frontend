@@ -69,7 +69,7 @@ const Header = () => {
                                 <li>
                                     <NavLink className={({ isActive }) =>
                                         isActive ? `${styles.active}` : ''
-                                    } to="/adm/painel">Painel</NavLink>
+                                    } to="/adm/painel/geral">Painel</NavLink>
                                 </li>
                                 <li>
                                     <p onClick={handleLogout}>Sair</p>

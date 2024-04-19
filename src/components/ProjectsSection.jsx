@@ -3,53 +3,13 @@ import styles from './ProjectsSection.module.scss'
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIcon } from '../hooks/useIcon';
 
 // Icons
-import { GoStack, GoServer, GoTools, GoDatabase } from "react-icons/go";
-import { GrMysql } from "react-icons/gr"
 import { MdDesignServices } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
-import { IoFlash, IoFlashOff } from "react-icons/io5";
-import {
-    FaCode,
-    FaGithub,
-    FaBug,
-    FaReact,
-    FaJava,
-    FaJs,
-    FaAngular,
-    FaDocker,
-    FaExternalLinkAlt,
-    FaGitAlt,
-    FaSlack,
-    FaSearch,
-    FaInfo
-} from "react-icons/fa";
-import {
-    SiVisualstudiocode,
-    SiPostman,
-    SiJirasoftware,
-    SiPython,
-    SiPhp,
-    SiJavascript,
-    SiTypescript,
-    SiHtml5,
-    SiCss3,
-    SiReact,
-    SiDjango,
-    SiSpring,
-    SiExpress,
-    SiLaravel,
-    SiVuedotjs,
-    SiFlask,
-    SiMysql,
-    SiMicrosoftsqlserver,
-    SiPostgresql,
-    SiMongodb,
-    SiOracle,
-    SiSqlite,
-    SiRedis
-} from "react-icons/si";
+import { FaInfo, FaSearch } from "react-icons/fa"
+import { IoFlash, IoFlashOff } from "react-icons/io5"
 
 // Redux
 import { getProjects } from '../slices/projectSlice'
@@ -132,48 +92,6 @@ const ProjectsSection = () => {
         dispatch(getProjects({ projectStack: typeSelected, languagesId: languagesSelected, frameworksId: frameworksSelected, databaseId: databaseSelected }))
     }, [typeSelected, languagesSelected, frameworksSelected, databaseSelected]);
 
-    const toolIcons = {
-        Github: <FaGithub />,
-        Docker: <FaDocker />,
-        Git: <FaGitAlt />,
-        Slack: <FaSlack />,
-        VScode: <SiVisualstudiocode />,
-        Postman: <SiPostman />,
-        Jira: <SiJirasoftware />,
-    };
-
-    const frameworkIcons = {
-        React: <SiReact />,
-        Angular: <FaAngular />,
-        Django: <SiDjango />,
-        SpringBoot: <SiSpring />,
-        Express: <SiExpress />,
-        Laravel: <SiLaravel />,
-        Vue: <SiVuedotjs />,
-        Flask: <SiFlask />,
-    }
-
-    const languageIcons = {
-        Python: <SiPython />,
-        PHP: <SiPhp />,
-        Javascript: <SiJavascript className={styles.js} />,
-        Typescript: <SiTypescript />,
-        SQL: <GrMysql />,
-        HTML: <SiHtml5 />,
-        CSS: <SiCss3 />,
-        Java: <FaJava />,
-    };
-
-    const databaseIcons = {
-        MySQL: < SiMysql />,
-        SqlServer: <SiMicrosoftsqlserver />,
-        PostgreSQL: <SiPostgresql />,
-        MongoDB: <SiMongodb />,
-        OracleDatabase: <SiOracle />,
-        SQLite: <SiSqlite />,
-        Redis: <SiRedis />,
-    }
-
     return (
         <div className={styles.projectsContainer}>
             <div className={styles.header}>
@@ -216,19 +134,19 @@ const ProjectsSection = () => {
                             <div className={styles.itemsContainer}>
                                 <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
                                     <div className={styles.icon}>
-                                        <GoStack />
+                                        {useIcon('Fullstack')}
                                     </div>
                                     <p>Fullstack</p>
                                 </div>
                                 <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
                                     <div className={styles.icon}>
-                                        <MdDesignServices />
+                                        {useIcon('Frontend')}
                                     </div>
                                     <p>Frontend</p>
                                 </div>
                                 <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
                                     <div className={styles.icon}>
-                                        <GoServer />
+                                        {useIcon('Backend')}
                                     </div>
                                     <p>Backend</p>
                                 </div>
@@ -241,7 +159,7 @@ const ProjectsSection = () => {
                                 {!frameworkLoading && frameworks && frameworks.map((framework, index) => (
                                     <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
                                         <div className={styles.icon}>
-                                            {frameworkIcons[framework.name]}
+                                            {useIcon(framework.name)}
                                         </div>
                                         <p>
                                             {framework.name}
@@ -257,7 +175,7 @@ const ProjectsSection = () => {
                                 {!languageLoading && languages && languages.map((language, index) => (
                                     <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
                                         <div className={styles.icon}>
-                                            {languageIcons[language.name]}
+                                            {useIcon(language.name)}
                                         </div>
                                         <p>
                                             {language.name}
@@ -273,7 +191,7 @@ const ProjectsSection = () => {
                                 {!databaseLoading && databases && databases.map((database, index) => (
                                     <div className={`${styles.item} ${databaseSelected === database.id ? styles.active : ''} `} key={index} onClick={() => handledatabaseSelected(database.id)}>
                                         <div className={styles.icon}>
-                                            {databaseIcons[database.name]}
+                                            {useIcon(database.name)}
                                         </div>
                                         <p>
                                             {database.name}

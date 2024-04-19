@@ -1,3 +1,5 @@
+import styles from '../components/Icons.module.scss'
+
 // Icons
 import {
     SiJavascript,
@@ -32,25 +34,25 @@ import { MdDesignServices } from "react-icons/md";
 
 export const useIcon = (iconName) => {
     const languageIcons = {
-        Python: <SiPython />,
-        PHP: <SiPhp />,
-        Javascript: <SiJavascript />,
-        Typescript: <SiTypescript />,
-        SQL: <GrMysql />,
-        HTML: <SiHtml5 />,
-        CSS: <SiCss3 />,
-        Java: <FaJava />,
+        Python: <SiPython className={styles.Python} />,
+        PHP: <SiPhp className={styles.PHP} />,
+        Javascript: <SiJavascript className={styles.Javascript} />,
+        Typescript: <SiTypescript className={styles.Typescript} />,
+        SQL: <GrMysql className={styles.SQL} />,
+        HTML: <SiHtml5 className={styles.HTML} />,
+        CSS: <SiCss3 className={styles.CSS} />,
+        Java: <FaJava className={styles.Java} />,
     };
 
     const frameworkIcons = {
-        React: <SiReact />,
-        Angular: <FaAngular />,
-        Django: <SiDjango />,
-        SpringBoot: <SiSpring />,
-        Express: <SiExpress />,
-        Laravel: <SiLaravel />,
-        Vue: <SiVuedotjs />,
-        Flask: <SiFlask />,
+        React: <SiReact className={styles.React} />,
+        Angular: <FaAngular className={styles.Angular} />,
+        Django: <SiDjango className={styles.Django} />,
+        SpringBoot: <SiSpring className={styles.SpringBoot} />,
+        Express: <SiExpress className={styles.Express} />,
+        Laravel: <SiLaravel className={styles.Laravel} />,
+        Vue: <SiVuedotjs className={styles.Vue} />,
+        Flask: <SiFlask className={styles.Flask} />,
     };
 
     const toolIcons = {
@@ -70,17 +72,16 @@ export const useIcon = (iconName) => {
     }
 
     const databaseIcons = {
-        MySQL: <SiMysql />,
-        SqlServer: <SiMicrosoftsqlserver />,
-        PostgreSQL: <SiPostgresql />,
-        MongoDB: <SiMongodb />,
-        OracleDatabase: <SiOracle />,
-        SQLite: <SiSqlite />,
-        Redis: <SiRedis />,
+        MySQL: <SiMysql className={styles.MySQL} />,
+        SqlServer: <SiMicrosoftsqlserver className={styles.SqlServer} />,
+        PostgreSQL: <SiPostgresql className={styles.PostgreSQL} />,
+        MongoDB: <SiMongodb className={styles.MongoDB} />,
+        OracleDatabase: <SiOracle className={styles.OracleDatabase} />,
+        SQLite: <SiSqlite className={styles.SQLite} />,
+        Redis: <SiRedis className={styles.Redis} />,
     }
 
     if (iconName && iconName.trim() !== "") {
-        console.log(iconName)
         if (languageIcons[iconName]) {
             return languageIcons[iconName];
         } else if (frameworkIcons[iconName]) {

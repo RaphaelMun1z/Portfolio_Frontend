@@ -80,7 +80,7 @@ function App() {
           <Route path="/login" element={auth ? <Navigate to="/adm/painel" /> : <Login />} />
 
           {/* ADM Routes */}
-          <Route path="/adm/painel" element={wrapPrivateRoute(<Dashboard />)} />
+          <Route path="/adm/painel/:page" element={wrapPrivateRoute(<Dashboard />)} />
           <Route path="/adm/cadastrar/linguagem" element={wrapPrivateRoute(<NewLanguage />)} />
           <Route path="/adm/cadastrar/framework" element={wrapPrivateRoute(<NewFramework />)} />
           <Route path="/adm/cadastrar/projeto" element={wrapPrivateRoute(<NewProject />)} />

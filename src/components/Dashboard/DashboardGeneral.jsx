@@ -1,13 +1,12 @@
 import styles from './DashboardGeneral.module.scss'
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
 import { getProjects } from '../../slices/projectSlice'
 import { getLanguages } from '../../slices/languageSlice';
 import { getFrameworks } from '../../slices/frameworkSlice';
-import { getDatabases } from '../../slices/databaseSlice';
 
 import DashboardGraphic from '../DashboardGraphic';
 
@@ -22,13 +21,11 @@ const DashboardGeneral = () => {
     const { projects, loading: projectLoading } = useSelector((state) => state.project)
     const { languages, loading: languageLoading } = useSelector((state) => state.language)
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
-    const { databases, loading: databaseLoading } = useSelector((state) => state.database)
 
     useEffect(() => {
         dispatch(getProjects())
         dispatch(getLanguages())
         dispatch(getFrameworks())
-        dispatch(getDatabases())
     }, [])
 
     return (
