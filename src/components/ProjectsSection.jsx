@@ -129,77 +129,85 @@ const ProjectsSection = () => {
                     </div>
 
                     <div className={styles.topicsContainer}>
-                        <div className={styles.topic}>
-                            <h4>Tipo</h4>
-                            <div className={styles.itemsContainer}>
-                                <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
-                                    <div className={styles.icon}>
-                                        {useIcon('Fullstack')}
-                                    </div>
-                                    <p>Fullstack</p>
-                                </div>
-                                <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
-                                    <div className={styles.icon}>
-                                        {useIcon('Frontend')}
-                                    </div>
-                                    <p>Frontend</p>
-                                </div>
-                                <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
-                                    <div className={styles.icon}>
-                                        {useIcon('Backend')}
-                                    </div>
-                                    <p>Backend</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={styles.topic}>
-                            <h4>Frameworks</h4>
-                            <div className={styles.itemsContainer}>
-                                {!frameworkLoading && frameworks && frameworks.map((framework, index) => (
-                                    <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
+                        {!projectLoading && projects && (
+                            <div className={styles.topic}>
+                                <h4>Tipo</h4>
+                                <div className={styles.itemsContainer}>
+                                    <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
                                         <div className={styles.icon}>
-                                            {useIcon(framework.name)}
+                                            {useIcon('Fullstack')}
                                         </div>
-                                        <p>
-                                            {framework.name}
-                                        </p>
+                                        <p>Fullstack</p>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className={styles.topic}>
-                            <h4>Linguagens</h4>
-                            <div className={styles.itemsContainer}>
-                                {!languageLoading && languages && languages.map((language, index) => (
-                                    <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
+                                    <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
                                         <div className={styles.icon}>
-                                            {useIcon(language.name)}
+                                            {useIcon('Frontend')}
                                         </div>
-                                        <p>
-                                            {language.name}
-                                        </p>
+                                        <p>Frontend</p>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className={styles.topic}>
-                            <h4>Banco de dados</h4>
-                            <div className={styles.itemsContainer}>
-                                {!databaseLoading && databases && databases.map((database, index) => (
-                                    <div className={`${styles.item} ${databaseSelected === database.id ? styles.active : ''} `} key={index} onClick={() => handledatabaseSelected(database.id)}>
+                                    <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
                                         <div className={styles.icon}>
-                                            {useIcon(database.name)}
+                                            {useIcon('Backend')}
                                         </div>
-                                        <p>
-                                            {database.name}
-                                        </p>
+                                        <p>Backend</p>
                                     </div>
-                                ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
+
+                        {!frameworkLoading && frameworks && (
+                            <div className={styles.topic}>
+                                <h4>Frameworks</h4>
+                                <div className={styles.itemsContainer}>
+                                    {frameworks.map((framework, index) => (
+                                        <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
+                                            <div className={styles.icon}>
+                                                {useIcon(framework.name)}
+                                            </div>
+                                            <p>
+                                                {framework.name}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {!languageLoading && languages && (
+                            <div className={styles.topic}>
+                                <h4>Linguagens</h4>
+                                <div className={styles.itemsContainer}>
+                                    {languages.map((language, index) => (
+                                        <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
+                                            <div className={styles.icon}>
+                                                {useIcon(language.name)}
+                                            </div>
+                                            <p>
+                                                {language.name}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {!databaseLoading && databases && (
+                            <div className={styles.topic}>
+                                <h4>Banco de dados</h4>
+                                <div className={styles.itemsContainer}>
+                                    {databases.map((database, index) => (
+                                        <div className={`${styles.item} ${databaseSelected === database.id ? styles.active : ''} `} key={index} onClick={() => handledatabaseSelected(database.id)}>
+                                            <div className={styles.icon}>
+                                                {useIcon(database.name)}
+                                            </div>
+                                            <p>
+                                                {database.name}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
 

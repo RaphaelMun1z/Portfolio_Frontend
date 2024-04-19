@@ -4,7 +4,6 @@ import ProjectsSection from "../components/ProjectsSection"
 const ProjectsPage = () => {
   return (
     <>
-      <ProjectsTypeMenu />
       <ProjectsSection />
     </>
   )
