@@ -1,8 +1,8 @@
 import { api, requestConfig } from '../utils/config'
 
 // Get frameworks
-const getFrameworks = async (_, token) => {
-    const config = requestConfig("GET", null, token)
+const getFrameworks = async () => {
+    const config = requestConfig("GET", null)
 
     try {
         const res = await fetch(api + "/frameworks", config)

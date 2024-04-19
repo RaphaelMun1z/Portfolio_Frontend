@@ -12,10 +12,8 @@ const initialState = {
 // Get languages
 export const getLanguages = createAsyncThunk(
     "language/getlanguages",
-    async (_, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await languageService.getLanguages(token)
+    async () => {
+        const data = await languageService.getLanguages()
 
         return data
     }

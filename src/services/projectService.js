@@ -1,9 +1,9 @@
 import { api, requestConfig } from '../utils/config'
 
 // Get projects
-const getProjects = async (token, filters) => {
+const getProjects = async (filters) => {
     const queryParams = new URLSearchParams(filters).toString();
-    const config = requestConfig("GET", null, token)
+    const config = requestConfig("GET", null)
 
     try {
         const res = await fetch(api + "/projects?" + queryParams, config)

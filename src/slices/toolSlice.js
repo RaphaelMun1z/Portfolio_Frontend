@@ -12,10 +12,8 @@ const initialState = {
 // Get tools
 export const getTools = createAsyncThunk(
     "tool/gettools",
-    async (_, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await toolService.getTools(token)
+    async () => {
+        const data = await toolService.getTools()
 
         return data
     }

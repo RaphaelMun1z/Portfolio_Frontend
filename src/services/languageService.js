@@ -1,8 +1,8 @@
 import { api, requestConfig } from '../utils/config'
 
 // Get languages
-const getLanguages = async (_, token) => {
-    const config = requestConfig("GET", null, token)
+const getLanguages = async () => {
+    const config = requestConfig("GET", null)
 
     try {
         const res = await fetch(api + "/languages", config)

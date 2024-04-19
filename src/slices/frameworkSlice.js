@@ -12,10 +12,8 @@ const initialState = {
 // Get frameworks
 export const getFrameworks = createAsyncThunk(
     "framework/getframeworks",
-    async (_, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await frameworkService.getFrameworks(token)
+    async () => {
+        const data = await frameworkService.getFrameworks()
 
         return data
     }

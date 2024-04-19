@@ -12,10 +12,8 @@ const initialState = {
 // Get databases
 export const getDatabases = createAsyncThunk(
     "database/getdatabases",
-    async (_, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await databaseService.getDatabases(token)
+    async () => {
+        const data = await databaseService.getDatabases()
 
         return data
     }

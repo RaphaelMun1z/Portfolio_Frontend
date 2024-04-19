@@ -1,8 +1,8 @@
 import { api, requestConfig } from '../utils/config'
 
 // Get databases
-const getDatabases = async (_, token) => {
-    const config = requestConfig("GET", null, token)
+const getDatabases = async () => {
+    const config = requestConfig("GET", null)
 
     try {
         const res = await fetch(api + "/databases", config)

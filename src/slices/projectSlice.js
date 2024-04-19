@@ -12,10 +12,8 @@ const initialState = {
 // Get projects
 export const getProjects = createAsyncThunk(
     "project/getprojects",
-    async (filters, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await projectService.getProjects(token, filters)
+    async (filters) => {
+        const data = await projectService.getProjects(filters)
 
         return data
     }
@@ -23,10 +21,8 @@ export const getProjects = createAsyncThunk(
 
 export const getProjectById = createAsyncThunk(
     "project/getproject",
-    async (id, thunkAPI) => {
-        const token = thunkAPI.getState().auth.user.token
-
-        const data = await projectService.getProjectById(id, token)
+    async (id) => {
+        const data = await projectService.getProjectById(id)
 
         return data
     }

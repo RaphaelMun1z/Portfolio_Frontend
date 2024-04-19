@@ -1,8 +1,8 @@
 import { api, requestConfig } from '../utils/config'
 
 // Get tools
-const getTools = async (_, token) => {
-    const config = requestConfig("GET", null, token)
+const getTools = async () => {
+    const config = requestConfig("GET", null)
 
     try {
         const res = await fetch(api + "/tools", config)
