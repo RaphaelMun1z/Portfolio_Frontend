@@ -105,6 +105,8 @@
             flex-direction: row;
             align-items: center;
             gap: 1em;
+            border-bottom: 1px solid #aaa;
+            padding-bottom: 1em;
 
             .fastSearchInput {
                 position: relative;
@@ -158,85 +160,93 @@
             color: rgb(254, 135, 0);
         }
 
-        .topic {
+        .topicsContainer {
             position: relative;
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            width: fit-content;
+            flex-wrap: nowrap;
+            width: 100%;
             height: fit-content;
 
-            h4 {
-                color: #aaa;
-                font-weight: 400;
-                margin-bottom: .2em;
-            }
-
-            .itemsContainer {
+            .topic {
                 position: relative;
                 display: flex;
                 flex-wrap: wrap;
-                width: 100%;
+                flex-direction: column;
+                width: fit-content;
                 height: fit-content;
-                gap: .5em;
+                gap: .4em;
 
-                .item {
+                h4 {
+                    color: #aaa;
+                    font-weight: 400;
+                }
+
+                .itemsContainer {
                     position: relative;
                     display: flex;
-                    width: fit-content;
+                    flex-wrap: wrap;
+                    width: 100%;
                     height: fit-content;
-                    border: 1px solid #fff;
-                    border-radius: 10px;
-                    padding: .5em 1em;
-                    align-items: center;
                     gap: .5em;
-                    cursor: pointer;
-                    transition: all .1s ease-in-out;
 
-                    &:hover {
-                        opacity: .5;
-                        transform: scale(.9);
-                        transition: all .1s ease-in-out;
-                    }
-
-                    &.active {
-                        border: 2px solid rgb(254, 135, 0);
-                        animation: moveUpDown .3s forwards;
-
-                        .icon {
-                            color: rgb(254, 135, 0);
-                        }
-
-                        p {
-                            color: rgb(254, 135, 0);
-                        }
-                    }
-
-                    @keyframes moveUpDown {
-                        0% {
-                            transform: scale(1);
-                        }
-
-                        50% {
-                            transform: scale(1.1);
-                        }
-
-                        100% {
-                            transform: scale(1);
-                        }
-                    }
-
-                    .icon {
+                    .item {
                         position: relative;
                         display: flex;
                         width: fit-content;
                         height: fit-content;
-                        color: #fff;
-                    }
+                        border: 1px solid #fff;
+                        border-radius: 10px;
+                        padding: .5em 1em;
+                        align-items: center;
+                        gap: .5em;
+                        cursor: pointer;
+                        transition: all .1s ease-in-out;
 
-                    p {
-                        color: #fff;
-                        font-weight: 500;
+                        &:hover {
+                            opacity: .5;
+                            transform: scale(.9);
+                            transition: all .1s ease-in-out;
+                        }
+
+                        &.active {
+                            border: 2px solid rgb(254, 135, 0);
+                            animation: moveUpDown .3s forwards;
+
+                            .icon {
+                                color: rgb(254, 135, 0);
+                            }
+
+                            p {
+                                color: rgb(254, 135, 0);
+                            }
+                        }
+
+                        @keyframes moveUpDown {
+                            0% {
+                                transform: scale(1);
+                            }
+
+                            50% {
+                                transform: scale(1.1);
+                            }
+
+                            100% {
+                                transform: scale(1);
+                            }
+                        }
+
+                        .icon {
+                            position: relative;
+                            display: flex;
+                            width: fit-content;
+                            height: fit-content;
+                            color: #fff;
+                        }
+
+                        p {
+                            color: #fff;
+                            font-weight: 500;
+                        }
                     }
                 }
             }

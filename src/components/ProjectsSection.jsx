@@ -55,6 +55,7 @@ import {
 import { getProjects } from '../slices/projectSlice'
 import { getLanguages } from '../slices/languageSlice';
 import { getFrameworks } from '../slices/frameworkSlice';
+import { getDatabases } from '../slices/databaseSlice';
 
 const ProjectsSection = () => {
     const dispatch = useDispatch()
@@ -62,11 +63,13 @@ const ProjectsSection = () => {
     const { projects, loading: projectLoading } = useSelector((state) => state.project)
     const { languages, loading: languageLoading } = useSelector((state) => state.language)
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+    const { databases, loading: databaseLoading } = useSelector((state) => state.database)
 
     useEffect(() => {
         dispatch(getProjects())
         dispatch(getLanguages())
         dispatch(getFrameworks())
+        dispatch(getDatabases())
     }, [])
 
     const [fastSearch, setFastSearch] = useState(false)
@@ -74,6 +77,7 @@ const ProjectsSection = () => {
     const [typeSelected, setTypeSelected] = useState("")
     const [languagesSelected, setLanguagesSelected] = useState([])
     const [frameworksSelected, setFrameworksSelected] = useState([])
+    const [databaseSelected, setDatabaseSelected] = useState("")
 
     const handleSubmitSearchProjectByName = (e) => {
         e.preventDefault()
@@ -116,9 +120,17 @@ const ProjectsSection = () => {
         }
     }
 
+    const handledatabaseSelected = (databaseId) => {
+        if (databaseSelected === databaseId) {
+            setDatabaseSelected("");
+        } else {
+            setDatabaseSelected(databaseId)
+        }
+    }
+
     useEffect(() => {
-        dispatch(getProjects({ projectStack: typeSelected, languagesId: languagesSelected, frameworksId: frameworksSelected }))
-    }, [typeSelected, languagesSelected]);
+        dispatch(getProjects({ projectStack: typeSelected, languagesId: languagesSelected, frameworksId: frameworksSelected, databaseId: databaseSelected }))
+    }, [typeSelected, languagesSelected, frameworksSelected, databaseSelected]);
 
     const toolIcons = {
         Github: <FaGithub />,
@@ -198,75 +210,77 @@ const ProjectsSection = () => {
                         </div>
                     </div>
 
-                    <div className={styles.topic}>
-                        <h4>Tipo</h4>
-                        <div className={styles.itemsContainer}>
-                            <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
-                                <div className={styles.icon}>
-                                    <GoStack />
+                    <div className={styles.topicsContainer}>
+                        <div className={styles.topic}>
+                            <h4>Tipo</h4>
+                            <div className={styles.itemsContainer}>
+                                <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
+                                    <div className={styles.icon}>
+                                        <GoStack />
+                                    </div>
+                                    <p>Fullstack</p>
                                 </div>
-                                <p>Fullstack</p>
-                            </div>
-                            <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
-                                <div className={styles.icon}>
-                                    <MdDesignServices />
+                                <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
+                                    <div className={styles.icon}>
+                                        <MdDesignServices />
+                                    </div>
+                                    <p>Frontend</p>
                                 </div>
-                                <p>Frontend</p>
-                            </div>
-                            <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
-                                <div className={styles.icon}>
-                                    <GoServer />
+                                <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
+                                    <div className={styles.icon}>
+                                        <GoServer />
+                                    </div>
+                                    <p>Backend</p>
                                 </div>
-                                <p>Backend</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div className={styles.topic}>
-                        <h4>Frameworks</h4>
-                        <div className={styles.itemsContainer}>
-                            {!frameworkLoading && frameworks && frameworks.map((framework, index) => (
-                                <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
-                                    <div className={styles.icon}>
-                                        {frameworkIcons[framework.name]}
+                        <div className={styles.topic}>
+                            <h4>Frameworks</h4>
+                            <div className={styles.itemsContainer}>
+                                {!frameworkLoading && frameworks && frameworks.map((framework, index) => (
+                                    <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
+                                        <div className={styles.icon}>
+                                            {frameworkIcons[framework.name]}
+                                        </div>
+                                        <p>
+                                            {framework.name}
+                                        </p>
                                     </div>
-                                    <p>
-                                        {framework.name}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={styles.topic}>
-                        <h4>Linguagens</h4>
-                        <div className={styles.itemsContainer}>
-                            {!languageLoading && languages && languages.map((language, index) => (
-                                <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
-                                    <div className={styles.icon}>
-                                        {languageIcons[language.name]}
+                        <div className={styles.topic}>
+                            <h4>Linguagens</h4>
+                            <div className={styles.itemsContainer}>
+                                {!languageLoading && languages && languages.map((language, index) => (
+                                    <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
+                                        <div className={styles.icon}>
+                                            {languageIcons[language.name]}
+                                        </div>
+                                        <p>
+                                            {language.name}
+                                        </p>
                                     </div>
-                                    <p>
-                                        {language.name}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={styles.topic}>
-                        <h4>Banco de dados</h4>
-                        <div className={styles.itemsContainer}>
-                            {Object.entries(databaseIcons).map(([database, icon], index) => (
-                                <div className={styles.item} key={index}>
-                                    <div className={styles.icon}>
-                                        {icon}
+                        <div className={styles.topic}>
+                            <h4>Banco de dados</h4>
+                            <div className={styles.itemsContainer}>
+                                {!databaseLoading && databases && databases.map((database, index) => (
+                                    <div className={`${styles.item} ${databaseSelected === database.id ? styles.active : ''} `} key={index} onClick={() => handledatabaseSelected(database.id)}>
+                                        <div className={styles.icon}>
+                                            {databaseIcons[database.name]}
+                                        </div>
+                                        <p>
+                                            {database.name}
+                                        </p>
                                     </div>
-                                    <p>
-                                        {database}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

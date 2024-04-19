@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
 import { getProjects } from '../../slices/projectSlice'
+import { getLanguages } from '../../slices/languageSlice';
+import { getFrameworks } from '../../slices/frameworkSlice';
+import { getDatabases } from '../../slices/databaseSlice';
 
 import DashboardGraphic from '../DashboardGraphic';
 
@@ -16,10 +19,16 @@ import { RiSearchEyeLine } from "react-icons/ri";
 const DashboardGeneral = () => {
     const dispatch = useDispatch()
 
-    const { projects, loading, error, message } = useSelector((state) => state.project)
+    const { projects, loading: projectLoading } = useSelector((state) => state.project)
+    const { languages, loading: languageLoading } = useSelector((state) => state.language)
+    const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+    const { databases, loading: databaseLoading } = useSelector((state) => state.database)
 
     useEffect(() => {
         dispatch(getProjects())
+        dispatch(getLanguages())
+        dispatch(getFrameworks())
+        dispatch(getDatabases())
     }, [])
 
     return (
@@ -32,10 +41,10 @@ const DashboardGeneral = () => {
                             <AiOutlineFundProjectionScreen />
                         </div>
                     </div>
-                    {loading && (
+                    {projectLoading && (
                         <div className='skeleton' style={{ marginTop: '10px' }}></div>
                     )}
-                    {!loading && projects && (
+                    {!projectLoading && projects && (
                         <div className={styles.data}>{projects.length}</div>
                     )}
                 </div>
@@ -46,8 +55,12 @@ const DashboardGeneral = () => {
                             <FaCode />
                         </div>
                     </div>
-                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
-                    {/* <div className={styles.data}>15</div> */}
+                    {languageLoading && (
+                        <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    )}
+                    {!languageLoading && languages && (
+                        <div className={styles.data}>{languages.length}</div>
+                    )}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>
@@ -56,8 +69,12 @@ const DashboardGeneral = () => {
                             <GiGears />
                         </div>
                     </div>
-                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
-                    {/* <div className={styles.data}>5</div> */}
+                    {frameworkLoading && (
+                        <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    )}
+                    {!frameworkLoading && frameworks && (
+                        <div className={styles.data}>{frameworks.length}</div>
+                    )}
                 </div>
                 <div className={styles.dataCard}>
                     <div className={styles.title}>
