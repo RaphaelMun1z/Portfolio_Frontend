@@ -1,0 +1,24 @@
+.stackContainer {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    padding: .5em 1em;
+    border-radius: 10px;
+    background-color: orange;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+    margin-top: 1em;
+
+    p {
+        font-size: 14pt !important;
+        font-weight: 500 !important;
+        color: #fff !important;
+    }
+
+    svg {
+        font-size: 20pt;
+        color: #fff;
+    }
+}

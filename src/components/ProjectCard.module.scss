@@ -16,27 +16,6 @@
         height: auto;
         min-height: 500px;
         padding: 1em;
-
-        .image {
-            position: relative;
-            display: flex;
-            width: 100%;
-            height: 100%;
-            max-height: 500px;
-            background-color: orange;
-            border-radius: 20px;
-            overflow: hidden;
-            overflow-y: scroll;
-            scrollbar-color: rgb(254, 135, 0) whitesmoke !important;
-
-            img {
-                position: relative;
-                display: flex;
-                width: 100%;
-                height: fit-content;
-                object-fit: contain;
-            }
-        }
     }
 
     .infoContainer {
@@ -54,145 +33,27 @@
             height: 100%;
             padding: 1em;
 
-            h1 {
+            .title {
                 font-size: 25pt;
                 font-weight: 700;
                 line-height: 35px;
                 margin-bottom: .2em;
+                color: #222;
             }
 
-            p {
+            .description {
                 font-size: 11pt;
                 font-weight: 300;
             }
 
-            .stackContainer {
+            .projectStack {
                 position: relative;
                 display: flex;
-                width: fit-content;
-                height: fit-content;
-                padding: .5em 1em;
-                border-radius: 10px;
-                background-color: orange;
-                justify-content: center;
-                align-items: center;
-                gap: .5em;
-                margin-top: 1em;
-
-                p {
-                    font-size: 14pt;
-                    font-weight: 500;
-                    color: #fff;
-                }
-
-                svg {
-                    font-size: 20pt;
-                    color: #fff;
-                }
-            }
-
-            .projectExtraDetails {
-                position: relative;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 5px;
-                width: fit-content;
-                height: fit-content;
-                margin: 15px 0 30px 0;
-
-                .extraDetailsCard {
-                    position: relative;
-                    display: flex;
-                    width: fit-content;
-                    height: fit-content;
-                    justify-content: flex-start;
-                    align-items: center;
-                    gap: .2em;
-                    padding: .2em .7em .2em .5em;
-                    background-color: #5dce0f;
-                    border-radius: 20px;
-                    flex: 0 1 49%;
-
-                    .icon {
-                        position: relative;
-                        display: flex;
-                        width: 40px;
-                        height: 40px;
-                        justify-content: center;
-                        align-items: center;
-
-                        svg {
-                            font-size: 15pt;
-                            color: #fff;
-                        }
-                    }
-
-                    .text {
-                        position: relative;
-                        display: flex;
-                        width: fit-content;
-                        height: 40px;
-                        font-size: 12pt;
-                        padding: .2em .5em;
-                        color: #fff;
-                        font-weight: 600;
-                        align-items: center;
-                        border-left: 1px solid #fff;
-                    }
-                }
-            }
-
-            .actions {
-                position: relative;
-                display: flex;
-                flex-wrap: wrap;
                 width: 100%;
                 height: fit-content;
-                gap: 5px;
-                margin-top: auto;
-
-                a {
-                    position: relative;
-                    display: flex;
-                    width: fit-content;
-                    height: auto;
-                    background-color: orange;
-                    text-decoration: none;
-                    border-radius: 10px;
-                    padding: .7em 1em;
-                    border: none;
-                    font-size: 12pt;
-                    color: #fff;
-                    font-weight: 600;
-                    cursor: pointer;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 5px;
-                    transition: all .2s ease-in-out;
-
-                    &:hover {
-                        opacity: .5;
-                        transition: all .2s ease-in-out;
-                    }
-
-                    svg {
-                        font-size: 15pt;
-                    }
-                }
-
-                .btnMoreAbout {
-                    background-color: #9f9f9f !important;
-                }
-
-                .btnVisitProject {
-                    background-color: rgb(66, 190, 66) !important;
-                }
-
-                .btnVisitProjectBlock {
-                    background-color: rgb(190, 105, 66) !important;
-                    opacity: .5;
-                    cursor: no-drop;
-                }
+                flex-wrap: wrap;
+                gap: 10px 1%;
+                margin: 1em 0;
             }
         }
     }

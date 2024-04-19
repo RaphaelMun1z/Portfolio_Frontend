@@ -1,0 +1,52 @@
+.actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    gap: 5px;
+    margin-top: auto;
+
+    a {
+        position: relative;
+        display: flex;
+        width: fit-content;
+        height: auto;
+        background-color: orange;
+        text-decoration: none;
+        border-radius: 10px;
+        padding: .7em 1em;
+        border: none;
+        font-size: 12pt;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            opacity: .5;
+            transition: all .2s ease-in-out;
+        }
+
+        svg {
+            font-size: 15pt;
+        }
+    }
+
+    .btnMoreAbout {
+        background-color: #0094f6 !important;
+    }
+
+    .btnVisitProject {
+        background-color: rgb(66, 190, 66) !important;
+    }
+
+    .btnVisitProjectBlock {
+        background-color: rgb(190, 105, 66) !important;
+        opacity: .5;
+        cursor: no-drop;
+    }
+}
