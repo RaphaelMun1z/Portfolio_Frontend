@@ -54,21 +54,26 @@ import {
 // Redux
 import { getProjects } from '../slices/projectSlice'
 import { getLanguages } from '../slices/languageSlice';
+import { getFrameworks } from '../slices/frameworkSlice';
 
 const ProjectsSection = () => {
     const dispatch = useDispatch()
 
     const { projects, loading: projectLoading } = useSelector((state) => state.project)
     const { languages, loading: languageLoading } = useSelector((state) => state.language)
+    const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
 
     useEffect(() => {
         dispatch(getProjects())
         dispatch(getLanguages())
+        dispatch(getFrameworks())
     }, [])
 
     const [fastSearch, setFastSearch] = useState(false)
     const [searchedProjectName, setSearchedProjectName] = useState("")
-    const [languageSelected, setLanguageSelected] = useState()
+    const [typeSelected, setTypeSelected] = useState("")
+    const [languagesSelected, setLanguagesSelected] = useState([])
+    const [frameworksSelected, setFrameworksSelected] = useState([])
 
     const handleSubmitSearchProjectByName = (e) => {
         e.preventDefault()
@@ -78,6 +83,7 @@ const ProjectsSection = () => {
         }
     }
 
+    // Fast Search
     useEffect(() => {
         if (fastSearch) {
             if (searchedProjectName && searchedProjectName.trim() !== "") {
@@ -86,11 +92,33 @@ const ProjectsSection = () => {
         }
     }, [searchedProjectName])
 
-    useEffect(() => {
-        if (languageSelected) {
-            dispatch(getProjects({ languageId: languageSelected }))
+    const handleTypeSelected = (type) => {
+        if (typeSelected === type) {
+            setTypeSelected("");
+        } else {
+            setTypeSelected(type)
         }
-    }, [languageSelected]);
+    }
+
+    const handleLanguagesSelected = (languageId) => {
+        if (languagesSelected.includes(languageId)) {
+            setLanguagesSelected(languagesSelected.filter(id => id !== languageId));
+        } else {
+            setLanguagesSelected([...languagesSelected, languageId])
+        }
+    }
+
+    const handleframeworksSelected = (frameworkId) => {
+        if (frameworksSelected.includes(frameworkId)) {
+            setFrameworksSelected(frameworksSelected.filter(id => id !== frameworkId));
+        } else {
+            setFrameworksSelected([...frameworksSelected, frameworkId])
+        }
+    }
+
+    useEffect(() => {
+        dispatch(getProjects({ projectStack: typeSelected, languagesId: languagesSelected, frameworksId: frameworksSelected }))
+    }, [typeSelected, languagesSelected]);
 
     const toolIcons = {
         Github: <FaGithub />,
@@ -140,6 +168,7 @@ const ProjectsSection = () => {
                 <h1>Meus Projetos</h1>
             </div>
             <div className={styles.searchForProjectContainer}>
+                {/* Filtros */}
                 <div className={styles.filterContainer}>
                     <h2 className={styles.title}>Filtros</h2>
                     <div className={styles.mainSearchInput}>
@@ -170,15 +199,39 @@ const ProjectsSection = () => {
                     </div>
 
                     <div className={styles.topic}>
+                        <h4>Tipo</h4>
+                        <div className={styles.itemsContainer}>
+                            <div className={`${styles.item} ${typeSelected === 'Fullstack' ? styles.active : ''} `} onClick={() => handleTypeSelected('Fullstack')}>
+                                <div className={styles.icon}>
+                                    <GoStack />
+                                </div>
+                                <p>Fullstack</p>
+                            </div>
+                            <div className={`${styles.item} ${typeSelected === 'Frontend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Frontend')}>
+                                <div className={styles.icon}>
+                                    <MdDesignServices />
+                                </div>
+                                <p>Frontend</p>
+                            </div>
+                            <div className={`${styles.item} ${typeSelected === 'Backend' ? styles.active : ''} `} onClick={() => handleTypeSelected('Backend')}>
+                                <div className={styles.icon}>
+                                    <GoServer />
+                                </div>
+                                <p>Backend</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.topic}>
                         <h4>Frameworks</h4>
                         <div className={styles.itemsContainer}>
-                            {Object.entries(frameworkIcons).map(([framework, icon], index) => (
-                                <div className={styles.item} key={index}>
+                            {!frameworkLoading && frameworks && frameworks.map((framework, index) => (
+                                <div className={`${styles.item} ${frameworksSelected.includes(framework.id) ? styles.active : ''} `} key={index} onClick={() => handleframeworksSelected(framework.id)}>
                                     <div className={styles.icon}>
-                                        {icon}
+                                        {frameworkIcons[framework.name]}
                                     </div>
                                     <p>
-                                        {framework}
+                                        {framework.name}
                                     </p>
                                 </div>
                             ))}
@@ -189,7 +242,7 @@ const ProjectsSection = () => {
                         <h4>Linguagens</h4>
                         <div className={styles.itemsContainer}>
                             {!languageLoading && languages && languages.map((language, index) => (
-                                <div className={`${styles.item} ${languageSelected === language.id ? styles.active : ''} `} key={index} onClick={() => setLanguageSelected(language.id)}>
+                                <div className={`${styles.item} ${languagesSelected.includes(language.id) ? styles.active : ''} `} key={index} onClick={() => handleLanguagesSelected(language.id)}>
                                     <div className={styles.icon}>
                                         {languageIcons[language.name]}
                                     </div>

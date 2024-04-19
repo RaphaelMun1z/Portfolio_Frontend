@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import TechnologiesProjectCard from './TechnologiesProjectCard'
 import ToolsProjectCard from './ToolsProjectCard';
 
+import { Tooltip } from 'react-tooltip';
+
 // Icons
 import { GoStack, GoServer } from "react-icons/go";
 import { GrCircleInformation } from "react-icons/gr";
@@ -29,19 +31,31 @@ const ProjectCard = ({ project }) => {
               {project.stack === "Fullstack" && (
                 <>
                   <GoStack />
-                  <p>{project.stack}</p>
+                  <p id='Fullstack'>{project.stack}</p>
+                  <Tooltip
+                    anchorSelect="#Fullstack"
+                    content="Este é um projeto Fullstack!"
+                  />
                 </>
               )}
               {project.stack === "Frontend" && (
                 <>
                   <MdDesignServices />
-                  <p>{project.stack}</p>
+                  <p id='Frontend'>{project.stack}</p>
+                  <Tooltip
+                    anchorSelect="#Frontend"
+                    content="Este é um projeto Frontend!"
+                  />
                 </>
               )}
               {project.stack === "Backend" && (
                 <>
                   <GoServer />
-                  <p>{project.stack}</p>
+                  <p id='Backend'>{project.stack}</p>
+                  <Tooltip
+                    anchorSelect="#Backend"
+                    content="Este é um projeto Backend!"
+                  />
                 </>
               )}
             </div>

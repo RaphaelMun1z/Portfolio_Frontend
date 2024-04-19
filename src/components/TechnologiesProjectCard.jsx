@@ -1,6 +1,9 @@
+import { Fragment } from 'react';
 import styles from './TechnologiesProjectCard.module.scss'
 
 import { useState, useEffect } from 'react';
+
+import { Tooltip } from 'react-tooltip';
 
 // Icons
 import { SiJavascript, SiHtml5, SiCss3, SiReact, SiPython, SiPhp, SiTypescript, SiDjango, SiSpring, SiExpress, SiLaravel, SiVuedotjs, SiFlask } from "react-icons/si";
@@ -56,9 +59,12 @@ const TechnologiesProjectCard = ({ frontend, backend }) => {
                     <p>Linguages utilizadas:</p>
                     <div className={styles.technologies}>
                         {languages && languages.map((language, index) => (
-                            <div className={styles.technologieCard} key={index}>
-                                {languageIcons[language] || <FaCode />}
-                            </div>
+                            <Fragment key={index}>
+                                <div className={styles.technologieCard} data-tooltip-id="language-tooltip" data-tooltip-content={language}>
+                                    {languageIcons[language] || <FaCode />}
+                                </div>
+                                <Tooltip id="language-tooltip" />
+                            </Fragment>
                         ))}
                     </div>
                 </div>
@@ -68,9 +74,12 @@ const TechnologiesProjectCard = ({ frontend, backend }) => {
                     <p>Frameworks utilizados:</p>
                     <div className={styles.technologies}>
                         {frameworks && frameworks.map((framework, index) => (
-                            <div className={styles.technologieCard} key={index}>
-                                {languageIcons[framework] || <FaCode />}
-                            </div>
+                            <Fragment key={index}>
+                                <div className={styles.technologieCard} data-tooltip-id="frameword-tooltip" data-tooltip-content={framework}>
+                                    {languageIcons[framework] || <FaCode />}
+                                </div>
+                                <Tooltip id="frameword-tooltip" />
+                            </Fragment>
                         ))}
                     </div>
                 </div>

@@ -1,28 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import languageService from "../services/languageService";
+import frameworkService from "../services/frameworkService";
 
 const initialState = {
-    languages: [],
-    language: null,
+    frameworks: [],
+    framework: null,
     error: false,
     success: false,
     loading: false,
 }
 
-// Get languages
-export const getLanguages = createAsyncThunk(
-    "language/getlanguages",
+// Get frameworks
+export const getFrameworks = createAsyncThunk(
+    "framework/getframeworks",
     async (_, thunkAPI) => {
         const token = thunkAPI.getState().auth.user.token
 
-        const data = await languageService.getLanguages(token)
+        const data = await frameworkService.getFrameworks(token)
 
         return data
     }
 )
 
-export const languageSlice = createSlice({
-    name: "language",
+export const frameworkSlice = createSlice({
+    name: "framework",
     initialState,
     reducers: {
         reset: (state) => {
@@ -33,18 +33,18 @@ export const languageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getLanguages.pending, (state) => {
+            .addCase(getFrameworks.pending, (state) => {
                 state.loading = true
                 state.error = false
             })
-            .addCase(getLanguages.fulfilled, (state, action) => {
+            .addCase(getFrameworks.fulfilled, (state, action) => {
                 state.loading = false
                 state.success = true
                 state.error = null
-                state.languages = action.payload
+                state.frameworks = action.payload
             })
     },
 })
 
-export const { reset } = languageSlice.actions
-export default languageSlice.reducer
+export const { reset } = frameworkSlice.actions
+export default frameworkSlice.reducer

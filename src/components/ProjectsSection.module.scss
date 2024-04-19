@@ -256,19 +256,18 @@
             flex-wrap: nowrap;
             width: 400px;
             height: fit-content;
-            background-color: #fff;
+            color: #fff;
             border-radius: 5px;
             padding: 1em;
-            gap: 1em;
-            justify-content: center;
+            padding-left: 0;
+            justify-content: flex-start;
             align-items: center;
-            border-left: 7px solid rgb(254, 135, 0);
-            color: rgb(254, 135, 0);
+            gap: .5em;
 
             .icon {
                 position: relative;
                 display: flex;
-                width: 10%;
+                width: fit-content;
                 height: 100%;
                 justify-content: center;
                 align-items: center;
@@ -281,7 +280,7 @@
                 width: 90%;
                 height: 100%;
                 font-size: 14pt;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 font-weight: 500;
                 gap: .3em;
