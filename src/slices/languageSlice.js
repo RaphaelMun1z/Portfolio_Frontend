@@ -9,6 +9,23 @@ const initialState = {
     loading: false,
 }
 
+// Create a language
+export const createLanguage = createAsyncThunk(
+    "language/create",
+    async (language, thunkAPI) => {
+
+        const token = thunkAPI.getState().auth.user.token
+        const data = await languageService.createLanguage(language, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 // Get languages
 export const getLanguages = createAsyncThunk(
     "language/getlanguages",
@@ -23,14 +40,31 @@ export const languageSlice = createSlice({
     name: "language",
     initialState,
     reducers: {
-        reset: (state) => {
+        resetMessage: (state) => {
             state.loading = false
             state.error = false
             state.success = false
+            state.message = null
         },
     },
     extraReducers: (builder) => {
         builder
+            .addCase(createLanguage.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(createLanguage.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.language = action.payload
+                state.message = "Linguagem cadastrada com sucesso!"
+            })
+            .addCase(createLanguage.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.language = {}
+            })
             .addCase(getLanguages.pending, (state) => {
                 state.loading = true
                 state.error = false
@@ -44,5 +78,5 @@ export const languageSlice = createSlice({
     },
 })
 
-export const { reset } = languageSlice.actions
+export const { resetMessage } = languageSlice.actions
 export default languageSlice.reducer
