@@ -155,7 +155,7 @@ const ProjectsSection = () => {
                             </div>
                         )}
 
-                        {!frameworkLoading && frameworks && (
+                        {!frameworkLoading && frameworks && frameworks.length > 0 && (
                             <div className={styles.topic}>
                                 <h4>Frameworks</h4>
                                 <div className={styles.itemsContainer}>
@@ -173,7 +173,7 @@ const ProjectsSection = () => {
                             </div>
                         )}
 
-                        {!languageLoading && languages && (
+                        {!languageLoading && languages && languages.length > 0 && (
                             <div className={styles.topic}>
                                 <h4>Linguagens</h4>
                                 <div className={styles.itemsContainer}>
@@ -191,7 +191,7 @@ const ProjectsSection = () => {
                             </div>
                         )}
 
-                        {!databaseLoading && databases && (
+                        {!databaseLoading && databases && databases.length > 0 && (
                             <div className={styles.topic}>
                                 <h4>Banco de dados</h4>
                                 <div className={styles.itemsContainer}>
@@ -235,7 +235,7 @@ const ProjectsSection = () => {
 
             </div>
             <div className={styles.contentContainer}>
-                {!projectLoading && projects && projects.map((project) => (
+                {!projectLoading && projects && projects.length > 0 && projects.map((project) => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
                 {projectLoading && (
