@@ -17,6 +17,7 @@ import { resetMessage, createProject } from '../../slices/projectSlice'
 import { getLanguages } from '../../slices/languageSlice';
 import { getFrameworks } from '../../slices/frameworkSlice';
 import { getDatabases } from '../../slices/databaseSlice';
+import { getTools } from '../../slices/toolSlice';
 
 const NewProject = () => {
     const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const NewProject = () => {
     const { languages, loading: languageLoading } = useSelector((state) => state.language)
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
     const { databases, loading: databaseLoading } = useSelector((state) => state.database)
+    const { tools, loading: toolLoading } = useSelector((state) => state.tool)
 
     // Step 0 - States
     const [projectName, setProjectName] = useState("")
@@ -47,6 +49,7 @@ const NewProject = () => {
     // Step 3 - States
     const [projectUsedTools, setProjectUsedTools] = useState(null)
     const [projectToolsArray, setProjectToolsArray] = useState([])
+    const [toolsArray, setToolsArray] = useState([])
 
     // Step 4 - States
     const [formsErrors, setFormsErrors] = useState([])
@@ -54,6 +57,19 @@ const NewProject = () => {
     // Step 5 - States
     const [projectUsedBdd, setProjectUsedBdd] = useState(null)
     const [projectBdd, setProjectBdd] = useState("")
+
+    useEffect(() => {
+        dispatch(getLanguages())
+        dispatch(getFrameworks())
+        dispatch(getDatabases())
+        dispatch(getTools())
+    }, [])
+
+    useEffect(() => {
+        if (tools) {
+            setToolsArray(tools)
+        }
+    }, [tools])
 
     // Forms States
     const [formSteps, setFormSteps] = useState([
@@ -337,12 +353,27 @@ const NewProject = () => {
         setProjectUsedTools(res)
     }
 
-    const handleSelectProjectTool = (opt) => {
-        if (projectToolsArray.includes(opt.target.value)) {
-        } else if (opt.target.value !== "invalid") {
-            projectToolsArray.push(opt.target.value)
-        }
+    const handleSelectTool = (id) => {
+        const updatedToolsArray = toolsArray.map(tool => {
+            if (tool.id === id) {
+                if (tool.selected === 'yes') {
+                    return { ...tool, selected: 'no' }
+                } else {
+                    return { ...tool, selected: 'yes' }
+                }
+            } else {
+                return tool;
+            }
+        })
+        setToolsArray(updatedToolsArray);
     }
+
+    useEffect(() => {
+        const selectedToolsIds = toolsArray
+            .filter(tool => tool.selected === 'yes')
+            .map(tool => tool.id);
+        setProjectToolsArray(selectedToolsIds);
+    }, [toolsArray]);
 
     const handleSelectProjectBdd = (opt) => {
         if (opt.target.value !== "invalid") {
@@ -383,12 +414,6 @@ const NewProject = () => {
         }, 2000)
     }
 
-    useEffect(() => {
-        dispatch(getLanguages())
-        dispatch(getFrameworks())
-        dispatch(getDatabases())
-    }, [])
-
     return (
         <div className={styles.mainContainer}>
             <div className={styles.formSections}>
@@ -409,6 +434,7 @@ const NewProject = () => {
                         </label>
 
                         <label>
+                            <p>Qual o tipo do projeto?</p>
                             <select name="projectType" onChange={(e) => setProjectType(e.target.value)}>
                                 <option value="undefined">Selecione o tipo</option>
                                 <option value="Web">Web</option>
@@ -634,14 +660,18 @@ const NewProject = () => {
                         {projectUsedTools && projectUsedTools === "true" && (
                             <label>
                                 <p>Quais ferramentas foram utilizadas?</p>
-                                <select name="tools" onChange={(e) => handleSelectProjectTool(e)}>
-                                    <option value="invalid">Selecione</option>
-                                    <option value="docker">Docker</option>
-                                    <option value="postman">Postman</option>
-                                    <option value="other">Outras</option>
-                                </select>
+                                <div className={styles.toolsContainer}>
+                                    {toolsArray && toolsArray.length > 0 && toolsArray.map((tool) => (
+                                        <div className={`${styles.toolButton} ${tool.selected === 'yes' ? styles.selected : ''}`} onClick={() => handleSelectTool(tool.id)}>{tool.name}</div>
+                                    ))}
+                                </div>
+                                {!toolLoading && tools && tools.length === 0 && (
+                                    <h5>Nenhuma ferramenta cadastrada até o momento!</h5>
+                                )}
                             </label>
                         )}
+
+                        {/* Aqui */}
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
@@ -777,9 +807,12 @@ const NewProject = () => {
                             <div className={styles.dataContainer}>
                                 <h2>Ferramentas de desenvolvimento utilizadas:</h2>
                                 <ul>
-                                    <li>teste</li>
-                                    <li>teste</li>
-                                    <li>teste</li>
+                                    {toolsArray
+                                        .filter(tool => tool.selected === 'yes')
+                                        .map(tool => (
+                                            <p key={tool.id}>{tool.name}</p>
+                                        ))
+                                    }
                                 </ul>
                             </div>
                         ) : ''}
