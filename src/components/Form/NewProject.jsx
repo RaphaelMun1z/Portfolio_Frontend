@@ -1,22 +1,42 @@
 import styles from './Form.module.scss'
 
+// Icons
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { FiAlertTriangle } from "react-icons/fi";
 
+// Components
 import { Link } from 'react-router-dom'
 import SystemStatusMessage from './SystemStatusMessage'
 
+// Hooks
 import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+// Redux
+import { resetMessage, createProject } from '../../slices/projectSlice'
+import { getLanguages } from '../../slices/languageSlice';
+import { getFrameworks } from '../../slices/frameworkSlice';
+import { getDatabases } from '../../slices/databaseSlice';
 
 const NewProject = () => {
+    const dispatch = useDispatch()
+
+    const { loading: loadingProject, message: messageProject, error: errorProject } = useSelector((state) => state.project)
+    const { languages, loading: languageLoading } = useSelector((state) => state.language)
+    const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+    const { databases, loading: databaseLoading } = useSelector((state) => state.database)
+
     // Step 0 - States
     const [projectName, setProjectName] = useState("")
     const [projectDescription, setProjectDescription] = useState("")
+    const [projectType, setProjectType] = useState("undefined")
 
     // Step 1 - States
     const [projectStack, setProjectStack] = useState("")
-    const [projectFrontendLanguage, setProjectFrontendLanguage] = useState("")
-    const [projectBackendLanguage, setProjectBackendLanguage] = useState("")
+    const [projectFrontendLanguage, setProjectFrontendLanguage] = useState(0)
+    const [projectBackendLanguage, setProjectBackendLanguage] = useState(0)
+    const [projectFrontendFramework, setProjectFrontendFramework] = useState(0)
+    const [projectBackendFramework, setProjectBackendFramework] = useState(0)
     const [projectFrontendRepository, setProjectFrontendRepository] = useState("")
     const [projectBackendRepository, setProjectBackendRepository] = useState("")
 
@@ -67,7 +87,7 @@ const NewProject = () => {
     }, [stepNumber])
 
     const handleNextStep = () => {
-        if (stepNumber >= 0 && stepNumber < 4) {
+        if (stepNumber >= 0 && stepNumber < 5) {
             setStepNumber(stepNumber + 1)
         }
     }
@@ -88,11 +108,18 @@ const NewProject = () => {
             formSteps[step].errors = []
             let errors = 0
 
-            // Name & Description
+            // Name & Type & Description
             if (projectName.trim() !== "") {
                 formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O nome é obrigatório!");
             } else if (projectName.trim() === "") {
                 formSteps[step].errors.push("O nome é obrigatório!");
+                errors += 1
+            }
+
+            if (projectType.trim() === "Web" || projectType.trim() === "Desktop" || projectType.trim() === "Mobile" || projectType.trim() === "EmbeddedProgramming") {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O tipo é obrigatório!");
+            } else if (projectType.trim() === "undefined") {
+                formSteps[step].errors.push("O tipo é obrigatório!");
                 errors += 1
             }
 
@@ -124,9 +151,9 @@ const NewProject = () => {
             }
 
             if (projectStack.trim() === "Frontend" || projectStack.trim() === "Fullstack") {
-                if (projectFrontendLanguage.trim() !== "") {
+                if (projectFrontendLanguage !== 0) {
                     formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A linguagem do frontend é obrigatória!");
-                } else if (projectFrontendLanguage.trim() === "") {
+                } else if (projectFrontendLanguage === 0) {
                     formSteps[step].errors.push("A linguagem do frontend é obrigatória!");
                     errors += 1
                 }
@@ -140,9 +167,9 @@ const NewProject = () => {
             }
 
             if (projectStack.trim() === "Backend" || projectStack.trim() === "Fullstack") {
-                if (projectBackendLanguage.trim() !== "") {
+                if (projectBackendLanguage !== 0) {
                     formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A linguagem do backend é obrigatória!");
-                } else if (projectBackendLanguage.trim() === "") {
+                } else if (projectBackendLanguage === 0) {
                     formSteps[step].errors.push("A linguagem do backend é obrigatória!");
                     errors += 1
                 }
@@ -323,6 +350,45 @@ const NewProject = () => {
         }
     }
 
+    const handleSaveProject = () => {
+        const project = {
+            name: projectName,
+            description: projectDescription,
+            type: projectType,
+            stack: projectStack,
+            fLanguageId: projectFrontendLanguage,
+            bLanguageId: projectBackendLanguage,
+            fFrameworkId: projectFrontendFramework,
+            bFrameworkId: projectBackendFramework,
+            fRepository: projectFrontendRepository,
+            bRepository: projectBackendRepository,
+            isHosted: projectIsHosted === "no" ? false : true,
+            URL: projectHostUrl,
+            usedTools: projectUsedTools,
+            toolsIdArray: projectToolsArray,
+            usedDatabase: projectUsedBdd,
+            databaseId: projectBdd,
+        }
+
+        console.log(project)
+
+        dispatch(createProject(project))
+
+        resetComponentMessage()
+    }
+
+    const resetComponentMessage = () => {
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
+    }
+
+    useEffect(() => {
+        dispatch(getLanguages())
+        dispatch(getFrameworks())
+        dispatch(getDatabases())
+    }, [])
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.formSections}>
@@ -340,6 +406,16 @@ const NewProject = () => {
                         <label>
                             <p>Qual a descrição do projeto?</p>
                             <textarea name="projectDescription" onChange={(e) => setProjectDescription(e.target.value)} defaultValue={projectDescription}></textarea>
+                        </label>
+
+                        <label>
+                            <select name="projectType" onChange={(e) => setProjectType(e.target.value)}>
+                                <option value="undefined">Selecione o tipo</option>
+                                <option value="Web">Web</option>
+                                <option value="Desktop">Desktop</option>
+                                <option value="Mobile">Mobile</option>
+                                <option value="EmbeddedProgramming">Programação Embarcada</option>
+                            </select>
                         </label>
 
                         <div className={styles.footer}>
@@ -378,7 +454,25 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' onChange={(e) => setProjectFrontendLanguage(e.target.value)} value={projectFrontendLanguage} />
+                                    {!languageLoading && languages && languages.length > 0 && (
+                                        <select name="frontLanguageId" onChange={(e) => setProjectFrontendLanguage(e.target.value)}>
+                                            <option value="0">Selecione uma linguagem</option>
+                                            {languages.map((language) => (
+                                                <option value={language.id}>{language.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
+                                </label>
+                                <label>
+                                    <p>Qual o framework utilizado para o <b>Frontend</b>?</p>
+                                    {!frameworkLoading && frameworks && frameworks.length > 0 && (
+                                        <select name="frontFrameworkId" onChange={(e) => setProjectFrontendFramework(e.target.value)}>
+                                            <option value="0">Selecione um framework</option>
+                                            {frameworks.map((framework) => (
+                                                <option value={framework.id}>{framework.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Frontend</b>?</p>
@@ -391,7 +485,25 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage} />
+                                    {!languageLoading && languages && languages.length > 0 && (
+                                        <select name="backLanguageId" onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage}>
+                                            <option value="0">Selecione uma linguagem</option>
+                                            {languages.map((language) => (
+                                                <option value={language.id}>{language.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
+                                </label>
+                                <label>
+                                    <p>Qual o framework utilizado para o <b>Backend</b>?</p>
+                                    {!frameworkLoading && frameworks && frameworks.length > 0 && (
+                                        <select name="backFrameworkId" onChange={(e) => setProjectBackendFramework(e.target.value)}>
+                                            <option value="0">Selecione um framework</option>
+                                            {frameworks.map((framework) => (
+                                                <option value={framework.id}>{framework.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Backend</b>?</p>
@@ -404,15 +516,52 @@ const NewProject = () => {
                             <>
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Frontend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no front...' onChange={(e) => setProjectFrontendLanguage(e.target.value)} value={projectFrontendLanguage} />
+                                    {!languageLoading && languages && languages.length > 0 && (
+                                        <select name="frontLanguageId" onChange={(e) => setProjectFrontendLanguage(e.target.value)} value={projectFrontendLanguage}>
+                                            <option value="0">Selecione uma linguagem</option>
+                                            {languages.map((language) => (
+                                                <option value={language.id}>{language.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
+                                </label>
+                                <label>
+                                    <p>Qual o framework utilizado para o <b>Frontend</b>?</p>
+                                    {!frameworkLoading && frameworks && frameworks.length > 0 && (
+                                        <select name="frontFrameworkId" onChange={(e) => setProjectFrontendFramework(e.target.value)}>
+                                            <option value="0">Selecione um framework</option>
+                                            {frameworks.map((framework) => (
+                                                <option value={framework.id}>{framework.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Frontend</b>?</p>
                                     <input type="text" placeholder='Repositório frontend...' onChange={(e) => setProjectFrontendRepository(e.target.value)} value={projectFrontendRepository} />
                                 </label>
+                                <hr />
                                 <label>
                                     <p>Qual a linguagem utilizada para o <b>Backend</b>?</p>
-                                    <input type="text" placeholder='Nome da linguagem utilizada no back...' onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage} />
+                                    {!languageLoading && languages && languages.length > 0 && (
+                                        <select name="backLanguageId" onChange={(e) => setProjectBackendLanguage(e.target.value)} value={projectBackendLanguage}>
+                                            <option value="0">Selecione uma linguagem</option>
+                                            {languages.map((language) => (
+                                                <option value={language.id}>{language.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
+                                </label>
+                                <label>
+                                    <p>Qual o framework utilizado para o <b>Backend</b>?</p>
+                                    {!frameworkLoading && frameworks && frameworks.length > 0 && (
+                                        <select name="backFrameworkId" onChange={(e) => setProjectBackendFramework(e.target.value)}>
+                                            <option value="0">Selecione um framework</option>
+                                            {frameworks.map((framework) => (
+                                                <option value={framework.id}>{framework.name}</option>
+                                            ))}
+                                        </select>
+                                    )}
                                 </label>
                                 <label>
                                     <p>Qual o repositório do <b>Backend</b>?</p>
@@ -520,12 +669,17 @@ const NewProject = () => {
                         {projectUsedBdd && projectUsedBdd === "true" && (
                             <label>
                                 <p>Qual banco foi usado?</p>
-                                <select name="tools" onChange={(e) => handleSelectProjectBdd(e)}>
-                                    <option value="invalid">Selecione</option>
-                                    <option value="MySQL" selected={projectBdd === "MySQL"}>MySQL</option>
-                                    <option value="MongoDB" selected={projectBdd === "MongoDB"}>MongoDB</option>
-                                    <option value="Firebase" selected={projectBdd === "Firebase"}>Firebase</option>
-                                </select>
+                                {!databaseLoading && databases && databases.length > 0 && (
+                                    <select name="frontLanguageId" onChange={(e) => setProjectBdd(e.target.value)}>
+                                        <option value="0">Selecione um banco de dados</option>
+                                        {databases.map((db) => (
+                                            <option value={db.id}>{db.name}</option>
+                                        ))}
+                                    </select>
+                                )}
+                                {!databaseLoading && databases && databases.length === 0 && (
+                                    <h5>Nenhum banco de dados cadastrado até o momento!</h5>
+                                )}
                             </label>
                         )}
 
@@ -546,6 +700,10 @@ const NewProject = () => {
                             <p>{projectName.trim() !== "" ? projectName : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                         </div>
                         <div className={styles.dataContainer}>
+                            <h2>Tipo de projeto:</h2>
+                            <p>{projectType.trim() !== "undefined" ? projectType : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                        </div>
+                        <div className={styles.dataContainer}>
                             <h2>Descrição do projeto:</h2>
                             <p>{projectDescription.trim() !== "" ? projectDescription : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                         </div>
@@ -558,11 +716,11 @@ const NewProject = () => {
                             <>
                                 <div className={styles.dataContainer}>
                                     <h2>Linguagem usada no frontend:</h2>
-                                    <p>{projectFrontendLanguage.trim() !== "" ? projectFrontendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectFrontendLanguage !== 0 ? projectFrontendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                                 <div className={styles.dataContainer}>
                                     <h2>Repositório do frontend:</h2>
-                                    <p>{projectFrontendRepository.trim() !== "" ? projectFrontendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectFrontendRepository !== 0 ? projectFrontendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                             </>
                         ) : ''}
@@ -628,9 +786,16 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             {formsErrors && formsErrors.length === 0 ? (
-                                <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
+                                <>
+                                    {!loadingProject && (
+                                        <button className={styles.nextStep} onClick={() => handleSaveProject()}><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
+                                    )}
+                                    {loadingProject && (
+                                        <button className={`${styles.nextStep} ${styles.disabled}`} disabled><p>Cadastrando...</p><MdOutlineNavigateNext /></button>
+                                    )}
+                                </>
                             ) : (
-                                <button className={`${styles.nextStep} ${styles.disabled}`} disabled onClick={() => handleNextStep()}><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
+                                <button className={`${styles.nextStep} ${styles.disabled}`} disabled><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
                             )}
                             <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
                             <div className={styles.messages}>

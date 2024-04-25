@@ -1,5 +1,20 @@
 import { api, requestConfig } from '../utils/config'
 
+// Create project
+const createProject = async (data, token) => {
+    const config = requestConfig("POST", data, token, false)
+
+    try {
+        const res = await fetch(api + "/projects", config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // Get projects
 const getProjects = async (filters) => {
     const queryParams = new URLSearchParams(filters).toString();
@@ -32,6 +47,7 @@ const getProjectById = async (id, token) => {
 }
 
 const projectService = {
+    createProject,
     getProjects,
     getProjectById,
 }

@@ -9,6 +9,22 @@ const initialState = {
     loading: false,
 }
 
+// Create project
+export const createProject = createAsyncThunk(
+    "project/create",
+    async (project, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+        const data = await projectService.createProject(project, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 // Get projects
 export const getProjects = createAsyncThunk(
     "project/getprojects",
@@ -32,14 +48,31 @@ export const projectSlice = createSlice({
     name: "project",
     initialState,
     reducers: {
-        reset: (state) => {
+        resetMessage: (state) => {
             state.loading = false
             state.error = false
             state.success = false
+            state.message = null
         },
     },
     extraReducers: (builder) => {
         builder
+            .addCase(createProject.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(createProject.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.project = action.payload
+                state.message = "Projeto criado com sucesso!"
+            })
+            .addCase(createProject.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.project = {}
+            })
             .addCase(getProjects.pending, (state) => {
                 state.loading = true
                 state.error = false
@@ -63,5 +96,5 @@ export const projectSlice = createSlice({
     },
 })
 
-export const { reset } = projectSlice.actions
+export const { resetMessage } = projectSlice.actions
 export default projectSlice.reducer
