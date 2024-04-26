@@ -97,9 +97,9 @@ const NewLanguage = () => {
                                 })}
                             </div>
                         )}
-                        {errorLanguage && errorLanguage.length > 0 && (
+                        {errorLanguage && (
                             <div className={styles.messages}>
-                                <SystemStatusMessage type="error" msg={error} />
+                                <SystemStatusMessage type="error" msg={errorLanguage} />
                             </div>
                         )}
                         {messageLanguage && (

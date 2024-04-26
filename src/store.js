@@ -6,6 +6,7 @@ import languageReducer from './slices/languageSlice'
 import frameworkReducer from './slices/frameworkSlice'
 import databaseReducer from './slices/databaseSlice'
 import toolReducer from './slices/toolSlice'
+import interpersonalSkillReducer from './slices/interpersonalSkillsSlice'
 
 export const store = configureStore({
     reducer: {
@@ -15,5 +16,6 @@ export const store = configureStore({
         framework: frameworkReducer,
         database: databaseReducer,
         tool: toolReducer,
+        interpersonalSkill: interpersonalSkillReducer,
     },
 })

@@ -1,11 +1,11 @@
 import { api, requestConfig } from '../utils/config'
 
-// Create a tool
-const createTool = async (data, token) => {
+// Create a interpersonal skill
+const createInterpersonalSkill = async (data, token) => {
     const config = requestConfig("POST", data, token, false)
 
     try {
-        const res = await fetch(api + "/tools", config)
+        const res = await fetch(api + "/interpersonal-skills", config)
             .then((res) => res.json())
             .catch((err) => err)
 
@@ -15,12 +15,12 @@ const createTool = async (data, token) => {
     }
 }
 
-// Get tools
-const getTools = async () => {
+// Get interpersonal skills
+const getInterpersonalSkills = async () => {
     const config = requestConfig("GET", null)
 
     try {
-        const res = await fetch(api + "/tools", config)
+        const res = await fetch(api + "/interpersonal-skills", config)
             .then((res) => res.json())
             .catch((err) => err)
 
@@ -30,9 +30,9 @@ const getTools = async () => {
     }
 }
 
-const toolService = {
-    createTool,
-    getTools,
+const interpersonalSkillService = {
+    createInterpersonalSkill,
+    getInterpersonalSkills,
 }
 
-export default toolService
+export default interpersonalSkillService

@@ -9,6 +9,23 @@ const initialState = {
     loading: false,
 }
 
+// Create a tool
+export const createTool = createAsyncThunk(
+    "tool/create",
+    async (tool, thunkAPI) => {
+
+        const token = thunkAPI.getState().auth.user.token
+        const data = await toolService.createTool(tool, token)
+
+        // Check for errors
+        if (data.error) {
+            return thunkAPI.rejectWithValue(data.error)
+        }
+
+        return data
+    }
+)
+
 // Get tools
 export const getTools = createAsyncThunk(
     "tool/gettools",
@@ -23,14 +40,31 @@ export const toolSlice = createSlice({
     name: "tool",
     initialState,
     reducers: {
-        reset: (state) => {
+        resetMessage: (state) => {
             state.loading = false
             state.error = false
             state.success = false
+            state.message = null
         },
     },
     extraReducers: (builder) => {
         builder
+            .addCase(createTool.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(createTool.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.tool = action.payload
+                state.message = "Linguagem cadastrada com sucesso!"
+            })
+            .addCase(createTool.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.tool = {}
+            })
             .addCase(getTools.pending, (state) => {
                 state.loading = true
                 state.error = false
@@ -44,5 +78,5 @@ export const toolSlice = createSlice({
     },
 })
 
-export const { reset } = toolSlice.actions
+export const { resetMessage } = toolSlice.actions
 export default toolSlice.reducer
