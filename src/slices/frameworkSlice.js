@@ -18,8 +18,8 @@ export const createFramework = createAsyncThunk(
         const data = await frameworkService.createFramework(framework, token)
 
         // Check for errors
-        if (data.errors) {
-            return thunkAPI.rejectWithValue(data.errors[0])
+        if (data.error) {
+            return thunkAPI.rejectWithValue(data.error)
         }
 
         return data

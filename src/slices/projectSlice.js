@@ -17,8 +17,8 @@ export const createProject = createAsyncThunk(
         const data = await projectService.createProject(project, token)
 
         // Check for errors
-        if (data.errors) {
-            return thunkAPI.rejectWithValue(data.errors[0])
+        if (data.error) {
+            return thunkAPI.rejectWithValue(data.error)
         }
 
         return data

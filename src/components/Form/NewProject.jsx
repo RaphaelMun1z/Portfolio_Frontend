@@ -446,7 +446,7 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             {formSteps[0].errors.length > 0 && (
                                 <div className={styles.messages}>
                                     {formSteps[0].errors.map((error, index) => (
@@ -598,7 +598,7 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             {formSteps[1].errors.length > 0 && (
                                 <div className={styles.messages}>
                                     {formSteps[1].errors.map((error, index) => (
@@ -636,7 +636,7 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             {formSteps[2].errors.map((error, index) => (
                                 <SystemStatusMessage type="error" msg={error} key={index} />
                             ))}
@@ -675,7 +675,7 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             {formSteps[3].errors.map((error, index) => (
                                 <SystemStatusMessage type="error" msg={error} key={index} />
                             ))}
@@ -715,7 +715,7 @@ const NewProject = () => {
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             {formSteps[4].errors.map((error, index) => (
                                 <SystemStatusMessage type="error" msg={error} key={index} />
                             ))}
@@ -830,7 +830,7 @@ const NewProject = () => {
                             ) : (
                                 <button className={`${styles.nextStep} ${styles.disabled}`} disabled><p>Confirmar e Cadastrar</p><MdOutlineNavigateNext /></button>
                             )}
-                            <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
+                            <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                             <div className={styles.messages}>
                                 {formsErrors && formsErrors.length > 0 && (
                                     <>

@@ -18,8 +18,8 @@ export const createLanguage = createAsyncThunk(
         const data = await languageService.createLanguage(language, token)
 
         // Check for errors
-        if (data.errors) {
-            return thunkAPI.rejectWithValue(data.errors[0])
+        if (data.error) {
+            return thunkAPI.rejectWithValue(data.error)
         }
 
         return data
