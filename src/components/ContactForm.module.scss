@@ -53,6 +53,89 @@ form {
     width: fit-content;
     height: fit-content;
     gap: 30px;
+
+    .footer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: .5em;
+
+        button,
+        .cancel {
+            display: flex;
+            font-size: 15pt;
+            width: 100%;
+            height: fit-content;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            padding: .5em 2em;
+            border: none;
+            transition: all .1s ease-in-out;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            transition: all .1s ease-in-out;
+
+            &:hover {
+                opacity: .5;
+                transition: all .1s ease-in-out;
+            }
+
+            &.submit {
+                background-color: rgba(254, 135, 0, 255);
+            }
+
+            &.cancel {
+                background-color: red;
+            }
+
+            &.nextStep {
+                background-color: limegreen;
+
+                svg {
+                    font-size: 25pt;
+                }
+
+                &.disabled {
+                    opacity: .5;
+                    cursor: no-drop;
+                }
+            }
+        }
+
+        .messages {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            gap: .5em;
+            margin-top: .5em;
+        }
+
+        .auxErrorMessage {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 100%;
+            border: 3px solid rgba(254, 135, 0, 255);
+            border-radius: 10px;
+            padding: 1em;
+            gap: .3em;
+
+            .title {
+                color: rgba(254, 135, 0, 255);
+                font-weight: 600;
+                margin-bottom: .5em;
+                font-size: 14pt;
+            }
+        }
+    }
 }
 
 form>h1 {
@@ -95,6 +178,24 @@ form>button:hover {
     width: 100%;
     height: fit-content;
     gap: 5px;
+
+    select {
+        position: relative;
+        display: flex;
+        font-size: 14pt;
+        width: 100%;
+        height: fit-content;
+        border-radius: 10px;
+        border: 1px solid #999;
+        padding: 0.5em;
+        background-color: #f2f2f2;
+        color: #222;
+    }
+
+    .noData{
+        color: #222;
+        font-size: 12pt;
+    }
 }
 
 .inputGroup label {

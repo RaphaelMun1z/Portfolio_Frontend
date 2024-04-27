@@ -1,21 +1,43 @@
 import styles from './DashboardItems.module.scss'
 
-import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
-import { RiSearch2Line, RiSendPlaneLine  } from "react-icons/ri";
+// Hooks
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getContactForms } from '../../slices/contactSlice';
+
+// Icons
+import { FaRegEye } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+import { RiSearch2Line } from "react-icons/ri";
+
+import { Link } from 'react-router-dom'
 
 const ContactFormsManager = () => {
-  const linhas = Array.from({ length: 10 }, (_, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>Exemplo {index + 1}</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td><th className={`${styles.actionTh} ${styles.view}`}><RiSendPlaneLine /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
-    </tr>
-  ));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  const dispatch = useDispatch()
+
+  const { contactForms, loading: contactFormLoading } = useSelector((state) => state.contact)
+
+  useEffect(() => {
+    dispatch(getContactForms())
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -44,17 +66,29 @@ const ContactFormsManager = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Título</th>
               <th>Assunto</th>
               <th>Nome</th>
+              <th>E-mail</th>
               <th>Criado em</th>
-              <th>Status</th>
-              <th className={styles.headActionTh}>Responder</th>
+              <th className={styles.headActionTh}>Visualizar</th>
               <th className={styles.headActionTh}>Deletar</th>
             </tr>
           </thead>
           <tbody>
-            {linhas}
+            {!contactFormLoading && contactForms && contactForms.length === 0 && (
+              <p className={styles.noData}>Não há formulários cadastrados.</p>
+            )}
+            {!contactFormLoading && contactForms && contactForms.length > 0 && contactForms.map((form) => (
+              <tr key={form.id}>
+                <td>{form.id}</td>
+                <td>{form.FormSubject.subject}</td>
+                <td>{form.personName}</td>
+                <td>{form.email}</td>
+                <td>{formatDate(form.createdAt)}<br />{formatTime(form.createdAt)}</td>
+                <td><th className={`${styles.actionTh} ${styles.view}`}><Link to={``}><FaRegEye /></Link></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

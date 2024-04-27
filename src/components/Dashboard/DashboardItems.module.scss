@@ -141,6 +141,11 @@
             border-collapse: separate;
             border-spacing: 0;
 
+            .noData {
+                color: #222;
+                font-size: 12pt;
+            }
+
             thead {
                 background-color: rgb(254, 135, 0);
 

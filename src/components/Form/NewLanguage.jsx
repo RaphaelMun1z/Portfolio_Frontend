@@ -56,8 +56,8 @@ const NewLanguage = () => {
 
         setName("")
         setProficiency(0)
+        
         setInternErrors([])
-
         resetComponentMessage()
     }
 
