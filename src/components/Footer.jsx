@@ -3,7 +3,22 @@ import styles from './Footer.module.css'
 
 import { Link } from "react-router-dom";
 
+// Hooks
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getSocialMedia } from '../slices/socialMediaSlice'
+
 const Footer = () => {
+    const dispatch = useDispatch()
+
+    const { socialMedia, loading: socialMediaLoading } = useSelector((state) => state.socialMedia)
+
+    useEffect(() => {
+        dispatch(getSocialMedia())
+    }, [])
+
     return (
         <footer>
             <div className={styles.insideFooter}>
@@ -28,12 +43,24 @@ const Footer = () => {
                 <div className={styles.listsContainer}>
                     <h1>Redes Sociais</h1>
                     <ul>
-                        <li><div className='skeleton' style={{ width: '150px', height: '25px' }}></div></li>
-                        <li><div className='skeleton' style={{ width: '150px', height: '25px', marginTop: '5px' }}></div></li>
-                        <li><div className='skeleton' style={{ width: '150px', height: '25px', marginTop: '5px' }}></div></li>
-                        {/* <li>Linkedin</li>
-                        <li>Github</li>
-                        <li>Instagram</li> */}
+                        {socialMediaLoading && (
+                            <>
+                                <li><div className='skeleton' style={{ width: '150px', height: '25px' }}></div></li>
+                                <li><div className='skeleton' style={{ width: '150px', height: '25px', marginTop: '5px' }}></div></li>
+                                <li><div className='skeleton' style={{ width: '150px', height: '25px', marginTop: '5px' }}></div></li>
+                            </>
+                        )}
+                        {!socialMediaLoading && socialMedia && socialMedia.linkedin && (
+                            <li><Link to={socialMedia.linkedin}>Linkedin</Link></li>
+                        )}
+
+                        {!socialMediaLoading && socialMedia && socialMedia.github && (
+                            <li><Link to={socialMedia.github}>Github</Link></li>
+                        )}
+
+                        {!socialMediaLoading && socialMedia && socialMedia.instagram && (
+                            <li><Link to={socialMedia.instagram}>Instagram</Link></li>
+                        )}
                     </ul>
                 </div>
             </div>

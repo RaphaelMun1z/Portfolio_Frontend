@@ -11,6 +11,7 @@ import contactReducer from './slices/contactSlice'
 import formSubjectReducer from './slices/formSubjectSlice'
 import faqReducer from './slices/faqSlice'
 import logReducer from './slices/logSlice'
+import socialMediaReducer from './slices/socialMediaSlice'
 
 export const store = configureStore({
     reducer: {
@@ -25,5 +26,6 @@ export const store = configureStore({
         formSubject: formSubjectReducer,
         faq: faqReducer,
         log: logReducer,
+        socialMedia: socialMediaReducer,
     },
 })

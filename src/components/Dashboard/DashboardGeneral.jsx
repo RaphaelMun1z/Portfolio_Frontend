@@ -1,5 +1,6 @@
 import styles from './DashboardGeneral.module.scss'
 
+// Hooks
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -34,7 +34,7 @@ const ContactForm = ({ user }) => {
             scrollTrigger: {
                 trigger: testimonialsElements,
                 scrub: true,
-                start: "top 800px",
+                start: "top 400px",
                 end: "bottom 1000px",
             }
         })
