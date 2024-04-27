@@ -1,4 +1,10 @@
+// Hooks
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './hooks/useAuth';
+import { useDispatch } from 'react-redux'
+
+// Redux
+import { createLog } from './slices/logSlice';
 
 // Components
 import Header from './components/Header';
@@ -34,11 +40,9 @@ import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
 import Loading from './components/Loading';
 
-// Hooks
-import { useAuth } from './hooks/useAuth';
-
 function App() {
   const { auth, loading } = useAuth()
+  const dispatch = useDispatch()
 
   if (loading) {
     return <Loading />
@@ -60,6 +64,17 @@ function App() {
     );
   };
 
+  const isFirstVisit = localStorage.getItem('isFirstVisit');
+
+  if (!isFirstVisit) {
+    const log = {
+      type: "Access",
+    }
+
+    dispatch(createLog(log))
+    localStorage.setItem('isFirstVisit', true);
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -77,7 +92,7 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/orcamento" element={<Budget />} />
           <Route path="/certificacoes" element={<Certifications />} />
-          <Route path="/login" element={auth ? <Navigate to="/adm/painel" /> : <Login />} />
+          <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
 
           {/* ADM Routes */}
           <Route path="/adm/painel/:page" element={wrapPrivateRoute(<Dashboard />)} />

@@ -7,13 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from '../../slices/projectSlice'
 import { getLanguages } from '../../slices/languageSlice';
 import { getFrameworks } from '../../slices/frameworkSlice';
-
-import DashboardGraphic from '../DashboardGraphic';
+import { getLogs } from '../../slices/logSlice';
+import { getContactForms } from '../../slices/contactSlice';
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { FaCode } from "react-icons/fa";
 import { GiGears } from "react-icons/gi";
 import { RiSearchEyeLine } from "react-icons/ri";
+
+import ProjectsGraphic from '../ProjectsGraphic';
+import LogAndFormGraphic from '../LogAndFormGraphic';
 
 const DashboardGeneral = () => {
     const dispatch = useDispatch()
@@ -21,11 +24,15 @@ const DashboardGeneral = () => {
     const { projects, loading: projectLoading } = useSelector((state) => state.project)
     const { languages, loading: languageLoading } = useSelector((state) => state.language)
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+    const { logs, loading: logLoading } = useSelector((state) => state.log)
+    const { contactForms, loading: contactFormsLoading } = useSelector((state) => state.contact)
 
     useEffect(() => {
         dispatch(getProjects())
         dispatch(getLanguages())
         dispatch(getFrameworks())
+        dispatch(getLogs())
+        dispatch(getContactForms())
     }, [])
 
     return (
@@ -80,23 +87,39 @@ const DashboardGeneral = () => {
                             <RiSearchEyeLine />
                         </div>
                     </div>
-                    <div className='skeleton' style={{ marginTop: '10px' }}></div>
-                    {/* <div className={styles.data}>5</div> */}
+                    {logLoading && (
+                        <div className='skeleton' style={{ marginTop: '10px' }}></div>
+                    )}
+                    {!logLoading && logs && (
+                        <div className={styles.data}>{logs.length}</div>
+                    )}
                 </div>
             </div>
             <div className={styles.graphicsContainer}>
                 <div className={styles.mainGraphicsDivision}>
-                    <div className={styles.graphic}>
-                        <div className='skeleton' style={{ margin: '1em 2em', minHeight: '400px' }}></div>
-                        {/* <DashboardGraphic graphicType="bar" /> */}
-                    </div>
-                    <div className={styles.graphic}>
-                        <div className='skeleton' style={{ margin: '1em 2em', minHeight: '400px' }}></div>
-                        {/* < DashboardGraphic graphicType="line" /> */}
-                    </div>
+                    {logLoading && contactFormsLoading && (
+                        <div className={styles.graphic}>
+                            <div className='skeleton' style={{ margin: '1em', width: '100%', height: '280px' }}></div>
+                        </div>
+                    )}
+                    {!logLoading && !contactFormsLoading && logs && contactForms && (
+                        <div className={styles.graphic}>
+                            <LogAndFormGraphic logData={logs} formData={contactForms} />
+                        </div>
+                    )}
+
+                    {projectLoading && (
+                        <div className={styles.graphic}>
+                            <div className='skeleton' style={{ margin: '1em', width: '100%', height: '280px' }}></div>
+                        </div>
+                    )}
+                    {!projectLoading && projects && (
+                        <div className={styles.graphic}>
+                            <ProjectsGraphic projectsData={projects} />
+                        </div>
+                    )}
                 </div>
-                <div className={styles.secondGraphicsDivision}></div>
-            </div>
+            </div >
         </>
     )
 }

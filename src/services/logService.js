@@ -16,8 +16,8 @@ const createLog = async (data) => {
 }
 
 // Get logs
-const getLogs = async () => {
-    const config = requestConfig("GET", null)
+const getLogs = async (token) => {
+    const config = requestConfig("GET", null, token)
 
     try {
         const res = await fetch(api + "/logs", config)

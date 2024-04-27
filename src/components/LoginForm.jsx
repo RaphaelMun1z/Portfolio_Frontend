@@ -26,8 +26,6 @@ const LoginForm = () => {
             password
         }
 
-        console.log(user)
-
         dispatch(login(user))
     }
 

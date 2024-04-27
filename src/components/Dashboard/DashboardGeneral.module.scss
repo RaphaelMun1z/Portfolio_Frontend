@@ -76,16 +76,15 @@
     .mainGraphicsDivision {
         position: relative;
         display: flex;
-        flex-wrap: wrap;
-        width: 75%;
+        flex-wrap: nowrap;
+        width: 100%;
         height: fit-content;
         gap: 1em;
-        padding: 0 1em 0 0;
 
         .graphic {
             position: relative;
             display: flex;
-            width: 100%;
+            width: 50%;
             height: fit-content;
             padding: 1em;
             background-color: #fff;
@@ -93,15 +92,5 @@
             justify-content: center;
             align-items: center;
         }
-    }
-
-    .secondGraphicsDivision {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        width: 25%;
-        height: auto;
-        background-color: #fff;
-        border-radius: 20px;
     }
 }

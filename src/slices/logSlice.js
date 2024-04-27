@@ -9,7 +9,7 @@ const initialState = {
     loading: false,
 }
 
-// Create a faq
+// Create a log
 export const createLog = createAsyncThunk(
     "log/create",
     async (log, thunkAPI) => {
@@ -27,8 +27,9 @@ export const createLog = createAsyncThunk(
 // Get logs
 export const getLogs = createAsyncThunk(
     "log/getlogs",
-    async () => {
-        const data = await logService.getLogs()
+    async (_, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+        const data = await logService.getLogs(token)
 
         return data
     }
