@@ -1,5 +1,12 @@
 import styles from './DashboardItems.module.scss'
 
+// Hooks
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux
+import { getFaqs } from '../../slices/faqSlice';
+
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
@@ -7,17 +14,29 @@ import { RiSearch2Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 
 const FaqManager = () => {
-  const linhas = Array.from({ length: 10 }, (_, index) => (
-    <tr key={index}>
-      <td>{index + 1}</td>
-      <td>Exemplo {index + 1}</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td>Exemplo</td>
-      <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-      <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
-    </tr>
-  ));
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
+  const dispatch = useDispatch()
+
+  const { faqs, loading: faqLoading } = useSelector((state) => state.faq)
+
+  useEffect(() => {
+    dispatch(getFaqs())
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -54,7 +73,20 @@ const FaqManager = () => {
             </tr>
           </thead>
           <tbody>
-            {linhas}
+            {!faqLoading && faqs && faqs.length === 0 && (
+              <p className={styles.noData}>Não há formulários cadastrados.</p>
+            )}
+            {!faqLoading && faqs && faqs.length > 0 && faqs.map((faq) => (
+              <tr key={faq.id}>
+                <td>{faq.id}</td>
+                <td>{faq.question}</td>
+                <td>{faq.answer}</td>
+                <td>{formatDate(faq.createdAt)}<br />{formatTime(faq.createdAt)}</td>
+                <td>{formatDate(faq.updatedAt)}<br />{formatTime(faq.updatedAt)}</td>
+                <td><th className={`${styles.actionTh} ${styles.edit}`}><Link to={``}><FaRegEdit /></Link></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

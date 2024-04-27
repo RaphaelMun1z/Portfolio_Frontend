@@ -9,6 +9,7 @@ import toolReducer from './slices/toolSlice'
 import interpersonalSkillReducer from './slices/interpersonalSkillsSlice'
 import contactReducer from './slices/contactSlice'
 import formSubjectReducer from './slices/formSubjectSlice'
+import faqReducer from './slices/faqSlice'
 
 export const store = configureStore({
     reducer: {
@@ -21,5 +22,6 @@ export const store = configureStore({
         interpersonalSkill: interpersonalSkillReducer,
         contact: contactReducer,
         formSubject: formSubjectReducer,
+        faq: faqReducer,
     },
 })
