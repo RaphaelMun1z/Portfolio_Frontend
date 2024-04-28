@@ -56,13 +56,13 @@ export const useIcon = (iconName) => {
     };
 
     const toolIcons = {
-        Github: <FaGithub />,
-        Docker: <FaDocker />,
-        Git: <FaGitAlt />,
-        Slack: <FaSlack />,
-        VScode: <SiVisualstudiocode />,
-        Postman: <SiPostman />,
-        Jira: <SiJirasoftware />,
+        Github: <FaGithub className={styles.Github} />,
+        Docker: <FaDocker className={styles.Docker} />,
+        Git: <FaGitAlt className={styles.Git} />,
+        Slack: <FaSlack className={styles.Slack} />,
+        VScode: <SiVisualstudiocode className={styles.VScode} />,
+        Postman: <SiPostman className={styles.Postman} />,
+        Jira: <SiJirasoftware className={styles.Jira} />,
     };
 
     const stackIcons = {

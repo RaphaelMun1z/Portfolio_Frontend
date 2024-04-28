@@ -1,0 +1,51 @@
+.techCard {
+    position: relative;
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    background-color: #fff;
+    flex: 0 1 calc((100%/3) - 1%);
+    border-radius: 20px;
+
+    div {
+        flex: 1 1 50%;
+        width: 50%;
+        height: auto;
+    }
+
+    .iconContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 3em;
+
+        .insideIconContainer {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: 150px;
+            }
+
+            p {
+                font-size: 20pt;
+                margin-top: 5px;
+                color: orange;
+                font-weight: 700;
+                text-align: center;
+            }
+        }
+    }
+}

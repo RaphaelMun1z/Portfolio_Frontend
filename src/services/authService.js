@@ -1,5 +1,8 @@
 import { api, requestConfig } from '../utils/config'
 
+// Cookie
+import cookie from 'js-cookie'
+
 const login = async (data) => {
     const config = requestConfig("POST", data)
 
@@ -9,7 +12,9 @@ const login = async (data) => {
             .catch((err) => err)
 
         if (res) {
-            localStorage.setItem('user', JSON.stringify(res));
+            cookie.set("user", JSON.stringify(res), {
+                expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
+            })
         }
 
         return res
@@ -19,7 +24,7 @@ const login = async (data) => {
 }
 
 const logout = () => {
-    localStorage.removeItem("user")
+    cookie.remove("user")
 }
 
 const authService = {

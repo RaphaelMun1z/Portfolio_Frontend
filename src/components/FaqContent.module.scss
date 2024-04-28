@@ -45,15 +45,14 @@ section {
                 width: 100%;
                 min-height: 120px;
                 height: fit-content;
-                border-radius: 10px;
-                background-color: rgba(254, 135, 0, 255);
+                border-bottom: 1px solid #ffffff78;
                 padding: 1em 2em 1em 1em;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
                 transition: all .1s ease-in-out;
 
-                &:hover{
+                &:hover {
                     opacity: .8;
                     transition: all .1s ease-in-out;
                 }
@@ -70,13 +69,13 @@ section {
 
                     p {
                         font-size: 20pt;
-                        font-weight: 600;
+                        font-weight: 400;
                         color: #fff;
                         max-width: 90%;
                     }
 
                     svg {
-                        color: #fff;
+                        color: #ffffff78;;
                         font-size: 20pt;
                     }
                 }
@@ -89,9 +88,35 @@ section {
                     align-items: center;
                     font-size: 214t;
                     font-weight: 300;
-                    color: #fff;
+                    color: #e1e1e1;
                 }
             }
+        }
+    }
+
+    .faqLink {
+        font-size: 13pt;
+        width: fit-content;
+        height: fit-content;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 600;
+        background-color: rgba(254, 135, 0, 255);
+        padding: .5em 2em;
+        border: 2px solid #fff;
+        transition: all .1s ease-in-out;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        margin: auto;
+        z-index: 10;
+
+        svg {
+            font-size: 17pt;
         }
     }
 }

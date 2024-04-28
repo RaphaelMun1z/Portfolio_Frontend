@@ -5,9 +5,14 @@
     flex-direction: row !important;
     height: auto;
     gap: 1em;
+    margin-left: inherit !important;
 
     .swiper-wrapper {
         height: auto !important;
+    }
+
+    .swiper-slide {
+        min-width: 532px;
     }
 
     .swiper-pagination {

@@ -4,7 +4,7 @@ import Skills from '../components/Skills';
 import ProjectsTypeMenu from '../components/ProjectsTypeMenu';
 import Certifications from './Certifications';
 import Testimonials from './Testimonials';
-import Faq from './Faq';
+import FaqContent from '../components/FaqContent';
 import ContactForm from '../components/ContactForm';
 
 const HomePage = () => {
@@ -16,7 +16,7 @@ const HomePage = () => {
             <ProjectsTypeMenu />
             <Certifications />
             <Testimonials />
-            <Faq />
+            <FaqContent button="true" />
             <ContactForm />
         </>
     )

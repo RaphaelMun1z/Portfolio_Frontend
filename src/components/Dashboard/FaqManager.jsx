@@ -74,7 +74,7 @@ const FaqManager = () => {
           </thead>
           <tbody>
             {!faqLoading && faqs && faqs.length === 0 && (
-              <p className={styles.noData}>Não há formulários cadastrados.</p>
+              <p className={styles.noData}>Não há faqs cadastradas.</p>
             )}
             {!faqLoading && faqs && faqs.length > 0 && faqs.map((faq) => (
               <tr key={faq.id}>

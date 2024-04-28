@@ -27,8 +27,8 @@ const TestimonialsSection = () => {
             scrollTrigger: {
                 trigger: testimonialsElements,
                 scrub: true,
-                start: "top 700px",
-                end: "bottom 300px",
+                start: "top 500px",
+                end: "bottom 100px",
             }
         })
             .fromTo(testimonialsElements,

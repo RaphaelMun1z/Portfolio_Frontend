@@ -1,0 +1,86 @@
+section {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    padding: 2em 0em;
+    gap: 3em 0;
+
+    .header {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+        margin: 1em auto;
+        color: #fff;
+
+        h1 {
+            font-size: 45pt;
+        }
+    }
+
+    .contentContainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: fit-content;
+        gap: 2em;
+
+        .faqItem {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 100%;
+            height: fit-content;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #aaaaaa72;
+            gap: .5em;
+
+            .question {
+                position: relative;
+                display: inline-flex;
+                width: fit-content;
+                height: fit-content;
+                align-items: center;
+                gap: .5em;
+
+                h2 {
+                    font-size: 22pt;
+                    color: #fff;
+                }
+
+                .number {
+                    position: relative;
+                    display: flex;
+                    width: 50px;
+                    height: 50px;
+                    color: #fff;
+                    color: rgb(254, 135, 0);
+                    font-size: 22pt;
+                    border: 2px solid rgb(254, 135, 0);
+                    border-radius: 10px;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            p {
+                font-size: 14pt;
+                font-weight: 300;
+                color: #e1e1e1;
+                max-width: 50%;
+            }
+        }
+    }
+
+    .noData {
+        color: #aaa;
+        font-size: 12pt;
+        margin: 0 auto;
+    }
+}

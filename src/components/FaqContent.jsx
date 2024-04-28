@@ -1,5 +1,7 @@
 import styles from './FaqContent.module.scss'
 
+// Icons
+import { IoIosArrowForward } from "react-icons/io";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 
 import { useState } from 'react';
@@ -8,7 +10,9 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const FaqContent = () => {
+import { Link } from 'react-router-dom'
+
+const FaqContent = ({ button = false }) => {
     const el = useRef(null);
     const tl = useRef(null);
 
@@ -21,8 +25,8 @@ const FaqContent = () => {
             scrollTrigger: {
                 trigger: testimonialsElements,
                 scrub: true,
-                start: "top 900px",
-                end: "bottom 600px",
+                start: "top 400px",
+                end: "bottom 200px",
             }
         })
             .fromTo(testimonialsElements, // Selecione os elementos
@@ -60,22 +64,6 @@ const FaqContent = () => {
             "pergunta": "Você possui experiência em projetos semelhantes ao meu?",
             "resposta": "Sim, tenho experiência em uma variedade de projetos e estou confiante em minha capacidade de lidar com desafios similares ao seu. Posso compartilhar exemplos de trabalhos anteriores, se necessário."
         },
-        {
-            "pergunta": "Quais tecnologias você utiliza em seus projetos?",
-            "resposta": "Minhas habilidades técnicas incluem [lista de tecnologias], mas estou sempre disposto a aprender e utilizar novas tecnologias, conforme necessário para atender às necessidades do projeto."
-        },
-        {
-            "pergunta": "Como é feito o pagamento pelos seus serviços?",
-            "resposta": "Normalmente, utilizo métodos de pagamento como [lista de métodos de pagamento], e o pagamento é geralmente dividido em marcos ou etapas específicas do projeto, conforme acordado entre ambas as partes."
-        },
-        {
-            "pergunta": "Posso fazer alterações no projeto durante o desenvolvimento?",
-            "resposta": "Sim, estou aberto a fazer alterações no projeto durante o desenvolvimento, desde que as alterações estejam dentro do escopo acordado inicialmente. Quaisquer alterações significativas podem afetar o prazo e o custo do projeto."
-        },
-        {
-            "pergunta": "Como garantir a segurança e confidencialidade dos meus dados?",
-            "resposta": "Levo a segurança e a confidencialidade dos dados dos clientes muito a sério. Implemento medidas de segurança rigorosas e estou disposto a assinar acordos de confidencialidade, se necessário, para garantir a proteção dos seus dados."
-        }
     ])
 
     const [expandedItems, setExpandedItems] = useState(Array(faq.length).fill(false));
@@ -93,7 +81,7 @@ const FaqContent = () => {
             </div>
             <div className={styles.contentContainer} >
                 <div className={styles.division}>
-                    {faq.slice(0, 5).map((f, index) => (
+                    {faq.slice(0, 3).map((f, index) => (
                         <div className={`${styles.item} item`} key={index} onClick={() => handleFaq(index)}>
                             <div className={styles.question}>
                                 <p>{f.pergunta}</p>
@@ -110,7 +98,7 @@ const FaqContent = () => {
                     ))}
                 </div>
                 <div className={styles.division}>
-                    {faq.slice(5, 10).map((f, index) => (
+                    {faq.slice(3, 8).map((f, index) => (
                         <div className={`${styles.item} item`} key={index} onClick={() => handleFaq(index + 5)}>
                             <div className={styles.question}>
                                 <p>{f.pergunta}</p>
@@ -127,6 +115,9 @@ const FaqContent = () => {
                     ))}
                 </div>
             </div>
+            {button && (
+                <Link to="/faq" className={styles.faqLink}>FAQ completa<IoIosArrowForward /></Link>
+            )}
         </section>
     )
 }

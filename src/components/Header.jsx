@@ -42,7 +42,7 @@ const Header = () => {
                         <li>
                             <NavLink className={({ isActive }) =>
                                 isActive ? `${styles.active}` : ''
-                            } to="/">Home</NavLink>
+                            } to="/">Início</NavLink>
                         </li>
                         <li>
                             <NavLink className={({ isActive }) =>
@@ -75,6 +75,13 @@ const Header = () => {
                                     <p onClick={handleLogout}>Sair</p>
                                 </li>
                             </>
+                        )}
+                        {!auth && (
+                            <li>
+                                <NavLink className={({ isActive }) =>
+                                    isActive ? `${styles.active}` : `${styles.loginButton}`
+                                } to="/login">Acessar</NavLink>
+                            </li>
                         )}
                     </ul>
                 </div>

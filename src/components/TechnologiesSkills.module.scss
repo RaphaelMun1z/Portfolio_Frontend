@@ -12,10 +12,12 @@ section {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     margin: 1em auto;
     color: #fff;
+    justify-content: center;
+    align-items: center;
 }
 
 .header h1 {
@@ -29,6 +31,24 @@ section {
     width: 100%;
     height: fit-content;
     gap: 30px 1.5%;
+
+    .containerTech{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: inherit;
+        height: fit-content;
+
+        h1{
+            margin-bottom: .5em;
+        }
+    }
+
+    .noData{
+        width: 100%;
+        color: #aaa;
+        font-size: 20pt;
+    }
 }
 
 .subTitle {

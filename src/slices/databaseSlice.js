@@ -4,6 +4,7 @@ import databaseService from "../services/databaseService";
 const initialState = {
     databases: [],
     database: null,
+    databaseUsage: null,
     error: false,
     success: false,
     loading: false,

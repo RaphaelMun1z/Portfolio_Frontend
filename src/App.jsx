@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth';
 import { useDispatch } from 'react-redux'
 
+// Cookie
+import cookie from "js-cookie"
+
 // Redux
 import { createLog } from './slices/logSlice';
 
@@ -64,7 +67,7 @@ function App() {
     );
   };
 
-  const isFirstVisit = localStorage.getItem('isFirstVisit');
+  const isFirstVisit = cookie.get('isFirstVisit');
 
   if (!isFirstVisit) {
     const log = {
@@ -72,7 +75,7 @@ function App() {
     }
 
     dispatch(createLog(log))
-    localStorage.setItem('isFirstVisit', true);
+    cookie.set("isFirstVisit", true)
   }
 
   return (
@@ -95,6 +98,7 @@ function App() {
           <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
 
           {/* ADM Routes */}
+          <Route path="/adm/painel" element={wrapPrivateRoute(<Dashboard />)} />
           <Route path="/adm/painel/:page" element={wrapPrivateRoute(<Dashboard />)} />
           <Route path="/adm/cadastrar/linguagem" element={wrapPrivateRoute(<NewLanguage />)} />
           <Route path="/adm/cadastrar/framework" element={wrapPrivateRoute(<NewFramework />)} />

@@ -18,6 +18,7 @@ import { createRoot } from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Stars } from '@react-three/drei'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Link } from 'react-router-dom';
 
 const scene = new THREE.Scene();
 
@@ -112,7 +113,7 @@ const LandingSection = () => {
                     <p>Olá,</p>
                     <h2>Me chamo <span>Raphael Muniz</span></h2>
                     <h6>Sou Desenvolvedor Full Stack React.js + Node.js</h6>
-                    <a href="/">Conheça meu trabalho<LuRocket /></a>
+                    <Link to="/projetos">Conheça meu trabalho<LuRocket /></Link>
                 </div>
             </div>
         </main>
