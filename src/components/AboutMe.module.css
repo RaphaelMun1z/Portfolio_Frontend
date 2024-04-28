@@ -117,7 +117,7 @@ section:hover .contentContainer .imageContainer img {
         height: fit-content;
         gap: .2em;
         padding-bottom: 1em;
-        border-bottom: 1px solid #fff;
+        border-bottom: 1px solid rgba(170, 170, 170, 0.4470588235);
 
         h1 {
             font-size: 16pt;
@@ -126,7 +126,7 @@ section:hover .contentContainer .imageContainer img {
 
         p {
             font-size: 12pt;
-            font-weight: 300;
+            font-weight: 200;
         }
     }
 }
