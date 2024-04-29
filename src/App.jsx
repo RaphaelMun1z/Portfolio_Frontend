@@ -23,6 +23,7 @@ import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
 import Faq from './pages/Faq';
 import Certifications from './pages/Certifications';
+import TechSinglePage from './components/TechSinglePage';
 import Login from './pages/Login';
 
 // Adm
@@ -95,6 +96,9 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/orcamento" element={<Budget />} />
           <Route path="/certificacoes" element={<Certifications />} />
+          <Route path="/linguagem/:id" element={<TechSinglePage type="language" />} />
+          <Route path="/framework/:id" element={<TechSinglePage type="framework" />} />
+          <Route path="/ferramenta/:id" element={<TechSinglePage type="tool" />} />
           <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
 
           {/* ADM Routes */}

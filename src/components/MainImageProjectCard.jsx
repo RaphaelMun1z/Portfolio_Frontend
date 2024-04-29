@@ -1,9 +1,11 @@
 import styles from './MainImageProjectCard.module.scss'
 
-const MainImageProjectCard = () => {
+import { uploads } from '../utils/config'
+
+const MainImageProjectCard = ({ image }) => {
     return (
         <div className={styles.image}>
-            <img src="https://i.pinimg.com/736x/0e/e1/d5/0ee1d58ac29d5cd77d167ee4b38da5f5.jpg" alt="" />
+            <img src={`${uploads}/projectsBanner/${image}`} alt="Banner" />
         </div>
     )
 }

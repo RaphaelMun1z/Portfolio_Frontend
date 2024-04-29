@@ -36,6 +36,15 @@ export const getTools = createAsyncThunk(
     }
 )
 
+export const getToolById = createAsyncThunk(
+    "tool/gettool",
+    async (id) => {
+        const data = await toolService.getToolById(id)
+
+        return data
+    }
+)
+
 export const toolSlice = createSlice({
     name: "tool",
     initialState,
@@ -74,6 +83,16 @@ export const toolSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.tools = action.payload
+            })
+            .addCase(getToolById.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(getToolById.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.tool = action.payload
             })
     },
 })

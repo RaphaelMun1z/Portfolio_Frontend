@@ -32,6 +32,8 @@ const NewProject = () => {
     const [projectName, setProjectName] = useState("")
     const [projectDescription, setProjectDescription] = useState("")
     const [projectType, setProjectType] = useState("undefined")
+    const [projectBannerImage, setProjectBannerImage] = useState(null)
+    const [previewBannerImage, setPreviewBannerImage] = useState("")
 
     // Step 1 - States
     const [projectStack, setProjectStack] = useState("")
@@ -143,6 +145,13 @@ const NewProject = () => {
                 formSteps[step].errors = formSteps[step].errors.filter(error => error !== "A descrição é obrigatória!");
             } else if (projectDescription.trim() === "") {
                 formSteps[step].errors.push("A descrição é obrigatória!");
+                errors += 1
+            }
+
+            if (projectBannerImage !== null) {
+                formSteps[step].errors = formSteps[step].errors.filter(error => error !== "O banner é obrigatório!");
+            } else if (projectBannerImage === null) {
+                formSteps[step].errors.push("O banner é obrigatório!");
                 errors += 1
             }
 
@@ -368,6 +377,14 @@ const NewProject = () => {
         setToolsArray(updatedToolsArray);
     }
 
+    const handleFile = (e) => {
+        const image = e.target.files[0]
+
+        setPreviewBannerImage(image)
+
+        setProjectBannerImage(image)
+    }
+
     useEffect(() => {
         const selectedToolsIds = toolsArray
             .filter(tool => tool.selected === 'yes')
@@ -375,14 +392,8 @@ const NewProject = () => {
         setProjectToolsArray(selectedToolsIds);
     }, [toolsArray]);
 
-    const handleSelectProjectBdd = (opt) => {
-        if (opt.target.value !== "invalid") {
-            setProjectBdd(opt.target.value)
-        }
-    }
-
     const handleSaveProject = () => {
-        const project = {
+        const projectData = {
             name: projectName,
             description: projectDescription,
             type: projectType,
@@ -399,11 +410,16 @@ const NewProject = () => {
             toolsIdArray: projectToolsArray,
             usedDatabase: projectUsedBdd,
             databaseId: projectBdd,
+            bannerImage: projectBannerImage,
         }
 
-        console.log(project)
+        const formData = new FormData()
 
-        dispatch(createProject(project))
+        const projectFormData = Object.keys(projectData).forEach((key) => {
+            formData.append(key, projectData[key])
+        })
+
+        dispatch(createProject(formData))
 
         resetComponentMessage()
     }
@@ -443,6 +459,14 @@ const NewProject = () => {
                                 <option value="EmbeddedProgramming">Programação Embarcada</option>
                             </select>
                         </label>
+
+                        <label>
+                            <p>Selecione o banner do projeto:</p>
+                            <input type="file" name="bannerImage" onChange={(e) => handleFile(e)} />
+                        </label>
+                        {previewBannerImage && (
+                            <img src={previewBannerImage} alt="Banner preview" />
+                        )}
 
                         <div className={styles.footer}>
                             <button className={styles.nextStep} onClick={() => handleNextStep()}><p>Avançar</p><MdOutlineNavigateNext /></button>
@@ -841,6 +865,12 @@ const NewProject = () => {
                                             ))}
                                         </div>
                                     </>
+                                )}
+                                {errorProject && (
+                                    <SystemStatusMessage type="error" msg={errorProject} />
+                                )}
+                                {messageProject && (
+                                    <SystemStatusMessage type="success" msg={messageProject} />
                                 )}
                             </div>
                         </div>

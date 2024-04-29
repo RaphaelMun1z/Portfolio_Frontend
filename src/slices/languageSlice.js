@@ -36,6 +36,15 @@ export const getLanguages = createAsyncThunk(
     }
 )
 
+export const getLanguageById = createAsyncThunk(
+    "language/getlanguage",
+    async (id) => {
+        const data = await languageService.getLanguageById(id)
+
+        return data
+    }
+)
+
 export const languageSlice = createSlice({
     name: "language",
     initialState,
@@ -74,6 +83,16 @@ export const languageSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.languages = action.payload
+            })
+            .addCase(getLanguageById.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(getLanguageById.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.language = action.payload
             })
     },
 })

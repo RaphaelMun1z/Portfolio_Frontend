@@ -12,7 +12,7 @@ const ProjectCard = ({ project }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageContainer}>
-        <MainImageProjectCard />
+        <MainImageProjectCard image={project.bannerImage} />
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.info}>

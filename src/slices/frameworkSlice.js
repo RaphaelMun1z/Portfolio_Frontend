@@ -36,6 +36,15 @@ export const getFrameworks = createAsyncThunk(
     }
 )
 
+export const getFrameworkById = createAsyncThunk(
+    "framework/getframework",
+    async (id) => {
+        const data = await frameworkService.getFrameworkById(id)
+
+        return data
+    }
+)
+
 export const frameworkSlice = createSlice({
     name: "framework",
     initialState,
@@ -74,6 +83,16 @@ export const frameworkSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.frameworks = action.payload
+            })
+            .addCase(getFrameworkById.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(getFrameworkById.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.framework = action.payload
             })
     },
 })

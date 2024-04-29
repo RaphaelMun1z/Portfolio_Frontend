@@ -7,7 +7,7 @@ import { FaLaptopCode, FaStar, FaCode } from "react-icons/fa";
 // Hooks
 import { useIcon } from '../hooks/useIcon'
 
-const TechnologyCard = ({name, usage}) => {
+const TechnologyCard = ({ name, usage }) => {
     return (
         <div className={styles.techCard}>
             <div className={styles.iconContainer}>
@@ -19,8 +19,9 @@ const TechnologyCard = ({name, usage}) => {
             <div className={styles.infoContainer}>
                 <div className={styles.insideInfoContainer}>
                     <div className={styles.generalInfo}>
-                        <h2>Projetos:</h2>
+                        <h2>Presente em</h2>
                         <p>{usage}<FaLaptopCode /></p>
+                        <h2>Projetos</h2>
                     </div>
                     <div className={styles.actions}>
                         <button>Ver Projetos<IoIosArrowForward /></button>

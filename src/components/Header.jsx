@@ -14,7 +14,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > 2000);
+            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > window.innerHeight);
         });
     }, []);
 

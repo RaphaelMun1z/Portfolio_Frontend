@@ -1,5 +1,7 @@
 import styles from './SingleProjectDetails.module.scss'
 
+import { uploads } from '../utils/config'
+
 // Icons
 import { GoStack, GoServer, GoTools, GoDatabase } from "react-icons/go";
 import { GrMysql } from "react-icons/gr"
@@ -43,6 +45,7 @@ import {
     SiSqlite,
     SiRedis
 } from "react-icons/si";
+import { IoCloudOfflineOutline } from "react-icons/io5";
 
 // Hooks
 import { useState, useEffect } from 'react';
@@ -51,6 +54,9 @@ import { useParams } from 'react-router-dom';
 
 // Redux
 import { getProjectById } from '../slices/projectSlice'
+import { getProjectImagesById } from '../slices/projectImageSlice'
+
+import { Link } from 'react-router-dom';
 
 const SingleProjectDetails = () => {
     const { id } = useParams()
@@ -58,9 +64,11 @@ const SingleProjectDetails = () => {
     const dispatch = useDispatch()
 
     const { project, loading, error, message } = useSelector((state) => state.project)
+    const { images, loading: imagesLoading } = useSelector((state) => state.projectImages)
 
     useEffect(() => {
         dispatch(getProjectById(id))
+        dispatch(getProjectImagesById(id))
     }, [dispatch, id])
 
     const toolIcons = {
@@ -135,8 +143,11 @@ const SingleProjectDetails = () => {
                         {loading && !project && (
                             <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                         )}
-                        {!loading && project && (
+                        {!loading && project && project.isHosted && (
                             <button className={styles.bug}>Visitar<FaExternalLinkAlt /></button>
+                        )}
+                        {!loading && project && !project.isHosted && (
+                            <button className={`${styles.bug} ${styles.notHosted}`}>Não hospedado<IoCloudOfflineOutline /></button>
                         )}
                         <div className={styles.repositories}>
                             <div className={styles.header}>
@@ -147,16 +158,16 @@ const SingleProjectDetails = () => {
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.ProjectFrontend && (
-                                        <button className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></button>
+                                    {!loading && project && project.fRepository && (
+                                        <a href={fRepository} className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                                 <div className={styles.repositoriesSection}>
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.ProjectBackend && (
-                                        <button className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></button>
+                                    {!loading && project && project.bRepository && (
+                                        <a href={bRepository} className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                             </div>
@@ -184,18 +195,18 @@ const SingleProjectDetails = () => {
                                 {!loading && project && (
                                     <>
                                         {project.ProjectFrontend && (
-                                            <div className={styles.technologyCard}>
+                                            <Link target='_blank' to={`/framework/${project.ProjectFrontend.Framework.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}>{languageIcons[project.ProjectFrontend.Framework.name] || <FaCode />}</div>
                                                 <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
                                                 <div className={styles.language}>{languageIcons[project.ProjectFrontend.Framework.Language.name] || <FaCode />}</div>
-                                            </div>
+                                            </Link>
                                         )}
                                         {project.ProjectBackend && (
-                                            <div className={styles.technologyCard}>
+                                            <Link target='_blank' to={`/framework/${project.ProjectBackend.Framework.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}>{languageIcons[project.ProjectBackend.Framework.name] || <FaCode />}</div>
                                                 <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
                                                 <div className={styles.language}>{languageIcons[project.ProjectBackend.Framework.Language.name] || <FaCode />}</div>
-                                            </div>
+                                            </Link>
                                         )}
                                     </>
                                 )}
@@ -210,18 +221,18 @@ const SingleProjectDetails = () => {
                                 {!loading && project && (
                                     <>
                                         {project.ProjectFrontend && (
-                                            <div className={styles.technologyCard}>
+                                            <Link target='_blank' to={`/linguagem/${project.ProjectFrontend.Language.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}><MdDesignServices /></div>
                                                 <div className={styles.name}><b>Frontend:</b><p>{project.ProjectFrontend.Language.name}</p></div>
                                                 <div className={styles.language}>{languageIcons[project.ProjectFrontend.Language.name] || <FaCode />}</div>
-                                            </div>
+                                            </Link>
                                         )}
                                         {project.ProjectBackend && (
-                                            <div className={styles.technologyCard}>
+                                            <Link target='_blank' to={`/linguagem/${project.ProjectBackend.Language.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}><GoServer /></div>
                                                 <div className={styles.name}><b>Backend:</b><p>{project.ProjectBackend.Language.name}</p></div>
                                                 <div className={styles.language}>{languageIcons[project.ProjectBackend.Language.name] || <FaCode />}</div>
-                                            </div>
+                                            </Link>
                                         )}
                                     </>
                                 )}
@@ -237,10 +248,10 @@ const SingleProjectDetails = () => {
                                     {!loading && project && project.ProjectTools.length > 0 && (
                                         <>
                                             {project.ProjectTools.map((ProjectTool) => (
-                                                <div className={`${styles.technologyCard} ${styles.toolsContainer}`} key={ProjectTool.id}>
+                                                <Link target='_blank' to={`/ferramenta/${ProjectTool.Tool.id}`} className={`${styles.technologyCard} ${styles.toolsContainer}`} key={ProjectTool.id}>
                                                     <div className={styles.icon}>{toolIcons[ProjectTool.Tool.name] || <FaCode />}</div>
                                                     <div className={styles.name}><p>{ProjectTool.Tool.name}</p></div>
-                                                </div>
+                                                </Link>
                                             ))}
                                         </>
                                     )}
@@ -268,20 +279,24 @@ const SingleProjectDetails = () => {
                 </div>
                 <div className={styles.images}>
                     <h3><AiFillPicture />Imagens do projeto:</h3>
-                    <div className='skeleton' style={{ width: '50%', height: '500px', flex: '1 1 49%' }}></div>
-                    <div className='skeleton' style={{ width: '50%', height: '500px', flex: '1 1 49%' }}></div>
-                    {/* <div className={styles.image}>
-                        <img src="" alt="Imagem do projeto" />
-                    </div>
-                    <div className={styles.image}>
-                        <img src="" alt="Imagem do projeto" />
-                    </div>
-                    <div className={styles.image}>
-                        <img src="" alt="Imagem do projeto" />
-                    </div>
-                    <div className={styles.image}>
-                        <img src="" alt="Imagem do projeto" />
-                    </div> */}
+                    {imagesLoading && (
+                        <>
+                            <div className='skeleton' style={{ width: '50%', height: '500px', flex: '1 1 49%' }}></div>
+                            <div className='skeleton' style={{ width: '50%', height: '500px', flex: '1 1 49%' }}></div>
+                        </>
+                    )}
+                    {!imagesLoading && images && images.length === 0 && (
+                        <p className={styles.noData}>Nenhuma imagem cadastrada.</p>
+                    )}
+                    {!imagesLoading && images && images.length > 0 && (
+                        <>
+                            {images.map((projectImage) => (
+                                <div className={styles.image}>
+                                    <img src={`${uploads}/image/${projectImage.image}`} alt="Imagem do projeto" />
+                                </div>
+                            ))}
+                        </>
+                    )}
                 </div>
             </div>
         </section>

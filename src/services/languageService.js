@@ -30,9 +30,25 @@ const getLanguages = async () => {
     }
 }
 
+// Get language by id
+const getLanguageById = async (id) => {
+    const config = requestConfig("GET", null)
+
+    try {
+        const res = await fetch(api + "/languages/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const languageService = {
     createLanguage,
     getLanguages,
+    getLanguageById,
 }
 
 export default languageService

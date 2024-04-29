@@ -30,9 +30,25 @@ const getFrameworks = async () => {
     }
 }
 
+// Get framework by id
+const getFrameworkById = async (id) => {
+    const config = requestConfig("GET", null)
+
+    try {
+        const res = await fetch(api + "/frameworks/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const frameworkService = {
     createFramework,
     getFrameworks,
+    getFrameworkById,
 }
 
 export default frameworkService
