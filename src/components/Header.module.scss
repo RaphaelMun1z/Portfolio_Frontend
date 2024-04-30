@@ -133,7 +133,7 @@ header {
         transition: all .1s ease-in-out;
 
         nav .linksContainer ul li {
-            color: rgba(254, 135, 0, 255);
+            color: rgb(254, 135, 0);
 
             a.active {
                 color: #fff;
@@ -141,6 +141,10 @@ header {
                 &:hover {
                     opacity: 1;
                 }
+            }
+
+            .loginButton {
+                border: 2px solid rgb(254, 135, 0) !important;
             }
         }
     }

@@ -14,7 +14,7 @@ const Header = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
-            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > window.innerHeight);
+            setScroll(window.scrollY > 0 && document.documentElement.offsetHeight > window.innerHeight + 200);
         });
     }, []);
 
@@ -79,7 +79,7 @@ const Header = () => {
                         {!auth && (
                             <li>
                                 <NavLink className={({ isActive }) =>
-                                    isActive ? `${styles.active}` : `${styles.loginButton}`
+                                    isActive ? `${styles.active} ${styles.loginButton}` : `${styles.loginButton}`
                                 } to="/login">Acessar</NavLink>
                             </li>
                         )}

@@ -71,16 +71,17 @@
     transition: all .4s ease-in-out;
 }
 
-.projectTypeCard:hover .infoContainer{
+.projectTypeCard:hover .infoContainer {
     color: #fff;
     transition: all .4s ease-in-out;
 }
-.projectTypeCard:hover button{
+
+.projectTypeCard:hover .redirectButton {
     border-color: #fff !important;
     color: #fff !important;
 }
 
-.projectTypeCard:hover button:hover{
+.projectTypeCard:hover .redirectButton:hover {
     background-color: transparent !important;
 }
 
@@ -128,7 +129,7 @@
     text-align: justify;
 }
 
-.projectTypeCard>.infoContainer>button {
+.projectTypeCard>.infoContainer>.redirectButton {
     position: relative;
     display: flex;
     width: fit-content;
@@ -147,9 +148,10 @@
     align-items: center;
     gap: 5px;
     transition: all .2s ease-in-out;
+    text-decoration: none;
 }
 
-.projectTypeCard>.infoContainer>button:hover {
+.projectTypeCard>.infoContainer>.redirectButton:hover {
     background-color: orange;
     color: #fff;
     transition: all .2s ease-in-out;

@@ -24,13 +24,17 @@ import {
     SiMongodb,
     SiOracle,
     SiSqlite,
-    SiRedis
+    SiRedis,
+    SiArduino
 } from "react-icons/si";
 import { FaJava, FaAngular, FaGithub, FaDocker, FaGitAlt, FaSlack } from "react-icons/fa";
 import { GoStack, GoServer } from "react-icons/go";
 import { FaCode } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
 import { MdDesignServices } from "react-icons/md";
+import { TbWorldWww } from "react-icons/tb";
+import { CiMobile3 } from "react-icons/ci";
+import { RxDesktop } from "react-icons/rx";
 
 export const useIcon = (iconName) => {
     const languageIcons = {
@@ -65,6 +69,13 @@ export const useIcon = (iconName) => {
         Jira: <SiJirasoftware className={styles.Jira} />,
     };
 
+    const typeIcons = {
+        Web: <TbWorldWww />,
+        Desktop: <RxDesktop />,
+        Mobile: <CiMobile3 />,
+        EmbeddedProgramming: <SiArduino />,
+    }
+
     const stackIcons = {
         Fullstack: <GoStack />,
         Frontend: <MdDesignServices />,
@@ -92,6 +103,8 @@ export const useIcon = (iconName) => {
             return stackIcons[iconName];
         } else if (databaseIcons[iconName]) {
             return databaseIcons[iconName];
+        } else if (typeIcons[iconName]) {
+            return typeIcons[iconName];
         } else {
             return <FaCode />;
         }
