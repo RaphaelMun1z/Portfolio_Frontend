@@ -132,7 +132,7 @@
                 height: fit-content;
                 margin-top: auto;
 
-                button {
+                a {
                     position: relative;
                     display: flex;
                     width: 100%;
@@ -150,6 +150,7 @@
                     cursor: pointer;
                     gap: 5px;
                     transition: all .1s ease-in-out;
+                    text-decoration: none;
 
                     svg {
                         font-size: 17pt;

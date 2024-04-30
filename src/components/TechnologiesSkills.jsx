@@ -69,7 +69,7 @@ const TechnologiesSkills = () => {
                         >
                             {frameworks.map((framework, index) => (
                                 <SwiperSlide key={index}>
-                                    <TechnologyCard name={framework.name} usage={framework.usageCount} />
+                                    <TechnologyCard name={framework.name} usage={framework.usageCount} category="frameworks" categoryValue={framework.id} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -100,7 +100,7 @@ const TechnologiesSkills = () => {
                         >
                             {languages.map((language, index) => (
                                 <SwiperSlide key={index}>
-                                    <TechnologyCard name={language.name} usage={language.usageCount} />
+                                    <TechnologyCard name={language.name} usage={language.usageCount} category="linguagens" categoryValue={language.id} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -131,7 +131,7 @@ const TechnologiesSkills = () => {
                         >
                             {databases.map((database, index) => (
                                 <SwiperSlide key={index}>
-                                    <TechnologyCard name={database.name} usage={database.usageCount} />
+                                    <TechnologyCard name={database.name} usage={database.usageCount} category="bdd" categoryValue={database.id} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

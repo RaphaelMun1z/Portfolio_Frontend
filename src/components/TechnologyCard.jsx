@@ -7,7 +7,9 @@ import { FaLaptopCode, FaStar, FaCode } from "react-icons/fa";
 // Hooks
 import { useIcon } from '../hooks/useIcon'
 
-const TechnologyCard = ({ name, usage }) => {
+import { Link } from 'react-router-dom'
+
+const TechnologyCard = ({ name, usage, category, categoryValue }) => {
     return (
         <div className={styles.techCard}>
             <div className={styles.iconContainer}>
@@ -24,7 +26,7 @@ const TechnologyCard = ({ name, usage }) => {
                         <h2>Projetos</h2>
                     </div>
                     <div className={styles.actions}>
-                        <button>Ver Projetos<IoIosArrowForward /></button>
+                        <Link to={`/projetos?${category}=${categoryValue}`}>Ver Projetos<IoIosArrowForward /></Link>
                     </div>
                 </div>
             </div>
