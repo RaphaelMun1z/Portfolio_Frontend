@@ -49,7 +49,10 @@ const AboutMe = () => {
                                     {projectLoading && (
                                         <div className='skeleton' style={{ width: '100px', height: '50px' }}></div>
                                     )}
-                                    {!projectLoading && projects && (
+                                    {!projectLoading && projects && projects.length === 0 && (
+                                        <span className={styles.soon}>Em breve</span>
+                                    )}
+                                    {!projectLoading && projects && projects.length > 0 && (
                                         <>
                                             {projects.length}
                                         </>

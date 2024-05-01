@@ -53,6 +53,9 @@ const Footer = () => {
                         {!socialMediaLoading && socialMedia && socialMedia.linkedin && (
                             <li><Link to={socialMedia.linkedin}>Linkedin</Link></li>
                         )}
+                        {!socialMediaLoading && !socialMedia && (
+                            <h5 className={styles.noData}>Não há redes sociais cadastradas.</h5>
+                        )}
 
                         {!socialMediaLoading && socialMedia && socialMedia.github && (
                             <li><Link to={socialMedia.github}>Github</Link></li>

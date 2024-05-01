@@ -203,3 +203,9 @@ section:hover .contentContainer .imageContainer img {
     height: fit-content;
     color: rgba(254, 135, 0, 255);
 }
+
+.soon {
+    font-size: 20pt;
+    font-weight: 300;
+    color: #999;
+}
