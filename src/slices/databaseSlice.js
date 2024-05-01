@@ -41,7 +41,6 @@ export const getDatabases = createAsyncThunk(
     "database/getdatabases",
     async () => {
         const data = await databaseService.getDatabases()
-        console.log(data)
 
         return data
     }

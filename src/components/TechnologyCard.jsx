@@ -26,7 +26,12 @@ const TechnologyCard = ({ name, usage, category, categoryValue }) => {
                         <h2>Projetos</h2>
                     </div>
                     <div className={styles.actions}>
-                        <Link to={`/projetos?${category}=${categoryValue}`}>Ver Projetos<IoIosArrowForward /></Link>
+                        {category && categoryValue && (
+                            <Link to={`/projetos?${category}=${categoryValue}`}>Ver Projetos<IoIosArrowForward /></Link>
+                        )}
+                        {!category && (
+                            <Link to={`/projetos?`}>Ver Projetos<IoIosArrowForward /></Link>
+                        )}
                     </div>
                 </div>
             </div>

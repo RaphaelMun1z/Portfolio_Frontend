@@ -46,7 +46,7 @@ const TechnologiesSkills = () => {
             </div>
             <div className={styles.contentContainer}>
                 <div className={styles.containerTech}>
-                    <h1 className={styles.subTitle}>Framework</h1>
+                    <h1 className={styles.subTitle}>Frameworks</h1>
                     {!frameworkLoading && frameworks.length === 0 && (
                         <h4 className={styles.noData}>Nenhum framework encontrado!</h4>
                     )}
@@ -108,7 +108,7 @@ const TechnologiesSkills = () => {
                 </div>
 
                 <div className={styles.containerTech}>
-                    <h1 className={styles.subTitle}>Banco de dados</h1>
+                    <h1 className={styles.subTitle}>Bancos de dados</h1>
                     {!databaseLoading && databases.length === 0 && (
                         <h4 className={styles.noData}>Nenhum banco de dados encontrado!</h4>
                     )}
