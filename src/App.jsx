@@ -37,6 +37,7 @@ import NewTool from './components/Form/NewTool';
 import NewInterpersonalSkill from './components/Form/NewInterpersonalSkill';
 import NewFaq from './components/Form/NewFaq';
 import Budget from './pages/Budget';
+import ProjectNewImageForm from './components/ProjectNewImageForm';
 /// Answer Form
 import AnswerContactForm from './components/Form/AnswerContactForm';
 
@@ -113,6 +114,7 @@ function App() {
           <Route path="/adm/cadastrar/habilidadeinterpessoal" element={wrapPrivateRoute(<NewInterpersonalSkill />)} />
           <Route path="/adm/cadastrar/faq" element={wrapPrivateRoute(<NewFaq />)} />
           <Route path="/adm/contactform" element={wrapPrivateRoute(<AnswerContactForm />)} />
+          <Route path="/adm/projeto/:projectId/nova-imagem" element={wrapPrivateRoute(<ProjectNewImageForm />)} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

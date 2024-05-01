@@ -9,6 +9,7 @@ import { getProjects } from '../../slices/projectSlice'
 import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
+import { BiImageAdd } from "react-icons/bi";
 
 import { Link } from 'react-router-dom';
 
@@ -66,6 +67,7 @@ const ProjectsManager = () => {
               <th>Criado em</th>
               <th>Atualizado em</th>
               <th className={styles.headActionTh}>Visualizar</th>
+              <th className={styles.headActionTh}>Adicionar imagem</th>
               <th className={styles.headActionTh}>Editar</th>
               <th className={styles.headActionTh}>Deletar</th>
             </tr>
@@ -78,6 +80,7 @@ const ProjectsManager = () => {
                 <td>{formatDate(project.createdAt)}<br />{formatTime(project.createdAt)}</td>
                 <td>{formatDate(project.updatedAt)}<br />{formatTime(project.updatedAt)}</td>
                 <td><th className={`${styles.actionTh} ${styles.view}`}><Link to={`/projeto/${project.id}`}><FaRegEye /></Link></th></td>
+                <td><th className={`${styles.actionTh} ${styles.edit}`}><Link to={`/adm/projeto/${project.id}/nova-imagem`}><BiImageAdd /></Link></th></td>
                 <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
                 <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
               </tr>
