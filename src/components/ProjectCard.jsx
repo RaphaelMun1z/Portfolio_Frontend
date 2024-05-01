@@ -9,6 +9,11 @@ import ActionsProjectCard from './ActionsProjectCard';
 import DatabaseProjectCard from './DatabaseProjectCard';
 
 const ProjectCard = ({ project }) => {
+  const maxLength = 300;
+  const truncatedDescription = project.description.length > maxLength ?
+    project.description.substring(0, maxLength) + "..." :
+    project.description;
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageContainer}>
@@ -17,7 +22,7 @@ const ProjectCard = ({ project }) => {
       <div className={styles.infoContainer}>
         <div className={styles.info}>
           <h1 className={styles.title}>{project.name}</h1>
-          <p className={styles.description}>{project.description}</p>
+          <p className={styles.description}>{truncatedDescription}</p>
 
           <StackProjectCard projectStack={project.stack} />
           <div className={styles.projectStack}>
