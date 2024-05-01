@@ -405,7 +405,7 @@ const NewProject = () => {
             bFrameworkId: projectBackendFramework,
             fRepository: projectFrontendRepository,
             bRepository: projectBackendRepository,
-            isHosted: projectIsHosted === "no" ? false : true,
+            isHosted: projectIsHosted,
             URL: projectHostUrl,
             usedTools: projectUsedTools,
             toolsIdArray: projectToolsArray,

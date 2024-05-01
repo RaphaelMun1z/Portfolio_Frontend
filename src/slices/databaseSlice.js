@@ -27,11 +27,21 @@ export const createDatabase = createAsyncThunk(
     }
 )
 
+export const getDatabaseById = createAsyncThunk(
+    "database/getdatabase",
+    async (id) => {
+        const data = await databaseService.getDatabaseById(id)
+
+        return data
+    }
+)
+
 // Get databases
 export const getDatabases = createAsyncThunk(
     "database/getdatabases",
     async () => {
         const data = await databaseService.getDatabases()
+        console.log(data)
 
         return data
     }
@@ -75,6 +85,16 @@ export const databaseSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.databases = action.payload
+            })
+            .addCase(getDatabaseById.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(getDatabaseById.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.database = action.payload
             })
     },
 })

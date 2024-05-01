@@ -4,51 +4,18 @@ import { uploads } from '../utils/config'
 
 // Icons
 import { GoStack, GoServer, GoTools, GoDatabase } from "react-icons/go";
-import { GrMysql } from "react-icons/gr"
 import { MdDesignServices } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import {
     FaCode,
     FaGithub,
     FaBug,
-    FaReact,
-    FaJava,
-    FaJs,
-    FaAngular,
-    FaDocker,
     FaExternalLinkAlt,
-    FaGitAlt,
-    FaSlack
 } from "react-icons/fa";
-import {
-    SiVisualstudiocode,
-    SiPostman,
-    SiJirasoftware,
-    SiPython,
-    SiPhp,
-    SiJavascript,
-    SiTypescript,
-    SiHtml5,
-    SiCss3,
-    SiReact,
-    SiDjango,
-    SiSpring,
-    SiExpress,
-    SiLaravel,
-    SiVuedotjs,
-    SiFlask,
-    SiMysql,
-    SiMicrosoftsqlserver,
-    SiPostgresql,
-    SiMongodb,
-    SiOracle,
-    SiSqlite,
-    SiRedis
-} from "react-icons/si";
 import { IoCloudOfflineOutline } from "react-icons/io5";
 
 // Hooks
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useIcon } from '../hooks/useIcon'
@@ -120,7 +87,7 @@ const SingleProjectDetails = () => {
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.ProjectFrontend.repository && (
+                                    {!loading && project && project.ProjectFrontend && (
                                         <a href={project.ProjectFrontend.repository} className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
@@ -128,7 +95,7 @@ const SingleProjectDetails = () => {
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.ProjectBackend.repository && (
+                                    {!loading && project && project.ProjectBackend && (
                                         <a href={project.ProjectBackend.repository} className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
@@ -242,10 +209,10 @@ const SingleProjectDetails = () => {
                                         <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
                                     )}
                                     {!loading && project && project.usedDatabase && (
-                                        <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
+                                        <Link target='_blank' to={`/database/${project.ProjectDatabase.Database.id}`}  className={`${styles.technologyCard} ${styles.toolsContainer}`}>
                                             <div className={styles.icon}>{useIcon(project.ProjectDatabase.Database.name)}</div>
                                             <div className={styles.name}><p>{project.ProjectDatabase.Database.name}</p></div>
-                                        </div>
+                                        </Link>
                                     )}
                                 </div>
                             </div>

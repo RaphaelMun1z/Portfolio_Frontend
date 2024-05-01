@@ -99,6 +99,7 @@ function App() {
           <Route path="/linguagem/:id" element={<TechSinglePage type="language" />} />
           <Route path="/framework/:id" element={<TechSinglePage type="framework" />} />
           <Route path="/ferramenta/:id" element={<TechSinglePage type="tool" />} />
+          <Route path="/database/:id" element={<TechSinglePage type="database" />} />
           <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
 
           {/* ADM Routes */}

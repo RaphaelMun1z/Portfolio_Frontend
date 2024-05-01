@@ -10,6 +10,7 @@ import { useIcon } from '../hooks/useIcon'
 import { getLanguageById } from '../slices/languageSlice'
 import { getFrameworkById } from '../slices/frameworkSlice'
 import { getToolById } from '../slices/toolSlice'
+import { getDatabaseById } from '../slices/databaseSlice'
 
 const TechSinglePage = ({ type }) => {
     const [loading, setLoading] = useState(false)
@@ -23,9 +24,11 @@ const TechSinglePage = ({ type }) => {
     const { language, loading: languageLoading } = useSelector((state) => state.language)
     const { framework, loading: frameworkLoading } = useSelector((state) => state.framework)
     const { tool, loading: toolLoading } = useSelector((state) => state.tool)
+    const { database, loading: databaseLoading } = useSelector((state) => state.database)
 
     useEffect(() => {
         if (type) {
+            console.log(type)
             switch (type) {
                 case "language":
                     dispatch(getLanguageById(id))
@@ -35,6 +38,9 @@ const TechSinglePage = ({ type }) => {
                     break;
                 case "tool":
                     dispatch(getToolById(id))
+                    break;
+                case "database":
+                    dispatch(getDatabaseById(id))
                     break;
             }
         }
@@ -63,6 +69,14 @@ const TechSinglePage = ({ type }) => {
             setProficiency(tool.proficiency)
         }
     }, [tool])
+
+    useEffect(() => {
+        if (database) {
+            setLoading(databaseLoading)
+            setName(database.name)
+            setProficiency(database.proficiency)
+        }
+    }, [database])
 
     return (
         <section className={styles.skillContainer}>

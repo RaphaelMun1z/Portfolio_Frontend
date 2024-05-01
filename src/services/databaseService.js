@@ -30,9 +30,26 @@ const getDatabases = async () => {
     }
 }
 
+// Get database by id
+const getDatabaseById = async (id) => {
+    const config = requestConfig("GET", null)
+
+    try {
+        const res = await fetch(api + "/databases/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+            console.log(res)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const databaseService = {
     createDatabase,
     getDatabases,
+    getDatabaseById,
 }
 
 export default databaseService
