@@ -1,5 +1,5 @@
 // Styles
-import styles from './LandingSection.module.css'
+import styles from './LandingSection.module.scss'
 
 import { useEffect, useState, useRef } from 'react';
 
@@ -88,7 +88,7 @@ const LandingSection = () => {
     return (
         <main>
             <div className={`${styles.imageContainer}`} ref={el}>
-                <Canvas scene={scene} className='item'>
+                <Canvas scene={scene} className={`${styles.divInsideImageContainer} item`}>
                     <ambientLight intensity={0.5} color="white" />
                     <directionalLight intensity={0.8} color="white" position={[0, 5, 5]} />
                     <spotLight
