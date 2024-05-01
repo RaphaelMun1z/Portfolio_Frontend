@@ -51,6 +51,7 @@ import { IoCloudOfflineOutline } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useIcon } from '../hooks/useIcon'
 
 // Redux
 import { getProjectById } from '../slices/projectSlice'
@@ -70,45 +71,6 @@ const SingleProjectDetails = () => {
         dispatch(getProjectById(id))
         dispatch(getProjectImagesById(id))
     }, [dispatch, id])
-
-    const toolIcons = {
-        Github: <FaGithub />,
-        Docker: <FaDocker />,
-        Git: <FaGitAlt />,
-        Slack: <FaSlack />,
-        VScode: <SiVisualstudiocode />,
-        Postman: <SiPostman />,
-        Jira: <SiJirasoftware />,
-    };
-
-    const languageIcons = {
-        Python: <SiPython />,
-        PHP: <SiPhp />,
-        Javascript: <SiJavascript className={styles.js} />,
-        Typescript: <SiTypescript />,
-        SQL: <GrMysql />,
-        HTML: <SiHtml5 />,
-        CSS: <SiCss3 />,
-        Java: <FaJava />,
-        React: <SiReact />,
-        Angular: <FaAngular />,
-        Django: <SiDjango />,
-        SpringBoot: <SiSpring />,
-        Express: <SiExpress />,
-        Laravel: <SiLaravel />,
-        Vue: <SiVuedotjs />,
-        Flask: <SiFlask />,
-    };
-
-    const databaseIcons = {
-        MySQL: < SiMysql />,
-        SqlServer: <SiMicrosoftsqlserver />,
-        PostgreSQL: <SiPostgresql />,
-        MongoDB: <SiMongodb />,
-        OracleDatabase: <SiOracle />,
-        SQLite: <SiSqlite />,
-        Redis: <SiRedis />,
-    }
 
     return (
         <section className={styles.projectDetailsContainer}>
@@ -143,8 +105,8 @@ const SingleProjectDetails = () => {
                         {loading && !project && (
                             <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                         )}
-                        {!loading && project && project.isHosted && (
-                            <button className={styles.bug}>Visitar<FaExternalLinkAlt /></button>
+                        {!loading && project && project.isHosted && project.ProjectHost && (
+                            <a href={`${project.ProjectHost.URL}`} className={`${styles.visitButton}`}>Visitar<FaExternalLinkAlt /></a>
                         )}
                         {!loading && project && !project.isHosted && (
                             <button className={`${styles.bug} ${styles.notHosted}`}>Não hospedado<IoCloudOfflineOutline /></button>
@@ -158,31 +120,45 @@ const SingleProjectDetails = () => {
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.fRepository && (
-                                        <a href={fRepository} className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
+                                    {!loading && project && project.ProjectFrontend.repository && (
+                                        <a href={project.ProjectFrontend.repository} className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                                 <div className={styles.repositoriesSection}>
                                     {loading && !project && (
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
-                                    {!loading && project && project.bRepository && (
-                                        <a href={bRepository} className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
+                                    {!loading && project && project.ProjectBackend.repository && (
+                                        <a href={project.ProjectBackend.repository} className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className={styles.projectView}>
+                        {!loading && project && (
+                            <img src={`${uploads}/projectsBanner/${project.bannerImage}`} alt="Banner do projeto" />
+                        )}
+                    </div>
                     <div className={styles.technologies}>
                         <div className={styles.projectTechInfo}>
                             <div className={styles.technologyCardContainer}>
-                                <div className={styles.technologyCard}>
+                                <div className={`${styles.technologyCard} ${styles.flexCard}`}>
                                     <div className={styles.icon}>
                                         {project && project.stack === "Fullstack" && (<GoStack />)}
                                         {project && project.stack === "Frontend" && (<MdDesignServices />)}
                                         {project && project.stack === "Backend" && (<GoServer />)}
                                     </div>
                                     <div className={styles.name}>{project && project.stack}</div>
+                                </div>
+                                <div className={`${styles.technologyCard} ${styles.flexCard}`}>
+                                    <div className={styles.icon}>
+                                        {project && project.type === "Web" && (useIcon('Web'))}
+                                        {project && project.type === "Desktop" && (useIcon('Desktop'))}
+                                        {project && project.type === "Mobile" && (useIcon('Mobile'))}
+                                        {project && project.type === "EmbeddedProgramming" && (useIcon('EmbeddedProgramming'))}
+                                    </div>
+                                    <div className={styles.name}>{project && project.type}</div>
                                 </div>
                             </div>
                         </div>
@@ -196,16 +172,16 @@ const SingleProjectDetails = () => {
                                     <>
                                         {project.ProjectFrontend && (
                                             <Link target='_blank' to={`/framework/${project.ProjectFrontend.Framework.id}`} className={styles.technologyCard}>
-                                                <div className={styles.icon}>{languageIcons[project.ProjectFrontend.Framework.name] || <FaCode />}</div>
+                                                <div className={styles.icon}>{useIcon(project.ProjectFrontend.Framework.name)}</div>
                                                 <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
-                                                <div className={styles.language}>{languageIcons[project.ProjectFrontend.Framework.Language.name] || <FaCode />}</div>
+                                                <div className={styles.language}>{useIcon(project.ProjectFrontend.Framework.Language.name)}</div>
                                             </Link>
                                         )}
                                         {project.ProjectBackend && (
                                             <Link target='_blank' to={`/framework/${project.ProjectBackend.Framework.id}`} className={styles.technologyCard}>
-                                                <div className={styles.icon}>{languageIcons[project.ProjectBackend.Framework.name] || <FaCode />}</div>
+                                                <div className={styles.icon}>{useIcon(project.ProjectBackend.Framework.name)}</div>
                                                 <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
-                                                <div className={styles.language}>{languageIcons[project.ProjectBackend.Framework.Language.name] || <FaCode />}</div>
+                                                <div className={styles.language}>{useIcon(project.ProjectBackend.Framework.Language.name)}</div>
                                             </Link>
                                         )}
                                     </>
@@ -224,14 +200,14 @@ const SingleProjectDetails = () => {
                                             <Link target='_blank' to={`/linguagem/${project.ProjectFrontend.Language.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}><MdDesignServices /></div>
                                                 <div className={styles.name}><b>Frontend:</b><p>{project.ProjectFrontend.Language.name}</p></div>
-                                                <div className={styles.language}>{languageIcons[project.ProjectFrontend.Language.name] || <FaCode />}</div>
+                                                <div className={styles.language}>{useIcon(project.ProjectFrontend.Language.name)}</div>
                                             </Link>
                                         )}
                                         {project.ProjectBackend && (
                                             <Link target='_blank' to={`/linguagem/${project.ProjectBackend.Language.id}`} className={styles.technologyCard}>
                                                 <div className={styles.icon}><GoServer /></div>
                                                 <div className={styles.name}><b>Backend:</b><p>{project.ProjectBackend.Language.name}</p></div>
-                                                <div className={styles.language}>{languageIcons[project.ProjectBackend.Language.name] || <FaCode />}</div>
+                                                <div className={styles.language}>{useIcon(project.ProjectBackend.Language.name)}</div>
                                             </Link>
                                         )}
                                     </>
@@ -247,9 +223,9 @@ const SingleProjectDetails = () => {
                                     )}
                                     {!loading && project && project.ProjectTools.length > 0 && (
                                         <>
-                                            {project.ProjectTools.map((ProjectTool) => (
-                                                <Link target='_blank' to={`/ferramenta/${ProjectTool.Tool.id}`} className={`${styles.technologyCard} ${styles.toolsContainer}`} key={ProjectTool.id}>
-                                                    <div className={styles.icon}>{toolIcons[ProjectTool.Tool.name] || <FaCode />}</div>
+                                            {project.ProjectTools.map((ProjectTool, index) => (
+                                                <Link target='_blank' to={`/ferramenta/${ProjectTool.Tool.id}`} className={`${styles.technologyCard} ${styles.toolsContainer} `} key={index}>
+                                                    <div className={styles.icon}>{useIcon(ProjectTool.Tool.name)}</div>
                                                     <div className={styles.name}><p>{ProjectTool.Tool.name}</p></div>
                                                 </Link>
                                             ))}
@@ -267,7 +243,7 @@ const SingleProjectDetails = () => {
                                     )}
                                     {!loading && project && project.usedDatabase && (
                                         <div className={`${styles.technologyCard} ${styles.toolsContainer}`}>
-                                            <div className={styles.icon}>{databaseIcons[project.ProjectDatabase.Database.name] || <FaCode />}</div>
+                                            <div className={styles.icon}>{useIcon(project.ProjectDatabase.Database.name)}</div>
                                             <div className={styles.name}><p>{project.ProjectDatabase.Database.name}</p></div>
                                         </div>
                                     )}
@@ -275,7 +251,6 @@ const SingleProjectDetails = () => {
                             </div>
                         )}
                     </div>
-
                 </div>
                 <div className={styles.images}>
                     <h3><AiFillPicture />Imagens do projeto:</h3>
@@ -290,8 +265,8 @@ const SingleProjectDetails = () => {
                     )}
                     {!imagesLoading && images && images.length > 0 && (
                         <>
-                            {images.map((projectImage) => (
-                                <div className={styles.image}>
+                            {images.map((projectImage, index) => (
+                                <div className={styles.image} key={index}>
                                     <img src={`${uploads}/image/${projectImage.image}`} alt="Imagem do projeto" />
                                 </div>
                             ))}

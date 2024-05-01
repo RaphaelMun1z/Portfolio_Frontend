@@ -388,7 +388,8 @@ const NewProject = () => {
     useEffect(() => {
         const selectedToolsIds = toolsArray
             .filter(tool => tool.selected === 'yes')
-            .map(tool => tool.id);
+            .map(tool => tool.id)
+
         setProjectToolsArray(selectedToolsIds);
     }, [toolsArray]);
 
@@ -415,7 +416,7 @@ const NewProject = () => {
 
         const formData = new FormData()
 
-        const projectFormData = Object.keys(projectData).forEach((key) => {
+        Object.keys(projectData).forEach((key) => {
             formData.append(key, projectData[key])
         })
 
@@ -782,11 +783,11 @@ const NewProject = () => {
                             <>
                                 <div className={styles.dataContainer}>
                                     <h2>Linguagem usada no backend:</h2>
-                                    <p>{projectBackendLanguage.trim() !== "" ? projectBackendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectBackendLanguage !== 0 ? projectBackendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                                 <div className={styles.dataContainer}>
                                     <h2>Repositório do backend:</h2>
-                                    <p>{projectBackendRepository.trim() !== "" ? projectBackendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectBackendRepository !== 0 ? projectBackendRepository : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                             </>
                         ) : ''}
