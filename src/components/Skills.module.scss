@@ -117,14 +117,14 @@ section {
 }
 
 .infoContainer .insideInfoContainer h1 {
-    font-size: 45pt;
+    font-size: min(8vw, 45pt);
     color: #fff;
 }
 
 .infoContainer .insideInfoContainer p {
     color: #fff;
     font-weight: 300;
-    font-size: 14pt;
+    font-size: min(3vw, 14pt);
     font-style: italic;
 }
 
@@ -161,4 +161,16 @@ section {
 .infoContainer .insideInfoContaine>button:hover {
     transition: all .1s ease-in-out;
     transform: scale(.9);
+}
+
+@media(max-width: 1200px) {
+    .contentContainer {
+        flex-direction: column-reverse !important;
+        gap: 2em;
+
+        div {
+            width: 100% !important;
+            padding: 0 1em !important;
+        }
+    }
 }

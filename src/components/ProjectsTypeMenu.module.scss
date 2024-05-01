@@ -157,3 +157,16 @@
     transition: all .2s ease-in-out;
     gap: 10px;
 }
+
+@media(max-width: 1200px) {
+    .header {
+        h1 {
+            text-align: center;
+        }
+    }
+
+    .contentContainer {
+        flex-direction: column !important;
+        padding: 0 1em !important;
+    }
+}

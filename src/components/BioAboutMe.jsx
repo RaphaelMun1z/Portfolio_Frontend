@@ -1,5 +1,5 @@
 // Styles
-import styles from './BioAboutMe.module.css'
+import styles from './BioAboutMe.module.scss'
 
 import Image from './Image';
 

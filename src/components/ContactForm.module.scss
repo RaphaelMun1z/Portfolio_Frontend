@@ -192,7 +192,7 @@ form>button:hover {
         color: #222;
     }
 
-    .noData{
+    .noData {
         color: #999;
         font-size: 12pt;
     }
@@ -231,4 +231,19 @@ form>button:hover {
     min-height: 150px;
     height: 150px;
     max-height: 200px;
+}
+
+@media(max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        padding: 0 1em !important;
+
+        .insideContainer:nth-child(1) {
+            display: none;
+        }
+
+        .insideContainer {
+            width: 100%;
+        }
+    }
 }

@@ -149,3 +149,22 @@ header {
         }
     }
 }
+
+@media(max-width: 1200px) {
+    header {
+        min-height: none !important;
+        padding: 1em 0 !important;
+    }
+
+    .active {
+        width: calc(100vw - 1em) !important;
+    }
+
+    nav {
+        justify-content: center !important;
+    }
+
+    .linksContainer {
+        display: none !important;
+    }
+}

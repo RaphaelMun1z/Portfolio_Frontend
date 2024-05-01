@@ -1,4 +1,4 @@
-import styles from './ProjectsTypeMenu.module.css'
+import styles from './ProjectsTypeMenu.module.scss'
 
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap'

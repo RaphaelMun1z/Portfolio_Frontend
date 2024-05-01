@@ -18,7 +18,7 @@ section {
         color: #fff;
 
         h1 {
-            font-size: 45pt;
+            font-size: min(8vw, 45pt);
         }
     }
 
@@ -138,3 +138,5 @@ section {
         }
     }
 }
+
+@media(max-width: 1200px) {}

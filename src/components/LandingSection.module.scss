@@ -1,9 +1,10 @@
 main {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 100%;
-    height: 85vh;
+    height: fit-content;
+    min-height: 85vh;
     background-color: transparent;
     padding: 2em 0em;
     justify-content: center;
@@ -16,7 +17,8 @@ main {
         display: flex;
         flex-wrap: wrap;
         width: 50%;
-        height: 100%;
+        min-width: 500px;
+        height: 700px;
         flex: 0 1 50%;
         justify-content: center;
         align-items: center;
@@ -27,6 +29,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         width: 50%;
+        min-width: 480px;
         height: 100%;
         flex: 0 1 50%;
         justify-content: center;
@@ -45,7 +48,7 @@ main {
             transition: opacity 1s ease, transform 1s ease, filter 1s ease-in-out;
 
             h2 {
-                font-size: 45pt;
+                font-size: min(8vw, 45pt);
                 width: fit-content;
                 height: fit-content;
                 color: #fff;
@@ -54,7 +57,7 @@ main {
                 pointer-events: none;
 
                 span {
-                    font-size: 45pt;
+                    font-size: min(8vw, 45pt);
                     width: fit-content;
                     height: fit-content;
                     color: rgba(254, 135, 0, 255);
@@ -63,7 +66,7 @@ main {
             }
 
             h6 {
-                font-size: 15pt;
+                font-size: min(3.2vw, 15pt);
                 width: fit-content;
                 height: fit-content;
                 color: #fff;
@@ -73,7 +76,7 @@ main {
             }
 
             p {
-                font-size: 25pt;
+                font-size: min(5vw, 25pt);
                 width: fit-content;
                 height: fit-content;
                 color: #fff;
@@ -83,7 +86,9 @@ main {
             }
 
             a {
-                font-size: 13pt;
+                // 313, 65
+                font-size: min(3vw, 13pt);
+                //font-size: 13pt;
                 width: fit-content;
                 height: fit-content;
                 text-decoration: none;
@@ -128,5 +133,28 @@ main {
             object-fit: contain;
             filter: drop-shadow(5px 50px 200px #222);
         }
+    }
+}
+
+@media(max-width: 1200px) {
+    main {
+        height: 80vh !important;
+        min-height: fit-content !important;
+    }
+
+    .imageContainer {
+        display: none !important;
+    }
+
+    .insideLandingContent {
+        h2 {
+            line-height: inherit !important;
+            display: contents !important;
+        }
+    }
+
+    .landingContentContainer {
+        min-width: fit-content !important;
+        width: 100% !important;
     }
 }

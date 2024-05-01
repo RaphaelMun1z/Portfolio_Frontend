@@ -208,3 +208,27 @@ section {
     height: fit-content;
     color: rgba(254, 135, 0, 255);
 }
+
+@media(max-width: 1200px) {
+    .contentContainer {
+        padding: 0 1em !important;
+        flex-direction: column !important;
+    }
+
+    .infoContainer {
+        padding: 0 !important;
+        margin-top: 1em !important;
+    }
+
+    .imageContainer {
+        padding: 5em !important;
+        overflow: hidden !important;
+        max-width: 100%;
+
+        img{
+            margin: 0em !important;
+            height: 300px;
+            padding: 2em !important;
+        }
+    }
+}

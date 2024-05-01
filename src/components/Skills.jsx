@@ -1,5 +1,5 @@
 // Styles
-import styles from './Skills.module.css'
+import styles from './Skills.module.scss'
 
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap'

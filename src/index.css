@@ -14,7 +14,8 @@
     flex-wrap: wrap;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
     padding-right: 8em;
     padding-left: 8em;
 }
@@ -35,6 +36,7 @@
 
 body {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     background: #fff;
     background-image: linear-gradient(to right, #0404B7, #03036C);
@@ -62,5 +64,11 @@ body {
 
     100% {
         background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@media(max-width: 1200px) {
+    #root {
+        padding: 0 !important;
     }
 }
