@@ -1,13 +1,12 @@
-import styles from './CertificationsSection.module.scss'
-import './swiperConfig.scss'
-
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 
+import styles from './CertificationsSection.module.scss'
+import './swiperConfig.scss'
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -15,8 +14,10 @@ import { FaChalkboardTeacher, FaChalkboard } from "react-icons/fa";
 import { SiUdemy } from "react-icons/si";
 
 const CertificationsSection = () => {
-    const el = useRef()
+    const el = useRef(null);
     const tl = useRef()
+
+    const [swiper, setSwiper] = useState(null);
 
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger)
@@ -64,6 +65,34 @@ const CertificationsSection = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (swiper) {
+            const updateSlidesPerView = () => {
+                if (window.innerWidth < 700) {
+                    swiper.params.slidesPerView = 1;
+                } else if (window.innerWidth < 1400) {
+                    swiper.params.slidesPerView = 2;
+                } else {
+                    swiper.params.slidesPerView = 3;
+                }
+                swiper.update();
+            };
+
+            updateSlidesPerView();
+
+            window.addEventListener('resize', updateSlidesPerView);
+
+            return () => {
+                window.removeEventListener('resize', updateSlidesPerView);
+            };
+        }
+    }, [swiper]);
+
+    useEffect(() => {
+        const swiperInstance = el.current.swiper;
+        setSwiper(swiperInstance);
+    }, []);
+
     return (
         <section ref={el}>
             <div className={`${styles.header} item0`}>
@@ -71,7 +100,7 @@ const CertificationsSection = () => {
             </div>
             <div className={styles.contentContainer}>
                 <Swiper
-                    slidesPerView={3}
+                    ref={el}
                     spaceBetween={30}
                     pagination={{
                         clickable: true,
@@ -126,7 +155,7 @@ const CertificationsSection = () => {
                     </SwiperSlide>
                 </Swiper>
             </div>
-        </section>
+        </section >
     )
 }
 

@@ -1,18 +1,15 @@
-import styles from './TestimonialsSection.module.scss'
-import './swiperConfig.scss'
-
+// Hooks
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 
+import styles from './TestimonialsSection.module.scss'
+import './swiperConfig.scss'
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-// Hooks
-import { useState, useEffect } from 'react';
 
 const TestimonialsSection = () => {
     const el = useRef(null);
@@ -27,8 +24,8 @@ const TestimonialsSection = () => {
             scrollTrigger: {
                 trigger: testimonialsElements,
                 scrub: true,
-                start: "top 500px",
-                end: "bottom 100px",
+                start: "top 800px",
+                end: "bottom 600px",
             }
         })
             .fromTo(testimonialsElements,
@@ -74,8 +71,32 @@ const TestimonialsSection = () => {
         },
     ])
 
+    const updateSlidesPerView = () => {
+        const swiper = el.current.swiper;
+        if (swiper) {
+            if (window.innerWidth < 700) {
+                swiper.params.slidesPerView = 1;
+            } else if (window.innerWidth < 1400) {
+                swiper.params.slidesPerView = 2;
+            } else {
+                swiper.params.slidesPerView = 3;
+            }
+            swiper.update();
+        }
+    };
+
+    useEffect(() => {
+        updateSlidesPerView();
+
+        window.addEventListener('resize', updateSlidesPerView);
+
+        return () => {
+            window.removeEventListener('resize', updateSlidesPerView);
+        };
+    }, []);
+
     return (
-        <section ref={el}>
+        <section>
             <div className={`${styles.header} item`}>
                 <h1>Depoimentos/Recomendações</h1>
             </div>
@@ -83,7 +104,7 @@ const TestimonialsSection = () => {
                 <div className={styles.testimonialsContainer}>
                     <div className={styles.cards}>
                         <Swiper
-                            slidesPerView={3}
+                            ref={el}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,

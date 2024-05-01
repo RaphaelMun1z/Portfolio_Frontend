@@ -139,4 +139,17 @@ section {
     }
 }
 
-@media(max-width: 1200px) {}
+@media(max-width: 1200px) {
+    .contentContainer {
+        padding: 0 1em !important;
+        max-height: 650px !important;
+
+        .card {
+            max-height: 650px !important;
+
+            .imageContainer {
+                max-height: 300px !important;
+            }
+        }
+    }
+}
