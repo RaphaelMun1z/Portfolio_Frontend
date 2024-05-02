@@ -3,25 +3,25 @@ import styles from './BudgetForm.module.scss'
 import { Link } from 'react-router-dom'
 import SystemStatusMessage from './Form/SystemStatusMessage'
 
-import { useEffect, useState } from 'react'
-
 import { TbWorldWww } from "react-icons/tb";
 import { MdDeleteOutline } from "react-icons/md";
 
+// Hooks
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+
+// Redux
+import { resetMessage, createBudget } from '../slices/budgetSlice'
+
 const BudgetForm = () => {
+    const [internErrors, setInternErrors] = useState([])
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [contactMethod, setContactMethod] = useState("invalid")
-    const [haveReference, setHaveReference] = useState("invalid")
+    const [contact, setContact] = useState("")
     const [referenceUrl, setReferenceURL] = useState("")
     const [arrayReferencesURL, setArrayReferencesURL] = useState([])
 
     const [urlIsInvalid, setUrlIsInvalid] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-
-    const handleChangeContactMethod = (method) => {
-        setContactMethod(method)
-    }
 
     const handleChangeHaveReference = (res) => {
         setHaveReference(res)
@@ -32,17 +32,18 @@ const BudgetForm = () => {
     }
 
     const addReference = () => {
+        setInternErrors([])
         if (isValidURL(referenceUrl)) {
             if (!arrayReferencesURL.includes(referenceUrl)) {
                 setUrlIsInvalid(false)
                 arrayReferencesURL.push(referenceUrl)
                 setReferenceURL('');
             } else {
-                setErrorMessage("Essa URL já foi adicionada.")
+                setInternErrors(prevErrors => [...prevErrors, "Essa URL já foi adicionada!"])
                 setUrlIsInvalid(true)
             }
         } else {
-            setErrorMessage("URL inválida. Por favor, insira uma URL válida.")
+            setInternErrors(prevErrors => [...prevErrors, "URL inválida. Por favor, insira uma URL válida."])
             setUrlIsInvalid(true)
         }
     }
@@ -56,21 +57,76 @@ const BudgetForm = () => {
         if (urlIsInvalid === true) {
             setTimeout(() => {
                 setUrlIsInvalid(false)
-                setErrorMessage("")
             }, 2000);
         }
     }, [urlIsInvalid])
 
     const handleDeleteReference = (index) => {
-        console.log(index)
         const newArray = arrayReferencesURL.filter((_, i) => i !== index);
         setArrayReferencesURL(newArray);
+    }
+
+    const dispatch = useDispatch()
+
+    const { loading: loadingBudget, message: messageBudget, error: errorBudget } = useSelector((state) => state.budget)
+
+    const handleSaveBudget = (e) => {
+        e.preventDefault()
+
+        setInternErrors([])
+
+        if (name.trim() === "") {
+            setInternErrors(prevErrors => [...prevErrors, "Seu nome é obrigatório!"])
+            return
+        }
+
+        if (description.trim() === "") {
+            setInternErrors(prevErrors => [...prevErrors, "A descrição é obrigatória!"])
+            return
+        }
+
+        if (contact.trim() === "") {
+            setInternErrors(prevErrors => [...prevErrors, "O contato é obrigatório!"])
+            return
+        }
+
+        if (arrayReferencesURL.length === 0) {
+            setInternErrors(prevErrors => [...prevErrors, "É necessário ao menos uma referência!"])
+            return
+        }
+
+        const budget = {
+            name: name,
+            contact: contact,
+            description: description,
+            references: arrayReferencesURL.toString(),
+        }
+
+        console.log(budget)
+
+        dispatch(createBudget(budget))
+
+        setName("")
+        setDescription("")
+        setContact("")
+        setReferenceURL("")
+        setArrayReferencesURL([])
+
+        setInternErrors([])
+
+        resetComponentMessage()
+    }
+
+    const resetComponentMessage = () => {
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
     }
 
     return (
         <div className={styles.mainContainer}>
             <div className={styles.formSections}>
-                <form className={styles.formStep}>
+                <form className={styles.formStep} onSubmit={(e) => handleSaveBudget(e)}>
                     <div className={styles.title}>
                         <h1>Criando um Orçamento</h1>
                     </div>
@@ -79,28 +135,16 @@ const BudgetForm = () => {
                         <input type="text" placeholder='Digite seu nome...' onChange={(e) => setName(e.target.value)} value={name} />
                     </label>
                     <label>
-                        <p>Como posso entrar em contato com você?</p>
-                        <select name="contactMethod" onChange={(e) => handleChangeContactMethod(e.target.value)} defaultValue={contactMethod}>
-                            <option value="invalid" disabled>Selecione</option>
-                            <option value="whatsapp">Whatsapp</option>
-                            <option value="email">E-mail</option>
-                        </select>
+                        <p>Contato</p>
+                        <input type="text" placeholder='Informe seu contato...' onChange={(e) => setContact(e.target.value)} value={contact} />
                     </label>
                     <label>
                         <p>Descreva seu projeto:</p>
                         <textarea name="description" placeholder='Descreva resumidamente seu projeto...' onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
                     </label>
                     <label>
-                        <p>Você tem referências de projetos?</p>
-                        <select name="haveReferences" onChange={(e) => handleChangeHaveReference(e.target.value)} value={haveReference}>
-                            <option value="invalid" disabled>Selecione</option>
-                            <option value="yes">Sim</option>
-                            <option value="no">Não</option>
-                        </select>
-                    </label>
-                    <label>
                         <p>Quais as referências? Cole a URL no campo.</p>
-                        <input type="text" placeholder='URL da referência...' onChange={(e) => handleReferenceURL(e.target.value)} value={referenceUrl} />
+                        <input type="text" placeholder='Exemplo: https://www.amazon.com.br/' onChange={(e) => handleReferenceURL(e.target.value)} value={referenceUrl} />
                         <button type='button' onClick={addReference}>Adicionar referência</button>
                         {arrayReferencesURL.map((reference, index) => (
                             <div className={styles.reference} key={index}>
@@ -115,14 +159,30 @@ const BudgetForm = () => {
                         ))}
                     </label>
                     <div className={styles.footer}>
-                        <button type="submit" className={styles.submit}>Enviar</button>
-                        <Link to="/adm/painel" className={styles.cancel}>Cancelar</Link>
-                        <div className={styles.messages}>
-                            {urlIsInvalid === true && (
-                                <SystemStatusMessage type="error" msg={errorMessage} />
-                            )}
-                            {/* <SystemStatusMessage type="success" msg="Banco de dados cadastrado com sucesso!" /> */}
-                        </div>
+                        {loadingBudget && (
+                            <button type="button" className={styles.submit} disabled>Enviando...</button>
+                        )}
+                        {!loadingBudget && (
+                            <button type="submit" className={styles.submit}>Enviar</button>
+                        )}
+                        <Link to="/" className={styles.cancel}>Cancelar</Link>
+                        {internErrors && internErrors.length > 0 && (
+                            <div className={styles.messages}>
+                                {internErrors.map((error) => {
+                                    return <SystemStatusMessage type="error" msg={error} />
+                                })}
+                            </div>
+                        )}
+                        {errorBudget && (
+                            <div className={styles.messages}>
+                                <SystemStatusMessage type="error" msg={errorBudget} />
+                            </div>
+                        )}
+                        {messageBudget && (
+                            <div className={styles.messages}>
+                                <SystemStatusMessage type="success" msg={messageBudget} />
+                            </div>
+                        )}
                     </div>
                 </form>
             </div>

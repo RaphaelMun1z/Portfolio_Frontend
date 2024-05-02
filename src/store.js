@@ -13,6 +13,8 @@ import faqReducer from './slices/faqSlice'
 import logReducer from './slices/logSlice'
 import socialMediaReducer from './slices/socialMediaSlice'
 import projectImageReducer from './slices/projectImageSlice'
+import reportReducer from './slices/reportSlice'
+import budgetReducer from './slices/budgetSlice'
 
 export const store = configureStore({
     reducer: {
@@ -29,5 +31,7 @@ export const store = configureStore({
         log: logReducer,
         socialMedia: socialMediaReducer,
         projectImages: projectImageReducer,
+        report: reportReducer,
+        budget: budgetReducer,
     },
 })

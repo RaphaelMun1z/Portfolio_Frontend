@@ -15,7 +15,7 @@ import {
 import { IoCloudOfflineOutline } from "react-icons/io5";
 
 // Hooks
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useIcon } from '../hooks/useIcon'
@@ -26,7 +26,11 @@ import { getProjectImagesById } from '../slices/projectImageSlice'
 
 import { Link } from 'react-router-dom';
 
+import ReportPopUp from './ReportPopUp';
+
 const SingleProjectDetails = () => {
+    const [reportModal, setReportModal] = useState(false)
+
     const { id } = useParams()
 
     const dispatch = useDispatch()
@@ -41,6 +45,9 @@ const SingleProjectDetails = () => {
 
     return (
         <section className={styles.projectDetailsContainer}>
+            {!loading && project && reportModal && (
+                <ReportPopUp setReportModal={setReportModal} />
+            )}
             <div className={styles.header}>
                 {loading && !project && (
                     <div className='skeleton' style={{ width: '600px', height: '90px' }}></div>
@@ -54,7 +61,7 @@ const SingleProjectDetails = () => {
                     )}
                     {!loading && project && (
                         <>
-                            <button className={styles.bug}><FaBug />Relatar BUG</button>
+                            <button className={styles.bug} onClick={() => setReportModal(true)}><FaBug />Relatar BUG</button>
                         </>
                     )}
                 </div>
@@ -209,7 +216,7 @@ const SingleProjectDetails = () => {
                                         <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
                                     )}
                                     {!loading && project && project.usedDatabase && (
-                                        <Link target='_blank' to={`/database/${project.ProjectDatabase.Database.id}`}  className={`${styles.technologyCard} ${styles.toolsContainer}`}>
+                                        <Link target='_blank' to={`/database/${project.ProjectDatabase.Database.id}`} className={`${styles.technologyCard} ${styles.toolsContainer}`}>
                                             <div className={styles.icon}>{useIcon(project.ProjectDatabase.Database.name)}</div>
                                             <div className={styles.name}><p>{project.ProjectDatabase.Database.name}</p></div>
                                         </Link>
