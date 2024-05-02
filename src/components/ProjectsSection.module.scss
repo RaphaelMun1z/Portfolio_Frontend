@@ -308,3 +308,15 @@
     height: fit-content;
     gap: 1%;
 }
+
+@media(max-width: 1200px) {
+    .projectsContainer {
+        gap: 1em 0 !important;
+        padding: 0 1em !important;
+    }
+
+    .topicsContainer {
+        flex-wrap: wrap !important;
+        gap: 1em !important;
+    }
+}
