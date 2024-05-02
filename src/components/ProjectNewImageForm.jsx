@@ -38,15 +38,17 @@ const ProjectNewImageForm = () => {
 
         setInternErrors([])
 
-        if (projectId === null) {
+        if (projectId === null || isNaN(projectId)) {
             setInternErrors(prevErrors => [...prevErrors, "O identificador do projeto é obrigatório!"])
             return
         }
 
         const projectImageData = {
-            image: image,
-            projectId: parseInt(projectId)
+            projectId: parseInt(projectId),
+            image: image
         }
+
+        console.log(projectImageData)
 
         const formData = new FormData()
 
@@ -54,10 +56,11 @@ const ProjectNewImageForm = () => {
             formData.append(key, projectImageData[key])
         })
 
-        return console.log(formData)
+        console.log(formData)
+
         dispatch(createProjectImage(formData))
 
-        setImage("")
+        setImage(null)
         setInternErrors([])
 
         resetComponentMessage()

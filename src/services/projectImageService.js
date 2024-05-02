@@ -2,7 +2,7 @@ import { api, requestConfig } from '../utils/config'
 
 // Create project image
 const createProjectImage = async (data, token) => {
-    const config = requestConfig("POST", data, token, false)
+    const config = requestConfig("POST", data, token, true)
 
     try {
         const res = await fetch(api + "/projects-image", config)

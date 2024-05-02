@@ -57,7 +57,7 @@ export const projectImageSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.image = action.payload
-                state.message = "Linguagem cadastrada com sucesso!"
+                state.message = "Imagem cadastrada com sucesso!"
             })
             .addCase(createProjectImage.rejected, (state, action) => {
                 state.loading = false
