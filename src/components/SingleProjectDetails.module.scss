@@ -450,3 +450,43 @@
     color: #aaa;
     font-weight: 400;
 }
+
+@media(max-width: 1200px) {
+    .projectDetailsContainer {
+        padding: 1em !important;
+    }
+
+    .headerContent {
+        flex-direction: column !important;
+        gap: 2em !important;
+    }
+
+    .description {
+        width: 100% !important;
+        max-width: fit-content !important;
+        max-height: fit-content !important;
+        order: 1;
+    }
+
+    .projectView {
+        width: 100% !important;
+        max-width: fit-content !important;
+        max-height: 50vh !important;
+        order: 3;
+    }
+
+    .technologies {
+        width: 100% !important;
+        max-width: fit-content !important;
+        max-height: fit-content !important;
+        order: 2;
+    }
+
+    .images {
+        .image {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            height: 350px !important;
+        }
+    }
+}

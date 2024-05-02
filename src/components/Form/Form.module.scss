@@ -329,3 +329,10 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .formSections {
+        min-height: inherit !important;
+        padding: 1em !important;
+    }
+}

@@ -216,3 +216,29 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .searchContainer {
+        flex-wrap: wrap !important;
+        gap: 1em 0 !important;
+
+        input {
+            width: 80% !important;
+        }
+
+        label {
+            width: 100% !important;
+        }
+    }
+
+    .container {
+        .list {
+            overflow-x: scroll !important;
+            margin-top: 1em !important;
+        }
+    }
+
+    .header {
+        flex-wrap: wrap !important;
+    }
+}

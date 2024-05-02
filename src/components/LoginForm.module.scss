@@ -243,3 +243,13 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .mainContainer {
+        padding: 1em !important;
+    }
+
+    .formStep {
+        width: 100% !important;
+    }
+}

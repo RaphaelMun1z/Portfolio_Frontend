@@ -87,10 +87,13 @@ footer {
 }
 
 @media(max-width: 1200px) {
+    footer {
+        border-radius: 20px 20px 0 0 !important;
+    }
+
     .insideFooter {
         flex-direction: column !important;
         padding-top: 1em !important;
         gap: 2em !important;
     }
-
 }

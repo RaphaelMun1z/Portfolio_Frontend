@@ -94,3 +94,25 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .mainNumberContainer {
+        flex-direction: column !important;
+        gap: 1em !important;
+
+        .title {
+            p {
+                width: fit-content !important;
+            }
+        }
+    }
+
+    .mainGraphicsDivision {
+        flex-direction: column !important;
+        gap: 1em !important;
+
+        .graphic {
+            width: 100% !important;
+        }
+    }
+}

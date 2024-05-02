@@ -88,3 +88,13 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .skillContainer {
+        padding: 1em !important;
+    }
+
+    .content {
+        width: 100% !important;
+    }
+}

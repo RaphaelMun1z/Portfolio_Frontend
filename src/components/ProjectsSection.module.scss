@@ -319,4 +319,10 @@
         flex-wrap: wrap !important;
         gap: 1em !important;
     }
+
+    .searchBar {
+        input {
+            max-width: 70% !important;
+        }
+    }
 }

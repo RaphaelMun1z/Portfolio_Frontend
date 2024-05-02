@@ -64,9 +64,18 @@
     .cardContainer {
         width: 100% !important;
         flex-direction: column-reverse !important;
+        padding: 1em !important;
 
         &>div {
             width: 100% !important;
+        }
+    }
+
+    .imageContainer {
+        min-height: 400px !important;
+
+        .imageContainer {
+            max-height: 400px !important;
         }
     }
 }
