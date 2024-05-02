@@ -85,40 +85,38 @@ function App() {
       <BrowserRouter>
         {/* <SystemMessage msg="Olá, seja bem vindo(a) ao meu portfólio!" /> */}
         <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/sobre" element={<AboutPage />} />
+            <Route path="/habilidades" element={<SkillsPage />} />
+            <Route path="/projetos" element={<ProjectsPage />} />
+            <Route path="/contato" element={<Contact />} />
+            <Route path="/projeto/:id" element={<ProjectPage />} />
+            <Route path="/depoimentos" element={<Testimonials />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/orcamento" element={<Budget />} />
+            <Route path="/certificacoes" element={<Certifications />} />
+            <Route path="/linguagem/:id" element={<TechSinglePage type="language" />} />
+            <Route path="/framework/:id" element={<TechSinglePage type="framework" />} />
+            <Route path="/ferramenta/:id" element={<TechSinglePage type="tool" />} />
+            <Route path="/database/:id" element={<TechSinglePage type="database" />} />
+            <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
 
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/sobre" element={<AboutPage />} />
-          <Route path="/habilidades" element={<SkillsPage />} />
-          <Route path="/projetos" element={<ProjectsPage />} />
-          <Route path="/contato" element={<Contact />} />
-          <Route path="/projeto/:id" element={<ProjectPage />} />
-          <Route path="/depoimentos" element={<Testimonials />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/orcamento" element={<Budget />} />
-          <Route path="/certificacoes" element={<Certifications />} />
-          <Route path="/linguagem/:id" element={<TechSinglePage type="language" />} />
-          <Route path="/framework/:id" element={<TechSinglePage type="framework" />} />
-          <Route path="/ferramenta/:id" element={<TechSinglePage type="tool" />} />
-          <Route path="/database/:id" element={<TechSinglePage type="database" />} />
-          <Route path="/login" element={auth ? <Navigate to="/adm/painel/geral" /> : <Login />} />
+            {/* ADM Routes */}
+            <Route path="/adm/painel" element={wrapPrivateRoute(<Dashboard />)} />
+            <Route path="/adm/painel/:page" element={wrapPrivateRoute(<Dashboard />)} />
+            <Route path="/adm/cadastrar/linguagem" element={wrapPrivateRoute(<NewLanguage />)} />
+            <Route path="/adm/cadastrar/framework" element={wrapPrivateRoute(<NewFramework />)} />
+            <Route path="/adm/cadastrar/projeto" element={wrapPrivateRoute(<NewProject />)} />
+            <Route path="/adm/cadastrar/bdd" element={wrapPrivateRoute(<NewBdd />)} />
+            <Route path="/adm/cadastrar/ferramenta" element={wrapPrivateRoute(<NewTool />)} />
+            <Route path="/adm/cadastrar/habilidadeinterpessoal" element={wrapPrivateRoute(<NewInterpersonalSkill />)} />
+            <Route path="/adm/cadastrar/faq" element={wrapPrivateRoute(<NewFaq />)} />
+            <Route path="/adm/contactform" element={wrapPrivateRoute(<AnswerContactForm />)} />
+            <Route path="/adm/projeto/:projectId/nova-imagem" element={wrapPrivateRoute(<ProjectNewImageForm />)} />
 
-          {/* ADM Routes */}
-          <Route path="/adm/painel" element={wrapPrivateRoute(<Dashboard />)} />
-          <Route path="/adm/painel/:page" element={wrapPrivateRoute(<Dashboard />)} />
-          <Route path="/adm/cadastrar/linguagem" element={wrapPrivateRoute(<NewLanguage />)} />
-          <Route path="/adm/cadastrar/framework" element={wrapPrivateRoute(<NewFramework />)} />
-          <Route path="/adm/cadastrar/projeto" element={wrapPrivateRoute(<NewProject />)} />
-          <Route path="/adm/cadastrar/bdd" element={wrapPrivateRoute(<NewBdd />)} />
-          <Route path="/adm/cadastrar/ferramenta" element={wrapPrivateRoute(<NewTool />)} />
-          <Route path="/adm/cadastrar/habilidadeinterpessoal" element={wrapPrivateRoute(<NewInterpersonalSkill />)} />
-          <Route path="/adm/cadastrar/faq" element={wrapPrivateRoute(<NewFaq />)} />
-          <Route path="/adm/contactform" element={wrapPrivateRoute(<AnswerContactForm />)} />
-          <Route path="/adm/projeto/:projectId/nova-imagem" element={wrapPrivateRoute(<ProjectNewImageForm />)} />
-
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         <Footer />
       </BrowserRouter>
     </>

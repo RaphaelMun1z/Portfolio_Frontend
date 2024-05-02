@@ -35,6 +35,17 @@ header {
             }
         }
 
+        .mobileNav {
+            position: relative;
+            display: none;
+            cursor: pointer;
+
+            svg {
+                color: rgb(254, 135, 0);
+                font-size: 26pt;
+            }
+        }
+
         .linksContainer {
             position: relative;
             display: flex;
@@ -152,19 +163,59 @@ header {
 
 @media(max-width: 1200px) {
     header {
+        position: fixed !important;
         min-height: none !important;
         padding: 1em 0 !important;
+        min-height: fit-content !important;
+        background-color: #fff;
+        border-radius: 0 0 20px 20px;
+        transition: all .1s ease-in-out;
+        z-index: 999 !important;
     }
 
-    .active {
-        width: calc(100vw - 1em) !important;
+    header.active {
+        width: 95% !important;
+        border-radius: 20px !important;
+        transition: all .1s ease-in-out;
     }
 
     nav {
-        justify-content: center !important;
+        padding: 0 2em !important;
+        flex-direction: column !important;
+        gap: 1em !important;
+    }
+
+    .navTop {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: fit-content;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .linksContainer {
-        display: none !important;
+        //display: none !important;
+
+        ul {
+            flex-direction: column;
+
+            li {
+                a {
+                    color: rgb(254, 135, 0) !important;
+                }
+
+                a.active {
+                    border: 2px solid rgb(254, 135, 0) !important;
+                    background: transparent !important;
+                    width: fit-content !important;
+                }
+            }
+        }
+    }
+
+    .mobileNav {
+        display: flex !important;
     }
 }

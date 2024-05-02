@@ -19,7 +19,7 @@ section {
 }
 
 .header h1 {
-    font-size: 45pt;
+    font-size: min(8vw, 45pt);
 }
 
 .contentContainer {
@@ -210,9 +210,15 @@ section {
 }
 
 @media(max-width: 1200px) {
+    section {
+        gap: 1em 0 !important;
+    }
+
     .contentContainer {
         padding: 0 1em !important;
         flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
     .infoContainer {
@@ -225,7 +231,7 @@ section {
         overflow: hidden !important;
         max-width: 100%;
 
-        img{
+        img {
             margin: 0em !important;
             height: 300px;
             padding: 2em !important;

@@ -18,7 +18,7 @@ section {
         color: #fff;
 
         h1 {
-            font-size: 45pt;
+            font-size: min(8vw, 45pt);
         }
     }
 
@@ -98,17 +98,17 @@ section {
 
                         h1 {
                             width: fit-content;
-                            font-size: 30pt;
+                            font-size: min(6vw, 30pt);
                         }
 
                         h2 {
                             width: 600px;
-                            font-size: 15pt;
+                            font-size: min(3vw, 15pt);
                         }
 
                         p {
                             width: fit-content;
-                            font-size: 15pt;
+                            font-size: min(3vw, 15pt);
                             margin-top: .5em;
                         }
 
@@ -134,6 +134,34 @@ section {
                     color: #fff;
                 }
             }
+        }
+    }
+}
+
+@media(max-width: 1200px) {
+    .academicEducationContainer {
+        width: 100% !important;
+        padding: 0 1em !important;
+
+        .item {
+            flex-wrap: wrap !important;
+            flex-direction: column !important;
+
+            .textContainer {
+                width: 100% !important;
+            }
+
+            .image {
+                width: fit-content !important;
+            }
+        }
+    }
+
+    .text {
+        padding: 1em !important;
+
+        h2 {
+            width: fit-content !important;
         }
     }
 }

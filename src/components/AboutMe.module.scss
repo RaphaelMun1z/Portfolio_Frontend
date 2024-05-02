@@ -19,7 +19,7 @@ section {
 }
 
 .header h1 {
-    font-size: 45pt;
+    font-size: min(8vw, 45pt);
 }
 
 .contentContainer {
@@ -208,4 +208,18 @@ section:hover .contentContainer .imageContainer img {
     font-size: 20pt;
     font-weight: 300;
     color: #999;
+}
+
+@media(max-width: 1200px) {
+    .contentContainer {
+        padding: 0 1em !important;
+    }
+
+    .infoContainer {
+        padding: 0 !important;
+    }
+
+    .imageContainer {
+        display: none !important;
+    }
 }

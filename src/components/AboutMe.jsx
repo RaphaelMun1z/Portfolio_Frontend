@@ -1,5 +1,5 @@
 // Styles
-import styles from './AboutMe.module.css'
+import styles from './AboutMe.module.scss'
 
 // Icons
 import { GrCertificate } from "react-icons/gr";
