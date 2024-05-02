@@ -21,7 +21,7 @@ section {
 }
 
 .header h1 {
-    font-size: 45pt;
+    font-size: min(8vw, 45pt);
 }
 
 .contentContainer {
@@ -32,19 +32,19 @@ section {
     height: fit-content;
     gap: 30px 1.5%;
 
-    .containerTech{
+    .containerTech {
         position: relative;
         display: flex;
         flex-wrap: wrap;
         width: inherit;
         height: fit-content;
 
-        h1{
+        h1 {
             margin-bottom: .5em;
         }
     }
 
-    .noData{
+    .noData {
         width: 100%;
         color: #999;
         font-size: 20pt;
@@ -69,4 +69,14 @@ section {
     overflow: hidden;
     padding: 3em;
     cursor: pointer;
+}
+
+@media(max-width: 1200px) {
+    .contentContainer {
+        gap: 3em 1.5% !important;
+    }
+
+    .containerTech {
+        padding: 0 1em !important;
+    }
 }

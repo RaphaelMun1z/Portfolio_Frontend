@@ -59,7 +59,6 @@ const TechnologiesSkills = () => {
                     )}
                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                         <Swiper
-                            slidesPerView={3}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -90,7 +89,6 @@ const TechnologiesSkills = () => {
                     )}
                     {!languageLoading && languages && languages.length > 0 && (
                         <Swiper
-                            slidesPerView={3}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -121,7 +119,6 @@ const TechnologiesSkills = () => {
                     )}
                     {!databaseLoading && databases && databases.length > 0 && (
                         <Swiper
-                            slidesPerView={3}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -152,7 +149,6 @@ const TechnologiesSkills = () => {
                     )}
                     {!toolLoading && tools && tools.length > 0 && (
                         <Swiper
-                            slidesPerView={3}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -186,7 +182,6 @@ const TechnologiesSkills = () => {
                     )}
                     {!interpersonalSkillLoading && interpersonalSkills && interpersonalSkills.length > 0 && (
                         <Swiper
-                            slidesPerView={3}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
