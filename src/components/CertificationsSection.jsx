@@ -64,8 +64,9 @@ const CertificationsSection = () => {
             gsap.killTweensOf("#item")
         }
     }, [])
-
+    console.log("testeeeeeeeeeeeeee")
     useEffect(() => {
+        console.log("teste")
         if (swiper) {
             const updateSlidesPerView = () => {
                 if (window.innerWidth < 700) {
