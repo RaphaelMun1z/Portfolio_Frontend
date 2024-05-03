@@ -29,18 +29,22 @@ const LandingSection = () => {
     useEffect(() => {
         const testimonialsElements = document.querySelectorAll('.item');
 
-        tl.current = gsap.timeline({
-            onComplete: () => {
-                console.log("Animation completed");
-            }
-        }).from(testimonialsElements, {
+        gsap.set(testimonialsElements, {
             opacity: 0,
-            y: 50,
-            stagger: 0.2,
-            filter: 'blur(0)',
-            scale: 1,
-            duration: 1,
+            y: -50,
+            filter: 'blur(4px)',
+            scale: 0.5,
         });
+
+        tl.current = gsap.timeline()
+            .to(testimonialsElements, {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                filter: 'blur(0)',
+                scale: 1,
+                duration: 1,
+            });
 
         return () => {
             tl.current.kill();
