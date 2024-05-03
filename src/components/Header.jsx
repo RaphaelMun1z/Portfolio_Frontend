@@ -47,7 +47,11 @@ const Header = () => {
     };
 
     useEffect(() => {
-        updateSlidesPerView();
+        updateSlidesPerView()
+    }, [])
+
+    useEffect(() => {
+        updateSlidesPerView()
 
         window.addEventListener('resize', updateSlidesPerView);
 

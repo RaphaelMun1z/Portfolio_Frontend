@@ -12,7 +12,7 @@ import TechnologyCard from './TechnologyCard'
 import SoftSkillCard from './SoftSkillCard'
 
 // Hooks
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
@@ -23,6 +23,12 @@ import { getTools } from '../slices/toolSlice';
 import { getInterpersonalSkills } from '../slices/interpersonalSkillsSlice'
 
 const TechnologiesSkills = () => {
+    const framework = useRef(null);
+    const language = useRef(null);
+    const database = useRef(null);
+    const tool = useRef(null);
+    const skill = useRef(null);
+
     const dispatch = useDispatch()
 
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
@@ -38,6 +44,63 @@ const TechnologiesSkills = () => {
         dispatch(getTools())
         dispatch(getInterpersonalSkills())
     }, [])
+
+    const updateSlidesPerView = (el) => {
+        let swiper
+
+        if (el.current) {
+            swiper = el.current.swiper
+        }
+
+        if (swiper) {
+            if (window.innerWidth < 700) {
+                swiper.params.slidesPerView = 1;
+            } else if (window.innerWidth < 1400) {
+                swiper.params.slidesPerView = 2;
+            } else {
+                swiper.params.slidesPerView = 3;
+            }
+            swiper.update();
+        }
+    };
+
+    useEffect(() => {
+        updateAllSlides()
+
+        window.addEventListener('resize', updateAllSlides);
+
+        return () => {
+            window.removeEventListener('resize', updateAllSlides);
+        };
+    }, []);
+
+    const updateAllSlides = () => {
+        updateSlidesPerView(framework)
+        updateSlidesPerView(language)
+        updateSlidesPerView(database)
+        updateSlidesPerView(tool)
+        updateSlidesPerView(skill)
+    }
+
+    useEffect(() => {
+        updateSlidesPerView(framework)
+    }, [frameworks])
+
+    useEffect(() => {
+        updateSlidesPerView(language)
+    }, [languages])
+
+    useEffect(() => {
+        updateSlidesPerView(database)
+    }, [databases])
+
+    useEffect(() => {
+        updateSlidesPerView(tool)
+    }, [tools])
+
+    useEffect(() => {
+        updateSlidesPerView(skill)
+    }, [interpersonalSkills])
 
     return (
         <section>
@@ -59,6 +122,7 @@ const TechnologiesSkills = () => {
                     )}
                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                         <Swiper
+                            ref={framework}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -89,6 +153,7 @@ const TechnologiesSkills = () => {
                     )}
                     {!languageLoading && languages && languages.length > 0 && (
                         <Swiper
+                            ref={language}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -119,6 +184,7 @@ const TechnologiesSkills = () => {
                     )}
                     {!databaseLoading && databases && databases.length > 0 && (
                         <Swiper
+                            ref={database}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -149,6 +215,7 @@ const TechnologiesSkills = () => {
                     )}
                     {!toolLoading && tools && tools.length > 0 && (
                         <Swiper
+                            ref={tool}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
@@ -182,6 +249,7 @@ const TechnologiesSkills = () => {
                     )}
                     {!interpersonalSkillLoading && interpersonalSkills && interpersonalSkills.length > 0 && (
                         <Swiper
+                            ref={skill}
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
