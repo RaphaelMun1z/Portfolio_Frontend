@@ -149,6 +149,10 @@ section {
 
             .imageContainer {
                 max-height: 300px !important;
+
+                img {
+                    max-width: 30vw !important;
+                }
             }
         }
     }
