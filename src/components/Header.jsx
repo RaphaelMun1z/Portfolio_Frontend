@@ -39,17 +39,12 @@ const Header = () => {
     }
 
     const updateSlidesPerView = () => {
-        if (window.innerWidth < 1200) {
+        if (window.innerWidth >= 1200) {
             setOpenNavbar(false)
-        } else {
+        } else if (window.innerWidth < 1200) {
             setOpenNavbar(true)
         }
     };
-
-    useEffect(() => {
-        updateSlidesPerView()
-        console.log("Teste")
-    }, [window])
 
     useEffect(() => {
         updateSlidesPerView()
