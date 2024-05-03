@@ -41,8 +41,10 @@ const Header = () => {
     const updateSlidesPerView = () => {
         if (window.innerWidth >= 1200) {
             setOpenNavbar(true)
+            console.log("a")
         } else if (window.innerWidth < 1200) {
             setOpenNavbar(false)
+            console.log("b")
         }
     };
 
