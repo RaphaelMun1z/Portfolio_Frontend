@@ -1,5 +1,5 @@
-export const api = "https://portfolio-backend-raphael-munizs-projects.vercel.app/api"
-export const uploads = "https://portfolio-backend-raphael-munizs-projects.vercel.app/uploads"
+export const api = "https://portfolio-frontend-phi-one.vercel.app/api"
+export const uploads = "https://portfolio-frontend-phi-one.vercel.app/uploads"
 
 export const requestConfig = (method, data, token = null, image = null) => {
     let config
