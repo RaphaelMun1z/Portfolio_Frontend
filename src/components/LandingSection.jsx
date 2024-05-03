@@ -28,6 +28,7 @@ const LandingSection = () => {
 
     useEffect(() => {
         const testimonialsElements = document.querySelectorAll('.item');
+        console.log(testimonialsElements)
 
         tl.current = gsap.timeline()
             .from(testimonialsElements, {
