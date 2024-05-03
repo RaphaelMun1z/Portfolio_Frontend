@@ -70,10 +70,13 @@ const CertificationsSection = () => {
             const updateSlidesPerView = () => {
                 if (window.innerWidth < 700) {
                     swiper.params.slidesPerView = 1;
+                    console.log("1")
                 } else if (window.innerWidth < 1400) {
                     swiper.params.slidesPerView = 2;
+                    console.log("2")
                 } else {
                     swiper.params.slidesPerView = 3;
+                    console.log("3")
                 }
                 swiper.update();
             };
