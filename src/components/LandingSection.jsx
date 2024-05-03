@@ -42,7 +42,7 @@ const LandingSection = () => {
         return () => {
             tl.current.kill();
         };
-    }, []);
+    }, [document.readyState]);
 
     // 3D
     const [model, setModel] = useState(null);

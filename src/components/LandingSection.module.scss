@@ -42,9 +42,9 @@ main {
             flex-direction: column;
             width: fit-content;
             height: fit-content;
-            /* opacity: 0;
+            opacity: 0;
             transform: translateY(-150px) scale(1);
-            filter: blur(20px); */
+            filter: blur(20px);
             transition: opacity 1s ease, transform 1s ease, filter 1s ease-in-out;
 
             h2 {
