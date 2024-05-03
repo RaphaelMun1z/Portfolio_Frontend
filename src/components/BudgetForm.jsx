@@ -120,7 +120,7 @@ const BudgetForm = () => {
     const resetComponentMessage = () => {
         setTimeout(() => {
             dispatch(resetMessage())
-        }, 2000)
+        }, 5000)
     }
 
     return (

@@ -131,7 +131,7 @@ const ContactForm = ({ user }) => {
     const resetComponentMessage = () => {
         setTimeout(() => {
             dispatch(resetMessage())
-        }, 2000)
+        }, 5000)
     }
 
     useEffect(() => {
