@@ -42,7 +42,7 @@ const Header = () => {
         if (window.innerWidth >= 1200) {
             setOpenNavbar(true)
         } else if (window.innerWidth < 1200) {
-            //setOpenNavbar(false)
+            setOpenNavbar(false)
         }
     };
 

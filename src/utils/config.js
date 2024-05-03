@@ -1,5 +1,5 @@
-export const api = "http://127.0.0.1:3000/api"
-export const uploads = "http://127.0.0.1:3000/uploads"
+export const api = "https://portfolio-backend-raphael-munizs-projects.vercel.app/api"
+export const uploads = "https://portfolio-backend-raphael-munizs-projects.vercel.app/uploads"
 
 export const requestConfig = (method, data, token = null, image = null) => {
     let config
