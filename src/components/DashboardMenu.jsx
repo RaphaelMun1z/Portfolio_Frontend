@@ -20,7 +20,7 @@ import FrameworksManager from './Dashboard/FrameworksManager';
 import BddManager from './Dashboard/BddManager';
 import ToolsManager from './Dashboard/ToolsManager';
 import InterpersonalSkillsManager from './Dashboard/InterpersonalSkillsManager';
-import ContactFormsManager from './Dashboard/contactFormsManager';
+import ContactFormsManager from './Dashboard/ContactFormsManager';
 import FaqManager from './Dashboard/FaqManager';
 
 import { Link } from 'react-router-dom';
