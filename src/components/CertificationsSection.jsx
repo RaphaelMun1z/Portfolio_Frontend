@@ -16,6 +16,7 @@ import { SiUdemy } from "react-icons/si";
 const CertificationsSection = () => {
     const el = useRef(null);
     const tl = useRef()
+    const ce = useRef(null);
 
     const [swiper, setSwiper] = useState(null);
 
@@ -64,20 +65,16 @@ const CertificationsSection = () => {
             gsap.killTweensOf("#item")
         }
     }, [])
-    console.log("testeeeeeeeeeeeeee")
+
     useEffect(() => {
-        console.log("teste")
         if (swiper) {
             const updateSlidesPerView = () => {
                 if (window.innerWidth < 700) {
                     swiper.params.slidesPerView = 1;
-                    console.log("1")
                 } else if (window.innerWidth < 1400) {
                     swiper.params.slidesPerView = 2;
-                    console.log("2")
                 } else {
                     swiper.params.slidesPerView = 3;
-                    console.log("3")
                 }
                 swiper.update();
             };
@@ -93,7 +90,7 @@ const CertificationsSection = () => {
     }, [swiper]);
 
     useEffect(() => {
-        const swiperInstance = el.current.swiper;
+        const swiperInstance = ce.current.swiper;
         setSwiper(swiperInstance);
     }, []);
 
@@ -104,7 +101,7 @@ const CertificationsSection = () => {
             </div>
             <div className={styles.contentContainer}>
                 <Swiper
-                    ref={el}
+                    ref={ce}
                     spaceBetween={30}
                     pagination={{
                         clickable: true,
