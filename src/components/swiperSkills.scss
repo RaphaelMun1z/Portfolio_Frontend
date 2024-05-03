@@ -11,9 +11,9 @@
         height: auto !important;
     }
 
-    /*  .swiper-slide {
-        min-width: 532px;
-    } */
+    .swiper-slide {
+        min-width: inherit !important;
+    }
 
     .swiper-pagination {
         position: relative;
