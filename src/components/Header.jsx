@@ -48,7 +48,8 @@ const Header = () => {
 
     useEffect(() => {
         updateSlidesPerView()
-    }, [])
+        console.log("Teste")
+    }, [window])
 
     useEffect(() => {
         updateSlidesPerView()
