@@ -29,12 +29,12 @@ const LandingSection = () => {
     useEffect(() => {
         const testimonialsElements = document.querySelectorAll('.item');
 
-        gsap.set(testimonialsElements, {
+        /* gsap.set(testimonialsElements, {
             opacity: 0,
             y: -50,
             filter: 'blur(4px)',
             scale: 0.5,
-        });
+        }); */
 
         tl.current = gsap.timeline()
             .to(testimonialsElements, {
