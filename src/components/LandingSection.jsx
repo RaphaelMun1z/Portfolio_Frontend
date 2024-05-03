@@ -23,27 +23,28 @@ import { Link } from 'react-router-dom';
 const scene = new THREE.Scene();
 
 const LandingSection = () => {
-    const el = useRef(null);
     const tl = useRef(null);
 
     useEffect(() => {
         const testimonialsElements = document.querySelectorAll('.item');
-        console.log(testimonialsElements)
 
-        tl.current = gsap.timeline()
-            .from(testimonialsElements, {
-                opacity: 1,
-                y: 0,
-                stagger: 0.2,
-                filter: 'blur(0)',
-                scale: 1,
-                duration: 1,
-            });
+        tl.current = gsap.timeline({
+            onComplete: () => {
+                console.log("Animation completed");
+            }
+        }).from(testimonialsElements, {
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            filter: 'blur(0)',
+            scale: 1,
+            duration: 1,
+        });
 
         return () => {
             tl.current.kill();
         };
-    }, [document.readyState]);
+    }, []);
 
     // 3D
     const [model, setModel] = useState(null);
@@ -88,7 +89,7 @@ const LandingSection = () => {
 
     return (
         <main>
-            <div className={`${styles.imageContainer}`} ref={el}>
+            <div className={`${styles.imageContainer}`}>
                 <Canvas scene={scene} className={`${styles.divInsideImageContainer} item`}>
                     <ambientLight intensity={0.5} color="white" />
                     <directionalLight intensity={0.8} color="white" position={[0, 5, 5]} />
@@ -109,7 +110,7 @@ const LandingSection = () => {
                     />
                 </Canvas>
             </div>
-            <div className={`${styles.landingContentContainer}`} ref={el}>
+            <div className={`${styles.landingContentContainer}`}>
                 <div className={`${styles.insideLandingContent} item`}>
                     <p>Olá,</p>
                     <h2>Me chamo <span>Raphael Muniz</span></h2>
