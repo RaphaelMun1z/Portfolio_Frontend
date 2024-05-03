@@ -57,7 +57,9 @@ const Header = () => {
     }, []);
 
     const navLinkClicked = () => {
-        //setOpenNavbar(false)
+        if (window.innerWidth < 1200) {
+            setOpenNavbar(false)
+        }
     }
 
     return (
