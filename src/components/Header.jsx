@@ -41,10 +41,8 @@ const Header = () => {
     const updateSlidesPerView = () => {
         if (window.innerWidth >= 1200) {
             setOpenNavbar(true)
-            console.log("a")
         } else if (window.innerWidth < 1200) {
-            setOpenNavbar(false)
-            console.log("b")
+            //setOpenNavbar(false)
         }
     };
 
@@ -59,7 +57,7 @@ const Header = () => {
     }, []);
 
     const navLinkClicked = () => {
-        setOpenNavbar(false)
+        //setOpenNavbar(false)
     }
 
     return (
@@ -78,7 +76,7 @@ const Header = () => {
                         )}
                     </div>
                 </div>
-                {openNavbar && (
+                {openNavbar === true && (
                     <div className={styles.linksContainer}>
                         <ul>
                             <li>
