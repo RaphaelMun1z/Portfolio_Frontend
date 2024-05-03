@@ -139,7 +139,7 @@ form {
 }
 
 form>h1 {
-    font-size: 45pt;
+    font-size: min(8vw, 45pt);
     color: rgb(210, 124, 24);
 }
 
