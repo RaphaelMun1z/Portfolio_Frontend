@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 const scene = new THREE.Scene();
 
 const LandingSection = () => {
+    const el = useRef(null);
     const tl = useRef(null);
 
     useEffect(() => {
@@ -89,7 +90,7 @@ const LandingSection = () => {
 
     return (
         <main>
-            <div className={`${styles.imageContainer}`}>
+            <div className={`${styles.imageContainer}`} ref={el}>
                 <Canvas scene={scene} className={`${styles.divInsideImageContainer} item`}>
                     <ambientLight intensity={0.5} color="white" />
                     <directionalLight intensity={0.8} color="white" position={[0, 5, 5]} />
@@ -110,7 +111,7 @@ const LandingSection = () => {
                     />
                 </Canvas>
             </div>
-            <div className={`${styles.landingContentContainer}`}>
+            <div className={`${styles.landingContentContainer}`} ref={el}>
                 <div className={`${styles.insideLandingContent} item`}>
                     <p>Olá,</p>
                     <h2>Me chamo <span>Raphael Muniz</span></h2>
