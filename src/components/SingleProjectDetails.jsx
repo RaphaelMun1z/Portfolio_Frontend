@@ -80,7 +80,7 @@ const SingleProjectDetails = () => {
                             <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                         )}
                         {!loading && project && project.isHosted && project.ProjectHost && (
-                            <a href={`${project.ProjectHost.URL}`} className={`${styles.visitButton}`}>Visitar<FaExternalLinkAlt /></a>
+                            <a href={`${project.ProjectHost.URL}`} target='_blank' className={`${styles.visitButton}`}>Visitar<FaExternalLinkAlt /></a>
                         )}
                         {!loading && project && !project.isHosted && (
                             <button className={`${styles.bug} ${styles.notHosted}`}>Não hospedado<IoCloudOfflineOutline /></button>
@@ -95,7 +95,7 @@ const SingleProjectDetails = () => {
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
                                     {!loading && project && project.ProjectFrontend && (
-                                        <a href={project.ProjectFrontend.repository} className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
+                                        <a href={project.ProjectFrontend.repository} target='_blank' className={styles.github}><FaGithub />Frontend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                                 <div className={styles.repositoriesSection}>
@@ -103,7 +103,7 @@ const SingleProjectDetails = () => {
                                         <div className='skeleton' style={{ width: '200px', height: '60px' }}></div>
                                     )}
                                     {!loading && project && project.ProjectBackend && (
-                                        <a href={project.ProjectBackend.repository} className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
+                                        <a href={project.ProjectBackend.repository} target='_blank' className={styles.github}><FaGithub />Backend<FaExternalLinkAlt className={styles.link} /></a>
                                     )}
                                 </div>
                             </div>
