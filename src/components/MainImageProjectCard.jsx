@@ -3,6 +3,8 @@ import styles from './MainImageProjectCard.module.scss'
 import { uploads } from '../utils/config'
 
 const MainImageProjectCard = ({ image }) => {
+    console.log(image)
+    
     return (
         <div className={styles.image}>
             <img src={`${uploads}/projectsBanner/${image}`} alt="Banner" />
