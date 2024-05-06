@@ -44,6 +44,23 @@ export const getProjectById = createAsyncThunk(
     }
 )
 
+// Delete a project
+export const deleteProject = createAsyncThunk(
+    "project/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await projectService.deleteProject(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const projectSlice = createSlice({
     name: "project",
     initialState,
@@ -92,6 +109,24 @@ export const projectSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.project = action.payload
+            })
+            .addCase(deleteProject.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteProject.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.projects = state.projects.filter((project) => {
+                    return project.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteProject.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.project = {}
             })
     },
 })

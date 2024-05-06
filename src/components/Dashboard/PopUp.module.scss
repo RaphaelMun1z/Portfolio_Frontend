@@ -1,0 +1,94 @@
+.popUpContainer {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    .popUp {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 30vw;
+        height: fit-content;
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 2em;
+
+        .content {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: fit-content;
+            gap: 1em;
+
+            h2 {
+                color: #222;
+            }
+
+            p {
+                span {
+                    font-weight: 700;
+                    font-size: 14pt;
+
+                    &.delete {
+                        font-size: 12pt;
+                        color: red;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .actions {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: fit-content;
+                gap: 1em;
+
+                button {
+                    position: relative;
+                    display: flex;
+                    padding: .3em 1em;
+                    border: 2px solid #999;
+                    color: #999;
+                    background-color: transparent;
+                    border-radius: 10px;
+                    font-size: 12pt;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all .1s ease-in-out;
+                    align-items: center;
+                    gap: .5em;
+
+                    &.delete {
+                        border-color: rgb(210, 68, 68);
+                        color: rgb(210, 68, 68);
+                    }
+
+                    &:hover {
+                        opacity: .5;
+                        transition: all .1s ease-in-out;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .popUpContainer {
+        padding: 1em !important;
+
+        .popUp {
+            width: 100% !important;
+        }
+    }
+}

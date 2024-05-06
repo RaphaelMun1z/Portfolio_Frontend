@@ -45,10 +45,26 @@ const getLanguageById = async (id) => {
     }
 }
 
+// Delete a language
+const deleteLanguage = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/languages/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const languageService = {
     createLanguage,
     getLanguages,
     getLanguageById,
+    deleteLanguage,
 }
 
 export default languageService

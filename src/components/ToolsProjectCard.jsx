@@ -3,6 +3,8 @@ import styles from './ToolsProjectCard.module.scss'
 import { Fragment } from 'react';
 import { useIcon } from '../hooks/useIcon';
 
+import { FaPlus } from "react-icons/fa6";
+
 import { Tooltip } from 'react-tooltip';
 
 const ToolsProjectCard = ({ projectTools }) => {
@@ -13,14 +15,22 @@ const ToolsProjectCard = ({ projectTools }) => {
                     <div className={styles.toolInfoContainer}>
                         <p>Ferramentas:</p>
                         <div className={styles.tools}>
-                            {projectTools && projectTools.map((projectTool, index) => (
-                                <Fragment key={index}>
-                                    <div className={styles.toolCard} data-tooltip-id="tool-tooltip" data-tooltip-content={projectTool.Tool.name}>
-                                        {useIcon(projectTool.Tool.name)}
-                                    </div>
-                                    <Tooltip id="tool-tooltip" />
-                                </Fragment>
-                            ))}
+                            {projectTools && (
+                                <>
+                                    <Fragment>
+                                        <div className={styles.toolCard} data-tooltip-id="tool-tooltip" data-tooltip-content={projectTools[0].Tool.name}>
+                                            {useIcon(projectTools[0].Tool.name)}
+                                        </div>
+                                        <Tooltip id="tool-tooltip" />
+                                    </Fragment>
+                                    <Fragment>
+                                        <div className={`${styles.toolCard} ${styles.plus}`} data-tooltip-id="tool-tooltip" data-tooltip-content={"Outros"}>
+                                            <FaPlus />
+                                        </div>
+                                        <Tooltip id="tool-tooltip" />
+                                    </Fragment>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

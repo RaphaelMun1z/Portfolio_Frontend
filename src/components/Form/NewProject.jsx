@@ -3,6 +3,7 @@ import styles from './Form.module.scss'
 // Icons
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { FiAlertTriangle } from "react-icons/fi";
+import { FaRegImage } from "react-icons/fa";
 
 // Components
 import { Link } from 'react-router-dom'
@@ -14,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
 import { resetMessage, createProject } from '../../slices/projectSlice'
-import { getLanguages } from '../../slices/languageSlice';
+import { getLanguageById, getLanguages } from '../../slices/languageSlice';
 import { getFrameworks } from '../../slices/frameworkSlice';
 import { getDatabases } from '../../slices/databaseSlice';
 import { getTools } from '../../slices/toolSlice';
@@ -23,7 +24,7 @@ const NewProject = () => {
     const dispatch = useDispatch()
 
     const { loading: loadingProject, message: messageProject, error: errorProject } = useSelector((state) => state.project)
-    const { languages, loading: languageLoading } = useSelector((state) => state.language)
+    const { language, languages, loading: languageLoading } = useSelector((state) => state.language)
     const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
     const { databases, loading: databaseLoading } = useSelector((state) => state.database)
     const { tools, loading: toolLoading } = useSelector((state) => state.tool)
@@ -59,6 +60,10 @@ const NewProject = () => {
     // Step 5 - States
     const [projectUsedBdd, setProjectUsedBdd] = useState(null)
     const [projectBdd, setProjectBdd] = useState("")
+
+    const [languagesAux, setLanguagesAux] = useState("")
+    const [projectFrontendLanguageName, setProjectFrontendLanguageName] = useState("")
+    const [projectBackendLanguageName, setProjectBackendLanguageName] = useState("")
 
     useEffect(() => {
         dispatch(getLanguages())
@@ -380,7 +385,13 @@ const NewProject = () => {
     const handleFile = (e) => {
         const image = e.target.files[0]
 
-        setPreviewBannerImage(image)
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewBannerImage(reader.result);
+            };
+            reader.readAsDataURL(image);
+        }
 
         setProjectBannerImage(image)
     }
@@ -392,6 +403,31 @@ const NewProject = () => {
 
         setProjectToolsArray(selectedToolsIds);
     }, [toolsArray]);
+
+    useEffect(() => {
+        setLanguagesAux("")
+
+        if (projectFrontendLanguage !== 0) {
+            setLanguagesAux("frontend")
+            dispatch(getLanguageById(projectFrontendLanguage));
+        }
+        if (projectBackendLanguage !== 0) {
+            setLanguagesAux("backend")
+            dispatch(getLanguageById(projectBackendLanguage));
+        }
+    }, [projectFrontendLanguage, projectBackendLanguage]);
+
+    useEffect(() => {
+        if (language) {
+            if (languagesAux === "frontend") {
+                setProjectFrontendLanguageName(language.name)
+            }
+
+            if (languagesAux === "backend") {
+                setProjectBackendLanguageName(language.name)
+            }
+        }
+    }, [language])
 
     const handleSaveProject = () => {
         const projectData = {
@@ -434,6 +470,29 @@ const NewProject = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.formSections}>
+                <div className={styles.stepsContainer}>
+                    {formSteps && formSteps.map((step, index) => {
+                        let pointClassName = ` ${styles.point} `;
+
+                        if (step.current || step.correctlyFilled) {
+                            pointClassName += ` ${styles.correctlyFilled} `;
+                        }
+
+                        if (step.viewed && !step.correctlyFilled) {
+                            pointClassName += ` ${styles.error} `;
+                        }
+
+                        if (step.current) {
+                            pointClassName += ` ${styles.current} `;
+                        }
+
+                        return (
+                            <p key={index}>
+                                <div className={pointClassName} onClick={() => handleSelectFormForPoint(index)}></div>
+                            </p>
+                        );
+                    })}
+                </div>
                 {stepNumber === 0 && (
                     <div className={styles.formStep}>
                         <div className={styles.title}>
@@ -461,12 +520,16 @@ const NewProject = () => {
                             </select>
                         </label>
 
-                        <label>
-                            <p>Selecione o banner do projeto:</p>
+                        <label className={styles.imageSelectInputContainer}>
+                            <p>Selecione o banner do projeto</p>
+                            <FaRegImage />
                             <input type="file" name="bannerImage" onChange={(e) => handleFile(e)} />
                         </label>
+
                         {previewBannerImage && (
-                            <img src={previewBannerImage} alt="Banner preview" />
+                            <div className={styles.imagePreviewContainer}>
+                                <img src={previewBannerImage} alt="Banner preview" />
+                            </div>
                         )}
 
                         <div className={styles.footer}>
@@ -771,7 +834,7 @@ const NewProject = () => {
                             <>
                                 <div className={styles.dataContainer}>
                                     <h2>Linguagem usada no frontend:</h2>
-                                    <p>{projectFrontendLanguage !== 0 ? projectFrontendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectFrontendLanguage !== 0 ? projectFrontendLanguageName : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                                 <div className={styles.dataContainer}>
                                     <h2>Repositório do frontend:</h2>
@@ -783,7 +846,7 @@ const NewProject = () => {
                             <>
                                 <div className={styles.dataContainer}>
                                     <h2>Linguagem usada no backend:</h2>
-                                    <p>{projectBackendLanguage !== 0 ? projectBackendLanguage : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
+                                    <p>{projectBackendLanguage !== 0 ? projectBackendLanguageName : <span className={styles.notDefinedYet}><FiAlertTriangle />Ainda não definido.</span>}</p>
                                 </div>
                                 <div className={styles.dataContainer}>
                                     <h2>Repositório do backend:</h2>
@@ -877,30 +940,6 @@ const NewProject = () => {
                         </div>
                     </div>
                 )}
-
-                <div className={styles.stepsContainer}>
-                    {formSteps && formSteps.map((step, index) => {
-                        let pointClassName = ` ${styles.point} `;
-
-                        if (step.current || step.correctlyFilled) {
-                            pointClassName += ` ${styles.correctlyFilled} `;
-                        }
-
-                        if (step.viewed && !step.correctlyFilled) {
-                            pointClassName += ` ${styles.error} `;
-                        }
-
-                        if (step.current) {
-                            pointClassName += ` ${styles.current} `;
-                        }
-
-                        return (
-                            <p key={index}>
-                                <div className={pointClassName} onClick={() => handleSelectFormForPoint(index)}></div>
-                            </p>
-                        );
-                    })}
-                </div>
             </div>
         </div >
     )

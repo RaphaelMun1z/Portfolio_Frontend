@@ -8,7 +8,7 @@ import { Tooltip } from 'react-tooltip';
 
 const LanguagesProjectCard = ({ frontend, backend }) => {
     const [languages, setLanguages] = useState([])
-    
+
     useEffect(() => {
         const languagesArray = []
 
@@ -17,7 +17,8 @@ const LanguagesProjectCard = ({ frontend, backend }) => {
         }
 
         if (backend) {
-            languagesArray.push(backend.Language.name)
+            if (!languagesArray.includes(backend.Language.name))
+                languagesArray.push(backend.Language.name)
         }
 
         setLanguages(languagesArray)

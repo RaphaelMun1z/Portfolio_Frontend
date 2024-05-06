@@ -1,10 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
-import { useEffect } from 'react';
+// Hooks
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getFrameworks } from '../../slices/frameworkSlice';
+import { getFrameworks, deleteFramework, resetMessage } from '../../slices/frameworkSlice';
 
 import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -12,7 +13,13 @@ import { RiSearch2Line } from "react-icons/ri";
 
 import { Link } from 'react-router-dom';
 
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
+
 const FrameworksManager = () => {
+  const [popUp, setPopUp] = useState(false)
+  const [frameworkToDelete, setFrameworkToDelete] = useState({})
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -31,14 +38,42 @@ const FrameworksManager = () => {
 
   const dispatch = useDispatch()
 
-  const { frameworks, loading: frameworkLoading } = useSelector((state) => state.framework)
+  const { frameworks, loading: frameworkLoading, message, error } = useSelector((state) => state.framework)
 
   useEffect(() => {
     dispatch(getFrameworks())
   }, [])
 
+  const handleConfirmDeleteFramework = (frameworkName, frameworkId) => {
+    frameworkToDelete.name = frameworkName
+    frameworkToDelete.id = frameworkId
+
+    setPopUp(true)
+  }
+
+  const handleCancelDeleteFramework = () => {
+    setFrameworkToDelete({})
+    setPopUp(false)
+  }
+
+  const handleDeleteFramework = (frameworkId) => {
+    dispatch(deleteFramework(frameworkId))
+    handleCancelDeleteFramework()
+
+    resetComponentMessage()
+  }
+
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 2000)
+  }
+
   return (
     <div className={styles.container}>
+      {popUp && (
+        <PopUp name={frameworkToDelete.name} id={frameworkToDelete.id} cancelDelete={handleCancelDeleteFramework} deleteFunction={handleDeleteFramework} />
+      )}
       <div className={styles.header}>
         <h1>Frameworks</h1>
         <Link to="/adm/cadastrar/framework" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
@@ -57,6 +92,14 @@ const FrameworksManager = () => {
             <option value="createdat">Data de criação</option>
           </select>
         </label>
+      </div>
+      <div className={styles.actionResults}>
+        {message && (
+          <SystemStatusMessage type="success" msg={message} />
+        )}
+        {error && (
+          <SystemStatusMessage type="error" msg={error} />
+        )}
       </div>
       <div className={styles.list}>
         <table>
@@ -81,8 +124,8 @@ const FrameworksManager = () => {
                 <td>{framework.proficiency}</td>
                 <td>{formatDate(framework.createdAt)}<br />{formatTime(framework.createdAt)}</td>
                 <td>{formatDate(framework.updatedAt)}<br />{formatTime(framework.updatedAt)}</td>
-                <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+                <td><p className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></p></td>
+                <td><p className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline onClick={() => handleConfirmDeleteFramework(framework.name, framework.id)} /></p></td>
               </tr>
             ))}
           </tbody>

@@ -1,10 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
-import { useEffect } from 'react';
+// Hooks
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getTools } from '../../slices/toolSlice';
+import { getTools, deleteTool, resetMessage } from '../../slices/toolSlice';
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -12,7 +13,13 @@ import { RiSearch2Line } from "react-icons/ri";
 
 import { Link } from 'react-router-dom';
 
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
+
 const ToolsManager = () => {
+  const [popUp, setPopUp] = useState(false)
+  const [toolToDelete, setToolToDelete] = useState({})
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -31,14 +38,42 @@ const ToolsManager = () => {
 
   const dispatch = useDispatch()
 
-  const { tools, loading: toolLoading } = useSelector((state) => state.tool)
+  const { tools, loading: toolLoading, message, error } = useSelector((state) => state.tool)
 
   useEffect(() => {
     dispatch(getTools())
   }, [])
 
+  const handleConfirmDeleteTool = (toolName, toolId) => {
+    toolToDelete.name = toolName
+    toolToDelete.id = toolId
+
+    setPopUp(true)
+  }
+
+  const handleCancelDeleteTool = () => {
+    setToolToDelete({})
+    setPopUp(false)
+  }
+
+  const handleDeleteTool = (toolId) => {
+    dispatch(deleteTool(toolId))
+    handleCancelDeleteTool()
+
+    resetComponentMessage()
+  }
+
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 2000)
+  }
+
   return (
     <div className={styles.container}>
+      {popUp && (
+        <PopUp name={toolToDelete.name} id={toolToDelete.id} cancelDelete={handleCancelDeleteTool} deleteFunction={handleDeleteTool} />
+      )}
       <div className={styles.header}>
         <h1>Ferramentas</h1>
         <Link to="/adm/cadastrar/ferramenta" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
@@ -56,6 +91,14 @@ const ToolsManager = () => {
             <option value="createdat">Data de criação</option>
           </select>
         </label>
+      </div>
+      <div className={styles.actionResults}>
+        {message && (
+          <SystemStatusMessage type="success" msg={message} />
+        )}
+        {error && (
+          <SystemStatusMessage type="error" msg={error} />
+        )}
       </div>
       <div className={styles.list}>
         <table>
@@ -79,7 +122,7 @@ const ToolsManager = () => {
                 <td>{formatDate(tool.createdAt)}<br />{formatTime(tool.createdAt)}</td>
                 <td>{formatDate(tool.updatedAt)}<br />{formatTime(tool.updatedAt)}</td>
                 <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline onClick={() => handleConfirmDeleteTool(tool.name, tool.id)} /></th></td>
               </tr>
             ))}
           </tbody>

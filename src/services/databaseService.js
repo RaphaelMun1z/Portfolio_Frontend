@@ -46,10 +46,27 @@ const getDatabaseById = async (id) => {
     }
 }
 
+// Delete a database
+const deleteDatabase = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/databases/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 const databaseService = {
     createDatabase,
     getDatabases,
     getDatabaseById,
+    deleteDatabase,
 }
 
 export default databaseService

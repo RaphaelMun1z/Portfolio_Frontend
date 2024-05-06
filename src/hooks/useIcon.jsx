@@ -25,7 +25,8 @@ import {
     SiOracle,
     SiSqlite,
     SiRedis,
-    SiArduino
+    SiArduino,
+    SiFirebase
 } from "react-icons/si";
 import { FaJava, FaAngular, FaGithub, FaDocker, FaGitAlt, FaSlack } from "react-icons/fa";
 import { GoStack, GoServer } from "react-icons/go";
@@ -90,6 +91,7 @@ export const useIcon = (iconName) => {
         OracleDatabase: <SiOracle className={styles.OracleDatabase} />,
         SQLite: <SiSqlite className={styles.SQLite} />,
         Redis: <SiRedis className={styles.Redis} />,
+        Firebase: <SiFirebase className={styles.Javascript} />,
     }
 
     if (iconName && iconName.trim() !== "") {

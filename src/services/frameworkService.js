@@ -45,10 +45,26 @@ const getFrameworkById = async (id) => {
     }
 }
 
+// Delete a framework
+const deleteFramework = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/frameworks/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const frameworkService = {
     createFramework,
     getFrameworks,
     getFrameworkById,
+    deleteFramework,
 }
 
 export default frameworkService

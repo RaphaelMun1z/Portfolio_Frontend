@@ -49,6 +49,15 @@
                     font-size: 20pt;
                 }
             }
+
+            .plus {
+                border: 2px solid orange;
+                background-color: transparent;
+
+                svg {
+                    color: orange;
+                }
+            }
         }
     }
 }

@@ -1,11 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
 // Hooks
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getInterpersonalSkills } from '../../slices/interpersonalSkillsSlice';
+import { deleteInterpersonalSkill, getInterpersonalSkills, resetMessage } from '../../slices/interpersonalSkillsSlice';
 
 // Icons
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -13,7 +13,13 @@ import { RiSearch2Line } from "react-icons/ri";
 
 import { Link } from 'react-router-dom';
 
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
+
 const InterpersonalSkillsManager = () => {
+  const [popUp, setPopUp] = useState(false)
+  const [interpersonalSkillToDelete, setInterpersonalSkillToDelete] = useState({})
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -32,14 +38,42 @@ const InterpersonalSkillsManager = () => {
 
   const dispatch = useDispatch()
 
-  const { interpersonalSkills, loading: interpersonalSkillLoading } = useSelector((state) => state.interpersonalSkill)
+  const { interpersonalSkills, loading: interpersonalSkillLoading, message, error } = useSelector((state) => state.interpersonalSkill)
 
   useEffect(() => {
     dispatch(getInterpersonalSkills())
   }, [])
 
+  const handleConfirmDeleteInterpersonalSkill = (interpersonalSkillName, interpersonalSkillId) => {
+    interpersonalSkillToDelete.name = interpersonalSkillName
+    interpersonalSkillToDelete.id = interpersonalSkillId
+
+    setPopUp(true)
+  }
+
+  const handleCancelDeleteInterpersonalSkill = () => {
+    setInterpersonalSkillToDelete({})
+    setPopUp(false)
+  }
+
+  const handleDeleteInterpersonalSkill = (interpersonalSkillId) => {
+    dispatch(deleteInterpersonalSkill(interpersonalSkillId))
+    handleCancelDeleteInterpersonalSkill()
+
+    resetComponentMessage()
+  }
+
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 2000)
+  }
+
   return (
     <div className={styles.container}>
+      {popUp && (
+        <PopUp name={interpersonalSkillToDelete.name} id={interpersonalSkillToDelete.id} cancelDelete={handleCancelDeleteInterpersonalSkill} deleteFunction={handleDeleteInterpersonalSkill} />
+      )}
       <div className={styles.header}>
         <h1>Habilidades interpessoais</h1>
         <Link to="/adm/cadastrar/habilidadeinterpessoal" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
@@ -57,6 +91,14 @@ const InterpersonalSkillsManager = () => {
             <option value="createdat">Data de criação</option>
           </select>
         </label>
+      </div>
+      <div className={styles.actionResults}>
+        {message && (
+          <SystemStatusMessage type="success" msg={message} />
+        )}
+        {error && (
+          <SystemStatusMessage type="error" msg={error} />
+        )}
       </div>
       <div className={styles.list}>
         <table>
@@ -76,7 +118,7 @@ const InterpersonalSkillsManager = () => {
                 <td>{skill.name}</td>
                 <td>{skill.proficiency}</td>
                 <td>{formatDate(skill.createdAt)}<br />{formatTime(skill.createdAt)}</td>
-                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline onClick={() => handleConfirmDeleteInterpersonalSkill(skill.name, skill.id)} /></th></td>
               </tr>
             ))}
           </tbody>

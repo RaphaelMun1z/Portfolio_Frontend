@@ -36,6 +36,23 @@ export const getInterpersonalSkills = createAsyncThunk(
     }
 )
 
+// Delete a interpersonal skills
+export const deleteInterpersonalSkill = createAsyncThunk(
+    "interpersonalSkill/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await interpersonalSkillService.deleteInterpersonalSkill(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const interpersonalSkillSlice = createSlice({
     name: "interpersonalSkill",
     initialState,
@@ -74,6 +91,24 @@ export const interpersonalSkillSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.interpersonalSkills = action.payload
+            })
+            .addCase(deleteInterpersonalSkill.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteInterpersonalSkill.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.interpersonalSkills = state.interpersonalSkills.filter((interpersonalSkill) => {
+                    return interpersonalSkill.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteInterpersonalSkill.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.interpersonalSkill = {}
             })
     },
 })

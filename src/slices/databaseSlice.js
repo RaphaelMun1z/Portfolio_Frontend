@@ -46,6 +46,23 @@ export const getDatabases = createAsyncThunk(
     }
 )
 
+// Delete a database
+export const deleteDatabase = createAsyncThunk(
+    "database/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await databaseService.deleteDatabase(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const databaseSlice = createSlice({
     name: "database",
     initialState,
@@ -94,6 +111,24 @@ export const databaseSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.database = action.payload
+            })
+            .addCase(deleteDatabase.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteDatabase.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.databases = state.databases.filter((database) => {
+                    return database.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteDatabase.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.database = {}
             })
     },
 })

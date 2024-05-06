@@ -30,9 +30,25 @@ const getInterpersonalSkills = async () => {
     }
 }
 
+// Delete a interpersonal skill
+const deleteInterpersonalSkill = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/interpersonal-skills/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const interpersonalSkillService = {
     createInterpersonalSkill,
     getInterpersonalSkills,
+    deleteInterpersonalSkill,
 }
 
 export default interpersonalSkillService

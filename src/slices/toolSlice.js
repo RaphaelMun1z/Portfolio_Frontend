@@ -45,6 +45,23 @@ export const getToolById = createAsyncThunk(
     }
 )
 
+// Delete a tool
+export const deleteTool = createAsyncThunk(
+    "tool/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await toolService.deleteTool(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const toolSlice = createSlice({
     name: "tool",
     initialState,
@@ -93,6 +110,24 @@ export const toolSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.tool = action.payload
+            })
+            .addCase(deleteTool.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteTool.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.tools = state.tools.filter((tool) => {
+                    return tool.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteTool.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.tool = {}
             })
     },
 })

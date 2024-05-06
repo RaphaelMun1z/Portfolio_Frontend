@@ -1,10 +1,11 @@
 import styles from './DashboardItems.module.scss'
 
-import { useEffect } from 'react';
+// Hooks
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getDatabases } from '../../slices/databaseSlice';
+import { getDatabases, deleteDatabase, resetMessage } from '../../slices/databaseSlice';
 
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -12,7 +13,13 @@ import { RiSearch2Line } from "react-icons/ri";
 
 import { Link } from 'react-router-dom';
 
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
+
 const BddManager = () => {
+  const [popUp, setPopUp] = useState(false)
+  const [databaseToDelete, setDatabaseToDelete] = useState({})
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -31,14 +38,42 @@ const BddManager = () => {
 
   const dispatch = useDispatch()
 
-  const { databases, loading: databaseLoading } = useSelector((state) => state.database)
+  const { databases, loading: databaseLoading, message, error } = useSelector((state) => state.database)
 
   useEffect(() => {
     dispatch(getDatabases())
   }, [])
 
+  const handleConfirmDeleteDatabase = (databaseName, databaseId) => {
+    databaseToDelete.name = databaseName
+    databaseToDelete.id = databaseId
+
+    setPopUp(true)
+  }
+
+  const handleCancelDeleteDatabase = () => {
+    setDatabaseToDelete({})
+    setPopUp(false)
+  }
+
+  const handleDeleteDatabase = (databaseId) => {
+    dispatch(deleteDatabase(databaseId))
+    handleCancelDeleteDatabase()
+
+    resetComponentMessage()
+  }
+
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 2000)
+  }
+
   return (
     <div className={styles.container}>
+      {popUp && (
+        <PopUp name={databaseToDelete.name} id={databaseToDelete.id} cancelDelete={handleCancelDeleteDatabase} deleteFunction={handleDeleteDatabase} />
+      )}
       <div className={styles.header}>
         <h1>Bancos de dados</h1>
         <Link to="/adm/cadastrar/bdd" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
@@ -56,6 +91,14 @@ const BddManager = () => {
             <option value="createdat">Data de criação</option>
           </select>
         </label>
+      </div>
+      <div className={styles.actionResults}>
+        {message && (
+          <SystemStatusMessage type="success" msg={message} />
+        )}
+        {error && (
+          <SystemStatusMessage type="error" msg={error} />
+        )}
       </div>
       <div className={styles.list}>
         <table>
@@ -79,7 +122,7 @@ const BddManager = () => {
                 <td>{formatDate(database.createdAt)}<br />{formatTime(database.createdAt)}</td>
                 <td>{formatDate(database.updatedAt)}<br />{formatTime(database.updatedAt)}</td>
                 <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline onClick={() => handleConfirmDeleteDatabase(database.name, database.id)} /></th></td>
               </tr>
             ))}
           </tbody>

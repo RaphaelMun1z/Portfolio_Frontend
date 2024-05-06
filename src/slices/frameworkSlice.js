@@ -45,6 +45,23 @@ export const getFrameworkById = createAsyncThunk(
     }
 )
 
+// Delete a framework
+export const deleteFramework = createAsyncThunk(
+    "framework/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await frameworkService.deleteFramework(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const frameworkSlice = createSlice({
     name: "framework",
     initialState,
@@ -93,6 +110,24 @@ export const frameworkSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.framework = action.payload
+            })
+            .addCase(deleteFramework.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteFramework.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.frameworks = state.frameworks.filter((framework) => {
+                    return framework.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteFramework.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.framework = {}
             })
     },
 })

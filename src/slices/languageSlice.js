@@ -45,6 +45,23 @@ export const getLanguageById = createAsyncThunk(
     }
 )
 
+// Delete a language
+export const deleteLanguage = createAsyncThunk(
+    "language/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await languageService.deleteLanguage(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const languageSlice = createSlice({
     name: "language",
     initialState,
@@ -93,6 +110,24 @@ export const languageSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.language = action.payload
+            })
+            .addCase(deleteLanguage.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteLanguage.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.languages = state.languages.filter((language) => {
+                    return language.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteLanguage.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.language = {}
             })
     },
 })

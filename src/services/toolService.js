@@ -45,10 +45,26 @@ const getToolById = async (id) => {
     }
 }
 
+// Delete a tool
+const deleteTool = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/tools/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const toolService = {
     createTool,
     getTools,
     getToolById,
+    deleteTool,
 }
 
 export default toolService

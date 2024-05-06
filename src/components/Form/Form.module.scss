@@ -19,6 +19,22 @@
         padding: 2em 3em;
         gap: 1.5em;
 
+        .imagePreviewContainer {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: fit-content;
+            max-height: 50vh;
+            overflow-y: scroll;
+            border-radius: 10px;
+
+            img {
+                width: 100%;
+                height: fit-content;
+                object-fit: contain;
+            }
+        }
+
         .title {
             h1 {
                 font-size: 25pt;
@@ -31,6 +47,35 @@
                 font-size: 12pt;
                 font-weight: 300;
                 max-width: 650px;
+            }
+        }
+
+        .imageSelectInputContainer {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            border: 2px solid rgba(254, 135, 0, 255);
+            padding: 1em 2em;
+            border-radius: 10px;
+            cursor: pointer;
+
+            p {
+                font-size: 20pt;
+                display: flex;
+                font-weight: 700;
+                align-items: center;
+                justify-content: center;
+            }
+
+            svg {
+                font-size: 50pt;
+                color: rgba(254, 135, 0, 255);
+            }
+
+            input {
+                display: none;
             }
         }
 
@@ -255,6 +300,7 @@
 
     .formStep {
         min-width: 35vw;
+        max-width: 50vw;
     }
 
     .stepsContainer {
@@ -334,5 +380,9 @@
     .formSections {
         min-height: inherit !important;
         padding: 1em !important;
+
+        .formStep {
+            max-width: 100% !important;
+        }
     }
 }

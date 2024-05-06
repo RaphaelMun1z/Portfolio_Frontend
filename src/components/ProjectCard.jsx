@@ -9,7 +9,7 @@ import ActionsProjectCard from './ActionsProjectCard';
 import DatabaseProjectCard from './DatabaseProjectCard';
 
 const ProjectCard = ({ project }) => {
-  const maxLength = 300;
+  const maxLength = 150;
   const truncatedDescription = project.description.length > maxLength ?
     project.description.substring(0, maxLength) + "..." :
     project.description;

@@ -1,10 +1,10 @@
 import styles from './DashboardItems.module.scss'
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getProjects } from '../../slices/projectSlice'
+import { deleteProject, getProjects, resetMessage } from '../../slices/projectSlice'
 
 import { FaRegEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline, MdAddCircleOutline } from "react-icons/md";
@@ -13,7 +13,13 @@ import { BiImageAdd } from "react-icons/bi";
 
 import { Link } from 'react-router-dom';
 
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
+
 const ProjectsManager = () => {
+  const [popUp, setPopUp] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState({})
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -38,8 +44,36 @@ const ProjectsManager = () => {
     dispatch(getProjects())
   }, [])
 
+  const handleConfirmDeleteProject = (projectName, projectId) => {
+    projectToDelete.name = projectName
+    projectToDelete.id = projectId
+
+    setPopUp(true)
+  }
+
+  const handleCancelDeleteProject = () => {
+    setProjectToDelete({})
+    setPopUp(false)
+  }
+
+  const handleDeleteProject = (projectId) => {
+    dispatch(deleteProject(projectId))
+    handleCancelDeleteProject()
+
+    resetComponentMessage()
+  }
+
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage())
+    }, 2000)
+  }
+
   return (
     <div className={styles.container}>
+      {popUp && (
+        <PopUp name={projectToDelete.name} id={projectToDelete.id} cancelDelete={handleCancelDeleteProject} deleteFunction={handleDeleteProject} />
+      )}
       <div className={styles.header}>
         <h1>Projetos</h1>
         <Link to="/adm/cadastrar/projeto" className={styles.newItem}>Cadastrar<MdAddCircleOutline /></Link>
@@ -57,6 +91,14 @@ const ProjectsManager = () => {
             <option value="createdat">Data de criação</option>
           </select>
         </label>
+      </div>
+      <div className={styles.actionResults}>
+        {message && (
+          <SystemStatusMessage type="success" msg={message} />
+        )}
+        {error && (
+          <SystemStatusMessage type="error" msg={error} />
+        )}
       </div>
       <div className={styles.list}>
         <table>
@@ -82,7 +124,7 @@ const ProjectsManager = () => {
                 <td><th className={`${styles.actionTh} ${styles.view}`}><Link to={`/projeto/${project.id}`}><FaRegEye /></Link></th></td>
                 <td><th className={`${styles.actionTh} ${styles.edit}`}><Link to={`/adm/projeto/${project.id}/nova-imagem`}><BiImageAdd /></Link></th></td>
                 <td><th className={`${styles.actionTh} ${styles.edit}`}><FaRegEdit /></th></td>
-                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
+                <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline onClick={() => handleConfirmDeleteProject(project.name, project.id)} /></th></td>
               </tr>
             ))}
           </tbody>

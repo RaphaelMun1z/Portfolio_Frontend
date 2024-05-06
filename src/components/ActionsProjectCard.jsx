@@ -13,7 +13,7 @@ const ActionsProjectCard = ({ ProjectId, ProjectHost }) => {
             <div className={styles.actions}>
                 <Link to={`/projeto/${ProjectId}`} className={styles.btnMoreAbout}>Saber Mais<GrCircleInformation /></Link>
                 {ProjectHost && (
-                    <Link to={`${ProjectHost.URL}`} className={styles.btnVisitProject}>Visitar<IoIosArrowForward /></Link>
+                    <Link to={`${ProjectHost.URL}`} target='_blank' className={styles.btnVisitProject}>Visitar<IoIosArrowForward /></Link>
                 )}
                 {!ProjectHost && (
                     <Link className={styles.btnVisitProjectBlock}>Não hospedado<IoCloudOfflineOutline /></Link>
