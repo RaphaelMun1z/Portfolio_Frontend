@@ -39,6 +39,7 @@ import NewFaq from './components/Form/NewFaq';
 import Budget from './pages/Budget';
 import ProjectNewImageForm from './components/ProjectNewImageForm';
 import NewSocialMidia from './components/Form/NewSocialMidia';
+import NewFormSubject from './components/Form/NewFormSubject';
 /// Answer Form
 import AnswerContactForm from './components/Form/AnswerContactForm';
 
@@ -111,6 +112,7 @@ function App() {
           <Route path="/adm/cadastrar/projeto" element={wrapPrivateRoute(<NewProject />)} />
           <Route path="/adm/cadastrar/bdd" element={wrapPrivateRoute(<NewBdd />)} />
           <Route path="/adm/cadastrar/rede-social" element={wrapPrivateRoute(<NewSocialMidia />)} />
+          <Route path="/adm/cadastrar/assunto-form" element={wrapPrivateRoute(<NewFormSubject />)} />
           <Route path="/adm/cadastrar/ferramenta" element={wrapPrivateRoute(<NewTool />)} />
           <Route path="/adm/cadastrar/habilidadeinterpessoal" element={wrapPrivateRoute(<NewInterpersonalSkill />)} />
           <Route path="/adm/cadastrar/faq" element={wrapPrivateRoute(<NewFaq />)} />

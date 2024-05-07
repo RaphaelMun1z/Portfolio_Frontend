@@ -16,6 +16,7 @@
     .header {
         position: relative;
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         height: fit-content;
         justify-content: space-between;
@@ -26,6 +27,15 @@
             font-size: 30pt;
             font-weight: 700;
             text-transform: uppercase;
+        }
+
+        .systemActions{
+            position: relative;
+            display: flex;
+            width: fit-content;
+            height: fit-content;
+            gap: 1em;
+            margin: .5em 0;
         }
 
         .newItem {

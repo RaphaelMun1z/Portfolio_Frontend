@@ -36,6 +36,23 @@ export const getFormSubjects = createAsyncThunk(
     }
 )
 
+// Delete a form subject
+export const deleteFormSubject = createAsyncThunk(
+    "formSubject/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await formSubjectService.deleteFormSubject(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const formSubjectSlice = createSlice({
     name: "formSubject",
     initialState,
@@ -74,6 +91,24 @@ export const formSubjectSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.formSubjects = action.payload
+            })
+            .addCase(deleteFormSubject.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteFormSubject.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.formSubjects = state.formSubjects.filter((formSubject) => {
+                    return formSubject.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteFormSubject.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.formSubject = {}
             })
     },
 })
