@@ -36,6 +36,23 @@ export const getReports = createAsyncThunk(
     }
 )
 
+// Delete a report
+export const deleteReport = createAsyncThunk(
+    "report/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await reportService.deleteReport(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const reportSlice = createSlice({
     name: "report",
     initialState,
@@ -74,6 +91,24 @@ export const reportSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.reports = action.payload
+            })
+            .addCase(deleteReport.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteReport.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.reports = state.reports.filter((report) => {
+                    return report.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteReport.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.report = {}
             })
     },
 })

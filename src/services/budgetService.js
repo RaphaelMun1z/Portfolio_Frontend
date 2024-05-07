@@ -30,9 +30,25 @@ const getBudgets = async (token) => {
     }
 }
 
+// Delete a budget
+const deleteBudget = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/budgets/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const budgetService = {
     createBudget,
     getBudgets,
+    deleteBudget,
 }
 
 export default budgetService

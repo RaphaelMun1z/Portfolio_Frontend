@@ -30,9 +30,25 @@ const getFaqs = async () => {
     }
 }
 
+// Delete a faq
+const deleteFaq = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/faqs/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const faqService = {
     createFaq,
     getFaqs,
+    deleteFaq,
 }
 
 export default faqService

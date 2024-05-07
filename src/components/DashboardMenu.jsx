@@ -3,10 +3,11 @@ import styles from './DashboardMenu.module.scss'
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { FaCode } from "react-icons/fa";
 import { GiGears } from "react-icons/gi";
-import { TbHomeCog } from "react-icons/tb";
-import { BsPersonWorkspace, BsDatabase } from "react-icons/bs";
+import { TbHomeCog, TbAccessPoint } from "react-icons/tb";
+import { BsPersonWorkspace, BsDatabase, BsFillHouseGearFill } from "react-icons/bs";
 import { FiTool } from "react-icons/fi";
-import { MdOutlineQuestionAnswer, MdOutlineContactSupport } from "react-icons/md";
+import { GoProjectRoadmap } from "react-icons/go";
+import { MdOutlineQuestionAnswer, MdOutlineContactSupport, MdOutlineBugReport, MdOutlineContactMail } from "react-icons/md";
 
 // Hooks
 import { useEffect, useState } from 'react';
@@ -21,7 +22,11 @@ import BddManager from './Dashboard/BddManager';
 import ToolsManager from './Dashboard/ToolsManager';
 import InterpersonalSkillsManager from './Dashboard/InterpersonalSkillsManager';
 import ContactFormsManager from './Dashboard/ContactFormsManager';
+import BudgetFormsManager from './Dashboard/BudgetFormsManager';
 import FaqManager from './Dashboard/FaqManager';
+import ReportManager from './Dashboard/ReportManager';
+import LogManager from './Dashboard/LogManager';
+import SystemManager from './Dashboard/SystemManager';
 
 import { Link } from 'react-router-dom';
 
@@ -37,7 +42,11 @@ const DashboardMenu = () => {
         "ferramentas",
         "habilidadesInterpessoais",
         "formulariosDeContato",
-        "faq"
+        "formulariosDeOrcamento",
+        "faq",
+        "report",
+        "log",
+        "sistema"
     ]
 
     const handlePageChange = (page) => {
@@ -89,12 +98,28 @@ const DashboardMenu = () => {
                             <p>Habilidades interpessoais</p>
                         </Link>
                         <Link to="/adm/painel/formulariosDeContato" className={currentPage === "formulariosDeContato" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
-                            <MdOutlineQuestionAnswer />
+                            <MdOutlineContactMail />
                             <p>Formulários de contato</p>
+                        </Link>
+                        <Link to="/adm/painel/formulariosDeOrcamento" className={currentPage === "formulariosDeOrcamento" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
+                            <GoProjectRoadmap />
+                            <p>Formulários de orçamento</p>
                         </Link>
                         <Link to="/adm/painel/faq" className={currentPage === "faq" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
                             <MdOutlineContactSupport />
                             <p>FAQ</p>
+                        </Link>
+                        <Link to="/adm/painel/report" className={currentPage === "report" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
+                            <MdOutlineBugReport />
+                            <p>Reports</p>
+                        </Link>
+                        <Link to="/adm/painel/log" className={currentPage === "log" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
+                            <TbAccessPoint />
+                            <p>Logs</p>
+                        </Link>
+                        <Link to="/adm/painel/sistema" className={currentPage === "sistema" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
+                            <BsFillHouseGearFill />
+                            <p>Sistema</p>
                         </Link>
                     </div>
                 </aside>
@@ -107,7 +132,11 @@ const DashboardMenu = () => {
                     {currentPage === 'ferramentas' && <ToolsManager />}
                     {currentPage === 'habilidadesInterpessoais' && <InterpersonalSkillsManager />}
                     {currentPage === 'formulariosDeContato' && <ContactFormsManager />}
+                    {currentPage === 'formulariosDeOrcamento' && <BudgetFormsManager />}
                     {currentPage === 'faq' && <FaqManager />}
+                    {currentPage === 'report' && <ReportManager />}
+                    {currentPage === 'log' && <LogManager />}
+                    {currentPage === 'sistema' && <SystemManager />}
                     {currentPage === '' && (
                         <div className={styles.error}>
                             <img src="/404.png" alt="Ocorreu um erro!" />

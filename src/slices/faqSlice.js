@@ -35,6 +35,23 @@ export const getFaqs = createAsyncThunk(
     }
 )
 
+// Delete a faq
+export const deleteFaq = createAsyncThunk(
+    "faq/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await faqService.deleteFaq(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const faqSlice = createSlice({
     name: "faq",
     initialState,
@@ -73,6 +90,24 @@ export const faqSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.faqs = action.payload
+            })
+            .addCase(deleteFaq.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteFaq.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.faqs = state.faqs.filter((faq) => {
+                    return faq.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteFaq.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.faq = {}
             })
     },
 })
