@@ -56,8 +56,6 @@ const ProjectNewImageForm = () => {
             formData.append(key, projectImageData[key])
         })
 
-        console.log(formData)
-
         dispatch(createProjectImage(formData))
 
         setImage(null)
@@ -89,7 +87,7 @@ const ProjectNewImageForm = () => {
                     {!loadingProjectImage && (
                         <button type="submit" className={styles.submit}>Salvar</button>
                     )}
-                    <Link to="/adm/painel/bancoDeDados" className={styles.cancel}>Cancelar</Link>
+                    <Link to="/adm/painel/projetos" className={styles.cancel}>Cancelar</Link>
                     {internErrors && internErrors.length > 0 && (
                         <div className={styles.messages}>
                             {internErrors.map((error) => {

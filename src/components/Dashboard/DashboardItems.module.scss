@@ -29,7 +29,7 @@
             text-transform: uppercase;
         }
 
-        .systemActions{
+        .systemActions {
             position: relative;
             display: flex;
             width: fit-content;
@@ -228,6 +228,14 @@
 
                 svg {
                     font-size: 20pt;
+                }
+
+                img {
+                    width: fit-content;
+                    height: fit-content;
+                    max-width: 100px;
+                    max-height: 100px;
+                    object-fit: cover;
                 }
             }
         }

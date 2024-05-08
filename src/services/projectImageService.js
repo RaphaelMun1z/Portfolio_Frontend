@@ -30,9 +30,25 @@ const getProjectImagesById = async (id) => {
     }
 }
 
+// Delete a project image
+const deleteProjectImage = async (id, token) => {
+    const config = requestConfig("DELETE", null, token)
+
+    try {
+        const res = await fetch(api + "/projects-image/" + id, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const projectImageService = {
     createProjectImage,
     getProjectImagesById,
+    deleteProjectImage,
 }
 
 export default projectImageService

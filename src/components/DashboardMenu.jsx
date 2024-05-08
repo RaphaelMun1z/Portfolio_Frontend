@@ -1,7 +1,7 @@
 import styles from './DashboardMenu.module.scss'
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { FaCode } from "react-icons/fa";
+import { FaCode, FaRegImages } from "react-icons/fa";
 import { GiGears } from "react-icons/gi";
 import { TbHomeCog, TbAccessPoint } from "react-icons/tb";
 import { BsPersonWorkspace, BsDatabase, BsFillHouseGearFill } from "react-icons/bs";
@@ -22,6 +22,7 @@ import FrameworksManager from './Dashboard/FrameworksManager';
 import BddManager from './Dashboard/BddManager';
 import ToolsManager from './Dashboard/ToolsManager';
 import InterpersonalSkillsManager from './Dashboard/InterpersonalSkillsManager';
+import ProjectImagesManager from './Dashboard/ProjectImagesManager';
 import ContactFormsManager from './Dashboard/ContactFormsManager';
 import BudgetFormsManager from './Dashboard/BudgetFormsManager';
 import FaqManager from './Dashboard/FaqManager';
@@ -44,6 +45,7 @@ const DashboardMenu = () => {
         "bancoDeDados",
         "ferramentas",
         "habilidadesInterpessoais",
+        "imagensDoProjeto",
         "formulariosDeContato",
         "formulariosDeOrcamento",
         "faq",
@@ -116,6 +118,10 @@ const DashboardMenu = () => {
                             <BsPersonWorkspace />
                             <p>Habilidades interpessoais</p>
                         </Link>
+                        <Link to="/adm/painel/imagensDoProjeto" className={currentPage === "imagensDoProjeto" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
+                            <FaRegImages />
+                            <p>Imagens do projeto</p>
+                        </Link>
                         <Link to="/adm/painel/formulariosDeContato" className={currentPage === "formulariosDeContato" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
                             <MdOutlineContactMail />
                             <p>Formulários de contato</p>
@@ -150,6 +156,7 @@ const DashboardMenu = () => {
                     {currentPage === 'bancoDeDados' && <BddManager />}
                     {currentPage === 'ferramentas' && <ToolsManager />}
                     {currentPage === 'habilidadesInterpessoais' && <InterpersonalSkillsManager />}
+                    {currentPage === 'imagensDoProjeto' && <ProjectImagesManager />}
                     {currentPage === 'formulariosDeContato' && <ContactFormsManager />}
                     {currentPage === 'formulariosDeOrcamento' && <BudgetFormsManager />}
                     {currentPage === 'faq' && <FaqManager />}

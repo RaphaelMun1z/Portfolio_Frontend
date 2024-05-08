@@ -35,6 +35,23 @@ export const getProjectImagesById = createAsyncThunk(
     }
 )
 
+// Delete a project image
+export const deleteProjectImage = createAsyncThunk(
+    "image/delete",
+    async (id, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+
+        const data = await projectImageService.deleteProjectImage(id, token)
+
+        // Check for errors
+        if (data.errors) {
+            return thunkAPI.rejectWithValue(data.errors[0])
+        }
+
+        return data
+    }
+)
+
 export const projectImageSlice = createSlice({
     name: "image",
     initialState,
@@ -73,6 +90,24 @@ export const projectImageSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.images = action.payload
+            })
+            .addCase(deleteProjectImage.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteProjectImage.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.images = state.images.filter((image) => {
+                    return image.id !== action.payload.id
+                })
+                state.message = action.payload.message
+            })
+            .addCase(deleteProjectImage.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.image = {}
             })
     },
 })
