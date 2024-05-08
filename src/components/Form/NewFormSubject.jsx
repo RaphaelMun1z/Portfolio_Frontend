@@ -65,7 +65,7 @@ const NewFormSubject = () => {
                     </div>
                     <label>
                         <p>Qual o assunto?</p>
-                        <input type="text" placeholder='URL da rede social...' onChange={(e) => setSubject(e.target.value)} value={subject} />
+                        <input type="text" placeholder='Digite o assunto...' onChange={(e) => setSubject(e.target.value)} value={subject} />
                     </label>
                     <label>
                         <p>Qual o tipo de formulário?</p>
@@ -73,7 +73,6 @@ const NewFormSubject = () => {
                             <option value="invalid">Selecione uma opção</option>
                             <option value="Report">Report</option>
                             <option value="Doubt">Contato</option>
-                            <option value="Budget">Orçamento</option>
                         </select>
                     </label>
                     <div className={styles.footer}>

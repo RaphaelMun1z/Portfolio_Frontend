@@ -45,10 +45,26 @@ const deleteFormSubject = async (id, token) => {
     }
 }
 
+// Get form subjects by id
+const getFormSubjectsByFormType = async (type) => {
+    const config = requestConfig("GET", null)
+
+    try {
+        const res = await fetch(api + "/form-subjects/form-type/" + type, config)
+            .then((res) => res.json())
+            .catch((err) => err)
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const formSubjectService = {
     createFormSubject,
     getFormSubjects,
     deleteFormSubject,
+    getFormSubjectsByFormType,
 }
 
 export default formSubjectService

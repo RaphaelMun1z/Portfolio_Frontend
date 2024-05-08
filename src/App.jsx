@@ -43,7 +43,6 @@ import NewFormSubject from './components/Form/NewFormSubject';
 /// Answer Form
 import AnswerContactForm from './components/Form/AnswerContactForm';
 
-import SystemMessage from './components/SystemMessage';
 import NotFound from './pages/NotFound';
 import Loading from './components/Loading';
 
@@ -85,7 +84,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <SystemMessage msg="Olá, seja bem vindo(a) ao meu portfólio!" /> */}
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />

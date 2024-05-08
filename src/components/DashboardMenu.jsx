@@ -8,6 +8,7 @@ import { BsPersonWorkspace, BsDatabase, BsFillHouseGearFill } from "react-icons/
 import { FiTool } from "react-icons/fi";
 import { GoProjectRoadmap } from "react-icons/go";
 import { MdOutlineQuestionAnswer, MdOutlineContactSupport, MdOutlineBugReport, MdOutlineContactMail } from "react-icons/md";
+import { LuLayoutGrid, LuLayoutList } from "react-icons/lu";
 
 // Hooks
 import { useEffect, useState } from 'react';
@@ -32,7 +33,9 @@ import { Link } from 'react-router-dom';
 
 const DashboardMenu = () => {
     const [currentPage, setCurrentPage] = useState("");
+    const [layout, setLayout] = useState("alternative")
     const { page } = useParams();
+
     const pages = [
         "geral",
         "projetos",
@@ -57,6 +60,14 @@ const DashboardMenu = () => {
         }
     };
 
+    const handleLayoutChange = () => {
+        if (layout === "normal") {
+            setLayout("alternative")
+        } else {
+            setLayout("normal")
+        }
+    }
+
     useEffect(() => {
         handlePageChange(page)
     }, [page])
@@ -67,7 +78,15 @@ const DashboardMenu = () => {
                 <h1>Painel de controle</h1>
             </div>
             <div className={styles.contentContainer}>
-                <aside>
+                <aside className={layout === "alternative" ? `${styles.alternative}` : ''}>
+                    <div className={styles.buttonSelectDesign} onClick={() => handleLayoutChange()}>
+                        {layout === "normal" && (
+                            <span><LuLayoutGrid /></span>
+                        )}
+                        {layout === "alternative" && (
+                            <span> <LuLayoutList /></span>
+                        )}
+                    </div>
                     <div className={styles.actionsContainer}>
                         <Link to="/adm/painel/geral" className={currentPage === "geral" ? `${styles.link} ${styles.activePage}` : `${styles.link}`}>
                             <TbHomeCog />

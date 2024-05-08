@@ -1,9 +1,11 @@
 .mainNumberContainer {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: fit-content;
     justify-content: space-between;
+    gap: .5em;
 
     .dataCard {
         position: relative;

@@ -31,10 +31,44 @@ section {
         aside {
             position: relative;
             display: flex;
+            flex-direction: column;
             width: 25%;
             height: auto;
             border-radius: 20px;
             padding: 0 1em;
+            gap: 1em;
+
+            .buttonSelectDesign {
+                position: relative;
+                display: flex;
+                width: 80px;
+                height: 80px;
+                border: 2px solid rgb(254, 135, 0);
+                border-radius: 20px;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all .1s ease-in-out;
+
+                &:hover {
+                    opacity: .5;
+                    transition: all .1s ease-in-out;
+                }
+
+                span {
+                    position: relative;
+                    display: flex;
+                    width: fit-content;
+                    height: fit-content;
+                    justify-content: center;
+                    align-items: center;
+
+                    svg {
+                        color: rgb(254, 135, 0);
+                        font-size: 30pt;
+                    }
+                }
+            }
 
             .actionsContainer {
                 position: relative;
@@ -86,6 +120,23 @@ section {
                     svg {
                         font-size: 30pt;
                         color: rgb(254, 135, 0);
+                    }
+                }
+            }
+        }
+
+        .alternative {
+            .actionsContainer {
+                flex-direction: row;
+                gap: .5em 1%;
+
+                .link {
+                    width: fit-content;
+                    flex: 1 1 32%;
+                    justify-content: center;
+
+                    p {
+                        display: none;
                     }
                 }
             }
@@ -144,12 +195,16 @@ section {
         flex-direction: row !important;
 
         .link {
-            width: fit-content !important;
+            flex: 1 1 32%;
+            justify-content: center !important;
 
             p {
                 display: none !important;
             }
         }
     }
-    
+
+    .buttonSelectDesign {
+        display: none !important;
+    }
 }

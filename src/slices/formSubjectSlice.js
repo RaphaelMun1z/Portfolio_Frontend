@@ -53,6 +53,15 @@ export const deleteFormSubject = createAsyncThunk(
     }
 )
 
+export const getFormSubjectsByFormType = createAsyncThunk(
+    "formSubject/getFormSubjectsByType",
+    async (type) => {
+        const data = await formSubjectService.getFormSubjectsByFormType(type)
+
+        return data
+    }
+)
+
 export const formSubjectSlice = createSlice({
     name: "formSubject",
     initialState,
@@ -109,6 +118,16 @@ export const formSubjectSlice = createSlice({
                 state.loading = false
                 state.error = action.payload
                 state.formSubject = {}
+            })
+            .addCase(getFormSubjectsByFormType.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(getFormSubjectsByFormType.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.formSubjects = action.payload
             })
     },
 })

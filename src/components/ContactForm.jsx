@@ -17,7 +17,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 // Redux
 import { resetMessage, createContactForm } from '../slices/contactSlice';
-import { getFormSubjects } from '../slices//formSubjectSlice';
+import { getFormSubjectsByFormType } from '../slices/formSubjectSlice';
 
 import SystemStatusMessage from './Form/SystemStatusMessage';
 
@@ -135,7 +135,7 @@ const ContactForm = ({ user }) => {
     }
 
     useEffect(() => {
-        dispatch(getFormSubjects())
+        dispatch(getFormSubjectsByFormType("Doubt"))
     }, [])
 
     return (

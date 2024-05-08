@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import SystemStatusMessage from './Form/SystemStatusMessage'
 
 // Hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
 import { resetMessage, createReport } from '../slices/reportSlice'
+import { getFormSubjectsByFormType } from '../slices/formSubjectSlice';
 
 const ReportPopUp = ({ setReportModal }) => {
     const [internErrors, setInternErrors] = useState([])
@@ -24,6 +25,7 @@ const ReportPopUp = ({ setReportModal }) => {
     const dispatch = useDispatch()
 
     const { loading: loadingReport, message: messageReport, error: errorReport } = useSelector((state) => state.report)
+    const { formSubjects, loading: formSubjectLoading } = useSelector((state) => state.formSubject)
 
     const handleSaveReport = (e) => {
         e.preventDefault()
@@ -60,6 +62,11 @@ const ReportPopUp = ({ setReportModal }) => {
         }, 2000)
     }
 
+    useEffect(() => {
+        dispatch(getFormSubjectsByFormType("Report"))
+    }, [])
+
+
     return (
         <section className={styles.reportSection}>
             <div className={styles.reportContainer}>
@@ -67,12 +74,17 @@ const ReportPopUp = ({ setReportModal }) => {
                     <h1>Relato de BUG</h1>
                     <label>
                         <p>O bug está relacionado a:</p>
-                        <select name="subject" defaultValue="invalid" onChange={(e) => handleSetSubject(e.target.value)} value={subject}>
-                            <option value="invalid">Selecione uma opção</option>
-                            <option value="Responsive">Responsividade</option>
-                            <option value="Load">Carregamento</option>
-                            <option value="Other">Outros</option>
-                        </select>
+                        {formSubjects && formSubjects.length > 0 && (
+                            <select name="subject" defaultValue="invalid" onChange={(e) => handleSetSubject(e.target.value)} value={subject}>
+                                <option value="invalid">Selecione uma opção</option>
+                                {formSubjects.map((formSubject, index) => (
+                                    <option value={formSubject.id} key={index}>{formSubject.subject}</option>
+                                ))}
+                            </select>
+                        )}
+                        {formSubjects && formSubjects.length === 0 && (
+                            <p className={styles.noData}>Não há assuntos cadastrados.</p>
+                        )}
                     </label>
                     <label>
                         <p>Por gentileza, descreva brevemente o problema</p>
