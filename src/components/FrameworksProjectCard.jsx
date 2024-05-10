@@ -12,11 +12,11 @@ const FrameworksProjectCard = ({ frontend, backend }) => {
     useEffect(() => {
         const frameworksArray = []
 
-        if (frontend) {
+        if (frontend && frontend.Framework) {
             frameworksArray.push(frontend.Framework.name)
         }
 
-        if (backend) {
+        if (backend && backend.Framework) {
             frameworksArray.push(backend.Framework.name)
         }
 

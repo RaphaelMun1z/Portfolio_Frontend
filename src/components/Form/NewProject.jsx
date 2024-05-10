@@ -581,7 +581,7 @@ const NewProject = () => {
                                     <p>Qual o framework utilizado para o <b>Frontend</b>?</p>
                                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                                         <select name="frontFrameworkId" onChange={(e) => setProjectFrontendFramework(e.target.value)}>
-                                            <option value="0">Selecione um framework</option>
+                                            <option value="0">Nenhum</option>
                                             {frameworks.map((framework) => (
                                                 <option value={framework.id}>{framework.name}</option>
                                             ))}
@@ -612,7 +612,7 @@ const NewProject = () => {
                                     <p>Qual o framework utilizado para o <b>Backend</b>?</p>
                                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                                         <select name="backFrameworkId" onChange={(e) => setProjectBackendFramework(e.target.value)}>
-                                            <option value="0">Selecione um framework</option>
+                                            <option value="0">Nenhum</option>
                                             {frameworks.map((framework) => (
                                                 <option value={framework.id}>{framework.name}</option>
                                             ))}
@@ -643,7 +643,7 @@ const NewProject = () => {
                                     <p>Qual o framework utilizado para o <b>Frontend</b>?</p>
                                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                                         <select name="frontFrameworkId" onChange={(e) => setProjectFrontendFramework(e.target.value)}>
-                                            <option value="0">Selecione um framework</option>
+                                            <option value="0">Nenhum</option>
                                             {frameworks.map((framework) => (
                                                 <option value={framework.id}>{framework.name}</option>
                                             ))}
@@ -670,7 +670,7 @@ const NewProject = () => {
                                     <p>Qual o framework utilizado para o <b>Backend</b>?</p>
                                     {!frameworkLoading && frameworks && frameworks.length > 0 && (
                                         <select name="backFrameworkId" onChange={(e) => setProjectBackendFramework(e.target.value)}>
-                                            <option value="0">Selecione um framework</option>
+                                            <option value="0">Nenhum</option>
                                             {frameworks.map((framework) => (
                                                 <option value={framework.id}>{framework.name}</option>
                                             ))}

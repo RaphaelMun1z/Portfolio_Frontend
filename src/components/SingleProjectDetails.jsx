@@ -136,32 +136,35 @@ const SingleProjectDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.projectTechInfo}>
-                            <h3><FaCode />Frameworks utilizados:</h3>
-                            <div className={styles.technologyCardContainer}>
-                                {loading && !project && (
-                                    <div className='skeleton' style={{ width: '500px', height: '300px' }}></div>
-                                )}
-                                {!loading && project && (
-                                    <>
-                                        {project.ProjectFrontend && (
-                                            <Link target='_blank' to={`/framework/${project.ProjectFrontend.Framework.id}`} className={styles.technologyCard}>
-                                                <div className={styles.icon}>{useIcon(project.ProjectFrontend.Framework.name)}</div>
-                                                <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
-                                                <div className={styles.language}>{useIcon(project.ProjectFrontend.Framework.Language.name)}</div>
-                                            </Link>
-                                        )}
-                                        {project.ProjectBackend && (
-                                            <Link target='_blank' to={`/framework/${project.ProjectBackend.Framework.id}`} className={styles.technologyCard}>
-                                                <div className={styles.icon}>{useIcon(project.ProjectBackend.Framework.name)}</div>
-                                                <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
-                                                <div className={styles.language}>{useIcon(project.ProjectBackend.Framework.Language.name)}</div>
-                                            </Link>
-                                        )}
-                                    </>
-                                )}
+                        {project && ((project.ProjectFrontend && project.ProjectFrontend.Framework) || (project.ProjectBackend && project.ProjectBackend.Framework)) ? (
+                            <div className={styles.projectTechInfo}>
+                                <h3><FaCode />Frameworks utilizados:</h3>
+                                <div className={styles.technologyCardContainer}>
+                                    {project.ProjectFrontend && (
+                                        <>
+                                            {project.ProjectFrontend.Framework && (
+                                                <Link target='_blank' to={`/framework/${project.ProjectFrontend.Framework.id}`} className={styles.technologyCard}>
+                                                    <div className={styles.icon}>{useIcon(project.ProjectFrontend.Framework.name)}</div>
+                                                    <div className={styles.name}>{project.ProjectFrontend.Framework.name}</div>
+                                                    <div className={styles.language}>{useIcon(project.ProjectFrontend.Framework.Language.name)}</div>
+                                                </Link>
+                                            )}
+                                        </>
+                                    )}
+                                    {project.ProjectBackend && (
+                                        <>
+                                            {project.ProjectBackend.Framework && (
+                                                <Link target='_blank' to={`/framework/${project.ProjectBackend.Framework.id}`} className={styles.technologyCard}>
+                                                    <div className={styles.icon}>{useIcon(project.ProjectBackend.Framework.name)}</div>
+                                                    <div className={styles.name}>{project.ProjectBackend.Framework.name}</div>
+                                                    <div className={styles.language}>{useIcon(project.ProjectBackend.Framework.Language.name)}</div>
+                                                </Link>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+                        ) : null}
                         <div className={styles.projectTechInfo}>
                             <h3><FaCode />Linguages utilizadas:</h3>
                             <div className={styles.technologyCardContainer}>
