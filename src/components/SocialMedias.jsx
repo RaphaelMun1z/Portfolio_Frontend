@@ -33,36 +33,36 @@ const SocialMedias = () => {
                 )}
 
                 {!socialMediaLoading && socialMedia && socialMedia.linkedin && (
-                    <div className={`${styles.socialMediaCard} ${styles.linkedin}`}>
+                    <a href={socialMedia.linkedin} className={`${styles.socialMediaCard} ${styles.linkedin}`}>
                         <div className={styles.logo}>
                             <FaLinkedin />
                         </div>
                         <div className={styles.text}>
                             <h1>Linkedin</h1>
                         </div>
-                    </div>
+                    </a>
                 )}
 
                 {!socialMediaLoading && socialMedia && socialMedia.github && (
-                    <div className={`${styles.socialMediaCard} ${styles.github}`}>
+                    <a href={socialMedia.github} className={`${styles.socialMediaCard} ${styles.github}`}>
                         <div className={styles.logo}>
                             <FaGithub />
                         </div>
                         <div className={styles.text}>
                             <h1>Github</h1>
                         </div>
-                    </div>
+                    </a>
                 )}
 
                 {!socialMediaLoading && socialMedia && socialMedia.instagram && (
-                    <div className={`${styles.socialMediaCard} ${styles.instagram}`}>
+                    <a href={socialMedia.instagram} className={`${styles.socialMediaCard} ${styles.instagram}`}>
                         <div className={styles.logo}>
                             <FaInstagram />
                         </div>
                         <div className={styles.text}>
                             <h1>Instagram</h1>
                         </div>
-                    </div>
+                    </a>
                 )}
             </div>
         </section>
