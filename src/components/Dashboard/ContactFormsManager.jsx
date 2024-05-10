@@ -69,6 +69,7 @@ const ContactFormsManager = () => {
               <th>Assunto</th>
               <th>Nome</th>
               <th>E-mail</th>
+              <th>mensagem</th>
               <th>Criado em</th>
               <th className={styles.headActionTh}>Visualizar</th>
               <th className={styles.headActionTh}>Deletar</th>
@@ -84,6 +85,7 @@ const ContactFormsManager = () => {
                 <td>{form.FormSubject.subject}</td>
                 <td>{form.personName}</td>
                 <td>{form.email}</td>
+                <td>{form.message}</td>
                 <td>{formatDate(form.createdAt)}<br />{formatTime(form.createdAt)}</td>
                 <td><th className={`${styles.actionTh} ${styles.view}`}><Link to={``}><FaRegEye /></Link></th></td>
                 <td><th className={`${styles.actionTh} ${styles.delete}`}><MdDeleteOutline /></th></td>
