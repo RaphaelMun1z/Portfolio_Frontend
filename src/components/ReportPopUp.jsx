@@ -78,7 +78,7 @@ const ReportPopUp = ({ setReportModal }) => {
                             <select name="subject" defaultValue="invalid" onChange={(e) => handleSetSubject(e.target.value)} value={subject}>
                                 <option value="invalid">Selecione uma opção</option>
                                 {formSubjects.map((formSubject, index) => (
-                                    <option value={formSubject.id} key={index}>{formSubject.subject}</option>
+                                    <option value={formSubject.subject} key={index}>{formSubject.subject}</option>
                                 ))}
                             </select>
                         )}
