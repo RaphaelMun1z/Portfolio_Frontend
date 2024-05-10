@@ -54,6 +54,7 @@
             cursor: pointer;
             transition: all .1s ease-in-out;
             text-decoration: none;
+            background-color: transparent;
 
             &:hover {
                 background-color: limegreen;
@@ -63,6 +64,17 @@
 
             svg {
                 font-size: 20pt;
+            }
+        }
+
+        .deleteItem {
+            border-color: red;
+            color: red;
+
+            &:hover {
+                background-color: red;
+                color: #fff;
+                transition: all .1s ease-in-out;
             }
         }
     }

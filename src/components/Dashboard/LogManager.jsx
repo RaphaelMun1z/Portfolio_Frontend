@@ -5,14 +5,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { getLogs } from '../../slices/logSlice';
+import { getLogs, deleteLogs } from '../../slices/logSlice';
 
 // Icons
-import { FaRegEye } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { RiSearch2Line } from "react-icons/ri";
 
-import { Link } from 'react-router-dom'
+import PopUp from './PopUp';
+import SystemStatusMessage from '../Form/SystemStatusMessage'
 
 const LogManager = () => {
     const [popUp, setPopUp] = useState(false)
@@ -36,16 +36,45 @@ const LogManager = () => {
 
     const dispatch = useDispatch()
 
-    const { logs, loading: logFormLoading } = useSelector((state) => state.log)
+    const { logs, loading: logFormLoading, message, error } = useSelector((state) => state.log)
 
     useEffect(() => {
         dispatch(getLogs())
     }, [])
 
+    const handleConfirmDeleteLog = (logName, logId) => {
+        logToDelete.name = logName
+        logToDelete.id = logId
+
+        setPopUp(true)
+    }
+
+    const handleCancelDeleteLog = () => {
+        setLogToDelete({})
+        setPopUp(false)
+    }
+
+    const handleDeleteLog = () => {
+        dispatch(deleteLogs())
+        handleCancelDeleteLog()
+
+        resetComponentMessage()
+    }
+
+    const resetComponentMessage = () => {
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
+    }
+
     return (
         <div className={styles.container}>
+            {popUp && (
+                <PopUp name={logToDelete.name} id={logToDelete.id} cancelDelete={handleCancelDeleteLog} deleteFunction={handleDeleteLog} />
+            )}
             <div className={styles.header}>
                 <h1>Formulários de log</h1>
+                <button type='button' className={`${styles.newItem} ${styles.deleteItem}`}  onClick={() => handleConfirmDeleteLog()}>Resetar LOG's<MdDeleteOutline /></button>
             </div>
             <div className={styles.searchContainer}>
                 <input type="text" placeholder='Busque pelo formulário de orçamento...' />
@@ -63,6 +92,14 @@ const LogManager = () => {
                         <option value="createdat">Data de criação</option>
                     </select>
                 </label>
+            </div>
+            <div className={styles.actionResults}>
+                {message && (
+                    <SystemStatusMessage type="success" msg={message} />
+                )}
+                {error && (
+                    <SystemStatusMessage type="error" msg={error} />
+                )}
             </div>
             <div className={styles.list}>
                 <table>

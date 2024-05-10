@@ -35,6 +35,17 @@ export const getLogs = createAsyncThunk(
     }
 )
 
+// Delete logs
+export const deleteLogs = createAsyncThunk(
+    "log/deletelogs",
+    async (_, thunkAPI) => {
+        const token = thunkAPI.getState().auth.user.token
+        const data = await logService.deleteLogs(token)
+
+        return data
+    }
+)
+
 export const logSlice = createSlice({
     name: "log",
     initialState,
@@ -73,6 +84,22 @@ export const logSlice = createSlice({
                 state.success = true
                 state.error = null
                 state.logs = action.payload
+            })
+            .addCase(deleteLogs.pending, (state) => {
+                state.loading = true
+                state.error = false
+            })
+            .addCase(deleteLogs.fulfilled, (state, action) => {
+                state.loading = false
+                state.success = true
+                state.error = null
+                state.logs = []
+                state.message = action.payload.message
+            })
+            .addCase(deleteLogs.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+                state.log = {}
             })
     },
 })
