@@ -47,8 +47,6 @@ const ReportPopUp = ({ setReportModal }) => {
             message: description
         }
 
-        console.log(report)
-
         dispatch(createReport(report))
 
         setSubject("invalid")

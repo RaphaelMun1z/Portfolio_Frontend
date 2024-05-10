@@ -40,34 +40,34 @@ const TestimonialsSection = () => {
 
     const [testimonials, setTestimonials] = useState([
         {
-            name: "John Doe",
+            name: "Joana Pereira",
             position: "CEO",
             image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            message: "Excelente profissional em desenvolvimento web, altamente recomendado.",
         },
         {
-            name: "Jane Smith",
-            position: "Marketing Manager",
+            name: "Luís Fernandes",
+            position: "Gerente de Projetos",
             image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
-            message: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            message: "Destaque em projetos web, altamente colaborativo e eficiente.",
         },
         {
-            name: "Alice Johnson",
-            position: "Software Engineer",
+            name: "Márcia Lima",
+            position: "Diretora de Design",
             image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
-            message: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            message: "Expertise impecável em integração front-end/back-end.",
         },
         {
-            name: "Michael Brown",
-            position: "Sales Representative",
+            name: "Ricardo Santos",
+            position: "Coordenador de TI",
             image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
-            message: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            message: "Habilidades excepcionais em resolver problemas críticos.",
         },
         {
-            name: "Emily Williams",
-            position: "Graphic Designer",
+            name: "Fernanda Oliveira",
+            position: "Especialista em UX/UI Design",
             image: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
-            message: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            message: "Talento notável em criar interfaces intuitivas.",
         },
     ])
 
@@ -133,6 +133,7 @@ const TestimonialsSection = () => {
                         </Swiper>
                     </div>
                 </div>
+                <span className='text-alert'>Textos e pessoas fictícias.</span>
             </div>
         </section>
     )

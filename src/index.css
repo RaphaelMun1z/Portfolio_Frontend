@@ -57,6 +57,13 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.text-alert{
+    color: #d3d3d3;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 1em;
+}
+
 @keyframes skeleton-loading {
     0% {
         background-color: hsl(200, 20%, 80%);

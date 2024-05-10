@@ -61,8 +61,8 @@ const FaqContent = ({ button = false }) => {
             "resposta": "Sim, estamos comprometidos em fornecer suporte contínuo após a conclusão do projeto. Se surgirem quaisquer problemas ou se você precisar de atualizações adicionais, estaremos disponíveis para ajudá-lo e garantir a funcionalidade contínua do seu projeto."
         },
         {
-            "pergunta": "Você possui experiência em projetos semelhantes ao meu?",
-            "resposta": "Sim, tenho experiência em uma variedade de projetos e estou confiante em minha capacidade de lidar com desafios similares ao seu. Posso compartilhar exemplos de trabalhos anteriores, se necessário."
+            "pergunta": "Quais são os principais marcos ou etapas do processo de desenvolvimento?",
+            "resposta": "Nossos principais marcos ou etapas do processo de desenvolvimento incluem: análise e definição de requisitos, design e prototipagem, desenvolvimento de código, testes e depuração, implementação e lançamento, seguidos por manutenção e suporte contínuo."
         },
     ])
 
