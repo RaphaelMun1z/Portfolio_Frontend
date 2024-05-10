@@ -11,12 +11,6 @@ const login = async (data) => {
             .then((res) => res.json())
             .catch((err) => err)
 
-        if (res) {
-            cookie.set("user", JSON.stringify(res), {
-                expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
-            })
-        }
-
         return res
     } catch (error) {
         console.log(error)

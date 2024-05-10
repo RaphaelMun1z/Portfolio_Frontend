@@ -5,6 +5,7 @@ import authService from "../services/authService";
 import cookie from 'js-cookie'
 
 const user = cookie.get('user') ? JSON.parse(cookie.get('user')) : null
+console.log(user)
 
 const initialState = {
     user: user ? user : null,
@@ -22,6 +23,10 @@ export const login = createAsyncThunk("auth/login",
         if (data.error) {
             return thunkAPI.rejectWithValue(data.error)
         }
+
+        cookie.set("user", JSON.stringify(data), {
+            expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
+        })
 
         return data
     }
