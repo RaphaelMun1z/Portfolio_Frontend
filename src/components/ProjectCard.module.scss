@@ -75,7 +75,11 @@
         min-height: 400px !important;
 
         .imageContainer {
-            max-height: 400px !important;
+            max-height: fit-content !important;
+
+            .image {
+                overflow: hidden !important;
+            }
         }
     }
 }
