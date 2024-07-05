@@ -46,6 +46,8 @@ import AnswerContactForm from './components/Form/AnswerContactForm';
 import NotFound from './pages/NotFound';
 import Loading from './components/Loading';
 
+import StatusAlert from './components/StatusAlert';
+
 function App() {
   const { auth, loading } = useAuth()
   const dispatch = useDispatch()
@@ -85,6 +87,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
+        <StatusAlert />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre" element={<AboutPage />} />

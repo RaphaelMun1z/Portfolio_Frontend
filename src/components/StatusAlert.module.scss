@@ -1,0 +1,22 @@
+.container{
+    position: fixed;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(206, 59, 59);
+    bottom: 20px;
+    right: 20px;
+    border-radius: 15px;
+    padding: 1.5em 2em;
+    color: #fff;
+    font-weight: 600;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    z-index: 999;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+    svg{
+        font-size: 1.5em;
+    }
+}
