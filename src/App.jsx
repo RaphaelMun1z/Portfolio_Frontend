@@ -87,7 +87,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <StatusAlert type="warning" message="Site instável no momento."/>
+        {/* <StatusAlert type="warning" message="Site instável no momento."/> */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre" element={<AboutPage />} />
