@@ -1,5 +1,5 @@
-export const api = "https://portfolio-backend-mu-rouge.vercel.app/api"
-export const uploads = "https://portfolio-backend-mu-rouge.vercel.app/uploads"
+export const api = "https://portfolioraphaelmuniz.tech/api"
+export const uploads = "https://portfolioraphaelmuniz.tech/api/uploads"
 
 /* export const api = "http://localhost:3000/api"
 export const uploads = "http://localhost:3000/uploads" */
