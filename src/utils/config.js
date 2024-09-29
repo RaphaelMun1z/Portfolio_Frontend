@@ -1,5 +1,5 @@
 export const api = "https://api.portfolioraphaelmuniz.tech/api"
-export const uploads = "https://api.portfolioraphaelmuniz.tech/api/uploads"
+export const uploads = "https://api.portfolioraphaelmuniz.tech/uploads"
 
 /* export const api = "http://localhost:3000/api"
 export const uploads = "http://localhost:3000/uploads" */
